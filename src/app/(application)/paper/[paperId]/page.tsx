@@ -38,7 +38,7 @@ export default async function Page() {
 
   return (
     <div className="w-full">
-      <div className="fixed left-12 top-0 w-full border-b border-b-border bg-background px-8 py-2">
+      <div className="fixed left-12 top-0 z-50 w-full border-b border-b-border bg-background px-8 py-2">
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
@@ -85,7 +85,7 @@ export default async function Page() {
             </span>
             <Editor
               markdown=""
-              className="h-[60rem] w-full rounded-md bg-background px-10 py-14"
+              className="min-h-[60rem] w-full rounded-md bg-background px-10 py-14"
             />
           </div>
         ))}
