@@ -61,7 +61,7 @@ export default async function Page() {
                   {sections.map((section, index) => (
                     <DropdownMenuItem key={index}>
                       <BreadcrumbLink
-                        href={`/paper/${paper.id}#section-${section.id}`}
+                        href={`/paper/${paper.id}#paper-section-${section.id}`}
                       >
                         {section.title}
                       </BreadcrumbLink>
@@ -73,22 +73,13 @@ export default async function Page() {
           </BreadcrumbList>
         </Breadcrumb>
       </div>
-      <MaxWidth className="flex flex-col items-center gap-20 py-20">
-        {sections.map((section, index) => (
-          <div
-            id={`section-${section.id}`}
-            key={index}
-            className="prose-sm prose-headings:font-bold w-full max-w-4xl text-justify"
-          >
-            <span className="mb-3 block text-center text-2xl font-bold text-foreground/70">
-              {section.title}
-            </span>
-            <Editor
-              markdown=""
-              className="min-h-[60rem] w-full rounded-md bg-background px-10 py-14"
-            />
-          </div>
-        ))}
+      <MaxWidth className="flex w-full justify-center px-10 py-32">
+        {/* <span className="mb-3 block text-center text-2xl font-bold text-foreground/70">
+            {sections[0]!.title}
+          </span> */}
+        <div className="w-full">
+          <Editor markdown="" />
+        </div>
       </MaxWidth>
     </div>
   );
