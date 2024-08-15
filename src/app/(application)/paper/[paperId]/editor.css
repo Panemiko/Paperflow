@@ -11,5 +11,10 @@ div:has(> .mdxeditor-rich-text-editor) {
 }
 
 .mdxeditor-source-editor {
-  @apply max-w-2xl
+  @apply w-full max-w-2xl;
+}
+
+.mdxeditor-diff-editor,
+.mdxeditor > .mdxeditor-diff-source-wrapper > .mdxeditor-rich-text-editor {
+  @apply w-full max-w-2xl;
 }
