@@ -9,6 +9,7 @@ import {
   UndoRedo,
   codeBlockPlugin,
   codeMirrorPlugin,
+  diffSourcePlugin,
   directivesPlugin,
   frontmatterPlugin,
   headingsPlugin,
@@ -135,7 +136,7 @@ export default function EditorRaw({
             AdmonitionDirectiveDescriptor,
           ],
         }),
-        // diffSourcePlugin({ viewMode: "rich-text", diffMarkdown: "boo" }),
+        diffSourcePlugin({ viewMode: 'rich-text', diffMarkdown: 'boo' }),
         markdownShortcutPlugin(),
       ]}
       {...props}

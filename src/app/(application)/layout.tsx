@@ -22,7 +22,7 @@ export default async function Layout({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-screen w-full">
-      <aside className="fixed z-50 flex min-h-screen flex-col gap-6 border-r border-r-border bg-background px-2 py-6">
+      <aside className="fixed z-50 flex min-h-screen flex-col gap-6 border-r border-r-border bg-background px-2 py-3">
         <Link href="/app">
           <Icon className="h-8 w-8" />
         </Link>

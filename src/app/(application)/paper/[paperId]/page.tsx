@@ -6,19 +6,35 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ChevronDownIcon } from "lucide-react";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { section } from "@/mock/section";
+import {
+  BookIcon,
+  ChevronDownIcon,
+  GitGraphIcon,
+  HistoryIcon,
+} from "lucide-react";
+import { CommitForm } from "./commit-form";
 import { Editor } from "./editor";
 
 export default async function Page() {
   const paper = {
     id: "1",
-    title: "Paper Title",
+    title: "Metodologia para incrementar a tecnologia na vida das pessoas",
   };
 
   const sections = [
@@ -38,22 +54,25 @@ export default async function Page() {
 
   return (
     <div className="w-full">
-      <div className="fixed left-12 top-0 z-50 w-full border-b border-b-border bg-background px-8 py-2">
+      <div className="fixed left-12 top-0 z-50 flex w-[calc(100%-2rem)] items-center justify-between border-b border-b-border bg-background px-8 py-2">
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
-              <BreadcrumbLink href="/app">Home</BreadcrumbLink>
+              <BreadcrumbLink href="/app">Paperflow</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbLink href={`/paper/${paper.id}`}>
+              <BreadcrumbLink
+                className="max-w-xs truncate"
+                href={`/paper/${paper.id}`}
+              >
                 {paper.title}
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
               <DropdownMenu>
-                <DropdownMenuTrigger className="flex items-center gap-1">
+                <DropdownMenuTrigger className="flex max-w-xs items-center gap-1 truncate">
                   {sections[0]!.title}
                   <ChevronDownIcon className="size-4" />
                 </DropdownMenuTrigger>
@@ -72,13 +91,34 @@ export default async function Page() {
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
+        <div className="flex gap-4">
+          <Button variant="link" size="sm">
+            <BookIcon /> Guides
+          </Button>
+          <Button variant="outline" size="sm">
+            <HistoryIcon /> Last commits
+          </Button>
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button size="sm">
+                <GitGraphIcon /> Commit
+              </Button>
+            </SheetTrigger>
+            <SheetContent>
+              <SheetHeader>
+                <SheetTitle>Commit changes</SheetTitle>
+                <SheetDescription>
+                  Commit changes to the section &quot;{section.title}&quot;.
+                </SheetDescription>
+              </SheetHeader>
+              <CommitForm />
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
       <MaxWidth className="flex w-full justify-center px-10 py-32">
-        {/* <span className="mb-3 block text-center text-2xl font-bold text-foreground/70">
-            {sections[0]!.title}
-          </span> */}
         <div className="w-full">
-          <Editor markdown="" />
+          <Editor markdown={section.content} />
         </div>
       </MaxWidth>
     </div>

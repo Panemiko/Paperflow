@@ -2,10 +2,14 @@
   @apply fixed left-[calc(50%+1.5rem)] top-14 mb-10 flex -translate-x-1/2 items-center gap-3 border border-border bg-background shadow-2xl shadow-black/5;
 }
 
-div:has(> .mdxeditor-root-contenteditable) {
+div:has(> .mdxeditor-rich-text-editor) {
   @apply flex justify-center;
 }
 
 .mdxeditor-root-contenteditable {
-  @apply prose-sm min-h-[70rem] w-full max-w-4xl rounded-lg border border-border bg-background px-12 py-16 text-justify prose-headings:font-bold prose-ol:list-decimal prose-ul:list-disc;
+  @apply prose min-h-[70rem] w-full max-w-3xl rounded-lg border border-border bg-background px-12 py-16 text-justify prose-headings:font-bold prose-ol:list-decimal prose-ul:list-disc;
+}
+
+.mdxeditor-source-editor {
+  @apply max-w-2xl
 }
