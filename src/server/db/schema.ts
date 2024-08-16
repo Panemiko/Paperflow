@@ -1,12 +1,7 @@
 // Example model schema from the Drizzle docs
 // https://orm.drizzle.team/docs/sql-schema-declaration
 
-import {
-  boolean,
-  pgTableCreator,
-  text,
-  timestamp
-} from "drizzle-orm/pg-core";
+import { boolean, pgTableCreator, text, timestamp } from "drizzle-orm/pg-core";
 
 import { createId } from "@paralleldrive/cuid2";
 
@@ -18,7 +13,7 @@ import { createId } from "@paralleldrive/cuid2";
  */
 export const createTable = pgTableCreator((name) => `paperflow_${name}`);
 
-export const users = createTable("users", {
+export const usersTable = createTable("users", {
   id: text("id").primaryKey().$defaultFn(createId),
   createdAt: timestamp("created_at")
     .notNull()
@@ -33,21 +28,21 @@ export const users = createTable("users", {
   lastName: text("last_name").notNull(),
 });
 
-export const sessions = createTable("sessions", {
+export const sessionsTable = createTable("sessions", {
   id: text("id").primaryKey().$defaultFn(createId),
   createdAt: timestamp("created_at")
     .notNull()
     .$default(() => new Date()),
   userId: text("user_id")
     .notNull()
-    .references(() => users.id),
+    .references(() => usersTable.id),
   expiresAt: timestamp("expires_at", {
     withTimezone: true,
     mode: "date",
   }).notNull(),
 });
 
-export const signInCode = createTable("sign_in_code", {
+export const signInCodesTable = createTable("sign_in_code", {
   id: text("id").primaryKey().$defaultFn(createId),
   createdAt: timestamp("created_at")
     .notNull()
@@ -55,7 +50,7 @@ export const signInCode = createTable("sign_in_code", {
   code: text("code").notNull(),
   userId: text("user_id")
     .notNull()
-    .references(() => users.id),
+    .references(() => usersTable.id),
   expiresAt: timestamp("expires_at", {
     withTimezone: true,
     mode: "date",

@@ -1,6 +1,6 @@
 import { signInCodeSchema, userSchema } from "@/lib/schemas";
 import { sendSignInCode } from "@/server/auth/email";
-import { signInCode, users } from "@/server/db/schema";
+import { signInCodesTable, usersTable } from "@/server/db/schema";
 import { TRPCError } from "@trpc/server";
 import { and, eq } from "drizzle-orm";
 import { cookies } from "next/headers";
@@ -17,8 +17,8 @@ export const userRouter = createTRPCRouter({
       }),
     )
     .mutation(async ({ ctx, input }) => {
-      const existingUser = await ctx.db.query.users.findFirst({
-        where: eq(users.email, input.email),
+      const existingUser = await ctx.db.query.usersTable.findFirst({
+        where: eq(usersTable.email, input.email),
       });
 
       if (existingUser) {
@@ -28,7 +28,7 @@ export const userRouter = createTRPCRouter({
       }
 
       const [newUser] = await ctx.db
-        .insert(users)
+        .insert(usersTable)
         .values({
           email: input.email,
           emailVerified: false,
@@ -37,8 +37,8 @@ export const userRouter = createTRPCRouter({
         })
         .onConflictDoNothing()
         .returning({
-          id: users.id,
-          email: users.email,
+          id: usersTable.id,
+          email: usersTable.email,
         });
 
       if (!newUser) {
@@ -65,8 +65,8 @@ export const userRouter = createTRPCRouter({
       }),
     )
     .query(async ({ ctx, input }) => {
-      const existingUser = await ctx.db.query.users.findFirst({
-        where: eq(users.email, input.email),
+      const existingUser = await ctx.db.query.usersTable.findFirst({
+        where: eq(usersTable.email, input.email),
       });
 
       return {
@@ -76,8 +76,8 @@ export const userRouter = createTRPCRouter({
   signInWithEmail: publicProcedure
     .input(userSchema.pick({ email: true }))
     .mutation(async ({ ctx, input }) => {
-      const existingUser = await ctx.db.query.users.findFirst({
-        where: eq(users.email, input.email),
+      const existingUser = await ctx.db.query.usersTable.findFirst({
+        where: eq(usersTable.email, input.email),
       });
 
       if (!existingUser) {
@@ -101,8 +101,8 @@ export const userRouter = createTRPCRouter({
         .merge(signInCodeSchema.pick({ code: true })),
     )
     .mutation(async ({ ctx, input }) => {
-      const existingUser = await ctx.db.query.users.findFirst({
-        where: eq(users.email, input.email),
+      const existingUser = await ctx.db.query.usersTable.findFirst({
+        where: eq(usersTable.email, input.email),
       });
 
       if (!existingUser) {
@@ -111,10 +111,10 @@ export const userRouter = createTRPCRouter({
         });
       }
 
-      const existingCode = await ctx.db.query.signInCode.findFirst({
+      const existingCode = await ctx.db.query.signInCodesTable.findFirst({
         where: and(
-          eq(signInCode.userId, existingUser.id),
-          eq(signInCode.code, input.code),
+          eq(signInCodesTable.userId, existingUser.id),
+          eq(signInCodesTable.code, input.code),
         ),
       });
 
@@ -126,13 +126,15 @@ export const userRouter = createTRPCRouter({
 
       await ctx.db.transaction(async (tx) => {
         await tx
-          .update(users)
+          .update(usersTable)
           .set({
             emailVerified: true,
           })
-          .where(eq(users.id, existingUser.id));
+          .where(eq(usersTable.id, existingUser.id));
 
-        await tx.delete(signInCode).where(eq(signInCode.id, existingCode.id));
+        await tx
+          .delete(signInCodesTable)
+          .where(eq(signInCodesTable.id, existingCode.id));
       });
 
       const session = await ctx.lucia.createSession(existingUser.id, {});

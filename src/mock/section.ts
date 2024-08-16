@@ -3,7 +3,7 @@ export const section = {
   title: "Introdução e problema de pesquisa",
   content: `## Introdução e problema de pesquisa
   
-  No contexto acadêmico atual, a elaboração de projetos científicos é uma atividade essencial, envolvendo uma série de etapas que vão desde a concepção da pesquisa até a apresentação final dos resultados. A eficiência na escrita e organização das informações desempenha um papel crucial nesse processo, exigindo ferramentas e práticas que otimizem o trabalho dos estudantes. Contudo, os recursos disponíveis muitas vezes são limitados, dificultando o desenvolvimento e a gestão desses projetos de forma eficaz.
+    No contexto acadêmico atual, a elaboração de projetos científicos é uma atividade essencial, envolvendo uma série de etapas que vão desde a concepção da pesquisa até a apresentação final dos resultados. A eficiência na escrita e organização das informações desempenha um papel crucial nesse processo, exigindo ferramentas e práticas que otimizem o trabalho dos estudantes. Contudo, os recursos disponíveis muitas vezes são limitados, dificultando o desenvolvimento e a gestão desses projetos de forma eficaz.
 
     Os Objetivos de Desenvolvimento Sustentável (ODS) da ONU, especialmente o ODS 4, que visa "assegurar a educação  inclusiva, equitativa e de qualidade, e promover oportunidades de aprendizagem ao longo da vida para todos", são altamente relevantes neste contexto. A melhoria da qualidade na educação passa também pelo aperfeiçoamento dos métodos e ferramentas utilizados na produção acadêmica, garantindo que os estudantes tenham à disposição tecnologias que facilitem e aprimorem a elaboração de seus projetos de pesquisa.
 

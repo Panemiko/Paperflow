@@ -6,7 +6,6 @@ import {
   MDXEditor,
   type MDXEditorMethods,
   type MDXEditorProps,
-  UndoRedo,
   codeBlockPlugin,
   codeMirrorPlugin,
   diffSourcePlugin,
@@ -77,21 +76,12 @@ export const YoutubeDirectiveDescriptor: DirectiveDescriptor<YoutubeDirectiveNod
             height="315"
             src={`https://www.youtube.com/embed/${mdastNode.attributes.id}`}
             title="YouTube video player"
-            frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           ></iframe>
         </div>
       );
     },
   };
-
-export function Toolbar() {
-  return (
-    <div className="top- sticky left-1/2 -translate-x-1/2 rounded-lg bg-background px-2 py-1">
-      <UndoRedo />
-    </div>
-  );
-}
 
 // Only import this to the next file
 export default function EditorRaw({
@@ -136,7 +126,7 @@ export default function EditorRaw({
             AdmonitionDirectiveDescriptor,
           ],
         }),
-        diffSourcePlugin({ viewMode: 'rich-text', diffMarkdown: 'boo' }),
+        diffSourcePlugin({ viewMode: "rich-text", diffMarkdown: "boo" }),
         markdownShortcutPlugin(),
       ]}
       {...props}
