@@ -42,7 +42,7 @@ export const sessionsTable = createTable("sessions", {
   }).notNull(),
 });
 
-export const signInCodesTable = createTable("sign_in_code", {
+export const signInCodesTable = createTable("sign_in_codes", {
   id: text("id").primaryKey().$defaultFn(createId),
   createdAt: timestamp("created_at")
     .notNull()
@@ -55,4 +55,36 @@ export const signInCodesTable = createTable("sign_in_code", {
     withTimezone: true,
     mode: "date",
   }).notNull(),
+});
+
+export const papersTable = createTable("papers", {
+  id: text("id").primaryKey().$defaultFn(createId),
+  createdAt: timestamp("created_at")
+    .notNull()
+    .$default(() => new Date()),
+  updatedAt: timestamp("updated_at")
+    .notNull()
+    .$default(() => new Date())
+    .$onUpdate(() => new Date()),
+  title: text("title").notNull(),
+  abstract: text("abstract"),
+  ownerId: text("owner_id")
+    .notNull()
+    .references(() => usersTable.id),
+});
+
+export const sectionsTable = createTable("sections", {
+  id: text("id").primaryKey().$defaultFn(createId),
+  createdAt: timestamp("created_at")
+    .notNull()
+    .$default(() => new Date()),
+  updatedAt: timestamp("updated_at")
+    .notNull()
+    .$default(() => new Date())
+    .$onUpdate(() => new Date()),
+  title: text("title").notNull(),
+  content: text("content"),
+  paperId: text("paper_id")
+    .notNull()
+    .references(() => papersTable.id),
 });
