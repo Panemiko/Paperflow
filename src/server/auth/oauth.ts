@@ -4,7 +4,7 @@ import { and, eq } from "drizzle-orm";
 import { cookies } from "next/headers";
 import { lucia } from ".";
 import { db } from "../db";
-import { users } from "../db/schema";
+import { usersTable } from "../db/schema";
 
 export const google = new Google(
   env.GOOGLE_CLIENT_ID,
@@ -19,7 +19,10 @@ export async function createUser(params: {
   lastName: string;
 }) {
   const existingUser = await db.query.users.findFirst({
-    where: and(eq(users.email, params.email), eq(users.emailVerified, true)),
+    where: and(
+      eq(usersTable.email, params.email),
+      eq(usersTable.emailVerified, true),
+    ),
   });
 
   if (existingUser) {
@@ -41,7 +44,7 @@ export async function createUser(params: {
   }
 
   const [newUser] = await db
-    .insert(users)
+    .insert(usersTable)
     .values({
       email: params.email,
       emailVerified: params.emailVerified,
@@ -50,7 +53,7 @@ export async function createUser(params: {
     })
     .onConflictDoNothing()
     .returning({
-      id: users.id,
+      id: usersTable.id,
     });
 
   if (!newUser) {

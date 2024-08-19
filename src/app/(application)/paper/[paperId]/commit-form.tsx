@@ -12,19 +12,50 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { api } from "@/trpc/react";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { z } from "zod";
 
-export function CommitForm() {
+const formSchema = z.object({
+  message: z.string(),
+  description: z.string().optional(),
+});
+
+export function CommitForm({
+  sectionId,
+  content,
+}: {
+  content: string;
+  sectionId: string;
+}) {
   const form = useForm({
     defaultValues: {
       message: "",
       description: "",
     },
+    resolver: zodResolver(formSchema),
   });
+
+  const { mutateAsync } = api.commit.create.useMutation();
+
+  async function create(data: z.infer<typeof formSchema>) {
+    try {
+      await mutateAsync({
+        sectionId: sectionId,
+        content,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <Form {...form}>
-      <form className="flex py-10T flex-col gap-6">
+      <form
+        onSubmit={form.handleSubmit(create)}
+        className="py-10T flex flex-col gap-6"
+      >
         <FormField
           control={form.control}
           name="message"

@@ -2,7 +2,7 @@ import { env } from "@/env";
 import SignInEmail from "emails/sign-in";
 import { generate } from "randomstring";
 import { db } from "../db";
-import { signInCode } from "../db/schema";
+import { signInCodesTable } from "../db/schema";
 import { resend } from "../email";
 
 export async function sendSignInCode(user: { email: string; id: string }) {
@@ -11,7 +11,7 @@ export async function sendSignInCode(user: { email: string; id: string }) {
     charset: "numeric",
   });
 
-  await db.insert(signInCode).values({
+  await db.insert(signInCodesTable).values({
     code: randomCode,
     userId: user.id,
     expiresAt: new Date(Date.now() + 60 * 10 * 1000), // 10 minutes

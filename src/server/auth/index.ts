@@ -8,12 +8,12 @@ import { Lucia, TimeSpan } from "lucia";
 import { cookies } from "next/headers";
 import { cache } from "react";
 import { db } from "../db";
-import { sessions, users } from "../db/schema";
+import { sessionsTable, usersTable } from "../db/schema";
 
 const adapter = new DrizzlePostgreSQLAdapter(
   db,
-  sessions as unknown as PostgreSQLSessionTable,
-  users,
+  sessionsTable as unknown as PostgreSQLSessionTable,
+  usersTable,
 );
 
 export const lucia = new Lucia(adapter, {
@@ -66,6 +66,6 @@ export const authentication = cache(async () => {
 declare module "lucia" {
   interface Register {
     Lucia: typeof lucia;
-    DatabaseUserAttributes: typeof users.$inferSelect;
+    DatabaseUserAttributes: typeof usersTable.$inferSelect;
   }
 }

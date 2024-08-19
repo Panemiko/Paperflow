@@ -1,7 +1,13 @@
 // Example model schema from the Drizzle docs
 // https://orm.drizzle.team/docs/sql-schema-declaration
 
-import { boolean, pgTableCreator, text, timestamp } from "drizzle-orm/pg-core";
+import {
+  boolean,
+  json,
+  pgTableCreator,
+  text,
+  timestamp,
+} from "drizzle-orm/pg-core";
 
 import { createId } from "@paralleldrive/cuid2";
 
@@ -82,9 +88,32 @@ export const sectionsTable = createTable("sections", {
     .notNull()
     .$default(() => new Date())
     .$onUpdate(() => new Date()),
-  title: text("title").notNull(),
-  content: text("content"),
+  title: text("title"),
   paperId: text("paper_id")
     .notNull()
     .references(() => papersTable.id),
 });
+
+export const commitsTable = createTable(
+  "commits",
+  {
+    id: text("id").primaryKey().$defaultFn(createId),
+    createdAt: timestamp("created_at")
+      .notNull()
+      .$default(() => new Date()),
+    sectionId: text("section_id")
+      .notNull()
+      .references(() => sectionsTable.id),
+    changes: json("changes").notNull(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => usersTable.id),
+  },
+  (table) => {
+    return {
+      lastAppliedCommitId: text("last_applied_commit_id").references(
+        () => table.id,
+      ),
+    };
+  },
+);

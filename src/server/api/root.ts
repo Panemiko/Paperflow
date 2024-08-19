@@ -1,4 +1,7 @@
 import { createCallerFactory, createTRPCRouter } from "@/server/api/trpc";
+import { commitRouter } from "./routers/commit";
+import { paperRouter } from "./routers/paper";
+import { sectionRouter } from "./routers/section";
 import { userRouter } from "./routers/user";
 
 /**
@@ -8,6 +11,9 @@ import { userRouter } from "./routers/user";
  */
 export const appRouter = createTRPCRouter({
   user: userRouter,
+  paper: paperRouter,
+  section: sectionRouter,
+  commit: commitRouter,
 });
 
 // export type definition of API
