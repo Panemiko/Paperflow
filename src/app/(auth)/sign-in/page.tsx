@@ -24,7 +24,7 @@ export default async function Page() {
           <Button
             asChild
             size="lg"
-            className="w-full justify-between bg-[#4285f4] text-white"
+            className="w-full justify-between bg-[#4285f4] hover:bg-[#4285f4]/90 text-white"
           >
             <Link href="/api/auth/google">
               <div className="flex items-center gap-4">

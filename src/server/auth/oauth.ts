@@ -18,7 +18,7 @@ export async function createUser(params: {
   firstName: string;
   lastName: string;
 }) {
-  const existingUser = await db.query.users.findFirst({
+  const existingUser = await db.query.usersTable.findFirst({
     where: and(
       eq(usersTable.email, params.email),
       eq(usersTable.emailVerified, true),

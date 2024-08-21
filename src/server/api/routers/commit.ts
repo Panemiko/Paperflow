@@ -72,9 +72,11 @@ export const commitRouter = createTRPCRouter({
       });
 
       const sectionUntilLastAppliedCommit = applyCommits(
-        "",
+        'teste de texto para ver se ele teve alguma alteração',
         commitHistory.map((commit) => commit.changes) as Change[],
       );
+
+      console.log(sectionUntilLastAppliedCommit)
 
       const changes = diffWordsWithSpace(
         sectionUntilLastAppliedCommit,
@@ -83,6 +85,8 @@ export const commitRouter = createTRPCRouter({
           ignoreWhitespace: false,
         },
       );
+
+      console.log(changes)
 
       await ctx.db.insert(commitsTable).values({
         sectionId: input.sectionId,
