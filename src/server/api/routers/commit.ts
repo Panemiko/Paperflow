@@ -1,27 +1,10 @@
+import { changesToText, textToChanges } from "@/lib/diff";
 import { commitSchema, sectionContentSchema } from "@/lib/schemas";
 import { commitsTable, papersTable, sectionsTable } from "@/server/db/schema";
 import { TRPCError } from "@trpc/server";
-import { type Change, diffWordsWithSpace } from "diff";
+import { type Diff } from "diff-match-patch";
 import { and, desc, eq } from "drizzle-orm";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
-
-function applyCommits(original: string, commits: Change[]): string {
-  let result = "";
-  let originalIndex = 0;
-
-  commits.forEach((commit) => {
-    if (commit.removed) {
-      originalIndex += commit.count!;
-    } else if (commit.added) {
-      result += commit.value;
-    } else {
-      result += original.slice(originalIndex, originalIndex + commit.count!);
-      originalIndex += commit.count!;
-    }
-  });
-
-  return result;
-}
 
 export const commitRouter = createTRPCRouter({
   bySection: protectedProcedure
@@ -71,22 +54,15 @@ export const commitRouter = createTRPCRouter({
         orderBy: desc(commitsTable.createdAt),
       });
 
-      const sectionUntilLastAppliedCommit = applyCommits(
-        'teste de texto para ver se ele teve alguma alteração',
-        commitHistory.map((commit) => commit.changes) as Change[],
+      const oldText = changesToText(
+        commitHistory.map((commit) => commit.changes)[0] as Diff[],
       );
 
-      console.log(sectionUntilLastAppliedCommit)
+      console.log(oldText);
 
-      const changes = diffWordsWithSpace(
-        sectionUntilLastAppliedCommit,
-        input.content,
-        {
-          ignoreWhitespace: false,
-        },
-      );
+      const changes = textToChanges(oldText, input.content);
 
-      console.log(changes)
+      console.log(changes);
 
       await ctx.db.insert(commitsTable).values({
         sectionId: input.sectionId,

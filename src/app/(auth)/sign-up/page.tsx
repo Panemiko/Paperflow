@@ -1,5 +1,6 @@
 import { CustomLink } from "@/components/ui/link";
 import { type Metadata } from "next";
+import { Suspense } from "react";
 import { EmailForm } from "./form";
 
 export const metadata: Metadata = {
@@ -20,10 +21,12 @@ export default async function Page() {
         </p>
       </div>
       <div className="mb-2">
-        <EmailForm />
+        <Suspense>
+          <EmailForm />
+        </Suspense>
       </div>
       <div>
-        <span className="text-foreground/70 text-xs">
+        <span className="text-xs text-foreground/70">
           By clicking Continue, you agree to our{" "}
           <CustomLink href="/terms">Terms</CustomLink> and{" "}
           <CustomLink href="/privacy">Privacy Policy</CustomLink>.

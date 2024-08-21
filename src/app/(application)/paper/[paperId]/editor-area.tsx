@@ -23,11 +23,13 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { changesToText } from "@/lib/diff";
 import {
   type commitSchema,
   type paperSchema,
   type sectionSchema,
 } from "@/lib/schemas";
+import { type Diff } from "diff-match-patch";
 import {
   BookIcon,
   ChevronDownIcon,
@@ -54,7 +56,9 @@ export default function EditorArea({
   const section =
     sections.find((section) => section.id === sectionId) ?? sections[0];
 
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState(
+    changesToText(commits.map((commit) => commit.changes)[0] as Diff[]),
+  );
 
   if (!section) {
     return notFound();
