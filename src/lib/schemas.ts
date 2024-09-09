@@ -61,16 +61,23 @@ export const sectionSchema = z.object({
   id: idSchema,
   createdAt: z.date(),
   updatedAt: z.date(),
-  title: z.string().trim().min(1, "Mandatory").max(500, "Max. 500 characters").nullable(),
+  title: z
+    .string()
+    .trim()
+    .min(1, "Mandatory")
+    .max(500, "Max. 500 characters")
+    .nullable(),
   paperId: idSchema,
 });
 
-export const commitChangeSchema = z.unknown()
+export const commitChangeSchema = z.unknown();
 
 export const commitSchema = z.object({
   id: idSchema,
   createdAt: z.date(),
   sectionId: idSchema,
+  message: z.string().min(1, "Mandatory").max(100, "Max. 100 characters"),
+  description: z.string().max(500, "Max. 500 characters").nullable(),
   changes: commitChangeSchema,
   userId: idSchema,
 });

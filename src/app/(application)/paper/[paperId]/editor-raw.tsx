@@ -20,7 +20,7 @@ import {
   quotePlugin,
   tablePlugin,
   thematicBreakPlugin,
-  toolbarPlugin
+  toolbarPlugin,
 } from "@mdxeditor/editor";
 import "@mdxeditor/editor/style.css";
 import { type LeafDirective } from "mdast-util-directive";
@@ -86,8 +86,12 @@ export const YoutubeDirectiveDescriptor: DirectiveDescriptor<YoutubeDirectiveNod
 // Only import this to the next file
 export default function EditorRaw({
   editorRef,
+  previousContent,
   ...props
-}: { editorRef: ForwardedRef<MDXEditorMethods> | null } & MDXEditorProps) {
+}: {
+  editorRef: ForwardedRef<MDXEditorMethods> | null;
+  previousContent: string;
+} & MDXEditorProps) {
   return (
     <MDXEditor
       plugins={[
@@ -126,7 +130,10 @@ export default function EditorRaw({
             AdmonitionDirectiveDescriptor,
           ],
         }),
-        diffSourcePlugin({ viewMode: "rich-text", diffMarkdown: "boo" }),
+        diffSourcePlugin({
+          viewMode: "rich-text",
+          diffMarkdown: previousContent,
+        }),
         markdownShortcutPlugin(),
       ]}
       {...props}

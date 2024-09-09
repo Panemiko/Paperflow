@@ -14,9 +14,10 @@ const EditorRaw = dynamic(() => import("./editor-raw"), {
 
 // This is what is imported by other components. Pre-initialized with plugins, and ready
 // to accept other props, including a ref.
-export const Editor = forwardRef<MDXEditorMethods, MDXEditorProps>(
-  (props, ref) => <EditorRaw {...props} editorRef={ref} />,
-);
+export const Editor = forwardRef<
+  MDXEditorMethods,
+  MDXEditorProps & { previousContent: string }
+>((props, ref) => <EditorRaw {...props} editorRef={ref} />);
 
 // TS complains without the following line
 Editor.displayName = "Editor";

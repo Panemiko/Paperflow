@@ -60,6 +60,10 @@ export default function EditorArea({
     changesToText(commits.map((commit) => commit.changes).flat() as Change[]),
   );
 
+  const contentUntilLastCommit = changesToText(
+    commits.map((commit) => commit.changes).flat() as Change[],
+  );
+
   if (!section) {
     return notFound();
   }
@@ -136,7 +140,11 @@ export default function EditorArea({
       </div>
       <MaxWidth className="flex w-full justify-center px-10 py-32">
         <div className="w-full">
-          <Editor markdown={content} onChange={(value) => setContent(value)} />
+          <Editor
+            previousContent={contentUntilLastCommit}
+            markdown={content}
+            onChange={(value) => setContent(value)}
+          />
         </div>
       </MaxWidth>
     </div>

@@ -3,6 +3,7 @@ import { commitSchema, sectionContentSchema } from "@/lib/schemas";
 import { commitsTable, papersTable, sectionsTable } from "@/server/db/schema";
 import { TRPCError } from "@trpc/server";
 import { and, desc, eq } from "drizzle-orm";
+import { markdownToTxt } from "markdown-to-txt";
 import { type Change } from "textdiff-create";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 
@@ -27,7 +28,7 @@ export const commitRouter = createTRPCRouter({
   create: protectedProcedure
     .input(
       commitSchema
-        .pick({ sectionId: true })
+        .pick({ sectionId: true, message: true, description: true })
         .extend({ content: sectionContentSchema }),
     )
     .mutation(async ({ ctx, input }) => {
@@ -60,10 +61,21 @@ export const commitRouter = createTRPCRouter({
 
       const changes = textToChanges(changesUntilLastCommits, input.content);
 
-      await ctx.db.insert(commitsTable).values({
-        sectionId: input.sectionId,
-        userId: ctx.auth.user.id,
-        changes,
+      const firstLine = input.content.split("\n")[0] ?? "";
+      const sectionTitle = markdownToTxt(firstLine.slice(0, 499)) ?? null;
+
+      await ctx.db.transaction(async (tx) => {
+        await tx.update(sectionsTable).set({
+          title: sectionTitle,
+        });
+
+        await tx.insert(commitsTable).values({
+          sectionId: input.sectionId,
+          userId: ctx.auth.user.id,
+          message: input.message,
+          description: input.description,
+          changes,
+        });
       });
     }),
 });

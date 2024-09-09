@@ -104,6 +104,8 @@ export const commitsTable = createTable(
     sectionId: text("section_id")
       .notNull()
       .references(() => sectionsTable.id),
+    message: text("message").notNull(),
+    description: text("description"),
     changes: json("changes").notNull(),
     userId: text("user_id")
       .notNull()

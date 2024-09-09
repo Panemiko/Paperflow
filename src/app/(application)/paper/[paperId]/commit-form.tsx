@@ -12,14 +12,15 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { commitSchema } from "@/lib/schemas";
 import { api } from "@/trpc/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { type z } from "zod";
 
-const formSchema = z.object({
-  message: z.string(),
-  description: z.string().optional(),
+const formSchema = commitSchema.pick({
+  message: true,
+  description: true,
 });
 
 export function CommitForm({
@@ -43,6 +44,8 @@ export function CommitForm({
     try {
       await mutateAsync({
         sectionId: sectionId,
+        message: data.message,
+        description: data.description,
         content,
       });
     } catch (error) {
