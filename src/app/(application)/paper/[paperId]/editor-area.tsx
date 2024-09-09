@@ -29,7 +29,6 @@ import {
   type paperSchema,
   type sectionSchema,
 } from "@/lib/schemas";
-import { type Diff } from "diff-match-patch";
 import {
   BookIcon,
   ChevronDownIcon,
@@ -38,6 +37,7 @@ import {
 } from "lucide-react";
 import { notFound } from "next/navigation";
 import { useState } from "react";
+import { type Change } from "textdiff-create";
 import { type z } from "zod";
 import { CommitForm } from "./commit-form";
 import { Editor } from "./editor";
@@ -57,7 +57,7 @@ export default function EditorArea({
     sections.find((section) => section.id === sectionId) ?? sections[0];
 
   const [content, setContent] = useState(
-    changesToText(commits.map((commit) => commit.changes)[0] as Diff[]),
+    changesToText(commits.map((commit) => commit.changes).flat() as Change[]),
   );
 
   if (!section) {
