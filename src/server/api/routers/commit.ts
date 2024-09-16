@@ -56,7 +56,7 @@ export const commitRouter = createTRPCRouter({
       });
 
       const changesUntilLastCommits = changesToText(
-        commitHistory.map((commit) => commit.changes).flat() as Change[],
+        commitHistory.map((commit) => commit.changes) as Change[][],
       );
 
       const changes = textToChanges(changesUntilLastCommits, input.content);
