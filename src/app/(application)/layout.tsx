@@ -12,6 +12,7 @@ import { HomeIcon } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { type ReactNode } from "react";
+import { UserDropdown } from "./user-dropdown";
 
 export default async function Layout({ children }: { children: ReactNode }) {
   const { user } = await authentication();
@@ -22,23 +23,26 @@ export default async function Layout({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-screen w-full">
-      <aside className="fixed z-50 flex min-h-screen flex-col gap-6 border-r border-r-border bg-background px-2 py-3">
-        <Link href="/app">
-          <Icon className="h-8 w-8" />
-        </Link>
-        <Separator />
-        <div className="flex flex-col gap-3">
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <HomeIcon />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent side="right">Home</TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+      <aside className="fixed z-50 flex min-h-screen flex-col justify-between gap-6 border-r border-r-border bg-background px-2 py-3">
+        <div className="flex flex-col gap-4">
+          <Link href="/app">
+            <Icon className="h-8 w-8" />
+          </Link>
+          <Separator />
+          <div className="flex flex-col gap-3">
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="ghost" size="icon">
+                    <HomeIcon />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent side="right">Home</TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </div>
         </div>
+        <UserDropdown user={user} />
       </aside>
       <div className="ml-12">{children}</div>
     </div>

@@ -26,19 +26,15 @@ export const userSchema = z.object({
   lastName: z.string().trim().min(1, "Mandatory").max(30, "Max. 30 characters"),
 });
 
-export const publicUserSchema = userSchema
-  .pick({
-    id: true,
-    createdAt: true,
-    updatedAt: true,
-    email: true,
-    emailVerified: true,
-    firstName: true,
-    lastName: true,
-  })
-  .extend({
-    fullName: z.string().trim().min(1, "Mandatory"),
-  });
+export const publicUserSchema = userSchema.pick({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+  email: true,
+  emailVerified: true,
+  firstName: true,
+  lastName: true,
+});
 
 export const signInCodeSchema = z.object({
   id: idSchema,

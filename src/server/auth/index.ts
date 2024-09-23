@@ -25,9 +25,7 @@ export const lucia = new Lucia(adapter, {
     },
   },
   getUserAttributes(ogUser) {
-    return publicUserSchema
-      .omit({ id: true })
-      .parse({ ...ogUser, fullName: `${ogUser.firstName} ${ogUser.lastName}` });
+    return publicUserSchema.omit({ id: true }).parse(ogUser);
   },
 });
 

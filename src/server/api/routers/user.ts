@@ -140,8 +140,6 @@ export const userRouter = createTRPCRouter({
       const session = await ctx.lucia.createSession(existingUser.id, {});
       const sessionCookie = ctx.lucia.createSessionCookie(session.id);
 
-      console.log(sessionCookie)
-
       cookies().set(
         sessionCookie.name,
         sessionCookie.value,

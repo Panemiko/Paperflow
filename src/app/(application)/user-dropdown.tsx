@@ -23,8 +23,8 @@ export function UserDropdown({
   user: z.infer<typeof publicUserSchema>;
 }) {
   const nameIntials =
-    user.fullName.split(" ")[0]![0]! +
-    user.fullName.split(" ")[user.fullName.split(" ").length - 1]![0]!;
+    user.firstName.split(" ")[0]![0]! +
+    user.lastName.split(" ")[user.lastName.split(" ").length - 1]![0]!;
 
   const { mutateAsync: signOut } = api.user.signOut.useMutation();
 
@@ -32,15 +32,17 @@ export function UserDropdown({
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger>
         <Avatar className="size-9 ">
           <AvatarFallback className="border-2 border-secondary bg-background">
             {nameIntials}
           </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent side="bottom" align="end">
-        <DropdownMenuLabel>{user.fullName}</DropdownMenuLabel>
+      <DropdownMenuContent side="right" align="end">
+        <DropdownMenuLabel>
+          {user.firstName} {user.lastName}
+        </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <Link href={`/account`}>
