@@ -4,6 +4,7 @@
 import {
   boolean,
   json,
+  pgEnum,
   pgTableCreator,
   text,
   timestamp,
@@ -18,6 +19,8 @@ import { createId } from "@paralleldrive/cuid2";
  * @see https://orm.drizzle.team/docs/goodies#multi-project-schema
  */
 export const createTable = pgTableCreator((name) => `paperflow_${name}`);
+
+export const paperPermissionRole = pgEnum("paper_permission_role", ["author"]);
 
 export const usersTable = createTable("users", {
   id: text("id").primaryKey().$defaultFn(createId),
@@ -74,9 +77,23 @@ export const papersTable = createTable("papers", {
     .$onUpdate(() => new Date()),
   title: text("title").notNull(),
   abstract: text("abstract"),
-  ownerId: text("owner_id")
+});
+
+export const paperPermissionsTable = createTable("paper_permissions", {
+  id: text("id").primaryKey().$defaultFn(createId),
+  createdAt: timestamp("created_at")
+    .notNull()
+    .$default(() => new Date()),
+  updatedAt: timestamp("updated_at")
+    .notNull()
+    .$default(() => new Date()),
+  paperId: text("paper_id")
+    .notNull()
+    .references(() => papersTable.id),
+  userId: text("user_id")
     .notNull()
     .references(() => usersTable.id),
+  role: paperPermissionRole("role").notNull(),
 });
 
 export const commitsTable = createTable(

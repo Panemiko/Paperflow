@@ -50,7 +50,15 @@ export const paperSchema = z.object({
   updatedAt: z.date(),
   title: z.string().trim().min(1, "Mandatory").max(100, "Max. 100 characters"),
   abstract: z.string().trim().max(5000, "Max. 5000 characters").nullable(),
-  ownerId: idSchema,
+});
+
+export const paperPermissionsSchema = z.object({
+  id: idSchema,
+  createdAt: z.date(),
+  updatedAt: z.date(),
+  paperId: idSchema,
+  userId: idSchema,
+  role: z.enum(["author"]),
 });
 
 export const commitChangeSchema = z.unknown();

@@ -1,5 +1,5 @@
 import { paperSchema } from "@/lib/schemas";
-import { papersTable } from "@/server/db/schema";
+import { paperPermissionsTable, papersTable } from "@/server/db/schema";
 import { and, eq } from "drizzle-orm";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 
@@ -11,17 +11,37 @@ export const paperRouter = createTRPCRouter({
       }),
     )
     .query(async ({ ctx, input }) => {
-      const paper = await ctx.db.query.papersTable.findFirst({
-        where: and(
-          eq(papersTable.id, input.id),
-          eq(papersTable.ownerId, ctx.auth.user.id),
-        ),
-      });
+      const paper = await ctx.db
+        .select()
+        .from(papersTable)
+        .leftJoin(
+          paperPermissionsTable,
+          and(eq(papersTable.id, paperPermissionsTable.paperId)),
+        )
+        .where(
+          and(
+            eq(papersTable.id, input.id),
+            eq(paperPermissionsTable.userId, ctx.auth.user.id),
+          ),
+        )
+        .limit(1);
 
-      if (!paper) {
+      if (!paper.map((paper) => paper.papers)?.length) {
         return null;
       }
 
-      return paper;
+      return paper.map((paper) => paper.papers)[0];
     }),
+  byCurrentUser: protectedProcedure.query(async ({ ctx }) => {
+    const paper = await ctx.db
+      .select()
+      .from(papersTable)
+      .leftJoin(
+        paperPermissionsTable,
+        and(eq(papersTable.id, paperPermissionsTable.paperId)),
+      )
+      .where(and(eq(paperPermissionsTable.userId, ctx.auth.user.id)));
+
+    return paper.map((paper) => paper.papers);
+  }),
 });

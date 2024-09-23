@@ -1,6 +1,10 @@
 import { changesToText, textToChanges } from "@/lib/diff";
-import { commitSchema, sectionContentSchema } from "@/lib/schemas";
-import { commitsTable, papersTable } from "@/server/db/schema";
+import { commitSchema, paperContentSchema } from "@/lib/schemas";
+import {
+  commitsTable,
+  paperPermissionsTable,
+  papersTable,
+} from "@/server/db/schema";
 import { TRPCError } from "@trpc/server";
 import { and, desc, eq } from "drizzle-orm";
 import { type Change } from "textdiff-create";
@@ -10,37 +14,46 @@ export const commitRouter = createTRPCRouter({
   byPaper: protectedProcedure
     .input(commitSchema.pick({ paperId: true }))
     .query(async ({ ctx, input }) => {
-      const result = await ctx.db
-        .select()
-        .from(commitsTable)
-        .where(
-          and(
-            eq(commitsTable.paperId, input.paperId),
-            eq(papersTable.ownerId, ctx.auth.user.id),
+      return await ctx.db.transaction(async (tx) => {
+        const perm = await tx.query.paperPermissionsTable.findFirst({
+          where: and(
+            eq(paperPermissionsTable.paperId, input.paperId),
+            eq(paperPermissionsTable.userId, ctx.auth.user.id),
           ),
-        );
+        });
 
-      return result;
+        if (!perm) {
+          throw new TRPCError({ code: "FORBIDDEN" });
+        }
+
+        return await tx.query.commitsTable.findMany({
+          where: eq(commitsTable.paperId, input.paperId),
+        });
+      });
     }),
   create: protectedProcedure
     .input(
       commitSchema
         .pick({ paperId: true, message: true, description: true })
-        .extend({ content: sectionContentSchema }),
+        .extend({ content: paperContentSchema }),
     )
     .mutation(async ({ ctx, input }) => {
       const paper = await ctx.db
         .select()
         .from(papersTable)
+        .leftJoin(
+          paperPermissionsTable,
+          and(eq(papersTable.id, paperPermissionsTable.paperId)),
+        )
         .where(
           and(
-            eq(papersTable.ownerId, ctx.auth.user.id),
             eq(papersTable.id, input.paperId),
+            eq(paperPermissionsTable.userId, ctx.auth.user.id),
           ),
         )
         .limit(1);
 
-      if (!paper?.length) {
+      if (!paper.map((paper) => paper.papers)?.length) {
         throw new TRPCError({
           code: "FORBIDDEN",
         });
@@ -65,4 +78,12 @@ export const commitRouter = createTRPCRouter({
         changes,
       });
     }),
+  lastCommits: protectedProcedure.query(async ({ ctx }) => {
+    const commits = await ctx.db.query.commitsTable.findMany({
+      where: eq(commitsTable.userId, ctx.auth.user.id),
+      orderBy: desc(commitsTable.createdAt),
+    });
+
+    return commits;
+  }),
 });
