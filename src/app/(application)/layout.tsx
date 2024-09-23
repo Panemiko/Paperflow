@@ -1,4 +1,5 @@
 import { Icon } from "@/components/brand/icon";
+import { MaxWidth } from "@/components/max-width";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -44,7 +45,9 @@ export default async function Layout({ children }: { children: ReactNode }) {
         </div>
         <UserDropdown user={user} />
       </aside>
-      <div className="ml-12">{children}</div>
+      <div className="ml-14">
+        <MaxWidth>{children}</MaxWidth>
+      </div>
     </div>
   );
 }

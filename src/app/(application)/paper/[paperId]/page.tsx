@@ -12,7 +12,6 @@ import { PaperLocation } from "./paper-location";
 
 export default async function Page({
   params,
-  searchParams,
 }: {
   params: { paperId: string };
   searchParams: { s?: string };
@@ -23,20 +22,7 @@ export default async function Page({
     return notFound();
   }
 
-  const sections = await api.section.byPaper({ paperId: paper.id });
-
-  if (!sections) {
-    return notFound();
-  }
-
-  const section =
-    sections.find((section) => section.id === searchParams.s) ?? sections[0];
-
-  if (!section) {
-    return notFound();
-  }
-
-  const commits = await api.commit.bySection({ sectionId: section.id });
+  const commits = await api.commit.byPaper({ paperId: paper.id });
 
   return (
     <>
@@ -44,14 +30,13 @@ export default async function Page({
         initialState={{
           commits,
           paper,
-          section,
           content: changesToText(
             commits.map((commit) => commit.changes) as Change[][],
           ),
         }}
       />
       <div className="w-full">
-        <div className="fixed left-12 top-0 z-50 flex w-[calc(100%-2rem)] items-center justify-between border-b border-b-border bg-background px-8 py-2">
+        <div className="fixed left-12 top-0 z-40 flex w-[calc(100%-2rem)] items-center justify-between border-b border-b-border bg-background px-8 py-2">
           <PaperLocation />
           <div className="flex gap-4">
             <Button variant="link" size="sm">

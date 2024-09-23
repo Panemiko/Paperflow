@@ -44,15 +44,15 @@ export function CommitForm() {
 
   const { mutateAsync, isPending } = api.commit.create.useMutation();
 
-  const { content, commitPopupOpen, setCommitPopupOpen, section } =
+  const { content, commitPopupOpen, paper, setCommitPopupOpen } =
     useEditorStore();
 
   async function create(data: z.infer<typeof formSchema>) {
-    if (!section) return;
+    if (!paper) return;
 
     try {
       await mutateAsync({
-        sectionId: section.id,
+        paperId: paper.id,
         message: data.message,
         description: data.description,
         content,
@@ -75,8 +75,8 @@ export function CommitForm() {
         <SheetHeader className="mb-10">
           <SheetTitle>Commit changes</SheetTitle>
           <SheetDescription>
-            Commit changes to the section &quot;
-            {section?.title ?? "(untitled)"}&quot;.
+            Commit changes to the paper &quot;
+            {paper?.title ?? "(untitled)"}&quot;.
           </SheetDescription>
         </SheetHeader>
 

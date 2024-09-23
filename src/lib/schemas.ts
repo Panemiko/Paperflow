@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const idSchema = z.string().trim().cuid2("Invalid ID");
 
-export const sectionContentSchema = z.string().trim();
+export const paperContentSchema = z.string();
 
 export const userPasswordSchema = z
   .string()
@@ -53,25 +53,12 @@ export const paperSchema = z.object({
   ownerId: idSchema,
 });
 
-export const sectionSchema = z.object({
-  id: idSchema,
-  createdAt: z.date(),
-  updatedAt: z.date(),
-  title: z
-    .string()
-    .trim()
-    .min(1, "Mandatory")
-    .max(500, "Max. 500 characters")
-    .nullable(),
-  paperId: idSchema,
-});
-
 export const commitChangeSchema = z.unknown();
 
 export const commitSchema = z.object({
   id: idSchema,
   createdAt: z.date(),
-  sectionId: idSchema,
+  paperId: idSchema,
   message: z.string().min(1, "Mandatory").max(100, "Max. 100 characters"),
   description: z.string().max(500, "Max. 500 characters").nullable(),
   changes: commitChangeSchema,

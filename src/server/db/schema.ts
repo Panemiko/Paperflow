@@ -79,21 +79,6 @@ export const papersTable = createTable("papers", {
     .references(() => usersTable.id),
 });
 
-export const sectionsTable = createTable("sections", {
-  id: text("id").primaryKey().$defaultFn(createId),
-  createdAt: timestamp("created_at")
-    .notNull()
-    .$default(() => new Date()),
-  updatedAt: timestamp("updated_at")
-    .notNull()
-    .$default(() => new Date())
-    .$onUpdate(() => new Date()),
-  title: text("title"),
-  paperId: text("paper_id")
-    .notNull()
-    .references(() => papersTable.id),
-});
-
 export const commitsTable = createTable(
   "commits",
   {
@@ -101,9 +86,9 @@ export const commitsTable = createTable(
     createdAt: timestamp("created_at")
       .notNull()
       .$default(() => new Date()),
-    sectionId: text("section_id")
+    paperId: text("paper_id")
       .notNull()
-      .references(() => sectionsTable.id),
+      .references(() => papersTable.id),
     message: text("message").notNull(),
     description: text("description"),
     changes: json("changes").notNull(),
