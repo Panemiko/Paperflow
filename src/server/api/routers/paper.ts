@@ -1,5 +1,9 @@
 import { paperSchema } from "@/lib/schemas";
-import { paperPermissionsTable, papersTable } from "@/server/db/schema";
+import {
+  commitsTable,
+  paperPermissionsTable,
+  papersTable,
+} from "@/server/db/schema";
 import { and, eq } from "drizzle-orm";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 
@@ -33,15 +37,33 @@ export const paperRouter = createTRPCRouter({
       return paper.map((paper) => paper.papers)[0];
     }),
   byCurrentUser: protectedProcedure.query(async ({ ctx }) => {
-    const paper = await ctx.db
+    const result = await ctx.db
       .select()
       .from(papersTable)
       .leftJoin(
         paperPermissionsTable,
         and(eq(papersTable.id, paperPermissionsTable.paperId)),
       )
-      .where(and(eq(paperPermissionsTable.userId, ctx.auth.user.id)));
+      .leftJoin(commitsTable, eq(papersTable.id, commitsTable.paperId))
+      .where(eq(paperPermissionsTable.userId, ctx.auth.user.id));
 
-    return paper.map((paper) => paper.papers);
+    return result.map((paper) => ({
+      ...paper.papers,
+      commitLength: result
+        .map((paper) => paper.commits)
+        .filter((commit) => commit?.paperId === paper.papers.id).length,
+      collaboratorsLength: result
+        .map((paper) => paper.paper_permissions)
+        .filter((perm) => perm?.paperId === paper.papers.id).length,
+      lastCommit: result
+        .map((paper) => paper.commits)
+        .filter((commit) => commit?.paperId === paper.papers.id)
+        .sort((a, b) => {
+          if (!a || !b) return 1;
+          return (
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          );
+        })[0],
+    }));
   }),
 });

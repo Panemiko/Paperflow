@@ -2,6 +2,17 @@ import { z } from "zod";
 
 export const idSchema = z.string().trim().cuid2("Invalid ID");
 
+export const paperPermissionRoleSchema = z.enum(["author"]);
+
+export const paperPermissionFeatureSchema = z.enum([
+  "commit",
+  "review",
+  "comment",
+  "update_metadata",
+  "invite",
+  "delete",
+]);
+
 export const paperContentSchema = z.string();
 
 export const userPasswordSchema = z
@@ -58,7 +69,7 @@ export const paperPermissionsSchema = z.object({
   updatedAt: z.date(),
   paperId: idSchema,
   userId: idSchema,
-  role: z.enum(["author"]),
+  role: paperPermissionRoleSchema,
 });
 
 export const commitChangeSchema = z.unknown();

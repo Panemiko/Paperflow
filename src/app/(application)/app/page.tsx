@@ -1,17 +1,19 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { GitGraphIcon } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { api } from "@/trpc/server";
+import { GitGraphIcon, PlusCircleIcon, UsersIcon } from "lucide-react";
 import moment from "moment";
 import Link from "next/link";
 
 export default async function Page() {
-  const changes = 10;
-  const papers = [
-    {
-      id: "1",
-      title: "Project 1",
-      changes: 5,
-    },
-  ];
+  const changes = await api.commit.commitsSinceLastWeek();
+  const papers = await api.paper.byCurrentUser();
+  const lastCommits = await api.commit.lastCommits();
 
   return (
     <div className="flex justify-between gap-10 py-20">
@@ -21,27 +23,78 @@ export default async function Page() {
             {moment().format("dddd, MMMM Do")}
           </span>
           <span className="text-xl text-foreground/70">
-            {changes} changes since yesterday
+            {changes} changes since last week
           </span>
         </div>
-        <div className="grid grid-cols-3 pt-10">
+        <div className="grid grid-cols-2 gap-10 pt-10">
           {papers.map((paper, index) => (
             <Link key={index} href={`/paper/${paper.id}`}>
-              <Card>
+              <Card className="transition-colors hover:bg-background/70">
                 <CardHeader>
-                  <CardTitle className="text-lg">{paper.title}</CardTitle>
+                  <CardTitle className="text-lg line-clamp-2">{paper.title}</CardTitle>
+                  <div className="flex flex-col gap-2">
+                    <div className="flex justify-between gap-4 text-sm text-foreground/70">
+                      <span>
+                        {paper.lastCommit
+                          ? `Last commited ${moment(paper.lastCommit.createdAt).fromNow()}`
+                          : "Never commited"}
+                      </span>
+                      <div className="mb-3 flex gap-4">
+                        <div className="flex gap-1 text-sm text-foreground/70">
+                          <GitGraphIcon className="size-5" />{" "}
+                          {paper.commitLength}
+                        </div>
+                        <div className="flex gap-1 text-sm text-foreground/70">
+                          <UsersIcon className="size-5" />{" "}
+                          {paper.collaboratorsLength}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </CardHeader>
               </Card>
             </Link>
           ))}
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link
+                  className="flex items-center justify-center rounded-lg border-2 border-dotted border-foreground opacity-10 transition-opacity hover:opacity-50"
+                  href={`/paper/new`}
+                >
+                  <PlusCircleIcon className="size-20 text-foreground" />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent>Create or access a new paper</TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </div>
       </div>
-      <Card className="w-full max-w-sm">
-        <CardHeader className="flex flex-row justify-between">
+      <Card className="min-h-[550px] w-full max-w-sm">
+        <CardHeader className="flex flex-row justify-between pb-0 pt-8">
           <CardTitle className="text-lg">Last commits</CardTitle>
           <GitGraphIcon className="size-4 text-foreground/70" />
         </CardHeader>
-        <CardContent></CardContent>
+        <CardContent>
+          {lastCommits.map((commit, index) => (
+            <Link
+              className="block rounded-lg border border-border px-5 py-4 transition-colors hover:bg-accent"
+              href={`/commit/${commit.id}`}
+              key={index}
+            >
+              <div className="flex flex-col">
+                <span className="text-xs mb-0.5 text-foreground/70">
+                  {moment(commit.createdAt).fromNow()} by{" "}
+                  {`${commit.user.firstName} ${commit.user.lastName}`}
+                </span>
+                <span className="font-medium mb-2">{commit.message}</span>
+                <span className="text-xs text-foreground/70 truncate">
+                  {papers.find((paper) => paper.id === commit.paperId)?.title}
+                </span>
+              </div>
+            </Link>
+          ))}
+        </CardContent>
       </Card>
     </div>
   );

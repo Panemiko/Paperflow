@@ -1,12 +1,15 @@
 import { changesToText, textToChanges } from "@/lib/diff";
+import { hasFeature } from "@/lib/permissions";
 import { commitSchema, paperContentSchema } from "@/lib/schemas";
 import {
   commitsTable,
   paperPermissionsTable,
   papersTable,
+  usersTable,
 } from "@/server/db/schema";
 import { TRPCError } from "@trpc/server";
-import { and, desc, eq } from "drizzle-orm";
+import { and, desc, eq, gt, inArray, lte } from "drizzle-orm";
+import moment from "moment";
 import { type Change } from "textdiff-create";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 
@@ -53,7 +56,13 @@ export const commitRouter = createTRPCRouter({
         )
         .limit(1);
 
-      if (!paper.map((paper) => paper.papers)?.length) {
+      if (
+        !paper.map((paper) => paper.papers)?.length ||
+        !hasFeature(
+          paper.map((paper) => paper.paper_permissions)[0]?.role,
+          "commit",
+        )
+      ) {
         throw new TRPCError({
           code: "FORBIDDEN",
         });
@@ -79,11 +88,58 @@ export const commitRouter = createTRPCRouter({
       });
     }),
   lastCommits: protectedProcedure.query(async ({ ctx }) => {
-    const commits = await ctx.db.query.commitsTable.findMany({
-      where: eq(commitsTable.userId, ctx.auth.user.id),
-      orderBy: desc(commitsTable.createdAt),
+    const result = await ctx.db.transaction(async (tx) => {
+      const permissions = await tx.query.paperPermissionsTable.findMany({
+        where: eq(paperPermissionsTable.userId, ctx.auth.user.id),
+      });
+
+      return await tx
+        .select()
+        .from(commitsTable)
+        .leftJoin(usersTable, eq(commitsTable.userId, usersTable.id))
+        .where(
+          inArray(
+            commitsTable.paperId,
+            permissions.map((p) => p.paperId),
+          ),
+        )
+        .orderBy(desc(commitsTable.createdAt))
+        .limit(10);
     });
 
-    return commits;
+    return result.map((commit) => ({
+      ...commit.commits,
+      user: {
+        id: commit.users?.id,
+        firstName: commit.users?.firstName,
+        lastName: commit.users?.lastName,
+        email: commit.users?.email,
+      },
+    }));
+  }),
+  commitsSinceLastWeek: protectedProcedure.query(async ({ ctx }) => {
+    const lastWeek = moment().subtract(1, "week").startOf("week").toDate();
+    const endOfLastWeek = moment().toDate();
+
+    const commits = await ctx.db.transaction(async (tx) => {
+      const permission = await tx.query.paperPermissionsTable.findMany({
+        where: eq(paperPermissionsTable.userId, ctx.auth.user.id),
+      });
+
+      return await tx.query.commitsTable.findMany({
+        where: and(
+          inArray(
+            commitsTable.paperId,
+            permission.map((p) => p.paperId),
+          ),
+          gt(commitsTable.createdAt, lastWeek),
+          lte(commitsTable.createdAt, endOfLastWeek),
+        ),
+        orderBy: desc(commitsTable.createdAt),
+        limit: 10,
+      });
+    });
+
+    return commits.length;
   }),
 });
