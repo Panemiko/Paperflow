@@ -96,6 +96,22 @@ export const paperPermissionsTable = createTable("paper_permissions", {
   role: paperPermissionRole("role").notNull(),
 });
 
+export const paperInvitesTable = createTable("paper_invites", {
+  id: text("id").primaryKey().$defaultFn(createId),
+  createdAt: timestamp("created_at")
+    .notNull()
+    .$default(() => new Date()),
+  updatedAt: timestamp("updated_at")
+    .notNull()
+    .$default(() => new Date()),
+  paperId: text("paper_id")
+    .notNull()
+    .references(() => papersTable.id),
+  email: text("email").notNull(),
+  token: text("token").notNull(),
+  accepted: boolean("accepted").notNull().default(false),
+});
+
 export const commitsTable = createTable(
   "commits",
   {

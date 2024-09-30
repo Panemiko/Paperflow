@@ -1,10 +1,16 @@
-import { paperSchema } from "@/lib/schemas";
+import { env } from "@/env";
+import { paperSchema, userSchema } from "@/lib/schemas";
 import {
   commitsTable,
+  paperInvitesTable,
   paperPermissionsTable,
   papersTable,
 } from "@/server/db/schema";
+import { resend } from "@/server/email";
+import { createId } from "@paralleldrive/cuid2";
+import { TRPCError } from "@trpc/server";
 import { and, eq } from "drizzle-orm";
+import PaperInviteEmail from "emails/paper-invite";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 
 export const paperRouter = createTRPCRouter({
@@ -66,4 +72,82 @@ export const paperRouter = createTRPCRouter({
         })[0],
     }));
   }),
+  create: protectedProcedure
+    .input(
+      paperSchema
+        .pick({
+          abstract: true,
+          title: true,
+        })
+        .extend({
+          invitedUsers: userSchema.pick({ email: true }).array(),
+        }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const { paper } = await ctx.db.transaction(async (tx) => {
+        const papers = await tx
+          .insert(papersTable)
+          .values({
+            title: input.title,
+            abstract: input.abstract,
+          })
+          .returning();
+
+        if (!papers[0]) {
+          throw new TRPCError({
+            code: "INTERNAL_SERVER_ERROR",
+          });
+        }
+
+        await tx.insert(paperPermissionsTable).values({
+          paperId: papers[0].id,
+          userId: ctx.auth.user.id,
+          role: "author",
+        });
+
+        return {
+          paper: papers[0],
+        };
+      });
+
+      if (input.invitedUsers.length > 0) {
+        const invites = await ctx.db
+          .insert(paperInvitesTable)
+          .values(
+            input.invitedUsers.map((user) => ({
+              paperId: paper.id,
+              email: user.email,
+              token: createId(),
+            })),
+          )
+          .returning();
+
+        if (env.NODE_ENV === "production") {
+          await resend.batch.send(
+            invites.map((invite) => ({
+              from: `PaperFlow <papers@${env.RESEND_DOMAIN}>`,
+              subject: "You've been invited to a PaperFlow paper",
+              to: invite.email,
+              text: `Paper collaboration invite for "${paper.title}"`,
+              react: PaperInviteEmail({
+                inviteUrl: `${env.NEXT_PUBLIC_URL}/invite?token=${invite.token}`,
+                paperTitle: paper.title,
+              }),
+            })),
+          );
+        }
+
+        if (env.NODE_ENV === "development") {
+          console.log(`Invite link for the paper "${paper.title}"`);
+
+          invites.forEach((invite) =>
+            console.log(
+              `${invite.email}: ${env.NEXT_PUBLIC_URL}/invite?token=${invite.token}`,
+            ),
+          );
+        }
+      }
+
+      return paper.id;
+    }),
 });
