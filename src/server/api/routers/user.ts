@@ -145,6 +145,13 @@ export const userRouter = createTRPCRouter({
         sessionCookie.value,
         sessionCookie.attributes,
       );
+
+      await new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(null);
+          console.log("aosijdaoidja");
+        }, 5000);
+      });
     }),
   signOut: protectedProcedure.mutation(async ({ ctx }) => {
     await ctx.lucia.invalidateSession(ctx.auth.session.id);

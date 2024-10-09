@@ -29,9 +29,11 @@ export default async function Page() {
         <div className="grid grid-cols-2 gap-10 pt-10">
           {papers.map((paper, index) => (
             <Link key={index} href={`/paper/${paper.id}`}>
-              <Card className="transition-colors hover:bg-background/70">
-                <CardHeader>
-                  <CardTitle className="text-lg line-clamp-2">{paper.title}</CardTitle>
+              <Card className="h-40 transition-colors hover:bg-background/70">
+                <CardHeader className="flex h-full justify-between">
+                  <CardTitle className="line-clamp-2 text-lg">
+                    {paper.title}
+                  </CardTitle>
                   <div className="flex flex-col gap-2">
                     <div className="flex justify-between gap-4 text-sm text-foreground/70">
                       <span>
@@ -56,10 +58,10 @@ export default async function Page() {
             </Link>
           ))}
           <TooltipProvider>
-            <Tooltip>
+            <Tooltip delayDuration={0}>
               <TooltipTrigger asChild>
                 <Link
-                  className="flex items-center justify-center rounded-lg border-2 border-dotted border-foreground opacity-10 transition-opacity hover:opacity-50"
+                  className="flex h-40 items-center justify-center rounded-lg border-2 border-dotted border-foreground opacity-10 transition-opacity hover:opacity-50"
                   href={`/paper/new`}
                 >
                   <PlusCircleIcon className="size-20 text-foreground" />
@@ -83,12 +85,12 @@ export default async function Page() {
               key={index}
             >
               <div className="flex flex-col">
-                <span className="text-xs mb-0.5 text-foreground/70">
+                <span className="mb-0.5 text-xs text-foreground/70">
                   {moment(commit.createdAt).fromNow()} by{" "}
                   {`${commit.user.firstName} ${commit.user.lastName}`}
                 </span>
-                <span className="font-medium mb-2">{commit.message}</span>
-                <span className="text-xs text-foreground/70 truncate">
+                <span className="mb-2 font-medium">{commit.message}</span>
+                <span className="truncate text-xs text-foreground/70">
                   {papers.find((paper) => paper.id === commit.paperId)?.title}
                 </span>
               </div>
