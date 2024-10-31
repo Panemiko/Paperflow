@@ -1,11 +1,10 @@
-import { signInCodeSchema, userSchema } from "@/lib/schemas";
+import { userSchema } from "@/lib/schemas";
 import { sendSignInCode } from "@/server/auth/email";
-import { signInCodesTable, usersTable } from "@/server/db/schema";
+import { usersTable } from "@/server/db/schema";
 import { TRPCError } from "@trpc/server";
-import { and, eq } from "drizzle-orm";
-import { cookies } from "next/headers";
+import { eq } from "drizzle-orm";
 import { z } from "zod";
-import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
+import { createTRPCRouter, publicProcedure } from "../trpc";
 
 export const userRouter = createTRPCRouter({
   registerWithEmail: publicProcedure
@@ -94,73 +93,4 @@ export const userRouter = createTRPCRouter({
         });
       }
     }),
-  verifySignInCode: publicProcedure
-    .input(
-      userSchema
-        .pick({ email: true })
-        .merge(signInCodeSchema.pick({ code: true })),
-    )
-    .mutation(async ({ ctx, input }) => {
-      const existingUser = await ctx.db.query.usersTable.findFirst({
-        where: eq(usersTable.email, input.email),
-      });
-
-      if (!existingUser) {
-        throw new TRPCError({
-          code: "FORBIDDEN",
-        });
-      }
-
-      const existingCode = await ctx.db.query.signInCodesTable.findFirst({
-        where: and(
-          eq(signInCodesTable.userId, existingUser.id),
-          eq(signInCodesTable.code, input.code),
-        ),
-      });
-
-      if (!existingCode || existingCode?.expiresAt.getTime() < Date.now()) {
-        throw new TRPCError({
-          code: "FORBIDDEN",
-        });
-      }
-
-      await ctx.db.transaction(async (tx) => {
-        await tx
-          .update(usersTable)
-          .set({
-            emailVerified: true,
-          })
-          .where(eq(usersTable.id, existingUser.id));
-
-        await tx
-          .delete(signInCodesTable)
-          .where(eq(signInCodesTable.id, existingCode.id));
-      });
-
-      const session = await ctx.lucia.createSession(existingUser.id, {});
-      const sessionCookie = ctx.lucia.createSessionCookie(session.id);
-
-      cookies().set(
-        sessionCookie.name,
-        sessionCookie.value,
-        sessionCookie.attributes,
-      );
-
-      await new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(null);
-          console.log("aosijdaoidja");
-        }, 5000);
-      });
-    }),
-  signOut: protectedProcedure.mutation(async ({ ctx }) => {
-    await ctx.lucia.invalidateSession(ctx.auth.session.id);
-
-    const blankSession = ctx.lucia.createBlankSessionCookie();
-    cookies().set(
-      blankSession.name,
-      blankSession.value,
-      blankSession.attributes,
-    );
-  }),
 });

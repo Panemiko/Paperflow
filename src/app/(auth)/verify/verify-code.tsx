@@ -6,7 +6,9 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import { api, type RouterError } from "@/trpc/react";
+import { env } from "@/env";
+import { type RouterError } from "@/trpc/react";
+import { useMutation } from "@tanstack/react-query";
 import { Loader2Icon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -17,8 +19,14 @@ export function VerifyCode({ email }: { email: string }) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  const { mutateAsync: verifySignInCode } =
-    api.user.verifySignInCode.useMutation();
+  const { mutateAsync: verifySignInCode } = useMutation({
+    mutationFn: async ({ code, email }: { code: string; email: string }) => {
+      return await fetch(`${env.NEXT_PUBLIC_URL}/api/verify`, {
+        method: "POST",
+        body: JSON.stringify({ code, email }),
+      });
+    },
+  });
 
   async function submit() {
     setIsLoading(true);
