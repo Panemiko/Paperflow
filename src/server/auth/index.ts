@@ -9,14 +9,10 @@ import { cookies } from "next/headers";
 import { cache } from "react";
 import { db } from "../db";
 import { sessionsTable, usersTable } from "../db/schema";
+import { eq } from "drizzle-orm";
 
-const adapter = new DrizzlePostgreSQLAdapter(
-  db,
-  sessionsTable as unknown as PostgreSQLSessionTable,
-  usersTable,
-);
-
-export const lucia = new Lucia(adapter, {
+export const auth = {
+  sessionCookieName: "auth_token",
   sessionExpiresIn: new TimeSpan(2, "w"), // 2 weeks
   sessionCookie: {
     expires: false,
@@ -24,46 +20,57 @@ export const lucia = new Lucia(adapter, {
       secure: env.NODE_ENV === "production", // set `Secure` flag in HTTPS
     },
   },
-  getUserAttributes(ogUser) {
-    return publicUserSchema.omit({ id: true }).parse(ogUser);
+  getUserAttributes(user: typeof usersTable.$inferSelect) {
+    return publicUserSchema.omit({ id: true }).parse(user);
   },
-});
+  validateSession: async (sessionId: string) => {
+    const session = await db.query.sessionsTable.findFirst({
+      where: eq(sessionsTable.id, sessionId),
+    })
 
-export const authentication = cache(async () => {
-  const sessionId = cookies().get(lucia.sessionCookieName)?.value ?? null;
+    const [data] = await db.select()
+      .from(sessionsTable)
+      .leftJoin(usersTable, eq(usersTable.id, sessionsTable.userId))
+      .where(eq(sessionsTable.id, sessionId))
 
-  if (!sessionId) return { user: null, session: null };
-
-  const { user, session } = await lucia.validateSession(sessionId);
-
-  try {
-    if (session?.fresh) {
-      const sessionCookie = lucia.createSessionCookie(session.id);
-
-      cookies().set(
-        sessionCookie.name,
-        sessionCookie.value,
-        sessionCookie.attributes,
-      );
+    if (!data?.sessions || !data.users ) {
+      return null
     }
 
-    if (!session) {
-      const sessionCookie = lucia.createBlankSessionCookie();
-
-      cookies().set(
-        sessionCookie.name,
-        sessionCookie.value,
-        sessionCookie.attributes,
-      );
+    return {
+      users: data?.users ?  auth.getUserAttributes(data?.users): undefined,
+      session: data?.sessions
     }
-  } catch {}
-
-  return { user, session };
-});
-
-declare module "lucia" {
-  interface Register {
-    Lucia: typeof lucia;
-    DatabaseUserAttributes: typeof usersTable.$inferSelect;
-  }
-}
+  },
+  authenticate : cache(async () => {
+    const sessionId = cookies().get(auth.sessionCookieName)?.value ?? null;
+  
+    if (!sessionId) return { user: null, session: null };
+  
+    const { user, session } = await auth.validateSession(sessionId);
+    
+    try {
+      if (session?.fresh) {
+        const sessionCookie = lucia.createSessionCookie(session.id);
+  
+        cookies().set(
+          sessionCookie.name,
+          sessionCookie.value,
+          sessionCookie.attributes,
+        );
+      }
+  
+      if (!session) {
+        const sessionCookie = lucia.createBlankSessionCookie();
+  
+        cookies().set(
+          sessionCookie.name,
+          sessionCookie.value,
+          sessionCookie.attributes,
+        );
+      }
+    } catch {}
+  
+    return { user, session };
+  });
+};
