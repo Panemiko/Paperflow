@@ -6,13 +6,7 @@ import { and, eq } from "drizzle-orm";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
-export default async function route(req: Request) {
-  if (req.method !== "POST") {
-    return new NextResponse(undefined, {
-      status: 405,
-    });
-  }
-
+export async function POST(req: Request) {
   const { code, email } = await userSchema
     .pick({ email: true })
     .merge(signInCodeSchema.pick({ code: true }))
@@ -59,5 +53,7 @@ export default async function route(req: Request) {
     sessionCookie.attributes,
   );
 
-  return new NextResponse(undefined, { status: 200 });
+  return new Response(undefined, {
+    status: 200,
+  });
 }

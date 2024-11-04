@@ -21,7 +21,7 @@ export function VerifyCode({ email }: { email: string }) {
 
   const { mutateAsync: verifySignInCode } = useMutation({
     mutationFn: async ({ code, email }: { code: string; email: string }) => {
-      return await fetch(`${env.NEXT_PUBLIC_URL}/api/verify`, {
+      return await fetch(`${env.NEXT_PUBLIC_URL}/api/auth/verify`, {
         method: "POST",
         body: JSON.stringify({ code, email }),
       });
