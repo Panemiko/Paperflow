@@ -9,8 +9,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { env } from "@/env";
 import { type publicUserSchema } from "@/lib/schemas";
-import { api } from "@/trpc/react";
+import { useMutation } from "@tanstack/react-query";
 import { LogOutIcon, UserIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -26,7 +27,13 @@ export function UserDropdown({
     user.firstName.split(" ")[0]![0]! +
     user.lastName.split(" ")[user.lastName.split(" ").length - 1]![0]!;
 
-  const { mutateAsync: signOut } = api.user.signOut.useMutation();
+  const { mutateAsync: signOut } = useMutation({
+    mutationFn: async () => {
+      return await fetch(`${env.NEXT_PUBLIC_URL}/api/auth/sign-out`, {
+        method: "POST",
+      });
+    },
+  });
 
   const router = useRouter();
 
