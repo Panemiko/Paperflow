@@ -53,24 +53,29 @@ export const paperRouter = createTRPCRouter({
       .leftJoin(commitsTable, eq(papersTable.id, commitsTable.paperId))
       .where(eq(paperPermissionsTable.userId, ctx.auth.user.id));
 
-    return result.map((paper) => ({
-      ...paper.papers,
-      commitLength: result
-        .map((paper) => paper.commits)
-        .filter((commit) => commit?.paperId === paper.papers.id).length,
-      collaboratorsLength: result
-        .map((paper) => paper.paper_permissions)
-        .filter((perm) => perm?.paperId === paper.papers.id).length,
-      lastCommit: result
-        .map((paper) => paper.commits)
-        .filter((commit) => commit?.paperId === paper.papers.id)
-        .sort((a, b) => {
-          if (!a || !b) return 1;
-          return (
-            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-          );
-        })[0],
-    }));
+    return result
+      .map((paper) => ({
+        ...paper.papers,
+        commitLength: result
+          .map((paper) => paper.commits)
+          .filter((commit) => commit?.paperId === paper.papers.id).length,
+        collaboratorsLength: result
+          .map((paper) => paper.paper_permissions)
+          .filter((perm) => perm?.paperId === paper.papers.id).length,
+        lastCommit: result
+          .map((paper) => paper.commits)
+          .filter((commit) => commit?.paperId === paper.papers.id)
+          .sort((a, b) => {
+            if (!a || !b) return 1;
+            return (
+              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+            );
+          })[0],
+      }))
+      .filter(
+        (value, index, array) =>
+          array.findIndex((paper) => paper.id === value.id) === index,
+      );
   }),
   create: protectedProcedure
     .input(

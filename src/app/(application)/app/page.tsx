@@ -77,7 +77,7 @@ export default async function Page() {
           <CardTitle className="text-lg">Last commits</CardTitle>
           <GitGraphIcon className="size-4 text-foreground/70" />
         </CardHeader>
-        <CardContent>
+        <CardContent className="flex flex-col gap-3">
           {lastCommits.map((commit, index) => (
             <Link
               className="block rounded-lg border border-border px-5 py-4 transition-colors hover:bg-accent"

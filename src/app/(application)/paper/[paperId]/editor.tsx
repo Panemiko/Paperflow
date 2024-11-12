@@ -33,6 +33,9 @@ export const Editor = forwardRef<MDXEditorMethods, Partial<MDXEditorProps>>(
         onChange={setContent}
         previousContent={previousContent}
         editorRef={ref}
+        toMarkdownOptions={{
+          tightDefinitions: true,
+        }}
         {...props}
       />
     );
