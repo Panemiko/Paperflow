@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Tooltip,
@@ -16,7 +17,36 @@ export default async function Page() {
   const lastCommits = await api.commit.lastCommits();
 
   return (
-    <div className="flex justify-between gap-10 py-20">
+    <div className="flex justify-between gap-8 py-20 pl-80">
+      <Card className="fixed left-12 top-0 min-h-screen w-full max-w-sm rounded-l-none">
+        <CardHeader className="flex flex-row justify-between pb-0 pt-8">
+          <CardTitle className="text-lg">Last commits</CardTitle>
+          <GitGraphIcon className="size-4 text-foreground/70" />
+        </CardHeader>
+        <CardContent className="flex flex-col gap-3">
+          {lastCommits.map((commit, index) => (
+            <Link
+              className="block rounded-lg border border-border px-5 py-4 transition-colors hover:bg-accent"
+              href={`/commit/${commit.id}`}
+              key={index}
+            >
+              <div className="flex flex-col">
+                <span className="mb-0.5 text-xs text-foreground/70">
+                  {moment(commit.createdAt).fromNow()} by{" "}
+                  {`${commit.user.firstName} ${commit.user.lastName}`}
+                </span>
+                <span className="mb-2 font-medium">{commit.message}</span>
+                <span className="truncate text-xs text-foreground/70">
+                  {papers.find((paper) => paper.id === commit.paperId)?.title}
+                </span>
+              </div>
+            </Link>
+          ))}
+          <Button variant="outline">
+            <Link href="/commits">View all commits</Link>
+          </Button>
+        </CardContent>
+      </Card>
       <div>
         <div className="flex flex-col gap-3">
           <span className="text-4xl font-bold">
@@ -72,32 +102,6 @@ export default async function Page() {
           </TooltipProvider>
         </div>
       </div>
-      <Card className="min-h-[550px] w-full max-w-sm">
-        <CardHeader className="flex flex-row justify-between pb-0 pt-8">
-          <CardTitle className="text-lg">Last commits</CardTitle>
-          <GitGraphIcon className="size-4 text-foreground/70" />
-        </CardHeader>
-        <CardContent>
-          {lastCommits.map((commit, index) => (
-            <Link
-              className="block rounded-lg border border-border px-5 py-4 transition-colors hover:bg-accent"
-              href={`/commit/${commit.id}`}
-              key={index}
-            >
-              <div className="flex flex-col">
-                <span className="mb-0.5 text-xs text-foreground/70">
-                  {moment(commit.createdAt).fromNow()} by{" "}
-                  {`${commit.user.firstName} ${commit.user.lastName}`}
-                </span>
-                <span className="mb-2 font-medium">{commit.message}</span>
-                <span className="truncate text-xs text-foreground/70">
-                  {papers.find((paper) => paper.id === commit.paperId)?.title}
-                </span>
-              </div>
-            </Link>
-          ))}
-        </CardContent>
-      </Card>
     </div>
   );
 }

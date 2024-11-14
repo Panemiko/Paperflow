@@ -7,7 +7,7 @@ div:has(> .mdxeditor-rich-text-editor) {
 }
 
 .mdxeditor-root-contenteditable {
-  @apply prose min-h-[70rem] w-full max-w-3xl rounded-lg border border-border bg-background px-12 py-10 pt-14 pb-6 text-justify prose-headings:font-bold prose-ol:list-decimal prose-ul:list-disc;
+  @apply prose min-h-[65rem] w-full max-w-4xl rounded-lg border border-border bg-background px-12 py-10 pt-14 pb-6 text-justify prose-headings:font-bold prose-ol:list-decimal prose-ul:list-disc;
 }
 
 .mdxeditor-source-editor {
