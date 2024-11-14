@@ -1,5 +1,6 @@
 import { createCallerFactory, createTRPCRouter } from "@/server/api/trpc";
 import { commitRouter } from "./routers/commit";
+import { landingPageRouter } from "./routers/landing-page";
 import { paperRouter } from "./routers/paper";
 import { userRouter } from "./routers/user";
 
@@ -12,6 +13,7 @@ export const appRouter = createTRPCRouter({
   user: userRouter,
   paper: paperRouter,
   commit: commitRouter,
+  landingPage: landingPageRouter
 });
 
 // export type definition of API
