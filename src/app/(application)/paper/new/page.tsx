@@ -6,7 +6,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { type Metadata } from "next";
 import { NewPaperForm } from "./form";
+
+export const metadata: Metadata = {
+  title: "New paper",
+};
 
 export default async function Page() {
   return (

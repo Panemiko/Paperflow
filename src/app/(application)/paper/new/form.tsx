@@ -71,7 +71,7 @@ export function NewPaperForm() {
             <FormItem>
               <FormLabel>Title</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input placeholder="" {...field} />
               </FormControl>
               <FormDescription>Formal title of the paper.</FormDescription>
               <FormMessage />
@@ -100,7 +100,7 @@ export function NewPaperForm() {
           name="invitedUsers"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Convidados</FormLabel>
+              <FormLabel>Invited users</FormLabel>
               <FormControl className="pt-3">
                 <div>
                   <ul className="mb-4">
@@ -158,7 +158,7 @@ export function NewPaperForm() {
                 </div>
               </FormControl>
               <FormDescription>
-                Authors and collaborators of the paper. Separated by commas.
+                Authors and collaborators of the paper. Separated by comma.
               </FormDescription>
               <FormMessage />
             </FormItem>

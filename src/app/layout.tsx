@@ -16,7 +16,7 @@ export const metadata = {
     template: "%s | Paperflow",
     default: "Paperflow",
   },
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  icons: [{ rel: "icon", url: "/icon.svg" }],
 };
 
 export default function RootLayout({

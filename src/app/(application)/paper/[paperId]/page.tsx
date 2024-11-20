@@ -10,6 +10,22 @@ import { Editor } from "./editor";
 import { Initializer } from "./initializer";
 import { PaperLocation } from "./paper-location";
 
+export async function generateMetadata({
+  params,
+}: {
+  params: { paperId: string };
+}) {
+  const paper = await api.paper.byId({ id: params.paperId });
+
+  if (!paper) {
+    return notFound();
+  }
+
+  return {
+    title: paper.title,
+  };
+}
+
 export default async function Page({
   params,
 }: {
