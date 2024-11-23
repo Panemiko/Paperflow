@@ -51,7 +51,7 @@ export function CommitForm() {
 
   useEffect(() => {
     document.addEventListener("keydown", (e) => {
-      if (e.ctrlKey && e.key === "s") {
+      if (e.ctrlKey && e.key === "q") {
         e.preventDefault();
         setCommitPopupOpen(!commitPopupOpen);
       }
