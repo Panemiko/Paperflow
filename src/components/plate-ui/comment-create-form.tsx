@@ -4,7 +4,6 @@ import React, { useEffect, useMemo } from 'react';
 
 import { cn, withProps } from '@udecode/cn';
 import { type Value, nanoid, NodeApi } from '@udecode/plate';
-import { AIPlugin } from '@udecode/plate-ai/react';
 import {
   BasicMarksPlugin,
   BoldPlugin,
@@ -22,8 +21,7 @@ import {
   MentionInputPlugin,
   MentionPlugin,
 } from '@udecode/plate-mention/react';
-import { Plate, useEditorRef, useStoreSelect } from '@udecode/plate/react';
-import { type CreatePlateEditorOptions, PlateLeaf } from '@udecode/plate/react';
+import { type CreatePlateEditorOptions, Plate, PlateLeaf, useEditorRef, useStoreSelect } from '@udecode/plate/react';
 import { ArrowUpIcon } from 'lucide-react';
 
 import { useCreateEditor } from '@/components/editor/use-create-editor';
@@ -36,7 +34,6 @@ import {
 import type { TDiscussion } from './block-discussion';
 import type { TComment } from './comment';
 
-import { AILeaf } from './ai-leaf';
 import {
   discussionStore,
   useFakeCurrentUserId,
@@ -60,7 +57,6 @@ export const useCommentEditor = (
       id: 'comment',
       override: {
         components: {
-          [AIPlugin.key]: AILeaf,
           [BoldPlugin.key]: withProps(PlateLeaf, { as: 'strong' }),
           [DatePlugin.key]: DateElement,
           [EmojiInputPlugin.key]: EmojiInputElement,
@@ -217,7 +213,7 @@ export function CommentCreateForm({
       comments: [
         {
           id: nanoid(),
-          contentRich: commentValue!,
+          contentRich: commentValue,
           createdAt: new Date(),
           discussionId,
           isEdited: false,
