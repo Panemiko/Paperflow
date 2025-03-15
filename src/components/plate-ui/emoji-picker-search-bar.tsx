@@ -22,7 +22,7 @@ export function EmojiPickerSearchBar({
           value={searchValue}
           onChange={(event) => setSearch(event.target.value)}
           placeholder={i18n.search}
-          aria-label="Search"
+          aria-label="Pesquisar"
           autoComplete="off"
           type="text"
           autoFocus

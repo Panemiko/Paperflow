@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 
 import { cn, withRef } from '@udecode/cn';
 import { useDraggable } from '@udecode/plate-dnd';
@@ -72,7 +71,7 @@ export const ImageElement = withHOC(
                   onFocus={(e) => {
                     e.preventDefault();
                   }}
-                  placeholder="Write a caption..."
+                  placeholder="Escreva uma legenda..."
                 />
               </Caption>
             </figure>

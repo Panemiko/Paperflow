@@ -1,6 +1,6 @@
-import React from 'react';
+/* eslint-disable @next/next/no-img-element */
 
-import type { SlateElementProps } from '@udecode/plate';
+import type { SlateElementProps, TNode } from '@udecode/plate';
 import type { TCaptionElement } from '@udecode/plate-caption';
 import type { TImageElement } from '@udecode/plate-media';
 
@@ -45,7 +45,7 @@ export function ImageElementStatic({
           />
           {caption && (
             <figcaption className="mx-auto mt-2 h-[24px] max-w-full">
-              {NodeApi.string(caption[0])}
+              {NodeApi.string(caption[0] as TNode)}
             </figcaption>
           )}
         </div>

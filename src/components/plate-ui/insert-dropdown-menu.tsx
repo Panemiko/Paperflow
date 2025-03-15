@@ -1,30 +1,30 @@
-'use client';
+"use client";
 
-import React from 'react';
+import React from "react";
 
-import type { DropdownMenuProps } from '@radix-ui/react-dropdown-menu';
+import type { DropdownMenuProps } from "@radix-ui/react-dropdown-menu";
 
-import { BlockquotePlugin } from '@udecode/plate-block-quote/react';
-import { CodeBlockPlugin } from '@udecode/plate-code-block/react';
-import { DatePlugin } from '@udecode/plate-date/react';
-import { ExcalidrawPlugin } from '@udecode/plate-excalidraw/react';
-import { HEADING_KEYS } from '@udecode/plate-heading';
-import { TocPlugin } from '@udecode/plate-heading/react';
-import { HorizontalRulePlugin } from '@udecode/plate-horizontal-rule/react';
-import { INDENT_LIST_KEYS, ListStyleType } from '@udecode/plate-indent-list';
-import { LinkPlugin } from '@udecode/plate-link/react';
+import { BlockquotePlugin } from "@udecode/plate-block-quote/react";
+import { CodeBlockPlugin } from "@udecode/plate-code-block/react";
+import { DatePlugin } from "@udecode/plate-date/react";
+import { ExcalidrawPlugin } from "@udecode/plate-excalidraw/react";
+import { HEADING_KEYS } from "@udecode/plate-heading";
+import { TocPlugin } from "@udecode/plate-heading/react";
+import { HorizontalRulePlugin } from "@udecode/plate-horizontal-rule/react";
+import { INDENT_LIST_KEYS, ListStyleType } from "@udecode/plate-indent-list";
+import { LinkPlugin } from "@udecode/plate-link/react";
 import {
   EquationPlugin,
   InlineEquationPlugin,
-} from '@udecode/plate-math/react';
-import { ImagePlugin, MediaEmbedPlugin } from '@udecode/plate-media/react';
-import { TablePlugin } from '@udecode/plate-table/react';
-import { TogglePlugin } from '@udecode/plate-toggle/react';
+} from "@udecode/plate-math/react";
+import { ImagePlugin, MediaEmbedPlugin } from "@udecode/plate-media/react";
+import { TablePlugin } from "@udecode/plate-table/react";
+import { TogglePlugin } from "@udecode/plate-toggle/react";
 import {
   type PlateEditor,
   ParagraphPlugin,
   useEditorRef,
-} from '@udecode/plate/react';
+} from "@udecode/plate/react";
 import {
   CalendarIcon,
   ChevronRightIcon,
@@ -47,12 +47,12 @@ import {
   SquareIcon,
   TableIcon,
   TableOfContentsIcon,
-} from 'lucide-react';
+} from "lucide-react";
 
 import {
   insertBlock,
   insertInlineElement,
-} from '@/components/editor/transforms';
+} from "@/components/editor/transforms";
 
 import {
   DropdownMenu,
@@ -61,8 +61,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
   useOpenState,
-} from './dropdown-menu';
-import { ToolbarButton } from './toolbar';
+} from "./dropdown-menu";
+import { ToolbarButton } from "./toolbar";
 
 type Group = {
   group: string;
@@ -79,46 +79,46 @@ interface Item {
 
 const groups: Group[] = [
   {
-    group: 'Basic blocks',
+    group: "Blocos básicos",
     items: [
       {
         icon: <PilcrowIcon />,
-        label: 'Paragraph',
+        label: "Parágrafo",
         value: ParagraphPlugin.key,
       },
       {
         icon: <Heading1Icon />,
-        label: 'Heading 1',
+        label: "Título 1",
         value: HEADING_KEYS.h1,
       },
       {
         icon: <Heading2Icon />,
-        label: 'Heading 2',
+        label: "Título 2",
         value: HEADING_KEYS.h2,
       },
       {
         icon: <Heading3Icon />,
-        label: 'Heading 3',
+        label: "Título 3",
         value: HEADING_KEYS.h3,
       },
       {
         icon: <TableIcon />,
-        label: 'Table',
+        label: "Tabela",
         value: TablePlugin.key,
       },
       {
         icon: <FileCodeIcon />,
-        label: 'Code',
+        label: "Código",
         value: CodeBlockPlugin.key,
       },
       {
         icon: <QuoteIcon />,
-        label: 'Quote',
+        label: "Citação",
         value: BlockquotePlugin.key,
       },
       {
         icon: <MinusIcon />,
-        label: 'Divider',
+        label: "Linha horizontal",
         value: HorizontalRulePlugin.key,
       },
     ].map((item) => ({
@@ -129,26 +129,26 @@ const groups: Group[] = [
     })),
   },
   {
-    group: 'Lists',
+    group: "Listas",
     items: [
       {
         icon: <ListIcon />,
-        label: 'Bulleted list',
+        label: "Lista de marcadores",
         value: ListStyleType.Disc,
       },
       {
         icon: <ListOrderedIcon />,
-        label: 'Numbered list',
+        label: "Lista numerada",
         value: ListStyleType.Decimal,
       },
       {
         icon: <SquareIcon />,
-        label: 'To-do list',
+        label: "Lista de tarefas",
         value: INDENT_LIST_KEYS.todo,
       },
       {
         icon: <ChevronRightIcon />,
-        label: 'Toggle list',
+        label: "Lista de verificação",
         value: TogglePlugin.key,
       },
     ].map((item) => ({
@@ -159,21 +159,21 @@ const groups: Group[] = [
     })),
   },
   {
-    group: 'Media',
+    group: "Mídia",
     items: [
       {
         icon: <ImageIcon />,
-        label: 'Image',
+        label: "Imagem",
         value: ImagePlugin.key,
       },
       {
         icon: <FilmIcon />,
-        label: 'Embed',
+        label: "Incorporado",
         value: MediaEmbedPlugin.key,
       },
       {
         icon: <PenToolIcon />,
-        label: 'Excalidraw',
+        label: "Excalidraw",
         value: ExcalidrawPlugin.key,
       },
     ].map((item) => ({
@@ -184,22 +184,22 @@ const groups: Group[] = [
     })),
   },
   {
-    group: 'Advanced blocks',
+    group: "Blocos avançados",
     items: [
       {
         icon: <TableOfContentsIcon />,
-        label: 'Table of contents',
+        label: "Tabela de conteúdos",
         value: TocPlugin.key,
       },
       {
         icon: <Columns3Icon />,
-        label: '3 columns',
-        value: 'action_three_columns',
+        label: "3 colunas",
+        value: "action_three_columns",
       },
       {
         focusEditor: false,
         icon: <RadicalIcon />,
-        label: 'Equation',
+        label: "Equação",
         value: EquationPlugin.key,
       },
     ].map((item) => ({
@@ -210,23 +210,23 @@ const groups: Group[] = [
     })),
   },
   {
-    group: 'Inline',
+    group: "Em linha",
     items: [
       {
         icon: <Link2Icon />,
-        label: 'Link',
+        label: "Link",
         value: LinkPlugin.key,
       },
       {
         focusEditor: true,
         icon: <CalendarIcon />,
-        label: 'Date',
+        label: "Data",
         value: DatePlugin.key,
       },
       {
         focusEditor: false,
         icon: <RadicalIcon />,
-        label: 'Inline Equation',
+        label: "Equação em linha",
         value: InlineEquationPlugin.key,
       },
     ].map((item) => ({
@@ -245,7 +245,7 @@ export function InsertDropdownMenu(props: DropdownMenuProps) {
   return (
     <DropdownMenu modal={false} {...openState} {...props}>
       <DropdownMenuTrigger asChild>
-        <ToolbarButton pressed={openState.open} tooltip="Insert" isDropdown>
+        <ToolbarButton pressed={openState.open} tooltip="Inserir" isDropdown>
           <PlusIcon />
         </ToolbarButton>
       </DropdownMenuTrigger>

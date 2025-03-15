@@ -87,45 +87,45 @@ export function FixedToolbarButtons() {
           </ToolbarGroup>
 
           <ToolbarGroup>
-            <MarkToolbarButton nodeType={BoldPlugin.key} tooltip="Bold (⌘+B)">
+            <MarkToolbarButton nodeType={BoldPlugin.key} tooltip="Negrito (⌘+B)">
               <BoldIcon />
             </MarkToolbarButton>
 
             <MarkToolbarButton
               nodeType={ItalicPlugin.key}
-              tooltip="Italic (⌘+I)"
+              tooltip="Itálico (⌘+I)"
             >
               <ItalicIcon />
             </MarkToolbarButton>
 
             <MarkToolbarButton
               nodeType={UnderlinePlugin.key}
-              tooltip="Underline (⌘+U)"
+              tooltip="Sublinhado (⌘+U)"
             >
               <UnderlineIcon />
             </MarkToolbarButton>
 
             <MarkToolbarButton
               nodeType={StrikethroughPlugin.key}
-              tooltip="Strikethrough (⌘+⇧+M)"
+              tooltip="Tachado (⌘+⇧+M)"
             >
               <StrikethroughIcon />
             </MarkToolbarButton>
 
-            <MarkToolbarButton nodeType={CodePlugin.key} tooltip="Code (⌘+E)">
+            <MarkToolbarButton nodeType={CodePlugin.key} tooltip="Código (⌘+E)">
               <Code2Icon />
             </MarkToolbarButton>
 
             <ColorDropdownMenu
               nodeType={FontColorPlugin.key}
-              tooltip="Text color"
+              tooltip="Cor do texto"
             >
               <BaselineIcon />
             </ColorDropdownMenu>
 
             <ColorDropdownMenu
               nodeType={FontBackgroundColorPlugin.key}
-              tooltip="Background color"
+              tooltip="Cor do fundo"
             >
               <PaintBucketIcon />
             </ColorDropdownMenu>
@@ -168,7 +168,7 @@ export function FixedToolbarButtons() {
       <div className="grow" />
 
       <ToolbarGroup>
-        <MarkToolbarButton nodeType={HighlightPlugin.key} tooltip="Highlight">
+        <MarkToolbarButton nodeType={HighlightPlugin.key} tooltip="Destacar">
           <HighlighterIcon />
         </MarkToolbarButton>
         <CommentToolbarButton />

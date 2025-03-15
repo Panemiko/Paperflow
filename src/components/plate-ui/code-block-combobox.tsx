@@ -142,7 +142,7 @@ export function CodeBlockCombobox() {
           role="combobox"
         >
           {languages.find((language) => language.value === value)?.label ??
-            'Plain Text'}
+            'Texto sem formatação'}
         </Button>
       </PopoverTrigger>
       <PopoverContent
@@ -154,9 +154,9 @@ export function CodeBlockCombobox() {
             className="h-9"
             value={searchValue}
             onValueChange={(value) => setSearchValue(value)}
-            placeholder="Search language..."
+            placeholder="Procure uma linguagem..."
           />
-          <CommandEmpty>No language found.</CommandEmpty>
+          <CommandEmpty>Nenhuma linguagem encontrada.</CommandEmpty>
 
           <CommandList className="h-[344px] overflow-y-auto">
             <CommandGroup>

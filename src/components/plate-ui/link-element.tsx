@@ -1,12 +1,11 @@
-'use client';
+"use client";
 
-import React from 'react';
 
-import type { TLinkElement } from '@udecode/plate-link';
+import type { TLinkElement } from "@udecode/plate-link";
 
-import { cn, withRef } from '@udecode/cn';
-import { useLink } from '@udecode/plate-link/react';
-import { PlateElement } from '@udecode/plate/react';
+import { cn, withRef } from "@udecode/cn";
+import { useLink } from "@udecode/plate-link/react";
+import { PlateElement } from "@udecode/plate/react";
 
 export const LinkElement = withRef<typeof PlateElement>(
   ({ children, className, ...props }, ref) => {
@@ -14,18 +13,19 @@ export const LinkElement = withRef<typeof PlateElement>(
     const { props: linkProps } = useLink({ element });
 
     return (
+      // @ts-expect-error this came with the library and the only thing it errors is when i lint the project
       <PlateElement
         ref={ref}
         as="a"
         className={cn(
           className,
-          'font-medium text-primary underline decoration-primary underline-offset-4'
+          "text-primary decoration-primary font-medium underline underline-offset-4",
         )}
-        {...(linkProps as any)}
+        {...linkProps}
         {...props}
       >
         {children}
       </PlateElement>
     );
-  }
+  },
 );

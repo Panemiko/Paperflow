@@ -1,42 +1,43 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import type { Value } from '@udecode/plate';
+import type { Value } from "@udecode/plate";
 
-import { cn } from '@udecode/cn';
-import { CommentsPlugin } from '@udecode/plate-comments/react';
-import { Plate, useEditorPlugin, useStoreValue } from '@udecode/plate/react';
+import { cn } from "@udecode/cn";
+import { CommentsPlugin } from "@udecode/plate-comments/react";
+import { Plate, useEditorPlugin, useStoreValue } from "@udecode/plate/react";
 import {
   differenceInDays,
   differenceInHours,
   differenceInMinutes,
   format,
-} from 'date-fns';
+} from "date-fns";
 import {
   CheckIcon,
   MoreHorizontalIcon,
   PencilIcon,
   TrashIcon,
   XIcon,
-} from 'lucide-react';
+} from "lucide-react";
 
-import { Avatar, AvatarFallback, AvatarImage } from './avatar';
+import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
 import {
   discussionStore,
+  type TDiscussion,
   useFakeCurrentUserId,
   useFakeUserInfo,
-} from './block-discussion';
-import { Button } from './button';
-import { useCommentEditor } from './comment-create-form';
+} from "./block-discussion";
+import { Button } from "./button";
+import { useCommentEditor } from "./comment-create-form";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from './dropdown-menu';
-import { Editor, EditorContainer } from './editor';
+} from "./dropdown-menu";
+import { Editor, EditorContainer } from "./editor";
 
 export const formatCommentDate = (date: Date) => {
   const now = new Date();
@@ -54,7 +55,7 @@ export const formatCommentDate = (date: Date) => {
     return `${diffDays}d`;
   }
 
-  return format(date, 'MM/dd/yyyy');
+  return format(date, "dd/MM/yyyy");
 };
 
 export interface TComment {
@@ -88,7 +89,7 @@ export function Comment(props: {
   } = props;
   // const { user } = comment;
 
-  const discussions = useStoreValue(discussionStore, 'discussions');
+  const discussions = useStoreValue(discussionStore, "discussions");
   const userInfo = useFakeUserInfo(comment.userId);
   const currentUserId = useFakeCurrentUserId();
 
@@ -99,19 +100,19 @@ export function Comment(props: {
       }
       return discussion;
     });
-    discussionStore.set('discussions', updatedDiscussions);
+    discussionStore.set("discussions", updatedDiscussions);
   };
 
   const removeDiscussion = async (id: string) => {
     const updatedDiscussions = discussions.filter(
-      (discussion: any) => discussion.id !== id
+      (discussion: { id: string }) => discussion.id !== id,
     );
-    discussionStore.set('discussions', updatedDiscussions);
+    discussionStore.set("discussions", updatedDiscussions);
   };
 
   const updateComment = async (input: {
     id: string;
-    contentRich: any;
+    contentRich: Value;
     discussionId: string;
     isEdited: boolean;
   }) => {
@@ -132,7 +133,7 @@ export function Comment(props: {
       }
       return discussion;
     });
-    discussionStore.set('discussions', updatedDiscussions);
+    discussionStore.set("discussions", updatedDiscussions);
   };
 
   const { tf } = useEditorPlugin(CommentsPlugin);
@@ -147,7 +148,7 @@ export function Comment(props: {
       id: comment.id,
       value: initialValue,
     },
-    [initialValue]
+    [initialValue],
   );
 
   const onCancel = () => {
@@ -195,11 +196,11 @@ export function Comment(props: {
           {userInfo?.name}
         </h4>
 
-        <div className="text-xs leading-none text-muted-foreground/80">
+        <div className="text-muted-foreground/80 text-xs leading-none">
           <span className="mr-1">
             {formatCommentDate(new Date(comment.createdAt))}
           </span>
-          {comment.isEdited && <span>(edited)</span>}
+          {comment.isEdited && <span>(editado)</span>}
         </div>
 
         {isMyComment && (hovering || dropdownOpen) && (
@@ -207,7 +208,7 @@ export function Comment(props: {
             {index === 0 && (
               <Button
                 variant="ghost"
-                className="h-6 p-1 text-muted-foreground"
+                className="text-muted-foreground h-6 p-1"
                 onClick={onResolveComment}
                 type="button"
               >
@@ -218,7 +219,7 @@ export function Comment(props: {
             <CommentMoreDropdown
               onCloseAutoFocus={() => {
                 setTimeout(() => {
-                  commentEditor.tf.focus({ edge: 'endEditor' });
+                  commentEditor.tf.focus({ edge: "endEditor" });
                 }, 0);
               }}
               onRemoveComment={() => {
@@ -239,16 +240,16 @@ export function Comment(props: {
       {isFirst && showDocumentContent && (
         <div className="text-subtle-foreground relative mt-1 flex pl-[32px] text-sm">
           {discussionLength > 1 && (
-            <div className="absolute top-[5px] left-3 h-full w-0.5 shrink-0 bg-muted" />
+            <div className="bg-muted absolute top-[5px] left-3 h-full w-0.5 shrink-0" />
           )}
-          <div className="my-px w-0.5 shrink-0 bg-highlight" />
+          <div className="bg-highlight my-px w-0.5 shrink-0" />
           {documentContent && <div className="ml-2">{documentContent}</div>}
         </div>
       )}
 
       <div className="relative my-1 pl-[26px]">
         {!isLast && (
-          <div className="absolute top-0 left-3 h-full w-0.5 shrink-0 bg-muted" />
+          <div className="bg-muted absolute top-0 left-3 h-full w-0.5 shrink-0" />
         )}
         <Plate readOnly={!isEditing} editor={commentEditor}>
           <EditorContainer variant="comment">
@@ -269,8 +270,8 @@ export function Comment(props: {
                     void onCancel();
                   }}
                 >
-                  <div className="flex size-5 shrink-0 items-center justify-center rounded-[50%] bg-primary/40">
-                    <XIcon className="size-3 stroke-[3px] text-background" />
+                  <div className="bg-primary/40 flex size-5 shrink-0 items-center justify-center rounded-[50%]">
+                    <XIcon className="text-background size-3 stroke-[3px]" />
                   </div>
                 </Button>
 
@@ -282,8 +283,8 @@ export function Comment(props: {
                     void onSave();
                   }}
                 >
-                  <div className="flex size-5 shrink-0 items-center justify-center rounded-[50%] bg-brand">
-                    <CheckIcon className="size-3 stroke-[3px] text-background" />
+                  <div className="bg-brand flex size-5 shrink-0 items-center justify-center rounded-[50%]">
+                    <CheckIcon className="text-background size-3 stroke-[3px]" />
                   </div>
                 </Button>
               </div>
@@ -313,22 +314,22 @@ export function CommentMoreDropdown(props: CommentMoreDropdownProps) {
     onRemoveComment,
   } = props;
 
-  const discussions = useStoreValue(discussionStore, 'discussions');
+  const discussions = useStoreValue(discussionStore, "discussions");
 
   const selectedEditCommentRef = React.useRef<boolean>(false);
 
   const onDeleteComment = React.useCallback(() => {
     if (!comment.id)
-      return alert('You are operating too quickly, please try again later.');
+      return alert("You are operating too quickly, please try again later.");
 
     // Find and update the discussion
-    const updatedDiscussions = discussions.map((discussion: any) => {
+    const updatedDiscussions = discussions.map((discussion: TDiscussion) => {
       if (discussion.id !== comment.discussionId) {
         return discussion;
       }
 
       const commentIndex = discussion.comments.findIndex(
-        (c: any) => c.id === comment.id
+        (c: { id: string }) => c.id === comment.id,
       );
       if (commentIndex === -1) {
         return discussion;
@@ -344,7 +345,7 @@ export function CommentMoreDropdown(props: CommentMoreDropdownProps) {
     });
 
     // Save back to session storage
-    discussionStore.set('discussions', updatedDiscussions);
+    discussionStore.set("discussions", updatedDiscussions);
     onRemoveComment?.();
   }, [comment.discussionId, comment.id, discussions, onRemoveComment]);
 
@@ -352,7 +353,7 @@ export function CommentMoreDropdown(props: CommentMoreDropdownProps) {
     selectedEditCommentRef.current = true;
 
     if (!comment.id)
-      return alert('You are operating too quickly, please try again later.');
+      return alert("You are operating too quickly, please try again later.");
 
     setEditingId(comment.id);
   }, [comment.id, setEditingId]);
@@ -364,7 +365,7 @@ export function CommentMoreDropdown(props: CommentMoreDropdownProps) {
       modal={false}
     >
       <DropdownMenuTrigger asChild onClick={(e) => e.stopPropagation()}>
-        <Button variant="ghost" className={cn('h-6 p-1 text-muted-foreground')}>
+        <Button variant="ghost" className={cn("text-muted-foreground h-6 p-1")}>
           <MoreHorizontalIcon className="size-4" />
         </Button>
       </DropdownMenuTrigger>
@@ -382,11 +383,11 @@ export function CommentMoreDropdown(props: CommentMoreDropdownProps) {
         <DropdownMenuGroup>
           <DropdownMenuItem onClick={onEditComment}>
             <PencilIcon className="size-4" />
-            Edit comment
+            Editar comentário
           </DropdownMenuItem>
           <DropdownMenuItem onClick={onDeleteComment}>
             <TrashIcon className="size-4" />
-            Delete comment
+            Excluír comentário
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>

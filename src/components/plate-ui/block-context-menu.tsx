@@ -115,7 +115,7 @@ export function BlockContextMenu({ children }: { children: React.ReactNode }) {
               editor.tf.focus();
             }}
           >
-            Delete
+            Excluír
           </ContextMenuItem>
           <ContextMenuItem
             onClick={() => {
@@ -124,31 +124,31 @@ export function BlockContextMenu({ children }: { children: React.ReactNode }) {
                 .blockSelection.duplicate();
             }}
           >
-            Duplicate
+            Duplicar
             {/* <ContextMenuShortcut>⌘ + D</ContextMenuShortcut> */}
           </ContextMenuItem>
           <ContextMenuSub>
-            <ContextMenuSubTrigger>Turn into</ContextMenuSubTrigger>
+            <ContextMenuSubTrigger>Transformar em</ContextMenuSubTrigger>
             <ContextMenuSubContent className="w-48">
               <ContextMenuItem
                 onClick={() => handleTurnInto(ParagraphPlugin.key)}
               >
-                Paragraph
+                Parágrafo
               </ContextMenuItem>
 
               <ContextMenuItem onClick={() => handleTurnInto(HEADING_KEYS.h1)}>
-                Heading 1
+                Título 1
               </ContextMenuItem>
               <ContextMenuItem onClick={() => handleTurnInto(HEADING_KEYS.h2)}>
-                Heading 2
+                Título 2
               </ContextMenuItem>
               <ContextMenuItem onClick={() => handleTurnInto(HEADING_KEYS.h3)}>
-                Heading 3
+                Título 3
               </ContextMenuItem>
               <ContextMenuItem
                 onClick={() => handleTurnInto(BlockquotePlugin.key)}
               >
-                Blockquote
+                Citação
               </ContextMenuItem>
             </ContextMenuSubContent>
           </ContextMenuSub>
@@ -162,7 +162,7 @@ export function BlockContextMenu({ children }: { children: React.ReactNode }) {
                 .blockSelection.setIndent(1)
             }
           >
-            Indent
+            Recuo para dentro
           </ContextMenuItem>
           <ContextMenuItem
             onClick={() =>
@@ -171,19 +171,19 @@ export function BlockContextMenu({ children }: { children: React.ReactNode }) {
                 .blockSelection.setIndent(-1)
             }
           >
-            Outdent
+            Recuo para fora
           </ContextMenuItem>
           <ContextMenuSub>
-            <ContextMenuSubTrigger>Align</ContextMenuSubTrigger>
+            <ContextMenuSubTrigger>Alinhamento</ContextMenuSubTrigger>
             <ContextMenuSubContent className="w-48">
               <ContextMenuItem onClick={() => handleAlign("left")}>
-                Left
+                Esquerda
               </ContextMenuItem>
               <ContextMenuItem onClick={() => handleAlign("center")}>
-                Center
+                Centralizado
               </ContextMenuItem>
               <ContextMenuItem onClick={() => handleAlign("right")}>
-                Right
+                Direita
               </ContextMenuItem>
             </ContextMenuSubContent>
           </ContextMenuSub>

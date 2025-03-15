@@ -1,26 +1,28 @@
-'use client';
+"use client";
 
-import { cn, withRef } from '@udecode/cn';
+import { cn, withRef } from "@udecode/cn";
 import {
   useTocElement,
   useTocElementState,
-} from '@udecode/plate-heading/react';
-import { PlateElement } from '@udecode/plate/react';
-import { cva } from 'class-variance-authority';
+} from "@udecode/plate-heading/react";
+import { PlateElement } from "@udecode/plate/react";
+import { cva } from "class-variance-authority";
 
-import { Button } from './button';
+import { Button } from "./button";
+
+type ItemDepth = 1 | 2 | 3;
 
 const headingItemVariants = cva(
-  'block h-auto w-full cursor-pointer truncate rounded-none px-0.5 py-1.5 text-left font-medium text-muted-foreground underline decoration-[0.5px] underline-offset-4 hover:bg-accent hover:text-muted-foreground',
+  "block h-auto w-full cursor-pointer truncate rounded-none px-0.5 py-1.5 text-left font-medium text-muted-foreground underline decoration-[0.5px] underline-offset-4 hover:bg-accent hover:text-muted-foreground",
   {
     variants: {
       depth: {
-        1: 'pl-0.5',
-        2: 'pl-[26px]',
-        3: 'pl-[50px]',
+        1: "pl-0.5",
+        2: "pl-[26px]",
+        3: "pl-[50px]",
       },
     },
-  }
+  },
 );
 
 export const TocElement = withRef<typeof PlateElement>(
@@ -32,7 +34,7 @@ export const TocElement = withRef<typeof PlateElement>(
     const { headingList } = state;
 
     return (
-      <PlateElement ref={ref} className={cn(className, 'mb-1 p-0')} {...props}>
+      <PlateElement ref={ref} className={cn(className, "mb-1 p-0")} {...props}>
         <div contentEditable={false}>
           {headingList.length > 0 ? (
             headingList.map((item) => (
@@ -40,9 +42,9 @@ export const TocElement = withRef<typeof PlateElement>(
                 key={item.id}
                 variant="ghost"
                 className={cn(
-                  headingItemVariants({ depth: item.depth as any })
+                  headingItemVariants({ depth: item.depth as ItemDepth }),
                 )}
-                onClick={(e) => btnProps.onClick(e, item, 'smooth')}
+                onClick={(e) => btnProps.onClick(e, item, "smooth")}
                 aria-current
               >
                 {item.title}
@@ -50,12 +52,12 @@ export const TocElement = withRef<typeof PlateElement>(
             ))
           ) : (
             <div className="text-sm text-gray-500">
-              Create a heading to display the table of contents.
+              Crie um título para exibir a tabela de conteúdo.
             </div>
           )}
         </div>
         {children}
       </PlateElement>
     );
-  }
+  },
 );

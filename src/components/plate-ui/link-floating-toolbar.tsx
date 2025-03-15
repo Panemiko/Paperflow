@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 
 import { cn } from '@udecode/cn';
 import {
@@ -83,7 +82,7 @@ export function LinkFloatingToolbar({ state }: LinkFloatingToolbarProps) {
 
         <FloatingLinkUrlInput
           className={inputVariants({ h: 'sm', variant: 'ghost' })}
-          placeholder="Paste link"
+          placeholder="Colar link"
           data-plate-focus
         />
       </div>
@@ -94,7 +93,7 @@ export function LinkFloatingToolbar({ state }: LinkFloatingToolbarProps) {
         </div>
         <input
           className={inputVariants({ h: 'sm', variant: 'ghost' })}
-          placeholder="Text to display"
+          placeholder="Texto de visualização"
           data-plate-focus
           {...textInputProps}
         />
@@ -111,7 +110,7 @@ export function LinkFloatingToolbar({ state }: LinkFloatingToolbarProps) {
         type="button"
         {...editButtonProps}
       >
-        Edit link
+        Editar link
       </button>
 
       <Separator orientation="vertical" />

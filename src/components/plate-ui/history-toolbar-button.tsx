@@ -18,7 +18,7 @@ export const RedoToolbarButton = withRef<typeof ToolbarButton>((props, ref) => {
       disabled={disabled}
       onClick={() => editor.redo()}
       onMouseDown={(e) => e.preventDefault()}
-      tooltip="Redo"
+      tooltip="Refazer"
       {...props}
     >
       <Redo2Icon />
@@ -39,7 +39,7 @@ export const UndoToolbarButton = withRef<typeof ToolbarButton>((props, ref) => {
       disabled={disabled}
       onClick={() => editor.undo()}
       onMouseDown={(e) => e.preventDefault()}
-      tooltip="Undo"
+      tooltip="Desfazer"
       {...props}
     >
       <Undo2Icon />

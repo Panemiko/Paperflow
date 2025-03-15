@@ -49,7 +49,7 @@ export const CodeBlockElement = withRef<typeof PlateElement>(
                 variant="ghost"
                 className="size-6 text-xs"
                 onClick={() => formatCodeBlock(editor, { element })}
-                title="Format code"
+                title="Formatar código"
               >
                 <BracesIcon className="!size-3.5 text-muted-foreground" />
               </Button>

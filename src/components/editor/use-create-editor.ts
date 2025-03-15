@@ -181,11 +181,11 @@ export const useCreateEditor = (
       plugins: [...editorPlugins, FixedToolbarPlugin, FloatingToolbarPlugin],
       value: [
         {
-          children: [{ text: "Playground" }],
+          children: [{ text: "Paperflow" }],
           type: "h1",
         },
         {
-          children: [{ text: "Teste do Paperflow" }],
+          children: [{ text: "Teste do editor do Paperflow" }],
           type: ParagraphPlugin.key,
         },
       ],

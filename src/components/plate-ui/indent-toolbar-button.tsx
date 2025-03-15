@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 
 import { withRef } from '@udecode/cn';
 import { useIndentButton } from '@udecode/plate-indent/react';
@@ -13,7 +12,7 @@ export const IndentToolbarButton = withRef<typeof ToolbarButton>(
     const { props } = useIndentButton();
 
     return (
-      <ToolbarButton ref={ref} tooltip="Indent" {...props} {...rest}>
+      <ToolbarButton ref={ref} tooltip="Recuar" {...props} {...rest}>
         <Indent />
       </ToolbarButton>
     );

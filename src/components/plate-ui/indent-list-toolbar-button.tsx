@@ -1,14 +1,12 @@
-'use client';
-
-import React from 'react';
+"use client";
 
 import {
   ListStyleType,
   someIndentList,
   toggleIndentList,
-} from '@udecode/plate-indent-list';
-import { useEditorRef, useEditorSelector } from '@udecode/plate/react';
-import { List, ListOrdered } from 'lucide-react';
+} from "@udecode/plate-indent-list";
+import { useEditorRef, useEditorSelector } from "@udecode/plate/react";
+import { List, ListOrdered } from "lucide-react";
 
 import {
   DropdownMenu,
@@ -17,12 +15,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
   useOpenState,
-} from './dropdown-menu';
+} from "./dropdown-menu";
 import {
   ToolbarSplitButton,
   ToolbarSplitButtonPrimary,
   ToolbarSplitButtonSecondary,
-} from './toolbar';
+} from "./toolbar";
 
 export function NumberedIndentListToolbarButton() {
   const editor = useEditorRef();
@@ -37,7 +35,7 @@ export function NumberedIndentListToolbarButton() {
         ListStyleType.LowerRoman,
         ListStyleType.UpperRoman,
       ]),
-    []
+    [],
   );
 
   return (
@@ -49,8 +47,8 @@ export function NumberedIndentListToolbarButton() {
             listStyleType: ListStyleType.Decimal,
           })
         }
-        data-state={pressed ? 'on' : 'off'}
-        tooltip="Numbered List"
+        data-state={pressed ? "on" : "off"}
+        tooltip="Lista numerada"
       >
         <ListOrdered className="size-4" />
       </ToolbarSplitButtonPrimary>
@@ -78,7 +76,7 @@ export function NumberedIndentListToolbarButton() {
                 })
               }
             >
-              Lower Alpha (a, b, c)
+              Letra minúscula (a, b, c)
             </DropdownMenuItem>
             <DropdownMenuItem
               onSelect={() =>
@@ -87,7 +85,7 @@ export function NumberedIndentListToolbarButton() {
                 })
               }
             >
-              Upper Alpha (A, B, C)
+              Letra maiúscula (A, B, C)
             </DropdownMenuItem>
             <DropdownMenuItem
               onSelect={() =>
@@ -96,7 +94,7 @@ export function NumberedIndentListToolbarButton() {
                 })
               }
             >
-              Lower Roman (i, ii, iii)
+              Romano minúsculo (i, ii, iii)
             </DropdownMenuItem>
             <DropdownMenuItem
               onSelect={() =>
@@ -105,7 +103,7 @@ export function NumberedIndentListToolbarButton() {
                 })
               }
             >
-              Upper Roman (I, II, III)
+              Romano maiúsculo (I, II, III)
             </DropdownMenuItem>
           </DropdownMenuGroup>
         </DropdownMenuContent>
@@ -125,7 +123,7 @@ export function BulletedIndentListToolbarButton() {
         ListStyleType.Circle,
         ListStyleType.Square,
       ]),
-    []
+    [],
   );
 
   return (
@@ -137,8 +135,8 @@ export function BulletedIndentListToolbarButton() {
             listStyleType: ListStyleType.Disc,
           });
         }}
-        data-state={pressed ? 'on' : 'off'}
-        tooltip="Bulleted List"
+        data-state={pressed ? "on" : "off"}
+        tooltip="Lista de marcadores"
       >
         <List className="size-4" />
       </ToolbarSplitButtonPrimary>
@@ -159,7 +157,7 @@ export function BulletedIndentListToolbarButton() {
             >
               <div className="flex items-center gap-2">
                 <div className="size-2 rounded-full border border-current bg-current" />
-                Default
+                Padrão
               </div>
             </DropdownMenuItem>
             <DropdownMenuItem
@@ -171,7 +169,7 @@ export function BulletedIndentListToolbarButton() {
             >
               <div className="flex items-center gap-2">
                 <div className="size-2 rounded-full border border-current" />
-                Circle
+                Círculo
               </div>
             </DropdownMenuItem>
             <DropdownMenuItem
@@ -183,7 +181,7 @@ export function BulletedIndentListToolbarButton() {
             >
               <div className="flex items-center gap-2">
                 <div className="size-2 border border-current bg-current" />
-                Square
+                Quadrado
               </div>
             </DropdownMenuItem>
           </DropdownMenuGroup>

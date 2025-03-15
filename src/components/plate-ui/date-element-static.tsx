@@ -1,4 +1,3 @@
-import React from 'react';
 
 import type { SlateElementProps } from '@udecode/plate';
 
@@ -33,9 +32,9 @@ export function DateElementStatic({
               new Date(today.setDate(today.getDate() + 2)).toDateString() ===
               elementDate.toDateString();
 
-            if (isToday) return 'Today';
-            if (isYesterday) return 'Yesterday';
-            if (isTomorrow) return 'Tomorrow';
+            if (isToday) return 'Hoje';
+            if (isYesterday) return 'Ontem';
+            if (isTomorrow) return 'Amanhã';
 
             return elementDate.toLocaleDateString(undefined, {
               day: 'numeric',
@@ -44,7 +43,7 @@ export function DateElementStatic({
             });
           })()
         ) : (
-          <span>Pick a date</span>
+          <span>Selecione uma data</span>
         )}
       </span>
       {children}

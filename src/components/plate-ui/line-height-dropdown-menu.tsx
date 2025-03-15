@@ -1,14 +1,12 @@
-'use client';
+"use client";
 
-import React from 'react';
-
-import type { DropdownMenuProps } from '@radix-ui/react-dropdown-menu';
+import type { DropdownMenuProps } from "@radix-ui/react-dropdown-menu";
 
 import {
   useLineHeightDropdownMenu,
   useLineHeightDropdownMenuState,
-} from '@udecode/plate-line-height/react';
-import { WrapText } from 'lucide-react';
+} from "@udecode/plate-line-height/react";
+import { WrapText } from "lucide-react";
 
 import {
   DropdownMenu,
@@ -17,8 +15,8 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
   useOpenState,
-} from './dropdown-menu';
-import { ToolbarButton } from './toolbar';
+} from "./dropdown-menu";
+import { ToolbarButton } from "./toolbar";
 
 export function LineHeightDropdownMenu({ ...props }: DropdownMenuProps) {
   const openState = useOpenState();
@@ -30,7 +28,7 @@ export function LineHeightDropdownMenu({ ...props }: DropdownMenuProps) {
       <DropdownMenuTrigger asChild>
         <ToolbarButton
           pressed={openState.open}
-          tooltip="Line height"
+          tooltip="Altura da linha"
           isDropdown
         >
           <WrapText />
@@ -41,9 +39,9 @@ export function LineHeightDropdownMenu({ ...props }: DropdownMenuProps) {
         <DropdownMenuRadioGroup {...radioGroupProps}>
           {state.values.map((_value) => (
             <DropdownMenuRadioItem
-              key={_value}
+              key={_value as string}
               className="min-w-[180px]"
-              value={_value}
+              value={_value as string}
             >
               {_value}
             </DropdownMenuRadioItem>

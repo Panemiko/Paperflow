@@ -1,6 +1,6 @@
 'use client';
 
-import React, { type ComponentPropsWithoutRef } from 'react';
+import { type ComponentPropsWithoutRef } from 'react';
 
 import { cn } from '@udecode/cn';
 import {
@@ -62,7 +62,7 @@ export function ColorCustom({
             )}
             {...menuItemProps}
           >
-            <span className="sr-only">Custom</span>
+            <span className="sr-only">Customizado</span>
             <PlusIcon />
           </DropdownMenuItem>
         </ColorInput>

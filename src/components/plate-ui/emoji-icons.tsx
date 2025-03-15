@@ -1,6 +1,6 @@
-import type React from 'react';
+import type React from "react";
 
-import type { EmojiCategoryList } from '@udecode/plate-emoji';
+import type { EmojiCategoryList } from "@udecode/plate-emoji";
 
 import {
   AppleIcon,
@@ -14,13 +14,13 @@ import {
   SmileIcon,
   StarIcon,
   XIcon,
-} from 'lucide-react';
+} from "lucide-react";
 
 export const emojiCategoryIcons: Record<
   EmojiCategoryList,
   {
-    outline: React.ReactElement<any>;
-    solid: React.ReactElement<any>; // Needed to add another solid variant - outline will be used for now
+    outline: React.ReactElement<unknown>;
+    solid: React.ReactElement<unknown>; // Needed to add another solid variant - outline will be used for now
   }
 > = {
   activity: {

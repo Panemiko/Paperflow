@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
+import { useState } from "react";
 
-import type { DropdownMenuProps } from '@radix-ui/react-dropdown-menu';
+import type { DropdownMenuProps } from "@radix-ui/react-dropdown-menu";
 
-import { cn } from '@udecode/cn';
-import { TablePlugin, useTableMergeState } from '@udecode/plate-table/react';
-import { useEditorPlugin, useEditorSelector } from '@udecode/plate/react';
+import { cn } from "@udecode/cn";
+import { TablePlugin, useTableMergeState } from "@udecode/plate-table/react";
+import { useEditorPlugin, useEditorSelector } from "@udecode/plate/react";
 import {
   ArrowDown,
   ArrowLeft,
@@ -18,7 +18,7 @@ import {
   Trash2Icon,
   Ungroup,
   XIcon,
-} from 'lucide-react';
+} from "lucide-react";
 
 import {
   DropdownMenu,
@@ -30,13 +30,13 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
   useOpenState,
-} from './dropdown-menu';
-import { ToolbarButton } from './toolbar';
+} from "./dropdown-menu";
+import { ToolbarButton } from "./toolbar";
 
 export function TableDropdownMenu(props: DropdownMenuProps) {
   const tableSelected = useEditorSelector(
     (editor) => editor.api.some({ match: { type: TablePlugin.key } }),
-    []
+    [],
   );
 
   const { editor, tf } = useEditorPlugin(TablePlugin);
@@ -46,7 +46,7 @@ export function TableDropdownMenu(props: DropdownMenuProps) {
   return (
     <DropdownMenu modal={false} {...openState} {...props}>
       <DropdownMenuTrigger asChild>
-        <ToolbarButton pressed={openState.open} tooltip="Table" isDropdown>
+        <ToolbarButton pressed={openState.open} tooltip="Tabela" isDropdown>
           <Table />
         </ToolbarButton>
       </DropdownMenuTrigger>
@@ -59,7 +59,7 @@ export function TableDropdownMenu(props: DropdownMenuProps) {
           <DropdownMenuSub>
             <DropdownMenuSubTrigger>
               <Grid3x3Icon />
-              <span>Table</span>
+              <span>Tabela</span>
             </DropdownMenuSubTrigger>
             <DropdownMenuSubContent className="m-0 p-0">
               <TablePicker />
@@ -69,7 +69,7 @@ export function TableDropdownMenu(props: DropdownMenuProps) {
           <DropdownMenuSub>
             <DropdownMenuSubTrigger disabled={!tableSelected}>
               <div className="size-4" />
-              <span>Cell</span>
+              <span>Célula</span>
             </DropdownMenuSubTrigger>
             <DropdownMenuSubContent>
               <DropdownMenuItem
@@ -81,7 +81,7 @@ export function TableDropdownMenu(props: DropdownMenuProps) {
                 }}
               >
                 <Combine />
-                Merge cells
+                Combinar células
               </DropdownMenuItem>
               <DropdownMenuItem
                 className="min-w-[180px]"
@@ -92,7 +92,7 @@ export function TableDropdownMenu(props: DropdownMenuProps) {
                 }}
               >
                 <Ungroup />
-                Split cell
+                Dividir células
               </DropdownMenuItem>
             </DropdownMenuSubContent>
           </DropdownMenuSub>
@@ -100,7 +100,7 @@ export function TableDropdownMenu(props: DropdownMenuProps) {
           <DropdownMenuSub>
             <DropdownMenuSubTrigger disabled={!tableSelected}>
               <div className="size-4" />
-              <span>Row</span>
+              <span>Linha</span>
             </DropdownMenuSubTrigger>
             <DropdownMenuSubContent>
               <DropdownMenuItem
@@ -112,7 +112,7 @@ export function TableDropdownMenu(props: DropdownMenuProps) {
                 }}
               >
                 <ArrowUp />
-                Insert row before
+                Inserir linha antes
               </DropdownMenuItem>
               <DropdownMenuItem
                 className="min-w-[180px]"
@@ -123,7 +123,7 @@ export function TableDropdownMenu(props: DropdownMenuProps) {
                 }}
               >
                 <ArrowDown />
-                Insert row after
+                Inserir linha depois
               </DropdownMenuItem>
               <DropdownMenuItem
                 className="min-w-[180px]"
@@ -134,7 +134,7 @@ export function TableDropdownMenu(props: DropdownMenuProps) {
                 }}
               >
                 <XIcon />
-                Delete row
+                Excluír linha
               </DropdownMenuItem>
             </DropdownMenuSubContent>
           </DropdownMenuSub>
@@ -142,7 +142,7 @@ export function TableDropdownMenu(props: DropdownMenuProps) {
           <DropdownMenuSub>
             <DropdownMenuSubTrigger disabled={!tableSelected}>
               <div className="size-4" />
-              <span>Column</span>
+              <span>Coluna</span>
             </DropdownMenuSubTrigger>
             <DropdownMenuSubContent>
               <DropdownMenuItem
@@ -154,7 +154,7 @@ export function TableDropdownMenu(props: DropdownMenuProps) {
                 }}
               >
                 <ArrowLeft />
-                Insert column before
+                Inserir coluna antes
               </DropdownMenuItem>
               <DropdownMenuItem
                 className="min-w-[180px]"
@@ -165,7 +165,7 @@ export function TableDropdownMenu(props: DropdownMenuProps) {
                 }}
               >
                 <ArrowRight />
-                Insert column after
+                Inserir coluna depois
               </DropdownMenuItem>
               <DropdownMenuItem
                 className="min-w-[180px]"
@@ -176,7 +176,7 @@ export function TableDropdownMenu(props: DropdownMenuProps) {
                 }}
               >
                 <XIcon />
-                Delete column
+                Excluír coluna
               </DropdownMenuItem>
             </DropdownMenuSubContent>
           </DropdownMenuSub>
@@ -190,7 +190,7 @@ export function TableDropdownMenu(props: DropdownMenuProps) {
             }}
           >
             <Trash2Icon />
-            Delete table
+            Excluír tabela
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>
@@ -210,7 +210,9 @@ export function TablePicker() {
     const newGrid = [...tablePicker.grid];
 
     for (let i = 0; i < newGrid.length; i++) {
+      // @ts-expect-error came with the package
       for (let j = 0; j < newGrid[i].length; j++) {
+        // @ts-expect-error came with the package
         newGrid[i][j] =
           i >= 0 && i <= rowIndex && j >= 0 && j <= colIndex ? 1 : 0;
       }
@@ -237,15 +239,15 @@ export function TablePicker() {
               <div
                 key={`(${rowIndex},${columIndex})`}
                 className={cn(
-                  'col-span-1 size-3 border border-solid bg-secondary',
-                  !!value && 'border-current'
+                  "bg-secondary col-span-1 size-3 border border-solid",
+                  !!value && "border-current",
                 )}
                 onMouseMove={() => {
                   onCellMove(rowIndex, columIndex);
                 }}
               />
             );
-          })
+          }),
         )}
       </div>
 

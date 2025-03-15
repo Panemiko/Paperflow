@@ -166,7 +166,7 @@ export const BlockSuggestionCard = ({
                 {suggestionText2Array(suggestion.text!).map((text, index) => (
                   <div key={index} className="flex items-center gap-2">
                     <span className="text-sm text-muted-foreground">
-                      Delete:
+                      Excluír:
                     </span>
 
                     <span key={index} className="text-sm">
@@ -183,11 +183,11 @@ export const BlockSuggestionCard = ({
                   (text, index) => (
                     <div key={index} className="flex items-center gap-2">
                       <span className="text-sm text-muted-foreground">
-                        Add:
+                        Adicionar:
                       </span>
 
                       <span key={index} className="text-sm">
-                        {text || 'line breaks'}
+                        {text || '(quebra de linha)'}
                       </span>
                     </div>
                   )
@@ -204,8 +204,8 @@ export const BlockSuggestionCard = ({
                         key={index}
                         className="flex items-start gap-2 text-brand/80"
                       >
-                        <span className="text-sm">with:</span>
-                        <span className="text-sm">{text || 'line breaks'}</span>
+                        <span className="text-sm">Com:</span>
+                        <span className="text-sm">{text || '(quebra de linha)'}</span>
                       </div>
                     </React.Fragment>
                   )
@@ -215,9 +215,9 @@ export const BlockSuggestionCard = ({
                   <React.Fragment key={index}>
                     <div key={index} className="flex items-start gap-2">
                       <span className="text-sm text-muted-foreground">
-                        {index === 0 ? 'Replace:' : 'Delete:'}
+                        {index === 0 ? 'Substituir:' : 'Excluír:'}
                       </span>
-                      <span className="text-sm">{text || 'line breaks'}</span>
+                      <span className="text-sm">{text || '(quebra de texto)'}</span>
                     </div>
                   </React.Fragment>
                 ))}
@@ -228,7 +228,7 @@ export const BlockSuggestionCard = ({
               <div className="flex items-center gap-2">
                 <span className="text-sm text-muted-foreground">
                   {Object.keys(suggestion.properties).map((key) => (
-                    <span key={key}>Un{key}</span>
+                    <span key={key}>Des{key}</span>
                   ))}
 
                   {Object.keys(suggestion.newProperties).map((key) => (

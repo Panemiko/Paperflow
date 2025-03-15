@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 
 import { cn, withRef } from '@udecode/cn';
 import {
@@ -11,8 +10,7 @@ import {
 } from '@udecode/plate/react';
 
 export const HrElement = withRef<typeof PlateElement>(
-  ({ className, nodeProps, ...props }, ref) => {
-    const { children } = props;
+  ({ className, nodeProps,children, ...props }, ref) => {
 
     const readOnly = useReadOnly();
     const selected = useSelected();

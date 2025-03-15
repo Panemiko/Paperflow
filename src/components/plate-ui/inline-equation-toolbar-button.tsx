@@ -13,7 +13,7 @@ export const InlineEquationToolbarButton = withRef<typeof ToolbarButton>(
     return (
       <ToolbarButton
         ref={ref}
-        tooltip="Mark as equation"
+        tooltip="Definir como equação"
         {...props}
         onClick={() => {
           insertInlineEquation(editor);

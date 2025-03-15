@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 
 import { cn, withRef } from '@udecode/cn';
 import {
@@ -28,12 +27,11 @@ export const FloatingToolbar = withRef<
   const editorId = useEditorId();
   const focusedEditorId = useEventEditorValue('focus');
   const isFloatingLinkOpen = !!usePluginOption({ key: 'a' }, 'mode');
-  const isAIChatOpen = usePluginOption({ key: 'aiChat' }, 'open');
 
   const floatingToolbarState = useFloatingToolbarState({
     editorId,
     focusedEditorId,
-    hideToolbar: isFloatingLinkOpen || isAIChatOpen,
+    hideToolbar: isFloatingLinkOpen,
     ...state,
     floatingOptions: {
       middleware: [

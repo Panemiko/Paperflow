@@ -19,7 +19,7 @@ export const MentionElement = withRef<
   typeof PlateElement,
   {
     prefix?: string;
-    onClick?: (mentionNode: any) => void;
+    onClick?: (mentionNode: unknown) => void;
   }
 >(({ children, className, prefix, onClick, ...props }, ref) => {
   const element = props.element as TMentionElement;
@@ -36,9 +36,9 @@ export const MentionElement = withRef<
         'inline-block rounded-md bg-muted px-1.5 py-0.5 align-baseline text-sm font-medium',
         !readOnly && 'cursor-pointer',
         selected && focused && 'ring-2 ring-ring',
-        element.children[0].bold === true && 'font-bold',
-        element.children[0].italic === true && 'italic',
-        element.children[0].underline === true && 'underline'
+        element.children[0]?.bold === true && 'font-bold',
+        element.children[0]?.italic === true && 'italic',
+        element.children[0]?.underline === true && 'underline'
       )}
       onClick={getHandler(onClick, element)}
       data-slate-value={element.value}

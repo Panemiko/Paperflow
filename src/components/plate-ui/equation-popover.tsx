@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import TextareaAutosize, {
   type TextareaAutosizeProps,
 } from 'react-textarea-autosize';
@@ -76,7 +76,7 @@ const EquationPopoverContent = ({
       />
 
       <Button variant="secondary" className="px-3" onClick={onClose}>
-        Done <CornerDownLeftIcon className="size-3.5" />
+        Pronto <CornerDownLeftIcon className="size-3.5" />
       </Button>
     </PopoverContent>
   );

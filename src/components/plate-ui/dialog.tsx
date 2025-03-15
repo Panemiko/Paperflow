@@ -1,6 +1,5 @@
 'use client';
 
-import * as React from 'react';
 
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { cn, createPrimitiveElement, withCn, withRef } from '@udecode/cn';
@@ -34,7 +33,7 @@ export const DialogContent = withRef<typeof DialogPrimitive.Content>(
         {children}
         <DialogPrimitive.Close className="absolute top-4 right-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
           <X className="size-4" />
-          <span className="sr-only">Close</span>
+          <span className="sr-only">Fechar</span>
         </DialogPrimitive.Close>
       </DialogPrimitive.Content>
     </DialogPortal>

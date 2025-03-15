@@ -45,13 +45,13 @@ export function FontSizeToolbarButton() {
   const { api, editor } = useEditorPlugin(FontSizePlugin);
 
   const cursorFontSize = useEditorSelector((editor) => {
-    const fontSize = editor.api.marks()?.[FontSizePlugin.key];
+    const fontSize = editor.api.marks()?.[FontSizePlugin.key as string];
 
     if (fontSize) {
       return toUnitLess(fontSize as string);
     }
 
-    const [block] = editor.api.block<TElement>() || [];
+    const [block] = editor.api.block<TElement>() ?? [];
 
     if (!block?.type) return DEFAULT_FONT_SIZE;
 
@@ -69,7 +69,7 @@ export function FontSizeToolbarButton() {
       return;
     }
     if (newSize !== toUnitLess(cursorFontSize)) {
-      api.fontSize.setMark(`${newSize}px`);
+      api.fontSize?.setMark(`${newSize}px`);
     }
 
     editor.tf.focus();
@@ -77,7 +77,7 @@ export function FontSizeToolbarButton() {
 
   const handleFontSizeChange = (delta: number) => {
     const newSize = Number(displayValue) + delta;
-    api.fontSize.setMark(`${newSize}px`);
+    api.fontSize?.setMark(`${newSize}px`);
     editor.tf.focus();
   };
 
@@ -126,7 +126,7 @@ export function FontSizeToolbarButton() {
                 'flex h-8 w-full items-center justify-center text-sm hover:bg-accent data-[highlighted=true]:bg-accent'
               )}
               onClick={() => {
-                api.fontSize.setMark(`${size}px`);
+                api.fontSize?.setMark(`${size}px`);
                 setIsFocused(false);
               }}
               data-highlighted={size === displayValue}

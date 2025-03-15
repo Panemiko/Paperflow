@@ -1,4 +1,3 @@
-import React from 'react';
 
 import type { TEquationElement } from '@udecode/plate-math';
 
@@ -46,7 +45,7 @@ export function EquationElementStatic({
         ) : (
           <div className="flex h-7 w-full items-center gap-2 text-sm whitespace-nowrap text-muted-foreground">
             <RadicalIcon className="size-6 text-muted-foreground/80" />
-            <div>Add a Tex equation</div>
+            <div>Adicione uma equação Tex</div>
           </div>
         )}
       </div>
