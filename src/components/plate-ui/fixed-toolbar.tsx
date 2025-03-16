@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { withCn } from '@udecode/cn';
+import { withCn } from "@udecode/cn";
 
-import { Toolbar } from './toolbar';
+import { Toolbar } from "./toolbar";
 
 export const FixedToolbar = withCn(
   Toolbar,
-  'sticky top-0 left-0 z-50 scrollbar-hide w-full justify-between overflow-x-auto rounded-t-lg border-b border-b-border bg-background/95 p-1 backdrop-blur-sm supports-backdrop-blur:bg-background/60'
+  "fixed top-6 left-1/2 -translate-x-1/2 z-50 border rounded-3xl scrollbar-hide max-w-7xl justify-between overflow-x-auto border-b border-b-border bg-background p-1",
 );

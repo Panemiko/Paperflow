@@ -2,19 +2,19 @@
 
 
 import {
-  BoldPlugin,
-  CodePlugin,
-  ItalicPlugin,
-  StrikethroughPlugin,
-  UnderlinePlugin,
+    BoldPlugin,
+    CodePlugin,
+    ItalicPlugin,
+    StrikethroughPlugin,
+    UnderlinePlugin,
 } from "@udecode/plate-basic-marks/react";
 import { useEditorReadOnly } from "@udecode/plate/react";
 import {
-  BoldIcon,
-  Code2Icon,
-  ItalicIcon,
-  StrikethroughIcon,
-  UnderlineIcon
+    BoldIcon,
+    Code2Icon,
+    ItalicIcon,
+    StrikethroughIcon,
+    UnderlineIcon
 } from "lucide-react";
 
 import { CommentToolbarButton } from "./comment-toolbar-button";
@@ -36,32 +36,32 @@ export function FloatingToolbarButtons() {
           <ToolbarGroup>
             <TurnIntoDropdownMenu />
 
-            <MarkToolbarButton nodeType={BoldPlugin.key} tooltip="Bold (⌘+B)">
+            <MarkToolbarButton nodeType={BoldPlugin.key} tooltip="Bold (Ctrl+B)">
               <BoldIcon />
             </MarkToolbarButton>
 
             <MarkToolbarButton
               nodeType={ItalicPlugin.key}
-              tooltip="Itálico (⌘+I)"
+              tooltip="Itálico (Ctrl+I)"
             >
               <ItalicIcon />
             </MarkToolbarButton>
 
             <MarkToolbarButton
               nodeType={UnderlinePlugin.key}
-              tooltip="Sublinhado (⌘+U)"
+              tooltip="Sublinhado (Ctrl+U)"
             >
               <UnderlineIcon />
             </MarkToolbarButton>
 
             <MarkToolbarButton
               nodeType={StrikethroughPlugin.key}
-              tooltip="Tachado (⌘+⇧+M)"
+              tooltip="Tachado (Ctrl+⇧+M)"
             >
               <StrikethroughIcon />
             </MarkToolbarButton>
 
-            <MarkToolbarButton nodeType={CodePlugin.key} tooltip="Código (⌘+E)">
+            <MarkToolbarButton nodeType={CodePlugin.key} tooltip="Código (Ctrl+E)">
               <Code2Icon />
             </MarkToolbarButton>
 

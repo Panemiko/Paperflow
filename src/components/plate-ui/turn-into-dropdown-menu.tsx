@@ -134,7 +134,7 @@ export function TurnIntoDropdownMenu(props: DropdownMenuProps) {
     <DropdownMenu modal={false} {...openState} {...props}>
       <DropdownMenuTrigger asChild>
         <ToolbarButton
-          className="min-w-[125px]"
+          className="min-w-[200px]"
           pressed={openState.open}
           tooltip="Tornar em"
           isDropdown
@@ -161,7 +161,7 @@ export function TurnIntoDropdownMenu(props: DropdownMenuProps) {
           {turnIntoItems.map(({ icon, label, value: itemValue }) => (
             <DropdownMenuRadioItem
               key={itemValue}
-              className="min-w-[180px]"
+              className="min-w-[200px]"
               value={itemValue}
             >
               {icon}

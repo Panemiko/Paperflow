@@ -9,57 +9,57 @@ import { cn, withRef } from "@udecode/cn";
 import { BlockSelectionPlugin } from "@udecode/plate-selection/react";
 import { type TTableElement, setCellBackground } from "@udecode/plate-table";
 import {
-  TablePlugin,
-  TableProvider,
-  useTableBordersDropdownMenuContentState,
-  useTableElement,
-  useTableMergeState,
+    TablePlugin,
+    TableProvider,
+    useTableBordersDropdownMenuContentState,
+    useTableElement,
+    useTableMergeState,
 } from "@udecode/plate-table/react";
 import {
-  PlateElement,
-  useEditorPlugin,
-  useEditorRef,
-  useEditorSelector,
-  useElement,
-  usePluginOption,
-  useReadOnly,
-  useRemoveNodeButton,
-  useSelected,
-  withHOC,
+    PlateElement,
+    useEditorPlugin,
+    useEditorRef,
+    useEditorSelector,
+    useElement,
+    usePluginOption,
+    useReadOnly,
+    useRemoveNodeButton,
+    useSelected,
+    withHOC,
 } from "@udecode/plate/react";
 import {
-  ArrowDown,
-  ArrowLeft,
-  ArrowRight,
-  ArrowUp,
-  CombineIcon,
-  EraserIcon,
-  Grid2X2Icon,
-  PaintBucketIcon,
-  SquareSplitHorizontalIcon,
-  Trash2Icon,
-  XIcon,
+    ArrowDown,
+    ArrowLeft,
+    ArrowRight,
+    ArrowUp,
+    CombineIcon,
+    EraserIcon,
+    Grid2X2Icon,
+    PaintBucketIcon,
+    SquareSplitHorizontalIcon,
+    Trash2Icon,
+    XIcon,
 } from "lucide-react";
 
 import { DEFAULT_COLORS } from "./color-constants";
 import { ColorDropdownMenuItems } from "./color-dropdown-menu-items";
 import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuPortal,
-  DropdownMenuTrigger,
+    DropdownMenu,
+    DropdownMenuCheckboxItem,
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
+    DropdownMenuPortal,
+    DropdownMenuTrigger,
 } from "./dropdown-menu";
 import { Popover, PopoverContent } from "./popover";
 import {
-  BorderAll,
-  BorderBottom,
-  BorderLeft,
-  BorderNone,
-  BorderRight,
-  BorderTop,
+    BorderAll,
+    BorderBottom,
+    BorderLeft,
+    BorderNone,
+    BorderRight,
+    BorderTop,
 } from "./table-icons";
 import { Toolbar, ToolbarButton, ToolbarGroup } from "./toolbar";
 
@@ -175,7 +175,7 @@ export const TableFloatingToolbar = withRef<typeof PopoverContent>(
 
               {collapsed && (
                 <ToolbarGroup>
-                  <ToolbarButton tooltip="Excluír tabela" {...buttonProps}>
+                  <ToolbarButton tooltip="Excluir tabela" {...buttonProps}>
                     <Trash2Icon />
                   </ToolbarButton>
                 </ToolbarGroup>
@@ -207,7 +207,7 @@ export const TableFloatingToolbar = withRef<typeof PopoverContent>(
                     tf.remove.tableRow();
                   }}
                   onMouseDown={(e) => e.preventDefault()}
-                  tooltip="Excluír linha"
+                  tooltip="Excluir linha"
                 >
                   <XIcon />
                 </ToolbarButton>
@@ -239,7 +239,7 @@ export const TableFloatingToolbar = withRef<typeof PopoverContent>(
                     tf.remove.tableColumn();
                   }}
                   onMouseDown={(e) => e.preventDefault()}
-                  tooltip="Excluír coluna"
+                  tooltip="Excluir coluna"
                 >
                   <XIcon />
                 </ToolbarButton>

@@ -8,34 +8,34 @@ import { cn } from "@udecode/cn";
 import { CommentsPlugin } from "@udecode/plate-comments/react";
 import { Plate, useEditorPlugin, useStoreValue } from "@udecode/plate/react";
 import {
-  differenceInDays,
-  differenceInHours,
-  differenceInMinutes,
-  format,
+    differenceInDays,
+    differenceInHours,
+    differenceInMinutes,
+    format,
 } from "date-fns";
 import {
-  CheckIcon,
-  MoreHorizontalIcon,
-  PencilIcon,
-  TrashIcon,
-  XIcon,
+    CheckIcon,
+    MoreHorizontalIcon,
+    PencilIcon,
+    TrashIcon,
+    XIcon,
 } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
 import {
-  discussionStore,
-  type TDiscussion,
-  useFakeCurrentUserId,
-  useFakeUserInfo,
+    discussionStore,
+    type TDiscussion,
+    useFakeCurrentUserId,
+    useFakeUserInfo,
 } from "./block-discussion";
 import { Button } from "./button";
 import { useCommentEditor } from "./comment-create-form";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
 } from "./dropdown-menu";
 import { Editor, EditorContainer } from "./editor";
 
@@ -387,7 +387,7 @@ export function CommentMoreDropdown(props: CommentMoreDropdownProps) {
           </DropdownMenuItem>
           <DropdownMenuItem onClick={onDeleteComment}>
             <TrashIcon className="size-4" />
-            Excluír comentário
+            Excluir comentário
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>

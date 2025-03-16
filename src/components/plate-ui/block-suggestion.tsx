@@ -3,19 +3,19 @@
 import React, { useMemo, useState } from 'react';
 
 import type {
-  TResolvedSuggestion,
-  TSuggestionElement,
-  TSuggestionText,
+    TResolvedSuggestion,
+    TSuggestionElement,
+    TSuggestionText,
 } from '@udecode/plate-suggestion';
 
 import { cn } from '@udecode/cn';
 import {
-  type NodeEntry,
-  type Path,
-  type TElement,
-  ElementApi,
-  PathApi,
-  TextApi,
+    type NodeEntry,
+    type Path,
+    type TElement,
+    ElementApi,
+    PathApi,
+    TextApi,
 } from '@udecode/plate';
 import { BlockquotePlugin } from '@udecode/plate-block-quote/react';
 import { CalloutPlugin } from '@udecode/plate-callout/react';
@@ -28,25 +28,25 @@ import { IndentListPlugin } from '@udecode/plate-indent-list/react';
 import { ColumnPlugin } from '@udecode/plate-layout/react';
 import { EquationPlugin } from '@udecode/plate-math/react';
 import {
-  AudioPlugin,
-  FilePlugin,
-  ImagePlugin,
-  MediaEmbedPlugin,
-  VideoPlugin,
+    AudioPlugin,
+    FilePlugin,
+    ImagePlugin,
+    MediaEmbedPlugin,
+    VideoPlugin,
 } from '@udecode/plate-media/react';
 import {
-  acceptSuggestion,
-  getSuggestionKey,
-  keyId2SuggestionId,
-  rejectSuggestion,
+    acceptSuggestion,
+    getSuggestionKey,
+    keyId2SuggestionId,
+    rejectSuggestion,
 } from '@udecode/plate-suggestion';
 import { SuggestionPlugin } from '@udecode/plate-suggestion/react';
 import { TablePlugin } from '@udecode/plate-table/react';
 import { TogglePlugin } from '@udecode/plate-toggle/react';
 import {
-  ParagraphPlugin,
-  useEditorPlugin,
-  useStoreSelect,
+    ParagraphPlugin,
+    useEditorPlugin,
+    useStoreSelect,
 } from '@udecode/plate/react';
 import { CheckIcon, XIcon } from 'lucide-react';
 
@@ -54,9 +54,9 @@ import { suggestionPlugin } from '@/components/editor/plugins/suggestion-plugin'
 
 import { Avatar, AvatarFallback, AvatarImage } from './avatar';
 import {
-  type TDiscussion,
-  discussionStore,
-  useFakeUserInfo,
+    type TDiscussion,
+    discussionStore,
+    useFakeUserInfo,
 } from './block-discussion';
 import { Button } from './button';
 import { type TComment, Comment, formatCommentDate } from './comment';
@@ -166,7 +166,7 @@ export const BlockSuggestionCard = ({
                 {suggestionText2Array(suggestion.text!).map((text, index) => (
                   <div key={index} className="flex items-center gap-2">
                     <span className="text-sm text-muted-foreground">
-                      Excluír:
+                      Excluir:
                     </span>
 
                     <span key={index} className="text-sm">
@@ -215,7 +215,7 @@ export const BlockSuggestionCard = ({
                   <React.Fragment key={index}>
                     <div key={index} className="flex items-start gap-2">
                       <span className="text-sm text-muted-foreground">
-                        {index === 0 ? 'Substituir:' : 'Excluír:'}
+                        {index === 0 ? 'Substituir:' : 'Excluir:'}
                       </span>
                       <span className="text-sm">{text || '(quebra de texto)'}</span>
                     </div>

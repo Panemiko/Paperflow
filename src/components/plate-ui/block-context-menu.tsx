@@ -6,27 +6,27 @@ import { BlockquotePlugin } from "@udecode/plate-block-quote/react";
 import { HEADING_KEYS } from "@udecode/plate-heading";
 import { IndentListPlugin } from "@udecode/plate-indent-list/react";
 import {
-  BLOCK_CONTEXT_MENU_ID,
-  BlockMenuPlugin,
-  BlockSelectionPlugin,
+    BLOCK_CONTEXT_MENU_ID,
+    BlockMenuPlugin,
+    BlockSelectionPlugin,
 } from "@udecode/plate-selection/react";
 import {
-  ParagraphPlugin,
-  useEditorPlugin,
-  usePlateState,
+    ParagraphPlugin,
+    useEditorPlugin,
+    usePlateState,
 } from "@udecode/plate/react";
 
 import { useIsTouchDevice } from "@/hooks/use-is-touch-device";
 
 import {
-  ContextMenu,
-  ContextMenuContent,
-  ContextMenuGroup,
-  ContextMenuItem,
-  ContextMenuSub,
-  ContextMenuSubContent,
-  ContextMenuSubTrigger,
-  ContextMenuTrigger,
+    ContextMenu,
+    ContextMenuContent,
+    ContextMenuGroup,
+    ContextMenuItem,
+    ContextMenuSub,
+    ContextMenuSubContent,
+    ContextMenuSubTrigger,
+    ContextMenuTrigger,
 } from "./context-menu";
 
 type Value = "askAI" | null;
@@ -115,7 +115,7 @@ export function BlockContextMenu({ children }: { children: React.ReactNode }) {
               editor.tf.focus();
             }}
           >
-            Excluír
+            Excluir
           </ContextMenuItem>
           <ContextMenuItem
             onClick={() => {
@@ -125,7 +125,7 @@ export function BlockContextMenu({ children }: { children: React.ReactNode }) {
             }}
           >
             Duplicar
-            {/* <ContextMenuShortcut>⌘ + D</ContextMenuShortcut> */}
+            {/* <ContextMenuShortcut>Ctrl + D</ContextMenuShortcut> */}
           </ContextMenuItem>
           <ContextMenuSub>
             <ContextMenuSubTrigger>Transformar em</ContextMenuSubTrigger>

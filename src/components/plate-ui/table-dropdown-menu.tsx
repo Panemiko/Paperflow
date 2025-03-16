@@ -8,28 +8,28 @@ import { cn } from "@udecode/cn";
 import { TablePlugin, useTableMergeState } from "@udecode/plate-table/react";
 import { useEditorPlugin, useEditorSelector } from "@udecode/plate/react";
 import {
-  ArrowDown,
-  ArrowLeft,
-  ArrowRight,
-  ArrowUp,
-  Combine,
-  Grid3x3Icon,
-  Table,
-  Trash2Icon,
-  Ungroup,
-  XIcon,
+    ArrowDown,
+    ArrowLeft,
+    ArrowRight,
+    ArrowUp,
+    Combine,
+    Grid3x3Icon,
+    Table,
+    Trash2Icon,
+    Ungroup,
+    XIcon,
 } from "lucide-react";
 
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
-  DropdownMenuTrigger,
-  useOpenState,
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
+    DropdownMenuSub,
+    DropdownMenuSubContent,
+    DropdownMenuSubTrigger,
+    DropdownMenuTrigger,
+    useOpenState,
 } from "./dropdown-menu";
 import { ToolbarButton } from "./toolbar";
 
@@ -134,7 +134,7 @@ export function TableDropdownMenu(props: DropdownMenuProps) {
                 }}
               >
                 <XIcon />
-                Excluír linha
+                Excluir linha
               </DropdownMenuItem>
             </DropdownMenuSubContent>
           </DropdownMenuSub>
@@ -176,7 +176,7 @@ export function TableDropdownMenu(props: DropdownMenuProps) {
                 }}
               >
                 <XIcon />
-                Excluír coluna
+                Excluir coluna
               </DropdownMenuItem>
             </DropdownMenuSubContent>
           </DropdownMenuSub>
@@ -190,7 +190,7 @@ export function TableDropdownMenu(props: DropdownMenuProps) {
             }}
           >
             <Trash2Icon />
-            Excluír tabela
+            Excluir tabela
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>

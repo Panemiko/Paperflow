@@ -1,6 +1,5 @@
 "use client";
 
-
 import {
   BoldPlugin,
   CodePlugin,
@@ -13,15 +12,9 @@ import {
   FontColorPlugin,
 } from "@udecode/plate-font/react";
 import { HighlightPlugin } from "@udecode/plate-highlight/react";
-import {
-  AudioPlugin,
-  FilePlugin,
-  ImagePlugin,
-  VideoPlugin,
-} from "@udecode/plate-media/react";
+import { ImagePlugin } from "@udecode/plate-media/react";
 import { useEditorReadOnly } from "@udecode/plate/react";
 import {
-  ArrowUpToLineIcon,
   BaselineIcon,
   BoldIcon,
   Code2Icon,
@@ -29,7 +22,7 @@ import {
   ItalicIcon,
   PaintBucketIcon,
   StrikethroughIcon,
-  UnderlineIcon
+  UnderlineIcon,
 } from "lucide-react";
 
 import { MoreDropdownMenu } from "@/components/plate-ui/more-dropdown-menu";
@@ -37,24 +30,18 @@ import { MoreDropdownMenu } from "@/components/plate-ui/more-dropdown-menu";
 import { AlignDropdownMenu } from "./align-dropdown-menu";
 import { ColorDropdownMenu } from "./color-dropdown-menu";
 import { CommentToolbarButton } from "./comment-toolbar-button";
-import { EmojiDropdownMenu } from "./emoji-dropdown-menu";
-import { ExportToolbarButton } from "./export-toolbar-button";
-import { FontSizeToolbarButton } from "./font-size-toolbar-button";
 import { RedoToolbarButton, UndoToolbarButton } from "./history-toolbar-button";
-import { ImportToolbarButton } from "./import-toolbar-button";
 import {
   BulletedIndentListToolbarButton,
   NumberedIndentListToolbarButton,
 } from "./indent-list-toolbar-button";
 import { IndentTodoToolbarButton } from "./indent-todo-toolbar-button";
-import { IndentToolbarButton } from "./indent-toolbar-button";
 import { InsertDropdownMenu } from "./insert-dropdown-menu";
 import { LineHeightDropdownMenu } from "./line-height-dropdown-menu";
 import { LinkToolbarButton } from "./link-toolbar-button";
 import { MarkToolbarButton } from "./mark-toolbar-button";
 import { MediaToolbarButton } from "./media-toolbar-button";
 import { ModeDropdownMenu } from "./mode-dropdown-menu";
-import { OutdentToolbarButton } from "./outdent-toolbar-button";
 import { TableDropdownMenu } from "./table-dropdown-menu";
 import { ToggleToolbarButton } from "./toggle-toolbar-button";
 import { ToolbarGroup } from "./toolbar";
@@ -73,46 +60,43 @@ export function FixedToolbarButtons() {
           </ToolbarGroup>
 
           <ToolbarGroup>
-            <ExportToolbarButton>
-              <ArrowUpToLineIcon />
-            </ExportToolbarButton>
-
-            <ImportToolbarButton />
-          </ToolbarGroup>
-
-          <ToolbarGroup>
             <InsertDropdownMenu />
             <TurnIntoDropdownMenu />
-            <FontSizeToolbarButton />
           </ToolbarGroup>
 
           <ToolbarGroup>
-            <MarkToolbarButton nodeType={BoldPlugin.key} tooltip="Negrito (⌘+B)">
+            <MarkToolbarButton
+              nodeType={BoldPlugin.key}
+              tooltip="Negrito (Ctrl+B)"
+            >
               <BoldIcon />
             </MarkToolbarButton>
 
             <MarkToolbarButton
               nodeType={ItalicPlugin.key}
-              tooltip="Itálico (⌘+I)"
+              tooltip="Itálico (Ctrl+I)"
             >
               <ItalicIcon />
             </MarkToolbarButton>
 
             <MarkToolbarButton
               nodeType={UnderlinePlugin.key}
-              tooltip="Sublinhado (⌘+U)"
+              tooltip="Sublinhado (Ctrl+U)"
             >
               <UnderlineIcon />
             </MarkToolbarButton>
 
             <MarkToolbarButton
               nodeType={StrikethroughPlugin.key}
-              tooltip="Tachado (⌘+⇧+M)"
+              tooltip="Tachado (Ctrl+⇧+M)"
             >
               <StrikethroughIcon />
             </MarkToolbarButton>
 
-            <MarkToolbarButton nodeType={CodePlugin.key} tooltip="Código (⌘+E)">
+            <MarkToolbarButton
+              nodeType={CodePlugin.key}
+              tooltip="Código (Ctrl+E)"
+            >
               <Code2Icon />
             </MarkToolbarButton>
 
@@ -138,25 +122,13 @@ export function FixedToolbarButtons() {
             <BulletedIndentListToolbarButton />
             <IndentTodoToolbarButton />
             <ToggleToolbarButton />
+            <LineHeightDropdownMenu />
           </ToolbarGroup>
 
           <ToolbarGroup>
             <LinkToolbarButton />
             <TableDropdownMenu />
-            <EmojiDropdownMenu />
-          </ToolbarGroup>
-
-          <ToolbarGroup>
             <MediaToolbarButton nodeType={ImagePlugin.key} />
-            <MediaToolbarButton nodeType={VideoPlugin.key} />
-            <MediaToolbarButton nodeType={AudioPlugin.key} />
-            <MediaToolbarButton nodeType={FilePlugin.key} />
-          </ToolbarGroup>
-
-          <ToolbarGroup>
-            <LineHeightDropdownMenu />
-            <OutdentToolbarButton />
-            <IndentToolbarButton />
           </ToolbarGroup>
 
           <ToolbarGroup>
