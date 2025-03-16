@@ -19,7 +19,7 @@ export default async function Layout({ children }: { children: ReactNode }) {
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        <header className="flex h-14 shrink-0 items-center gap-2">
+        <header className="bg-sidebar sticky top-0 flex h-10 shrink-0 items-center gap-2">
           <div className="flex flex-1 items-center gap-2 px-3">
             <SidebarTrigger />
             <Separator

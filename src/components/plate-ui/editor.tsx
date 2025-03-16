@@ -22,12 +22,12 @@ const editorContainerVariants = cva(
     variants: {
       variant: {
         comment: cn(
-          "flex flex-wrap justify-between gap-1 px-1 py-0.5 text-sm",
+          "flex justify-center gap-1 px-1 py-0.5 text-sm",
           "rounded-md border-[1.5px] border-transparent bg-transparent",
           "has-[[data-slate-editor]:focus]:border-brand/50 has-[[data-slate-editor]:focus]:ring-2 has-[[data-slate-editor]:focus]:ring-brand/30",
           "has-aria-disabled:border-input has-aria-disabled:bg-muted",
         ),
-        default: "h-full",
+        default: "h-full w-full",
         demo: "h-[650px]",
         select: cn(
           "group rounded-md border border-input ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2",
@@ -88,7 +88,7 @@ const editorVariants = cva(
           "max-h-[min(70vh,320px)] w-full max-w-[700px] overflow-y-auto px-3 py-2 text-base md:text-sm",
         comment: cn("rounded-none border-none bg-transparent text-sm"),
         default:
-          "size-full px-16 pt-12 pb-72 text-base sm:px-[max(64px,calc(50%-350px))]",
+          "size-full max-w-3xl pb-72 pt-8 text-base mx-auto",
         demo: "size-full px-16 pt-4 pb-72 text-base sm:px-[max(64px,calc(50%-350px))]",
         fullWidth: "size-full px-16 pt-4 pb-72 text-base sm:px-24",
         none: "",

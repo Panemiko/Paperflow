@@ -76,8 +76,8 @@ const groups: Group[] = [
     items: [
       {
         icon: <PilcrowIcon />,
-        keywords: ["parágrafo"],
-        label: "Texto",
+        keywords: ["texto", "parágrafo"],
+        label: "Parágrafo",
         value: ParagraphPlugin.key,
       },
       {

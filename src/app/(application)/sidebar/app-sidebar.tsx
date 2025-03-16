@@ -1,31 +1,31 @@
-"use client"
+"use client";
 
 import {
-    AudioWaveform,
-    Blocks,
-    Calendar,
-    Command,
-    Home,
-    Inbox,
-    MessageCircleQuestion,
-    Search,
-    Settings2,
-    Sparkles,
-    Trash2,
-} from "lucide-react"
-import * as React from "react"
+  AudioWaveform,
+  Blocks,
+  Calendar,
+  Command,
+  Home,
+  Inbox,
+  MessageCircleQuestion,
+  Search,
+  Settings2,
+  Sparkles,
+  Trash2,
+} from "lucide-react";
+import * as React from "react";
 
-import { NavFavorites } from "@/app/(application)/sidebar/nav-favorites"
-import { NavMain } from "@/app/(application)/sidebar/nav-main"
-import { NavSecondary } from "@/app/(application)/sidebar/nav-secondary"
-import { NavWorkspaces } from "@/app/(application)/sidebar/nav-workspaces"
-import { TeamSwitcher } from "@/app/(application)/sidebar/team-switcher"
 import {
-    Sidebar,
-    SidebarContent,
-    SidebarHeader,
-    SidebarRail,
-} from "@/components/ui/sidebar"
+  Sidebar,
+  SidebarContent,
+  SidebarHeader,
+  SidebarRail,
+} from "@/components/ui/sidebar";
+import { NavFavorites } from "./nav-favorites";
+import { NavMain } from "./nav-main";
+import { NavSecondary } from "./nav-secondary";
+import { NavWorkspaces } from "./nav-workspaces";
+import { TeamSwitcher } from "./team-switcher";
 
 // This is sample data.
 const data = {
@@ -98,41 +98,6 @@ const data = {
     },
   ],
   favorites: [
-    {
-      name: "Project Management & Task Tracking",
-      url: "#",
-      emoji: "📊",
-    },
-    {
-      name: "Family Recipe Collection & Meal Planning",
-      url: "#",
-      emoji: "🍳",
-    },
-    {
-      name: "Fitness Tracker & Workout Routines",
-      url: "#",
-      emoji: "💪",
-    },
-    {
-      name: "Book Notes & Reading List",
-      url: "#",
-      emoji: "📚",
-    },
-    {
-      name: "Sustainable Gardening Tips & Plant Care",
-      url: "#",
-      emoji: "🌱",
-    },
-    {
-      name: "Language Learning Progress & Resources",
-      url: "#",
-      emoji: "🗣️",
-    },
-    {
-      name: "Home Renovation Ideas & Budget Tracker",
-      url: "#",
-      emoji: "🏠",
-    },
     {
       name: "Personal Finance & Investment Portfolio",
       url: "#",
@@ -256,7 +221,7 @@ const data = {
       ],
     },
   ],
-}
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -272,5 +237,5 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarContent>
       <SidebarRail />
     </Sidebar>
-  )
+  );
 }

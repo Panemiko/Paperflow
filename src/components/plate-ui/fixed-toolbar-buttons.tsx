@@ -59,6 +59,8 @@ export function FixedToolbarButtons() {
             <RedoToolbarButton />
           </ToolbarGroup>
 
+          <div className="grow" />
+
           <ToolbarGroup>
             <InsertDropdownMenu />
             <TurnIntoDropdownMenu />

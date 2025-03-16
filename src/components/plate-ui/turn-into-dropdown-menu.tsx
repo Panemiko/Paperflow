@@ -48,8 +48,8 @@ import { ToolbarButton } from "./toolbar";
 const turnIntoItems = [
   {
     icon: <PilcrowIcon />,
-    keywords: ["parágrafo"],
-    label: "Texto",
+    keywords: ["parágrafo", "texto"],
+    label: "Parágrafo",
     value: ParagraphPlugin.key,
   },
   {
@@ -136,7 +136,7 @@ export function TurnIntoDropdownMenu(props: DropdownMenuProps) {
         <ToolbarButton
           className="min-w-[200px]"
           pressed={openState.open}
-          tooltip="Tornar em"
+          tooltip="Transformar em"
           isDropdown
         >
           {selectedItem?.label}
@@ -156,7 +156,7 @@ export function TurnIntoDropdownMenu(props: DropdownMenuProps) {
           onValueChange={(type) => {
             setBlockType(editor, type);
           }}
-          label="Tornar em"
+          label="Transformar em"
         >
           {turnIntoItems.map(({ icon, label, value: itemValue }) => (
             <DropdownMenuRadioItem
