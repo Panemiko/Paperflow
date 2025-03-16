@@ -79,7 +79,7 @@ const turnIntoItems = [
   {
     icon: <ListOrderedIcon />,
     keywords: ["ordenada", "ol", "1"],
-    label: "Lista numerada",
+    label: "Lista enumerada",
     value: ListStyleType.Decimal,
   },
   {

@@ -1,25 +1,25 @@
 "use client";
 
 import {
-  ListStyleType,
-  someIndentList,
-  toggleIndentList,
+    ListStyleType,
+    someIndentList,
+    toggleIndentList,
 } from "@udecode/plate-indent-list";
 import { useEditorRef, useEditorSelector } from "@udecode/plate/react";
 import { List, ListOrdered } from "lucide-react";
 
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-  useOpenState,
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+    useOpenState,
 } from "./dropdown-menu";
 import {
-  ToolbarSplitButton,
-  ToolbarSplitButtonPrimary,
-  ToolbarSplitButtonSecondary,
+    ToolbarSplitButton,
+    ToolbarSplitButtonPrimary,
+    ToolbarSplitButtonSecondary,
 } from "./toolbar";
 
 export function NumberedIndentListToolbarButton() {
@@ -48,7 +48,7 @@ export function NumberedIndentListToolbarButton() {
           })
         }
         data-state={pressed ? "on" : "off"}
-        tooltip="Lista numerada"
+        tooltip="Lista enumerada"
       >
         <ListOrdered className="size-4" />
       </ToolbarSplitButtonPrimary>

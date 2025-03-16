@@ -138,7 +138,7 @@ const groups: Group[] = [
       },
       {
         icon: <ListOrderedIcon />,
-        label: "Lista numerada",
+        label: "Lista enumerada",
         value: ListStyleType.Decimal,
       },
       {
