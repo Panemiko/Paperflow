@@ -56,6 +56,18 @@ const config = {
         ]
       }
     ]
-  }
+  },
+  "overrides": [
+    {
+      files: [
+        'src/components/editor/**/*',
+        'src/components/plate-ui/**/*',
+      ],
+      rules: {
+        "@typescript-eslint/no-explicit-any": "off",
+        '@typescript-eslint/no-unsafe-assignment': 'off',
+      }
+    }
+  ]
 }
 module.exports = config;

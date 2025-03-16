@@ -193,7 +193,7 @@ const groups: Group[] = [
       },
       {
         icon: <Columns3Icon />,
-        label: "3 colunas",
+        label: "Colunas",
         value: "action_three_columns",
       },
       {

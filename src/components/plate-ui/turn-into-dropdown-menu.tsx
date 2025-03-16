@@ -91,7 +91,7 @@ const turnIntoItems = [
   {
     icon: <ChevronRightIcon />,
     keywords: ["colapsável", "expansível"],
-    label: "Lista de alternância",
+    label: "Lista colapsável",
     value: TogglePlugin.key,
   },
   {
@@ -108,7 +108,7 @@ const turnIntoItems = [
   },
   {
     icon: <Columns3Icon />,
-    label: "3 colunas",
+    label: "Colunas",
     value: "action_three_columns",
   },
 ];

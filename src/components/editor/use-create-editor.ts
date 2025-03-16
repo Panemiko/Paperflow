@@ -58,6 +58,7 @@ import {
   type CreatePlateEditorOptions,
   ParagraphPlugin,
   PlateLeaf,
+  type PlatePlugin,
   usePlateEditor,
 } from "@udecode/plate/react";
 

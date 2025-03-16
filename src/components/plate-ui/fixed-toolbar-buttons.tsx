@@ -35,15 +35,14 @@ import {
   BulletedIndentListToolbarButton,
   NumberedIndentListToolbarButton,
 } from "./indent-list-toolbar-button";
-import { IndentTodoToolbarButton } from "./indent-todo-toolbar-button";
 import { InsertDropdownMenu } from "./insert-dropdown-menu";
 import { LineHeightDropdownMenu } from "./line-height-dropdown-menu";
 import { LinkToolbarButton } from "./link-toolbar-button";
 import { MarkToolbarButton } from "./mark-toolbar-button";
 import { MediaToolbarButton } from "./media-toolbar-button";
 import { ModeDropdownMenu } from "./mode-dropdown-menu";
+import { Separator } from "./separator";
 import { TableDropdownMenu } from "./table-dropdown-menu";
-import { ToggleToolbarButton } from "./toggle-toolbar-button";
 import { ToolbarGroup } from "./toolbar";
 import { TurnIntoDropdownMenu } from "./turn-into-dropdown-menu";
 
@@ -62,6 +61,9 @@ export function FixedToolbarButtons() {
           <div className="grow" />
 
           <ToolbarGroup>
+            <div className="mx-1.5 h-full py-0.5">
+              <Separator orientation="vertical" />
+            </div>
             <InsertDropdownMenu />
             <TurnIntoDropdownMenu />
           </ToolbarGroup>
@@ -122,8 +124,6 @@ export function FixedToolbarButtons() {
 
             <NumberedIndentListToolbarButton />
             <BulletedIndentListToolbarButton />
-            <IndentTodoToolbarButton />
-            <ToggleToolbarButton />
             <LineHeightDropdownMenu />
           </ToolbarGroup>
 
