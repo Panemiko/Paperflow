@@ -6,5 +6,5 @@ import { Toolbar } from "./toolbar";
 
 export const FixedToolbar = withCn(
   Toolbar,
-  "fixed top-6 left-1/2 -translate-x-1/2 z-50 border rounded-3xl scrollbar-hide max-w-7xl justify-between overflow-x-auto border-b border-b-border bg-background p-1",
+  "z-50 w-full scrollbar-hide justify-between overflow-x-auto border-y border-b-border bg-background p-1",
 );
