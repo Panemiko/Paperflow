@@ -50,7 +50,13 @@ export function FixedToolbarButtons() {
   const readOnly = useEditorReadOnly();
 
   return (
-    <div className="flex w-full">
+    <div className="grid w-full grid-cols-3">
+      {readOnly && (
+        <>
+          <div />
+          <div />
+        </>
+      )}
       {!readOnly && (
         <>
           <ToolbarGroup>
@@ -58,99 +64,105 @@ export function FixedToolbarButtons() {
             <RedoToolbarButton />
           </ToolbarGroup>
 
-          <div className="grow" />
+          <div className="flex justify-center">
+            <ToolbarGroup>
+              <div className="mx-1.5 h-full py-0.5">
+                <Separator orientation="vertical" />
+              </div>
+              <InsertDropdownMenu />
+              <TurnIntoDropdownMenu />
+            </ToolbarGroup>
 
-          <ToolbarGroup>
-            <div className="mx-1.5 h-full py-0.5">
-              <Separator orientation="vertical" />
-            </div>
-            <InsertDropdownMenu />
-            <TurnIntoDropdownMenu />
-          </ToolbarGroup>
+            <ToolbarGroup>
+              <MarkToolbarButton
+                nodeType={BoldPlugin.key}
+                tooltip="Negrito (Ctrl+B)"
+              >
+                <BoldIcon />
+              </MarkToolbarButton>
 
-          <ToolbarGroup>
-            <MarkToolbarButton
-              nodeType={BoldPlugin.key}
-              tooltip="Negrito (Ctrl+B)"
-            >
-              <BoldIcon />
-            </MarkToolbarButton>
+              <MarkToolbarButton
+                nodeType={ItalicPlugin.key}
+                tooltip="Itálico (Ctrl+I)"
+              >
+                <ItalicIcon />
+              </MarkToolbarButton>
 
-            <MarkToolbarButton
-              nodeType={ItalicPlugin.key}
-              tooltip="Itálico (Ctrl+I)"
-            >
-              <ItalicIcon />
-            </MarkToolbarButton>
+              <MarkToolbarButton
+                nodeType={UnderlinePlugin.key}
+                tooltip="Sublinhado (Ctrl+U)"
+              >
+                <UnderlineIcon />
+              </MarkToolbarButton>
 
-            <MarkToolbarButton
-              nodeType={UnderlinePlugin.key}
-              tooltip="Sublinhado (Ctrl+U)"
-            >
-              <UnderlineIcon />
-            </MarkToolbarButton>
+              <MarkToolbarButton
+                nodeType={StrikethroughPlugin.key}
+                tooltip="Tachado (Ctrl+⇧+M)"
+              >
+                <StrikethroughIcon />
+              </MarkToolbarButton>
 
-            <MarkToolbarButton
-              nodeType={StrikethroughPlugin.key}
-              tooltip="Tachado (Ctrl+⇧+M)"
-            >
-              <StrikethroughIcon />
-            </MarkToolbarButton>
+              <MarkToolbarButton
+                nodeType={CodePlugin.key}
+                tooltip="Código (Ctrl+E)"
+              >
+                <Code2Icon />
+              </MarkToolbarButton>
 
-            <MarkToolbarButton
-              nodeType={CodePlugin.key}
-              tooltip="Código (Ctrl+E)"
-            >
-              <Code2Icon />
-            </MarkToolbarButton>
+              <ColorDropdownMenu
+                nodeType={FontColorPlugin.key}
+                tooltip="Cor do texto"
+              >
+                <BaselineIcon />
+              </ColorDropdownMenu>
 
-            <ColorDropdownMenu
-              nodeType={FontColorPlugin.key}
-              tooltip="Cor do texto"
-            >
-              <BaselineIcon />
-            </ColorDropdownMenu>
+              <ColorDropdownMenu
+                nodeType={FontBackgroundColorPlugin.key}
+                tooltip="Cor do fundo"
+              >
+                <PaintBucketIcon />
+              </ColorDropdownMenu>
+            </ToolbarGroup>
 
-            <ColorDropdownMenu
-              nodeType={FontBackgroundColorPlugin.key}
-              tooltip="Cor do fundo"
-            >
-              <PaintBucketIcon />
-            </ColorDropdownMenu>
-          </ToolbarGroup>
+            <ToolbarGroup>
+              <AlignDropdownMenu />
 
-          <ToolbarGroup>
-            <AlignDropdownMenu />
+              <NumberedIndentListToolbarButton />
+              <BulletedIndentListToolbarButton />
+              <LineHeightDropdownMenu />
+            </ToolbarGroup>
 
-            <NumberedIndentListToolbarButton />
-            <BulletedIndentListToolbarButton />
-            <LineHeightDropdownMenu />
-          </ToolbarGroup>
+            <ToolbarGroup>
+              <LinkToolbarButton />
+              <TableDropdownMenu />
+              <MediaToolbarButton nodeType={ImagePlugin.key} />
+            </ToolbarGroup>
 
-          <ToolbarGroup>
-            <LinkToolbarButton />
-            <TableDropdownMenu />
-            <MediaToolbarButton nodeType={ImagePlugin.key} />
-          </ToolbarGroup>
-
-          <ToolbarGroup>
-            <MoreDropdownMenu />
-          </ToolbarGroup>
+            <ToolbarGroup>
+              <MoreDropdownMenu />
+              <div className="mx-1.5 h-full py-0.5">
+                <Separator orientation="vertical" />
+              </div>
+            </ToolbarGroup>
+          </div>
         </>
       )}
 
-      <div className="grow" />
+      <div className="flex justify-end">
+        <ToolbarGroup>
+          <div className="mx-1.5 h-full py-0.5">
+            <Separator orientation="vertical" />
+          </div>
+          <MarkToolbarButton nodeType={HighlightPlugin.key} tooltip="Destacar">
+            <HighlighterIcon />
+          </MarkToolbarButton>
+          <CommentToolbarButton />
+        </ToolbarGroup>
 
-      <ToolbarGroup>
-        <MarkToolbarButton nodeType={HighlightPlugin.key} tooltip="Destacar">
-          <HighlighterIcon />
-        </MarkToolbarButton>
-        <CommentToolbarButton />
-      </ToolbarGroup>
-
-      <ToolbarGroup>
-        <ModeDropdownMenu />
-      </ToolbarGroup>
+        <ToolbarGroup>
+          <ModeDropdownMenu />
+        </ToolbarGroup>
+      </div>
     </div>
   );
 }
