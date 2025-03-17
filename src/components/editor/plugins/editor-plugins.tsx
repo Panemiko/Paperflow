@@ -6,11 +6,6 @@ import { CodeBlockPlugin } from "@udecode/plate-code-block/react";
 import { DatePlugin } from "@udecode/plate-date/react";
 import { DocxPlugin } from "@udecode/plate-docx";
 import { EmojiPlugin } from "@udecode/plate-emoji/react";
-import {
-  FontBackgroundColorPlugin,
-  FontColorPlugin,
-  FontSizePlugin,
-} from "@udecode/plate-font/react";
 import { HighlightPlugin } from "@udecode/plate-highlight/react";
 import { HorizontalRulePlugin } from "@udecode/plate-horizontal-rule/react";
 import { JuicePlugin } from "@udecode/plate-juice";
@@ -40,7 +35,6 @@ import { indentListPlugins } from "./indent-list-plugins";
 import { lineHeightPlugin } from "./line-height-plugin";
 import { linkPlugin } from "./link-plugin";
 import { mediaPlugins } from "./media-plugins";
-import { mentionPlugin } from "./mention-plugin";
 import { resetBlockTypePlugin } from "./reset-block-type-plugin";
 import { skipMarkPlugin } from "./skip-mark-plugin";
 import { softBreakPlugin } from "./soft-break-plugin";
@@ -53,7 +47,6 @@ export const viewPlugins = [
   HorizontalRulePlugin,
   linkPlugin,
   DatePlugin,
-  mentionPlugin,
   tablePlugin,
   TogglePlugin,
   tocPlugin,
@@ -63,9 +56,6 @@ export const viewPlugins = [
   ColumnPlugin,
 
   // Marks
-  FontColorPlugin,
-  FontBackgroundColorPlugin,
-  FontSizePlugin,
   HighlightPlugin,
   KbdPlugin,
   skipMarkPlugin,

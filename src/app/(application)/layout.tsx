@@ -7,7 +7,7 @@ export default async function Layout({ children }: { children: ReactNode }) {
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        <main className="bg-accent h-fit">{children}</main>
+        <main className="bg-accent min-h-screen h-fit">{children}</main>
       </SidebarInset>
     </SidebarProvider>
   );

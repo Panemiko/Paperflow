@@ -7,20 +7,14 @@ import {
   StrikethroughPlugin,
   UnderlinePlugin,
 } from "@udecode/plate-basic-marks/react";
-import {
-  FontBackgroundColorPlugin,
-  FontColorPlugin,
-} from "@udecode/plate-font/react";
 import { HighlightPlugin } from "@udecode/plate-highlight/react";
 import { ImagePlugin } from "@udecode/plate-media/react";
 import { useEditorReadOnly } from "@udecode/plate/react";
 import {
-  BaselineIcon,
   BoldIcon,
   Code2Icon,
   HighlighterIcon,
   ItalicIcon,
-  PaintBucketIcon,
   StrikethroughIcon,
   UnderlineIcon,
 } from "lucide-react";
@@ -28,7 +22,6 @@ import {
 import { MoreDropdownMenu } from "@/components/plate-ui/more-dropdown-menu";
 
 import { AlignDropdownMenu } from "./align-dropdown-menu";
-import { ColorDropdownMenu } from "./color-dropdown-menu";
 import { CommentToolbarButton } from "./comment-toolbar-button";
 import { RedoToolbarButton, UndoToolbarButton } from "./history-toolbar-button";
 import {
@@ -108,20 +101,6 @@ export function FixedToolbarButtons() {
               >
                 <Code2Icon />
               </MarkToolbarButton>
-
-              <ColorDropdownMenu
-                nodeType={FontColorPlugin.key}
-                tooltip="Cor do texto"
-              >
-                <BaselineIcon />
-              </ColorDropdownMenu>
-
-              <ColorDropdownMenu
-                nodeType={FontBackgroundColorPlugin.key}
-                tooltip="Cor do fundo"
-              >
-                <PaintBucketIcon />
-              </ColorDropdownMenu>
             </ToolbarGroup>
 
             <ToolbarGroup>
