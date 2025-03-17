@@ -1,6 +1,5 @@
 "use client"
 
-import * as React from "react"
 import {
   ArrowDown,
   ArrowUp,
@@ -18,6 +17,7 @@ import {
   Trash,
   Trash2,
 } from "lucide-react"
+import * as React from "react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -102,7 +102,7 @@ export function NavActions() {
   const [isOpen, setIsOpen] = React.useState(false)
 
   React.useEffect(() => {
-    setIsOpen(true)
+    setIsOpen(false)
   }, [])
 
   return (

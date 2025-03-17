@@ -11,6 +11,7 @@ import { Editor } from "@/components/plate-ui/editor";
 export function PlateEditor() {
   const editor = useCreateEditor();
 
+
   return (
     <DndProvider backend={HTML5Backend}>
       <Plate editor={editor}>

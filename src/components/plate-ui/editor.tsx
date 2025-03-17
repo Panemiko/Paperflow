@@ -14,7 +14,7 @@ import {
 import { cva } from "class-variance-authority";
 
 const editorContainerVariants = cva(
-  "relative w-full cursor-text overflow-y-auto caret-primary select-text selection:bg-brand/25 focus-visible:outline-none [&_.slate-selection-area]:z-50 [&_.slate-selection-area]:border [&_.slate-selection-area]:border-brand/25 [&_.slate-selection-area]:bg-brand/15",
+  "relative w-full cursor-text overflow-y-auto caret-primary select-text selection:bg-brand/25 focus-visible:outline-none [&_.slate-selection-area]:z-40 [&_.slate-selection-area]:border [&_.slate-selection-area]:border-brand/25 [&_.slate-selection-area]:bg-brand/15",
   {
     defaultVariants: {
       variant: "default",
@@ -88,7 +88,7 @@ const editorVariants = cva(
           "max-h-[min(70vh,320px)] w-full max-w-[700px] overflow-y-auto px-3 py-2 text-base md:text-sm",
         comment: cn("rounded-none border-none bg-transparent text-sm"),
         default:
-          "size-full max-w-3xl pb-72 pt-8 text-base mx-auto",
+          "max-w-4xl rounded-xl px-14 w-full py-16 min-h-[calc(var(--container-4xl)/7*10)] bg-background mt-20 border border-border text-base mx-auto",
         demo: "size-full px-16 pt-4 pb-72 text-base sm:px-[max(64px,calc(50%-350px))]",
         fullWidth: "size-full px-16 pt-4 pb-72 text-base sm:px-24",
         none: "",
