@@ -5,8 +5,10 @@ import { createId } from "@paralleldrive/cuid2";
 import { sql } from "drizzle-orm";
 import {
   type AnyPgColumn,
+  boolean,
   json,
   pgTableCreator,
+  text,
   timestamp,
   varchar,
 } from "drizzle-orm/pg-core";
@@ -19,6 +21,8 @@ import {
  */
 export const createTable = pgTableCreator((name) => `paperflow_${name}`);
 
+// authentication related
+
 export const usersTable = createTable("users", {
   id: varchar("id", { length: 256 })
     .primaryKey()
@@ -30,7 +34,74 @@ export const usersTable = createTable("users", {
   updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
     () => new Date(),
   ),
+  name: text("name").notNull(),
+  email: text("email").notNull().unique(),
+  emailVerified: boolean("email_verified").notNull(),
+  image: text("image"),
 });
+
+export const sessionsTable = createTable("sessions", {
+  id: varchar("id", { length: 256 })
+    .primaryKey()
+    .unique()
+    .$defaultFn(() => createId()),
+  createdAt: timestamp("created_at", { withTimezone: true })
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
+    () => new Date(),
+  ),
+  expiresAt: timestamp("expires_at").notNull(),
+  token: text("token").notNull().unique(),
+  ipAddress: text("ip_address"),
+  userAgent: text("user_agent"),
+  userId: text("user_id")
+    .notNull()
+    .references(() => usersTable.id, { onDelete: "cascade" }),
+});
+
+export const accountsTable = createTable("accounts", {
+  id: varchar("id", { length: 256 })
+    .primaryKey()
+    .unique()
+    .$defaultFn(() => createId()),
+  createdAt: timestamp("created_at", { withTimezone: true })
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
+    () => new Date(),
+  ),
+  accountId: text("account_id").notNull(),
+  providerId: text("provider_id").notNull(),
+  userId: text("user_id")
+    .notNull()
+    .references(() => usersTable.id, { onDelete: "cascade" }),
+  accessToken: text("access_token"),
+  refreshToken: text("refresh_token"),
+  idToken: text("id_token"),
+  accessTokenExpiresAt: timestamp("access_token_expires_at"),
+  refreshTokenExpiresAt: timestamp("refresh_token_expires_at"),
+  scope: text("scope"),
+  password: text("password"),
+});
+
+export const verificationsTable = createTable("verifications", {
+  id: varchar("id", { length: 256 })
+    .primaryKey()
+    .unique()
+    .$defaultFn(() => createId()),
+  createdAt: timestamp("created_at", { withTimezone: true })
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
+    () => new Date(),
+  ),
+  identifier: text("identifier").notNull(),
+  value: text("value").notNull(),
+  expiresAt: timestamp("expires_at").notNull(),
+});
+
+// papers and versioning related
 
 export const papersTable = createTable("papers", {
   id: varchar("id", { length: 256 })
