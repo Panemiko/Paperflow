@@ -88,11 +88,7 @@ const editorVariants = cva(
           "max-h-[min(70vh,320px)] w-full max-w-[700px] overflow-y-auto px-3 py-2 text-base md:text-sm",
         comment: cn("rounded-none border-none bg-transparent text-sm"),
         default:
-<<<<<<< HEAD
-          "max-w-4xl rounded-xl px-14 w-full py-16 min-h-[calc(var(--container-4xl)/7*10)] bg-background mt-10 mb-64 border border-border text-base mx-auto",
-=======
-          "max-w-4xl rounded-xl px-14 w-full py-16 min-h-[calc(var(--container-4xl)/7*10)] bg-background mt-10 border border-border text-base mx-auto",
->>>>>>> d7193412f6393763f9eb6934e6c5f87f032dbcfa
+          "max-w-4xl rounded-xl px-24 w-full py-16 min-h-[calc(var(--container-4xl)/7*10)] bg-background mt-10 mb-64 border border-border text-base mx-auto",
         demo: "size-full px-16 pt-4 pb-72 text-base sm:px-[max(64px,calc(50%-350px))]",
         fullWidth: "size-full px-16 pt-4 pb-72 text-base sm:px-24",
         none: "",

@@ -48,7 +48,7 @@ export const withPlaceholders = (components: unknown) =>
     {
       key: ParagraphPlugin.key,
       hideOnBlur: true,
-      placeholder: "Escreva um parágrafo",
+      placeholder: "Digite / para ver os comandos",
       query: {
         maxLevel: 1,
       },

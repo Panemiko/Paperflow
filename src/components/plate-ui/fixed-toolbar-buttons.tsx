@@ -59,9 +59,6 @@ export function FixedToolbarButtons() {
 
           <div className="flex justify-center">
             <ToolbarGroup>
-              <div className="mx-1.5 h-full py-0.5">
-                <Separator orientation="vertical" />
-              </div>
               <InsertDropdownMenu />
               <TurnIntoDropdownMenu />
             </ToolbarGroup>
@@ -119,9 +116,6 @@ export function FixedToolbarButtons() {
 
             <ToolbarGroup>
               <MoreDropdownMenu />
-              <div className="mx-1.5 h-full py-0.5">
-                <Separator orientation="vertical" />
-              </div>
             </ToolbarGroup>
           </div>
         </>

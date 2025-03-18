@@ -103,6 +103,7 @@ import { TableElement } from "@/components/plate-ui/table-element";
 import { TableRowElement } from "@/components/plate-ui/table-row-element";
 import { TocElement } from "@/components/plate-ui/toc-element";
 import { ToggleElement } from "@/components/plate-ui/toggle-element";
+import { defaultPaperValue } from "@/mock/default-paper";
 
 export const viewComponents = {
   [AudioPlugin.key]: MediaAudioElement,
@@ -172,6 +173,11 @@ export const useCreateEditor = (
 ) => {
   return usePlateEditor<Value>(
     {
+      handlers: {
+        onChange: (props) => {
+          console.log(props.value);
+        },
+      },
       override: {
         components: {
           ...(readOnly ? viewComponents : withPlaceholders(editorComponents)),
@@ -180,16 +186,7 @@ export const useCreateEditor = (
         ...override,
       },
       plugins: [...editorPlugins, FixedToolbarPlugin, FloatingToolbarPlugin],
-      value: [
-        {
-          children: [{ text: "Paperflow" }],
-          type: "h1",
-        },
-        {
-          children: [{ text: "Teste do editor do Paperflow" }],
-          type: ParagraphPlugin.key,
-        },
-      ],
+      value: defaultPaperValue,
       ...options,
     },
     deps,
