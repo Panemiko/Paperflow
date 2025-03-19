@@ -15,8 +15,11 @@ import { CustomLink } from "@/components/ui/link";
 import { authClient } from "@/lib/auth/client";
 import { userSchema } from "@/lib/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { setCookie } from "cookies-next";
 import { ArrowRightIcon } from "lucide-react";
+import { redirect } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { type z } from "zod";
 
 const formSchema = userSchema.pick({ email: true });
@@ -35,7 +38,11 @@ export function EmailInputForm() {
       type: "sign-in",
     });
 
-    console.log("Email submitted:", data.email);
+    await setCookie("email", data.email, {}); // expires in the session
+
+    toast.success("Código enviado com sucesso!");
+    
+    redirect("/auth/verify");
   }
 
   return (
@@ -62,7 +69,12 @@ export function EmailInputForm() {
           )}
         />
 
-        <Button className="w-full" size="lg" type="submit">
+        <Button
+          isLoading={form.formState.isSubmitting}
+          className="w-full"
+          size="lg"
+          type="submit"
+        >
           <ArrowRightIcon /> Enviar código
         </Button>
         <p className="text-foreground/70 text-center text-xs">
