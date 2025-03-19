@@ -5,8 +5,12 @@ import { nextCookies } from "better-auth/next-js";
 import { emailOTP } from "better-auth/plugins";
 
 export const auth = betterAuth({
+  advanced: {
+    generateId: false,
+  },
   database: drizzleAdapter(db, {
     provider: "pg",
+    usePlural: true,
   }),
   plugins: [
     emailOTP({

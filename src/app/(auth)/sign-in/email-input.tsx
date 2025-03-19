@@ -23,6 +23,9 @@ const formSchema = userSchema.pick({ email: true });
 
 export function EmailInputForm() {
   const form = useForm<z.infer<typeof formSchema>>({
+    defaultValues: {
+      email: "",
+    },
     resolver: zodResolver(formSchema),
   });
 
@@ -45,7 +48,11 @@ export function EmailInputForm() {
             <FormItem className="mb-10">
               <FormLabel>Seu e-mail</FormLabel>
               <FormControl>
-                <Input placeholder="seuemail@gmail.com" {...field} />
+                <Input
+                  type="email"
+                  placeholder="seuemail@gmail.com"
+                  {...field}
+                />
               </FormControl>
               <FormDescription>
                 Utilize seu e-mail pessoal ou da sua instituição.

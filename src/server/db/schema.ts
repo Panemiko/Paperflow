@@ -23,7 +23,7 @@ export const createTable = pgTableCreator((name) => `paperflow_${name}`);
 
 // authentication related
 
-export const usersTable = createTable("users", {
+export const users = createTable("users", {
   id: varchar("id", { length: 256 })
     .primaryKey()
     .unique()
@@ -40,7 +40,7 @@ export const usersTable = createTable("users", {
   image: text("image"),
 });
 
-export const sessionsTable = createTable("sessions", {
+export const sessions = createTable("sessions", {
   id: varchar("id", { length: 256 })
     .primaryKey()
     .unique()
@@ -57,10 +57,10 @@ export const sessionsTable = createTable("sessions", {
   userAgent: text("user_agent"),
   userId: text("user_id")
     .notNull()
-    .references(() => usersTable.id, { onDelete: "cascade" }),
+    .references(() => users.id, { onDelete: "cascade" }),
 });
 
-export const accountsTable = createTable("accounts", {
+export const accounts = createTable("accounts", {
   id: varchar("id", { length: 256 })
     .primaryKey()
     .unique()
@@ -75,7 +75,7 @@ export const accountsTable = createTable("accounts", {
   providerId: text("provider_id").notNull(),
   userId: text("user_id")
     .notNull()
-    .references(() => usersTable.id, { onDelete: "cascade" }),
+    .references(() => users.id, { onDelete: "cascade" }),
   accessToken: text("access_token"),
   refreshToken: text("refresh_token"),
   idToken: text("id_token"),
@@ -85,7 +85,7 @@ export const accountsTable = createTable("accounts", {
   password: text("password"),
 });
 
-export const verificationsTable = createTable("verifications", {
+export const verifications = createTable("verifications", {
   id: varchar("id", { length: 256 })
     .primaryKey()
     .unique()
@@ -103,7 +103,7 @@ export const verificationsTable = createTable("verifications", {
 
 // papers and versioning related
 
-export const papersTable = createTable("papers", {
+export const papers = createTable("papers", {
   id: varchar("id", { length: 256 })
     .primaryKey()
     .unique()
@@ -116,7 +116,7 @@ export const papersTable = createTable("papers", {
   ),
 });
 
-export const branchesTable = createTable("branches", {
+export const branches = createTable("branches", {
   id: varchar("id", { length: 256 })
     .primaryKey()
     .unique()
@@ -127,14 +127,12 @@ export const branchesTable = createTable("branches", {
   updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
     () => new Date(),
   ),
-  ownerId: varchar("owner_id", { length: 256 }).references(() => usersTable.id),
-  paperId: varchar("paper_id", { length: 256 }).references(
-    () => papersTable.id,
-  ),
+  ownerId: varchar("owner_id", { length: 256 }).references(() => users.id),
+  paperId: varchar("paper_id", { length: 256 }).references(() => papers.id),
   content: json("content").notNull(),
 });
 
-export const snapshotsTable = createTable("snapshots", {
+export const snapshots = createTable("snapshots", {
   id: varchar("id", { length: 256 })
     .primaryKey()
     .unique()
@@ -143,23 +141,21 @@ export const snapshotsTable = createTable("snapshots", {
     .default(sql`CURRENT_TIMESTAMP`)
     .notNull(),
   madeByUserId: varchar("made_by_user_id", { length: 256 }).references(
-    () => usersTable.id,
+    () => users.id,
   ),
   changes: json("changes").notNull(),
-  branchId: varchar("branch_id", { length: 256 }).references(
-    () => branchesTable.id,
-  ),
+  branchId: varchar("branch_id", { length: 256 }).references(() => branches.id),
   name: varchar("name", { length: 256 }).notNull(),
   description: varchar("description", { length: 2048 }).notNull(),
   parentSnapshotId: varchar("parent_snapshot_id", { length: 256 }).references(
-    (): AnyPgColumn => snapshotsTable.id,
+    (): AnyPgColumn => snapshots.id,
   ),
   parentSnapshotId2: varchar("parent_snapshot_id_2", {
     length: 256,
-  }).references((): AnyPgColumn => snapshotsTable.id),
+  }).references((): AnyPgColumn => snapshots.id),
 });
 
-export const decoupledBranchTable = createTable("decoupled_branches", {
+export const decoupledBranch = createTable("decoupled_branches", {
   id: varchar("id", { length: 256 })
     .primaryKey()
     .unique()
@@ -172,8 +168,8 @@ export const decoupledBranchTable = createTable("decoupled_branches", {
   ),
   user: varchar("user", { length: 256 })
     .notNull()
-    .references(() => usersTable.id),
+    .references(() => users.id),
   branchId: varchar("branch_id", { length: 256 })
     .notNull()
-    .references(() => branchesTable.id),
+    .references(() => branches.id),
 });
