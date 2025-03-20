@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { type ComponentPropsWithoutRef } from "react";
 
-export function Logo({ className, ...props }: ComponentPropsWithoutRef<"svg">) {
+export function BrandIcon({ className, ...props }: ComponentPropsWithoutRef<"svg">) {
   return (
     <svg
       width="338"

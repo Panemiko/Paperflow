@@ -19,6 +19,11 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/auth/sign-in", request.url));
   }
 
+  // Redirect to the setup page if the user hasn't set up their account yet
+  if (!session.user.name) {
+    return NextResponse.redirect(new URL("/auth/setup", request.url));
+  }
+
   return NextResponse.next();
 }
 

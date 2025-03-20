@@ -1,10 +1,8 @@
 "use client";
 
 import {
-  AudioWaveform,
   Blocks,
   Calendar,
-  Command,
   Home,
   Inbox,
   MessageCircleQuestion,
@@ -15,37 +13,21 @@ import {
 } from "lucide-react";
 import * as React from "react";
 
+import { BrandLogo } from "@/components/brand/logo";
 import {
   Sidebar,
   SidebarContent,
   SidebarHeader,
   SidebarRail,
+  SidebarSeparator,
 } from "@/components/ui/sidebar";
-import { NavFavorites } from "./nav-favorites";
+import Link from "next/link";
 import { NavMain } from "./nav-main";
-import { NavSecondary } from "./nav-secondary";
 import { NavWorkspaces } from "./nav-workspaces";
-import { TeamSwitcher } from "./team-switcher";
+import { UserDisplay } from "./user-display";
 
 // This is sample data.
 const data = {
-  teams: [
-    {
-      name: "Acme Inc",
-      logo: Command,
-      plan: "Enterprise",
-    },
-    {
-      name: "Acme Corp.",
-      logo: AudioWaveform,
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
-      logo: Command,
-      plan: "Free",
-    },
-  ],
   navMain: [
     {
       title: "Search",
@@ -223,17 +205,28 @@ const data = {
   ],
 };
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({
+  user,
+  ...props
+}: React.ComponentProps<typeof Sidebar> & {
+  user: { name: string; email: string; image?: string | null; id: string };
+}) {
   return (
     <Sidebar className="border-r-0" {...props}>
       <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
+        <Link href={"/overview"}>
+          <BrandLogo className="mt-4 mb-4 ml-1 h-fit w-32" />
+        </Link>
         <NavMain items={data.navMain} />
       </SidebarHeader>
-      <SidebarContent>
-        <NavFavorites favorites={data.favorites} />
+      <SidebarContent className="py-8">
         <NavWorkspaces workspaces={data.workspaces} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
+        <div className="px-4">
+          <SidebarSeparator />
+        </div>
+        <div className="mt-auto space-y-2 px-4">
+          <UserDisplay user={user} />
+        </div>
       </SidebarContent>
       <SidebarRail />
     </Sidebar>

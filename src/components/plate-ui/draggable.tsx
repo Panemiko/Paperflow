@@ -236,7 +236,7 @@ const DragHandle = React.memo(() => {
           .blockSelection.set(element.id as string);
       }}
       data-plate-prevent-deselect
-      tooltip="Drag to move"
+      tooltip="Segure para mover"
     >
       <GripVertical className="text-muted-foreground" />
     </TooltipButton>
