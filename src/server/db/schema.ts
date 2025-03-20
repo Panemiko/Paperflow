@@ -166,7 +166,7 @@ export const decoupledBranch = createTable("decoupled_branches", {
   updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
     () => new Date(),
   ),
-  user: varchar("user", { length: 256 })
+  userId: varchar("user_id", { length: 256 })
     .notNull()
     .references(() => users.id),
   branchId: varchar("branch_id", { length: 256 })

@@ -1,16 +1,29 @@
-import type { FileRouter } from 'uploadthing/next';
+import { auth } from "@/lib/auth";
+import type { FileRouter } from "uploadthing/next";
 
-import { createRouteHandler, createUploadthing } from 'uploadthing/next';
+import { createRouteHandler, createUploadthing } from "uploadthing/next";
+import { UploadThingError } from "uploadthing/server";
 
 const f = createUploadthing();
 
 const ourFileRouter = {
-  editorUploader: f(['image', 'text', 'blob', 'pdf', 'video', 'audio'])
-    .middleware(() => {
-      return {};
+  editorUploader: f({
+    image: {
+      maxFileCount: 1,
+      maxFileSize: "16MB",
+    },
+  })
+    .middleware(async ({ req }) => {
+      const authentication = await auth.api.getSession({
+        headers: req.headers,
+      });
+
+      if (!authentication?.user) throw new UploadThingError("Unauthorized");
+
+      return { userId: authentication.user.id };
     })
-    .onUploadComplete(({ file }) => {
-      return { file };
+    .onUploadComplete(({ file, metadata }) => {
+      return { file, uploadedBy: metadata.userId };
     }),
 } satisfies FileRouter;
 
