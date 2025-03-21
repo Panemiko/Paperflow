@@ -30,6 +30,7 @@ export const createTRPCContext = async (opts: { headers: Headers }) => {
 
   return {
     db,
+    dbSchema: db._.schema!,
     auth: authentication,
     ...opts,
   };
@@ -105,7 +106,12 @@ const authMiddleware = t.middleware(async ({ next, ctx }) => {
     throw new TRPCError({ code: "UNAUTHORIZED" });
   }
 
-  return next();
+  return next({
+    ctx: {
+      ...ctx,
+      auth: ctx.auth,
+    },
+  });
 });
 
 /**

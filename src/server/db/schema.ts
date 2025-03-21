@@ -114,6 +114,14 @@ export const papers = createTable("papers", {
   updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
     () => new Date(),
   ),
+  title: text("title").notNull(),
+  description: text("description").notNull(),
+  createdByUserId: varchar("created_by_user_id", { length: 256 }).references(
+    () => users.id,
+  ),
+  mainBranchId: varchar("main_branch_id", { length: 256 }).references(
+    (): AnyPgColumn => branches.id,
+  ),
 });
 
 export const branches = createTable("branches", {
@@ -127,8 +135,13 @@ export const branches = createTable("branches", {
   updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
     () => new Date(),
   ),
-  ownerId: varchar("owner_id", { length: 256 }).references(() => users.id),
-  paperId: varchar("paper_id", { length: 256 }).references(() => papers.id),
+  name: text("name").notNull(),
+  ownerId: varchar("owner_id", { length: 256 })
+    .notNull()
+    .references(() => users.id),
+  paperId: varchar("paper_id", { length: 256 })
+    .notNull()
+    .references(() => papers.id),
   content: json("content").notNull(),
 });
 
@@ -140,11 +153,13 @@ export const snapshots = createTable("snapshots", {
   createdAt: timestamp("created_at", { withTimezone: true })
     .default(sql`CURRENT_TIMESTAMP`)
     .notNull(),
-  madeByUserId: varchar("made_by_user_id", { length: 256 }).references(
-    () => users.id,
-  ),
+  madeByUserId: varchar("made_by_user_id", { length: 256 })
+    .notNull()
+    .references(() => users.id),
   changes: json("changes").notNull(),
-  branchId: varchar("branch_id", { length: 256 }).references(() => branches.id),
+  branchId: varchar("branch_id", { length: 256 })
+    .notNull()
+    .references(() => branches.id),
   name: varchar("name", { length: 256 }).notNull(),
   description: varchar("description", { length: 2048 }).notNull(),
   parentSnapshotId: varchar("parent_snapshot_id", { length: 256 }).references(

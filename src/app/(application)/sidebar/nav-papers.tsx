@@ -1,10 +1,10 @@
-import { ChevronRight, MoreHorizontal, Plus } from "lucide-react"
+import { ChevronRight, Plus, PlusIcon } from "lucide-react";
 
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/components/ui/collapsible"
+} from "@/components/ui/collapsible";
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -16,33 +16,34 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
+import Link from "next/link";
 
-export function NavWorkspaces({
+export function NavPapers({
   workspaces,
 }: {
   workspaces: {
-    name: string
-    emoji: React.ReactNode
+    name: string;
+    emoji: React.ReactNode;
     pages: {
-      name: string
-      emoji: React.ReactNode
-    }[]
-  }[]
+      name: string;
+      emoji: React.ReactNode;
+    }[];
+  }[];
 }) {
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Workspaces</SidebarGroupLabel>
+      <SidebarGroupLabel>Artigos</SidebarGroupLabel>
       <SidebarGroupContent>
         <SidebarMenu>
           {workspaces.map((workspace) => (
             <Collapsible key={workspace.name}>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <a href="#">
+                  <Link href="#">
                     <span>{workspace.emoji}</span>
                     <span>{workspace.name}</span>
-                  </a>
+                  </Link>
                 </SidebarMenuButton>
                 <CollapsibleTrigger asChild>
                   <SidebarMenuAction
@@ -73,13 +74,15 @@ export function NavWorkspaces({
             </Collapsible>
           ))}
           <SidebarMenuItem>
-            <SidebarMenuButton className="text-sidebar-foreground/70">
-              <MoreHorizontal />
-              <span>More</span>
+            <SidebarMenuButton asChild className="text-sidebar-foreground/70">
+              <Link href="/paper/new">
+                <PlusIcon />
+                <span>Adicionar novo</span>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarGroupContent>
     </SidebarGroup>
-  )
+  );
 }

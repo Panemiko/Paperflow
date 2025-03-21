@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/sidebar";
 import Link from "next/link";
 import { NavMain } from "./nav-main";
-import { NavWorkspaces } from "./nav-workspaces";
+import { NavPapers } from "./nav-papers";
 import { UserDisplay } from "./user-display";
 
 export function AppSidebar({
@@ -71,7 +71,7 @@ export function AppSidebar({
         />
       </SidebarHeader>
       <SidebarContent className="py-8">
-        <NavWorkspaces workspaces={data.workspaces} />
+        <NavPapers workspaces={data.workspaces} />
         <div className="px-4">
           <SidebarSeparator />
         </div>
