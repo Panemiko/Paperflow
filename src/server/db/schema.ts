@@ -2,7 +2,7 @@
 // https://orm.drizzle.team/docs/sql-schema-declaration
 
 import { createId } from "@paralleldrive/cuid2";
-import { sql } from "drizzle-orm";
+import { relations, sql } from "drizzle-orm";
 import {
   type AnyPgColumn,
   boolean,
@@ -143,6 +143,7 @@ export const branches = createTable("branches", {
     .notNull()
     .references(() => papers.id),
   content: json("content").notNull(),
+  isEditable: boolean("is_editable").notNull(),
 });
 
 export const snapshots = createTable("snapshots", {
@@ -188,3 +189,116 @@ export const decoupledBranch = createTable("decoupled_branches", {
     .notNull()
     .references(() => branches.id),
 });
+
+// Define relations for users table
+export const usersRelations = relations(users, ({ many, one }) => ({
+  sessions: many(sessions, { relationName: "user_sessions" }),
+  accounts: many(accounts, { relationName: "user_accounts" }),
+  papers: many(papers, { relationName: "created_papers" }),
+  branches: many(branches, { relationName: "owned_branches" }),
+  snapshots: many(snapshots, { relationName: "created_snapshots" }),
+  decoupledBranches: many(decoupledBranch, {
+    relationName: "user_decoupled_branches",
+  }),
+}));
+
+// Define relations for sessions table
+export const sessionsRelations = relations(sessions, ({ one }) => ({
+  user: one(users, {
+    fields: [sessions.userId],
+    references: [users.id],
+    relationName: "user_sessions",
+  }),
+}));
+
+// Define relations for accounts table
+export const accountsRelations = relations(accounts, ({ one }) => ({
+  user: one(users, {
+    fields: [accounts.userId],
+    references: [users.id],
+    relationName: "user_accounts",
+  }),
+}));
+
+// Define relations for papers table
+export const papersRelations = relations(papers, ({ one, many }) => ({
+  createdBy: one(users, {
+    fields: [papers.createdByUserId],
+    references: [users.id],
+    relationName: "created_papers",
+  }),
+  mainBranch: one(branches, {
+    fields: [papers.mainBranchId],
+    references: [branches.id],
+    relationName: "paper_main_branch",
+  }),
+  branches: many(branches, {
+    relationName: "paper_branches",
+  }),
+}));
+
+// Define relations for branches table
+export const branchesRelations = relations(branches, ({ one, many }) => ({
+  paper: one(papers, {
+    fields: [branches.paperId],
+    references: [papers.id],
+    relationName: "paper_branches",
+  }),
+  owner: one(users, {
+    fields: [branches.ownerId],
+    references: [users.id],
+    relationName: "owned_branches",
+  }),
+  snapshots: many(snapshots, { relationName: "branch_snapshots" }),
+  decoupledBranches: many(decoupledBranch, {
+    relationName: "branch_decoupled",
+  }),
+  mainBranchForPaper: one(papers, {
+    fields: [branches.id],
+    references: [papers.mainBranchId],
+    relationName: "paper_main_branch",
+  }),
+}));
+
+// Define relations for snapshots table
+export const snapshotsRelations = relations(snapshots, ({ one, many }) => ({
+  branch: one(branches, {
+    fields: [snapshots.branchId],
+    references: [branches.id],
+    relationName: "branch_snapshots",
+  }),
+  madeBy: one(users, {
+    fields: [snapshots.madeByUserId],
+    references: [users.id],
+    relationName: "created_snapshots",
+  }),
+  parentSnapshot: one(snapshots, {
+    fields: [snapshots.parentSnapshotId],
+    references: [snapshots.id],
+    relationName: "child_snapshots",
+  }),
+  parentSnapshot2: one(snapshots, {
+    fields: [snapshots.parentSnapshotId2],
+    references: [snapshots.id],
+    relationName: "child_snapshots2",
+  }),
+  childSnapshots: many(snapshots, { relationName: "child_snapshots" }),
+  childSnapshots2: many(snapshots, { relationName: "child_snapshots2" }),
+}));
+
+// Define relations for decoupled branches table
+export const decoupledBranchRelations = relations(
+  decoupledBranch,
+  ({ one }) => ({
+    user: one(users, {
+      fields: [decoupledBranch.userId],
+      references: [users.id],
+      relationName: "user_decoupled_branches",
+    }),
+    branch: one(branches, {
+      fields: [decoupledBranch.branchId],
+      references: [branches.id],
+      relationName: "branch_decoupled",
+    }),
+  }),
+);

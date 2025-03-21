@@ -1,6 +1,8 @@
 import { branchSchema, paperSchema, userSchema } from "@/lib/schema";
+import { tryCatch } from "@/lib/utils";
 import { branches, papers, snapshots } from "@/server/db/schema";
-import { eq } from "drizzle-orm";
+import { TRPCError } from "@trpc/server";
+import { desc, eq } from "drizzle-orm";
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 
@@ -83,6 +85,7 @@ export const paperRouter = createTRPCRouter({
             name: input.mainBranch.name,
             ownerId: ctx.auth.user.id,
             paperId: createdPaper.id,
+            isEditable: false,
           })
           .returning();
 
@@ -115,4 +118,37 @@ export const paperRouter = createTRPCRouter({
         paperId,
       };
     }),
+  list: protectedProcedure.query(async ({ ctx }) => {
+    const [userPapers, error] = await tryCatch(
+      ctx.db.query.papers.findMany({
+        where: eq(papers.createdByUserId, ctx.auth.user.id),
+        orderBy: desc(papers.createdAt),
+        with: {
+          mainBranch: {
+            columns: {
+              id: true,
+              name: true,
+            },
+          },
+          branches: {
+            columns: {
+              id: true,
+              name: true,
+            },
+          },
+        },
+        limit: 10,
+        columns: {
+          id: true,
+          title: true,
+        },
+      }),
+    );
+
+    if (error) {
+      throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+    }
+
+    return userPapers;
+  }),
 });

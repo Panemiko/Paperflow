@@ -1,35 +1,43 @@
-"use client"
+"use client";
 
-import { type LucideIcon } from "lucide-react"
+import { HomeIcon, InboxIcon } from "lucide-react";
 
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-export function NavMain({
-  items,
-}: {
-  items: {
-    title: string
-    url: string
-    icon: LucideIcon
-    isActive?: boolean
-  }[]
-}) {
+export function NavMain() {
+  const pathname = usePathname();
+
+  const items = [
+    {
+      title: "Início",
+      url: "/overview",
+      icon: HomeIcon,
+    },
+    {
+      title: "Notificações",
+      url: "/notifications",
+      icon: InboxIcon,
+    },
+  ];
+
   return (
     <SidebarMenu>
       {items.map((item) => (
         <SidebarMenuItem key={item.title}>
-          <SidebarMenuButton asChild isActive={item.isActive}>
-            <a href={item.url}>
+          <SidebarMenuButton asChild isActive={item.url === pathname}>
+            <Link href={item.url}>
               <item.icon />
               <span>{item.title}</span>
-            </a>
+            </Link>
           </SidebarMenuButton>
         </SidebarMenuItem>
       ))}
     </SidebarMenu>
-  )
+  );
 }

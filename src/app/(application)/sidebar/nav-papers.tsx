@@ -1,4 +1,4 @@
-import { ChevronRight, Plus, PlusIcon } from "lucide-react";
+import { ChevronRight, PlusIcon } from "lucide-react";
 
 import {
   Collapsible,
@@ -17,57 +17,74 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
+import { tryCatch } from "@/lib/utils";
+import { api } from "@/trpc/server";
 import Link from "next/link";
 
-export function NavPapers({
-  workspaces,
-}: {
-  workspaces: {
-    name: string;
-    emoji: React.ReactNode;
-    pages: {
-      name: string;
-      emoji: React.ReactNode;
-    }[];
-  }[];
-}) {
+export async function NavPapers() {
+  const [papers, error] = await tryCatch(api.paper.list());
+
+  if (error) {
+    return (
+      <span className="text-foreground/70 text-xs">
+        Houve um erro ao carregar os seus artigos
+      </span>
+    );
+  }
+
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Artigos</SidebarGroupLabel>
       <SidebarGroupContent>
         <SidebarMenu>
-          {workspaces.map((workspace) => (
-            <Collapsible key={workspace.name}>
+          {papers.map((paper, index) => (
+            <Collapsible key={index} defaultOpen={true}>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <Link href="#">
-                    <span>{workspace.emoji}</span>
-                    <span>{workspace.name}</span>
+                  <Link href={`/paper/${paper.id}`} title={paper.title}>
+                    <span className="truncate">{paper.title}</span>
                   </Link>
                 </SidebarMenuButton>
                 <CollapsibleTrigger asChild>
                   <SidebarMenuAction
-                    className="bg-sidebar-accent text-sidebar-accent-foreground left-2 data-[state=open]:rotate-90"
+                    className="data-[state=open]:rotate-90"
                     showOnHover
                   >
                     <ChevronRight />
                   </SidebarMenuAction>
                 </CollapsibleTrigger>
-                <SidebarMenuAction showOnHover>
-                  <Plus />
-                </SidebarMenuAction>
+
                 <CollapsibleContent>
                   <SidebarMenuSub>
-                    {workspace.pages.map((page) => (
-                      <SidebarMenuSubItem key={page.name}>
-                        <SidebarMenuSubButton asChild>
-                          <a href="#">
-                            <span>{page.emoji}</span>
-                            <span>{page.name}</span>
-                          </a>
-                        </SidebarMenuSubButton>
-                      </SidebarMenuSubItem>
-                    ))}
+                    <SidebarMenuSubItem key={index}>
+                      <SidebarMenuSubButton
+                        className="bg-primary/10 hover:bg-primary/30 rounded-lg transition-colors"
+                        asChild
+                      >
+                        <Link
+                          href={`/paper/${paper.id}`}
+                          className="flex items-center"
+                        >
+                          <span>{paper.mainBranch?.name}</span>
+                          <span className="text-primary ml-auto text-xs">
+                            principal
+                          </span>
+                        </Link>
+                      </SidebarMenuSubButton>
+                    </SidebarMenuSubItem>
+                    {paper.branches
+                      .filter((branch) => branch.id !== paper.mainBranch?.id)
+                      .map((branch, index) => (
+                        <SidebarMenuSubItem key={index}>
+                          <SidebarMenuSubButton asChild>
+                            <Link
+                              href={`/paper/${paper.id}/branch/${branch.id}`}
+                            >
+                              <span>{branch.name}</span>
+                            </Link>
+                          </SidebarMenuSubButton>
+                        </SidebarMenuSubItem>
+                      ))}
                   </SidebarMenuSub>
                 </CollapsibleContent>
               </SidebarMenuItem>

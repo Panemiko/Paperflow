@@ -1,6 +1,3 @@
-"use client";
-
-import { Home, Inbox } from "lucide-react";
 import * as React from "react";
 
 import { BrandLogo } from "@/components/brand/logo";
@@ -22,56 +19,16 @@ export function AppSidebar({
 }: React.ComponentProps<typeof Sidebar> & {
   user: { name: string; email: string; image?: string | null; id: string };
 }) {
-  const data = {
-    navMain: [],
-    workspaces: [
-      {
-        name: "Personal Life Management",
-        emoji: "🏠",
-        pages: [
-          {
-            name: "Daily Journal & Reflection",
-            url: "#",
-            emoji: "📔",
-          },
-          {
-            name: "Health & Wellness Tracker",
-            url: "#",
-            emoji: "🍏",
-          },
-          {
-            name: "Personal Growth & Learning Goals",
-            url: "#",
-            emoji: "🌟",
-          },
-        ],
-      },
-    ],
-  };
-
   return (
     <Sidebar className="border-r-0" {...props}>
       <SidebarHeader>
         <Link href={"/overview"}>
           <BrandLogo className="mt-4 mb-4 ml-1 h-fit w-32" />
         </Link>
-        <NavMain
-          items={[
-            {
-              title: "Início",
-              url: "/overview",
-              icon: Home,
-            },
-            {
-              title: "Notificações",
-              url: "/notifications",
-              icon: Inbox,
-            },
-          ]}
-        />
+        <NavMain />
       </SidebarHeader>
       <SidebarContent className="py-8">
-        <NavPapers workspaces={data.workspaces} />
+        <NavPapers />
         <div className="px-4">
           <SidebarSeparator />
         </div>

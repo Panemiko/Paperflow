@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+export const idSchema = z.string().cuid2().min(1);
+
 export const userSchema = z.object({
   email: z.string().trim().email().min(1).max(255),
 });
