@@ -9,7 +9,6 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Fragment, type ReactNode } from "react";
-import { NavActions } from "./sidebar/nav-actions";
 
 export function Frame({
   children,
@@ -52,7 +51,7 @@ export function Frame({
             </Breadcrumb>
           )}
         </div>
-        <div className="ml-auto px-3">{actions && <NavActions />}</div>
+        <div className="ml-auto px-3">{actions}</div>
       </header>
       {children}
     </div>

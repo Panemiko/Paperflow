@@ -1,11 +1,12 @@
 import { DocumentViewer } from "@/components/editor/document-viewer";
 import { idSchema } from "@/lib/schema";
-import { tryCatch } from "@/lib/utils";
+import { truncateText, tryCatch } from "@/lib/utils";
 import { api } from "@/trpc/server";
 import { type Value } from "@udecode/plate";
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Frame } from "../../frame";
+import { PaperActions } from "./actions";
 
 export async function generateMetadata({
   params,
@@ -54,9 +55,10 @@ export default async function Page({
     <Frame
       breadcrumbItems={[
         { name: "Artigos" },
-        { name: paper.title },
+        { name: truncateText(paper.title, 40) },
         { name: mainBranch.name },
       ]}
+      actions={<PaperActions />}
     >
       <DocumentViewer content={mainBranch.content as Value} />
     </Frame>

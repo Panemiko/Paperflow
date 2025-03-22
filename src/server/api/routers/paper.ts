@@ -37,7 +37,7 @@ async function generateDefaultPaperContent(title: string, userName: string) {
     {
       type: "p",
       lineHeight: "1.2",
-      align: "justify",
+      align: "center",
       children: [
         {
           text: "Para editar esse texto, crie uma ramificação no canto superior direito da tela.",
