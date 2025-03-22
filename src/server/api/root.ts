@@ -1,3 +1,4 @@
+import { branchRouter } from "@/server/api/routers/branch";
 import { paperRouter } from "@/server/api/routers/paper";
 import { createCallerFactory, createTRPCRouter } from "@/server/api/trpc";
 
@@ -8,6 +9,7 @@ import { createCallerFactory, createTRPCRouter } from "@/server/api/trpc";
  */
 export const appRouter = createTRPCRouter({
   paper: paperRouter,
+  branch: branchRouter,
 });
 
 // export type definition of API

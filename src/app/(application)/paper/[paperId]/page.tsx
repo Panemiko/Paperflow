@@ -1,38 +1,64 @@
-import { MaxWidth } from "@/components/max-width";
+import { DocumentViewer } from "@/components/editor/document-viewer";
 import { idSchema } from "@/lib/schema";
 import { tryCatch } from "@/lib/utils";
+import { api } from "@/trpc/server";
+import { type Value } from "@udecode/plate";
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Frame } from "../../frame";
 
-export const metadata: Metadata = {
-  title: "New Paper",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ paperId: string }>;
+}): Promise<Metadata> {
+  const [paper, paperError] = await tryCatch(
+    api.paper.byId({
+      paperId: (await params).paperId,
+    }),
+  );
+
+  if (paperError) {
+    return notFound();
+  }
+
+  return {
+    title: paper.title,
+    description: "Visualize o conteúdo de um artigo",
+  };
+}
 
 export default async function Page({
   params,
 }: {
   params: Promise<{ paperId: string }>;
 }) {
-  const [paperId, error] = await tryCatch(
+  const [paperId, paramsError] = await tryCatch(
     idSchema.parseAsync((await params).paperId),
   );
 
-  if (error) {
+  if (paramsError) {
+    return notFound();
+  }
+
+  const [paper, paperError] = await tryCatch(api.paper.byId({ paperId }));
+  const [mainBranch, mainBranchError] = await tryCatch(
+    api.branch.getMainBranchFromPaper({ paperId }),
+  );
+
+  if (paperError || mainBranchError) {
     return notFound();
   }
 
   return (
-    <Frame breadcrumbItems={[{ name: "Artigos" }, { name: "Novo artigo" }]}>
-      <MaxWidth className="px-14 py-20">
-        <div className="mb-10">
-          <h1 className="mb-4 text-4xl font-bold">Novo artigo</h1>
-          <p className="text-foreground/70 max-w-prose">
-            Aqui você pode criar um novo artigo e compartilhar com o mundo.
-          </p>
-        </div>
-        <div></div>
-      </MaxWidth>
+    <Frame
+      breadcrumbItems={[
+        { name: "Artigos" },
+        { name: paper.title },
+        { name: mainBranch.name },
+      ]}
+    >
+      <DocumentViewer content={mainBranch.content as Value} />
     </Frame>
   );
 }

@@ -1,4 +1,4 @@
-import { branchSchema, paperSchema, userSchema } from "@/lib/schema";
+import { branchSchema, idSchema, paperSchema, userSchema } from "@/lib/schema";
 import { tryCatch } from "@/lib/utils";
 import { branches, papers, snapshots } from "@/server/db/schema";
 import { TRPCError } from "@trpc/server";
@@ -151,4 +151,20 @@ export const paperRouter = createTRPCRouter({
 
     return userPapers;
   }),
+
+  byId: protectedProcedure
+    .input(z.object({ paperId: idSchema }))
+    .query(async ({ ctx, input }) => {
+      const [paper, error] = await tryCatch(
+        ctx.db.query.papers.findFirst({
+          where: eq(papers.id, input.paperId),
+        }),
+      );
+
+      if (error || !paper) {
+        throw new TRPCError({ code: "NOT_FOUND" });
+      }
+
+      return paper;
+    }),
 });

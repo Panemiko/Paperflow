@@ -1,3 +1,4 @@
+import { env } from "@/env";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -19,6 +20,10 @@ export async function tryCatch<T, E = Error>(
     const data = await promise;
     return [data, null];
   } catch (error) {
+    if (env.NODE_ENV !== "production") {
+      console.error(error);
+    }
+
     return [null, error as E];
   }
 }
