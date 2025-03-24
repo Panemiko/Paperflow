@@ -1,7 +1,9 @@
+import { PlateEditor } from "@/components/editor/plate-editor";
 import { Frame } from "@/components/frame";
 import { idSchema } from "@/lib/schema";
 import { truncateText, tryCatch } from "@/lib/utils";
 import { api } from "@/trpc/server";
+import { type Value } from "@udecode/plate";
 import { notFound } from "next/navigation";
 
 export default async function Page({
@@ -22,11 +24,9 @@ export default async function Page({
   const [paperId, branchId] = ids as [string, string];
 
   const [paper, paperError] = await tryCatch(api.paper.byId({ paperId }));
-  const [mainBranch, mainBranchError] = await tryCatch(
-    api.branch.getMainBranchFromPaper({ paperId }),
-  );
+  const [branch, branchError] = await tryCatch(api.branch.byId({ branchId }));
 
-  if (paperError || mainBranchError) {
+  if (paperError || branchError || branch.paperId !== paper.id) {
     return notFound();
   }
 
@@ -35,10 +35,10 @@ export default async function Page({
       breadcrumbItems={[
         { name: "Artigos" },
         { name: truncateText(paper.title, 40), href: `/paper/${paperId}` },
-        { name: mainBranch.name },
+        { name: branch.name },
       ]}
     >
-      <div></div>
+      <PlateEditor defaultContent={branch.content as Value} />
     </Frame>
   );
 }

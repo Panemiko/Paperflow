@@ -48,9 +48,7 @@ export function NewBranchForm({ branchId }: { branchId: string }) {
       return;
     }
 
-    redirect(
-      `/paper/${branchResult.paperId}/branch/${branchResult.createdBranchId}`,
-    );
+    redirect(`/paper/${branchResult.paperId}/${branchResult.createdBranchId}`);
   }
 
   return (
