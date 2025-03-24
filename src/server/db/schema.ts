@@ -4,7 +4,6 @@
 import { createId } from "@paralleldrive/cuid2";
 import { relations, sql } from "drizzle-orm";
 import {
-  type AnyPgColumn,
   boolean,
   json,
   pgTableCreator,
@@ -115,13 +114,9 @@ export const papers = createTable("papers", {
     () => new Date(),
   ),
   title: text("title").notNull(),
-  description: text("description").notNull(),
-  createdByUserId: varchar("created_by_user_id", { length: 256 }).references(
-    () => users.id,
-  ),
-  mainBranchId: varchar("main_branch_id", { length: 256 }).references(
-    (): AnyPgColumn => branches.id,
-  ),
+  description: text("description"),
+  createdByUserId: varchar("created_by_user_id", { length: 256 }),
+  mainBranchId: varchar("main_branch_id", { length: 256 }),
 });
 
 export const branches = createTable("branches", {
@@ -136,17 +131,14 @@ export const branches = createTable("branches", {
     () => new Date(),
   ),
   name: text("name").notNull(),
-  ownerId: varchar("owner_id", { length: 256 })
-    .notNull()
-    .references(() => users.id),
-  paperId: varchar("paper_id", { length: 256 })
-    .notNull()
-    .references(() => papers.id),
   content: json("content").notNull(),
   isEditable: boolean("is_editable").notNull(),
+  ownerId: varchar("owner_id", { length: 256 }).notNull(),
+  paperId: varchar("paper_id", { length: 256 }).notNull(),
+  referencesCommitId: varchar("last_commit_id", { length: 256 }),
 });
 
-export const snapshots = createTable("snapshots", {
+export const commits = createTable("commits", {
   id: varchar("id", { length: 256 })
     .primaryKey()
     .unique()
@@ -154,21 +146,12 @@ export const snapshots = createTable("snapshots", {
   createdAt: timestamp("created_at", { withTimezone: true })
     .default(sql`CURRENT_TIMESTAMP`)
     .notNull(),
-  madeByUserId: varchar("made_by_user_id", { length: 256 })
-    .notNull()
-    .references(() => users.id),
-  changes: json("changes").notNull(),
-  branchId: varchar("branch_id", { length: 256 })
-    .notNull()
-    .references(() => branches.id),
   name: varchar("name", { length: 256 }).notNull(),
   description: varchar("description", { length: 2048 }).notNull(),
-  parentSnapshotId: varchar("parent_snapshot_id", { length: 256 }).references(
-    (): AnyPgColumn => snapshots.id,
-  ),
-  parentSnapshotId2: varchar("parent_snapshot_id_2", {
-    length: 256,
-  }).references((): AnyPgColumn => snapshots.id),
+  changes: json("changes").notNull(),
+  madeByUserId: varchar("made_by_user_id", { length: 256 }).notNull(),
+  previousCommitId: varchar("previous_commit_id", { length: 256 }),
+  mergeCommitId: varchar("merge_commit_id", { length: 256 }),
 });
 
 export const decoupledBranch = createTable("decoupled_branches", {
@@ -182,123 +165,106 @@ export const decoupledBranch = createTable("decoupled_branches", {
   updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
     () => new Date(),
   ),
-  userId: varchar("user_id", { length: 256 })
-    .notNull()
-    .references(() => users.id),
-  branchId: varchar("branch_id", { length: 256 })
-    .notNull()
-    .references(() => branches.id),
+  content: json("content").notNull(),
+  userId: varchar("user_id", { length: 256 }).notNull(),
+  branchId: varchar("branch_id", { length: 256 }).notNull(),
 });
 
-// Define relations for users table
-export const usersRelations = relations(users, ({ many, one }) => ({
-  sessions: many(sessions, { relationName: "user_sessions" }),
-  accounts: many(accounts, { relationName: "user_accounts" }),
-  papers: many(papers, { relationName: "created_papers" }),
-  branches: many(branches, { relationName: "owned_branches" }),
-  snapshots: many(snapshots, { relationName: "created_snapshots" }),
-  decoupledBranches: many(decoupledBranch, {
-    relationName: "user_decoupled_branches",
-  }),
+// Define relations after all tables are defined
+export const usersRelations = relations(users, ({ many }) => ({
+  sessions: many(sessions),
+  accounts: many(accounts),
+  createdPapers: many(papers, { relationName: "creator" }),
+  ownedBranches: many(branches, { relationName: "owner" }),
+  createdCommits: many(commits, { relationName: "author" }),
+  decoupledBranches: many(decoupledBranch, { relationName: "decoupledUser" }),
 }));
 
-// Define relations for sessions table
 export const sessionsRelations = relations(sessions, ({ one }) => ({
   user: one(users, {
     fields: [sessions.userId],
     references: [users.id],
-    relationName: "user_sessions",
   }),
 }));
 
-// Define relations for accounts table
 export const accountsRelations = relations(accounts, ({ one }) => ({
   user: one(users, {
     fields: [accounts.userId],
     references: [users.id],
-    relationName: "user_accounts",
   }),
 }));
 
-// Define relations for papers table
 export const papersRelations = relations(papers, ({ one, many }) => ({
-  createdBy: one(users, {
+  creator: one(users, {
     fields: [papers.createdByUserId],
     references: [users.id],
-    relationName: "created_papers",
+    relationName: "creator",
   }),
   mainBranch: one(branches, {
     fields: [papers.mainBranchId],
     references: [branches.id],
-    relationName: "paper_main_branch",
+    relationName: "mainBranchFor",
   }),
-  branches: many(branches, {
-    relationName: "paper_branches",
-  }),
+  branches: many(branches, { relationName: "paperBranches" }),
 }));
 
-// Define relations for branches table
 export const branchesRelations = relations(branches, ({ one, many }) => ({
   paper: one(papers, {
     fields: [branches.paperId],
     references: [papers.id],
-    relationName: "paper_branches",
+    relationName: "paperBranches",
   }),
   owner: one(users, {
     fields: [branches.ownerId],
     references: [users.id],
-    relationName: "owned_branches",
+    relationName: "owner",
   }),
-  snapshots: many(snapshots, { relationName: "branch_snapshots" }),
-  decoupledBranches: many(decoupledBranch, {
-    relationName: "branch_decoupled",
-  }),
-  mainBranchForPaper: one(papers, {
+  mainBranchFor: one(papers, {
     fields: [branches.id],
     references: [papers.mainBranchId],
-    relationName: "paper_main_branch",
+    relationName: "mainBranchFor",
   }),
+  referencedCommit: one(commits, {
+    fields: [branches.referencesCommitId],
+    references: [commits.id],
+    relationName: "referencingBranches",
+  }),
+  decoupled: many(decoupledBranch, { relationName: "originalBranch" }),
 }));
 
-// Define relations for snapshots table
-export const snapshotsRelations = relations(snapshots, ({ one, many }) => ({
-  branch: one(branches, {
-    fields: [snapshots.branchId],
-    references: [branches.id],
-    relationName: "branch_snapshots",
-  }),
-  madeBy: one(users, {
-    fields: [snapshots.madeByUserId],
+export const commitsRelations = relations(commits, ({ one, many }) => ({
+  author: one(users, {
+    fields: [commits.madeByUserId],
     references: [users.id],
-    relationName: "created_snapshots",
+    relationName: "author",
   }),
-  parentSnapshot: one(snapshots, {
-    fields: [snapshots.parentSnapshotId],
-    references: [snapshots.id],
-    relationName: "child_snapshots",
+  previousCommit: one(commits, {
+    fields: [commits.previousCommitId],
+    references: [commits.id],
+    relationName: "nextCommit",
   }),
-  parentSnapshot2: one(snapshots, {
-    fields: [snapshots.parentSnapshotId2],
-    references: [snapshots.id],
-    relationName: "child_snapshots2",
+  nextCommit: many(commits, { relationName: "nextCommit" }),
+  mergeCommit: one(commits, {
+    fields: [commits.mergeCommitId],
+    references: [commits.id],
+    relationName: "mergedFrom",
   }),
-  childSnapshots: many(snapshots, { relationName: "child_snapshots" }),
-  childSnapshots2: many(snapshots, { relationName: "child_snapshots2" }),
+  mergedFrom: many(commits, { relationName: "mergedFrom" }),
+  referencingBranches: many(branches, { relationName: "referencingBranches" }),
 }));
 
-// Define relations for decoupled branches table
 export const decoupledBranchRelations = relations(
   decoupledBranch,
   ({ one }) => ({
-    user: one(users, {
+    decoupledUser: one(users, {
       fields: [decoupledBranch.userId],
       references: [users.id],
-      relationName: "user_decoupled_branches",
+      relationName: "decoupledUser",
     }),
-    branch: one(branches, {
+    originalBranch: one(branches, {
       fields: [decoupledBranch.branchId],
       references: [branches.id],
-      relationName: "branch_decoupled",
+      relationName: "originalBranch",
     }),
   }),
 );

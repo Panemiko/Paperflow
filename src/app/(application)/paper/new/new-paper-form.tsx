@@ -22,12 +22,10 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-const formSchema = paperSchema.pick({ title: true, description: true }).merge(
-  z.object({
-    mainBranch: branchSchema.pick({ name: true }),
-    invitedUsersEmail: z.string(),
-  }),
-);
+const formSchema = paperSchema.pick({ title: true, description: true }).extend({
+  mainBranch: branchSchema.pick({ name: true }),
+  invitedUsersEmail: z.string(),
+});
 
 export function NewPaperForm() {
   const form = useForm<z.infer<typeof formSchema>>({

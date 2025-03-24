@@ -1,6 +1,6 @@
 import { MaxWidth } from "@/components/max-width";
 import { type Metadata } from "next";
-import { Frame } from "../../frame";
+import { Frame } from "../../../../components/frame";
 import { NewPaperForm } from "./new-paper-form";
 
 export const metadata: Metadata = {

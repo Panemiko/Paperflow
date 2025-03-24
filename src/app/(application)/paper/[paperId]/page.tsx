@@ -1,11 +1,11 @@
 import { DocumentViewer } from "@/components/editor/document-viewer";
+import { Frame } from "@/components/frame";
 import { idSchema } from "@/lib/schema";
 import { truncateText, tryCatch } from "@/lib/utils";
 import { api } from "@/trpc/server";
 import { type Value } from "@udecode/plate";
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Frame } from "../../frame";
 import { PaperActions } from "./actions";
 
 export async function generateMetadata({
@@ -25,7 +25,7 @@ export async function generateMetadata({
 
   return {
     title: paper.title,
-    description: "Visualize o conteúdo de um artigo",
+    description: "Visualize o conteúdo de um artigo", 
   };
 }
 
@@ -58,7 +58,7 @@ export default async function Page({
         { name: truncateText(paper.title, 40) },
         { name: mainBranch.name },
       ]}
-      actions={<PaperActions />}
+      actions={<PaperActions branchId={mainBranch.id} />}
     >
       <DocumentViewer content={mainBranch.content as Value} />
     </Frame>

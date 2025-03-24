@@ -1,6 +1,6 @@
 import { branchSchema, idSchema, paperSchema, userSchema } from "@/lib/schema";
 import { tryCatch } from "@/lib/utils";
-import { branches, papers, snapshots } from "@/server/db/schema";
+import { branches, commits, papers } from "@/server/db/schema";
 import { TRPCError } from "@trpc/server";
 import { desc, eq } from "drizzle-orm";
 import { z } from "zod";
@@ -101,10 +101,9 @@ export const paperRouter = createTRPCRouter({
           })
           .where(eq(papers.id, createdPaper.id));
 
-        await tx.insert(snapshots).values({
+        await tx.insert(commits).values({
           name: "Conteúdo inicial",
           description: "Explicação básica de como usar o Paperflow.",
-          branchId: mainBranch.id,
           changes: defaultPaperContent,
           madeByUserId: ctx.auth.user.id,
         });

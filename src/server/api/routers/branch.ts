@@ -1,6 +1,6 @@
-import { idSchema } from "@/lib/schema";
+import { branchSchema, idSchema } from "@/lib/schema";
 import { tryCatch } from "@/lib/utils";
-import { papers } from "@/server/db/schema";
+import { branches, papers } from "@/server/db/schema";
 import { TRPCError } from "@trpc/server";
 import { eq } from "drizzle-orm";
 import { z } from "zod";
@@ -30,5 +30,45 @@ export const branchRouter = createTRPCRouter({
       }
 
       return paper.mainBranch;
+    }),
+  create: protectedProcedure
+    .input(
+      branchSchema.pick({ name: true }).extend({
+        basedOnBranchId: idSchema,
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const [branchBasedOn, branchQueryError] = await tryCatch(
+        ctx.db.query.branches.findFirst({
+          where: eq(branches.id, input.basedOnBranchId),
+        }),
+      );
+
+      if (branchQueryError || !branchBasedOn) {
+        throw new TRPCError({ code: "FORBIDDEN" });
+      }
+
+      const [createdBranch, branchCreationError] = await tryCatch(
+        ctx.db
+          .insert(branches)
+          .values({
+            name: input.name,
+            paperId: branchBasedOn.paperId,
+            ownerId: ctx.auth.user.id,
+            content: branchBasedOn.content,
+            referencesCommitId: branchBasedOn.referencesCommitId,
+            isEditable: true,
+          })
+          .returning(),
+      );
+
+      if (branchCreationError || !createdBranch[0]) {
+        throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      }
+
+      return {
+        createdBranchId: createdBranch[0].id,
+        paperId: createdBranch[0].paperId,
+      };
     }),
 });
