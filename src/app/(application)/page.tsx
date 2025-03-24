@@ -12,7 +12,7 @@ import { NavActions } from "./sidebar/nav-actions";
 export default function Page() {
   return (
     <div>
-      <header className="bg-background z-50 border-b border-border sticky top-0 flex h-10 shrink-0 items-center gap-2">
+      <header className="bg-background border-border sticky top-0 z-50 flex h-10 shrink-0 items-center gap-2 border-b">
         <div className="flex flex-1 items-center gap-2 px-3">
           <SidebarTrigger />
           <Separator

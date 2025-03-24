@@ -12,7 +12,11 @@ import {
 import { GitBranchIcon } from "lucide-react";
 import { NewBranchForm } from "./new-branch-form";
 
-export function PaperActions({ branchId }: { branchId: string }) {
+export function PaperActions({
+  workingBranch,
+}: {
+  workingBranch: { id: string; isMainBranch: boolean };
+}) {
   return (
     <div>
       <Dialog>
@@ -30,7 +34,7 @@ export function PaperActions({ branchId }: { branchId: string }) {
             </DialogDescription>
           </DialogHeader>
           <div>
-            <NewBranchForm branchId={branchId} />
+            <NewBranchForm branchId={workingBranch.id} />
           </div>
         </DialogContent>
       </Dialog>

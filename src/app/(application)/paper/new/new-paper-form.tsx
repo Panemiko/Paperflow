@@ -22,14 +22,17 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-const formSchema = paperSchema.pick({ title: true, description: true }).extend({
-  mainBranch: branchSchema.pick({ name: true }),
-  invitedUsersEmail: z.string(),
-});
+const formSchema = paperSchema
+  .pick({ title: true, description: true, slug: true })
+  .extend({
+    mainBranch: branchSchema.pick({ name: true }),
+    invitedUsersEmail: z.string(),
+  });
 
 export function NewPaperForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: {
+      slug: "",
       description: "",
       invitedUsersEmail: "",
       mainBranch: {
@@ -46,6 +49,7 @@ export function NewPaperForm() {
     const [result, error] = await tryCatch(
       createPaper({
         title: data.title,
+        slug: data.slug,
         description: data.description,
         invitedUsersEmail: [],
         mainBranch: data.mainBranch,
@@ -59,7 +63,7 @@ export function NewPaperForm() {
       return;
     }
 
-    redirect(`/paper/${result.paperId}`);
+    redirect(`/${result.paper.slug}/${result.branch.name}`);
   }
 
   return (
@@ -76,6 +80,24 @@ export function NewPaperForm() {
               </FormControl>
               <FormDescription>
                 Nome que identificará seu projeto no sistema.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="slug"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>URL do Projeto</FormLabel>
+              <FormControl>
+                <Input placeholder="meu-projeto" {...field} />
+              </FormControl>
+              <FormDescription>
+                Identificador único para acessar seu projeto (apenas letras,
+                números, hífens e underscores).
               </FormDescription>
               <FormMessage />
             </FormItem>

@@ -23,7 +23,7 @@ import { type z } from "zod";
 
 const formSchema = branchSchema.pick({ name: true });
 
-export function NewBranchForm({ branchId }: { branchId: string }) {
+export function NewBranchForm({ originBranchId }: { originBranchId: string }) {
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: {
       name: "",
@@ -34,21 +34,25 @@ export function NewBranchForm({ branchId }: { branchId: string }) {
   const { mutateAsync: createBranch } = api.branch.create.useMutation();
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
-    const [branchResult, error] = await tryCatch(
+    const [response, error] = await tryCatch(
       createBranch({
-        name: data.name,
-        basedOnBranchId: branchId,
+        data: {
+          name: data.name,
+        },
+        forkedFromBranchId: originBranchId,
       }),
     );
 
-    if (error) {
+    if (error || !response) {
       toast.error("Erro ao criar branch", {
         description: "Tente novamente mais tarde.",
       });
       return;
     }
 
-    redirect(`/paper/${branchResult.paperId}/${branchResult.createdBranchId}`);
+    redirect(
+      `${response.createdBranch.paper.slug}/${response.createdBranch.name}`,
+    );
   }
 
   return (

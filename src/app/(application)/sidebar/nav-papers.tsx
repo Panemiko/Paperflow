@@ -13,7 +13,7 @@ import {
   SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSub
+  SidebarMenuSub,
 } from "@/components/ui/sidebar";
 import { tryCatch } from "@/lib/utils";
 import { api } from "@/trpc/server";
@@ -57,16 +57,17 @@ export async function NavPapers() {
                   <CollapsibleContent>
                     <SidebarMenuSub>
                       <NavBranchButton
-                        href={`/paper/${paper.id}`}
-                        isMain
+                        key={index}
+                        href={`/${paper.slug}/${paper.mainBranch!.name}`}
                         name={paper.mainBranch!.name}
+                        isMain
                       />
                       {paper.branches
                         .filter((branch) => branch.id !== paper.mainBranch?.id)
                         .map((branch, index) => (
                           <NavBranchButton
                             key={index}
-                            href={`/paper/${paper.id}/${branch.id}`}
+                            href={`/${paper.slug}/${branch.name}`}
                             name={branch.name}
                           />
                         ))}

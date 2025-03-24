@@ -1,6 +1,7 @@
 import { branchRouter } from "@/server/api/routers/branch";
 import { paperRouter } from "@/server/api/routers/paper";
 import { createCallerFactory, createTRPCRouter } from "@/server/api/trpc";
+import { editorRouter } from "./routers/editor";
 
 /**
  * This is the primary router for your server.
@@ -10,6 +11,7 @@ import { createCallerFactory, createTRPCRouter } from "@/server/api/trpc";
 export const appRouter = createTRPCRouter({
   paper: paperRouter,
   branch: branchRouter,
+  editor: editorRouter,
 });
 
 // export type definition of API

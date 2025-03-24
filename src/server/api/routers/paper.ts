@@ -50,7 +50,7 @@ async function generateDefaultPaperContent(title: string, userName: string) {
 export const paperRouter = createTRPCRouter({
   create: protectedProcedure
     .input(
-      paperSchema.pick({ title: true, description: true }).merge(
+      paperSchema.pick({ title: true, description: true, slug: true }).merge(
         z.object({
           mainBranch: branchSchema.pick({ name: true }),
           invitedUsersEmail: z.array(userSchema.shape.email),
@@ -63,10 +63,11 @@ export const paperRouter = createTRPCRouter({
         ctx.auth.user.name,
       );
 
-      const { paperId } = await ctx.db.transaction(async (tx) => {
+      const result = await ctx.db.transaction(async (tx) => {
         const [createdPaper] = await tx
           .insert(papers)
           .values({
+            slug: input.slug,
             title: input.title,
             description: input.description,
             createdByUserId: ctx.auth.user.id,
@@ -109,13 +110,18 @@ export const paperRouter = createTRPCRouter({
         });
 
         return {
-          paperId: createdPaper.id,
+          paper: {
+            slug: createdPaper.slug,
+            id: createdPaper.id,
+          },
+          branch: {
+            id: mainBranch.id,
+            name: mainBranch.name,
+          },
         };
       });
 
-      return {
-        paperId,
-      };
+      return result;
     }),
   list: protectedProcedure.query(async ({ ctx }) => {
     const [userPapers, error] = await tryCatch(
@@ -140,6 +146,7 @@ export const paperRouter = createTRPCRouter({
         columns: {
           id: true,
           title: true,
+          slug: true,
         },
       }),
     );
@@ -148,7 +155,9 @@ export const paperRouter = createTRPCRouter({
       throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
     }
 
-    return userPapers;
+    return userPapers.map((paper) => ({
+      ...paper,
+    }));
   }),
 
   byId: protectedProcedure

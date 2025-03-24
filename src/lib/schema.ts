@@ -19,6 +19,12 @@ export const userSchema = baseModelSchema.extend({
 });
 
 export const paperSchema = baseModelSchema.extend({
+  slug: z
+    .string()
+    .trim()
+    .min(1)
+    .max(64)
+    .regex(/^[a-zA-Z0-9_-]+$/),
   title: z.string().trim().min(1).max(255),
   description: z.string().trim().max(2048),
   createdByUserId: idSchema,

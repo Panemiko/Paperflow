@@ -1,6 +1,6 @@
 import { branchSchema, idSchema } from "@/lib/schema";
 import { tryCatch } from "@/lib/utils";
-import { branches, papers } from "@/server/db/schema";
+import { branches, decoupledBranches, papers } from "@/server/db/schema";
 import { TRPCError } from "@trpc/server";
 import { eq } from "drizzle-orm";
 import { z } from "zod";
@@ -33,43 +33,71 @@ export const branchRouter = createTRPCRouter({
     }),
   create: protectedProcedure
     .input(
-      branchSchema.pick({ name: true }).extend({
-        basedOnBranchId: idSchema,
+      z.object({
+        data: branchSchema.pick({ name: true }),
+        forkedFromBranchId: idSchema,
       }),
     )
     .mutation(async ({ ctx, input }) => {
-      const [branchBasedOn, branchQueryError] = await tryCatch(
-        ctx.db.query.branches.findFirst({
-          where: eq(branches.id, input.basedOnBranchId),
+      const [queriesResult, transactionError] = await tryCatch(
+        ctx.db.transaction(async (tx) => {
+          const originalBranch = await tx.query.branches.findFirst({
+            where: eq(branches.id, input.forkedFromBranchId),
+          });
+
+          if (!originalBranch) {
+            throw new TRPCError({ code: "NOT_FOUND" });
+          }
+
+          const paper = await tx.query.papers.findFirst({
+            where: eq(papers.id, originalBranch.paperId),
+          });
+
+          if (!paper) {
+            throw new TRPCError({ code: "NOT_FOUND" });
+          }
+
+          const [createdBranch, error] = await tryCatch(
+            tx
+              .insert(branches)
+              .values({
+                name: input.data.name,
+                ownerId: ctx.auth.user.id,
+                isEditable: true,
+                paperId: paper.id,
+                content: originalBranch.content,
+                referencesCommitId: originalBranch.referencesCommitId,
+              })
+              .returning(),
+          );
+
+          if (error || !createdBranch[0]) {
+            throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+          }
+
+          await tx.insert(decoupledBranches).values({
+            branchId: createdBranch[0].id,
+            content: createdBranch[0].content,
+            userId: ctx.auth.user.id,
+          });
+
+          return {
+            createdBranch: {
+              ...createdBranch[0],
+              paper: {
+                id: paper.id,
+                slug: paper.slug,
+              },
+            },
+          };
         }),
       );
 
-      if (branchQueryError || !branchBasedOn) {
+      if (transactionError) {
         throw new TRPCError({ code: "FORBIDDEN" });
       }
 
-      const [createdBranch, branchCreationError] = await tryCatch(
-        ctx.db
-          .insert(branches)
-          .values({
-            name: input.name,
-            paperId: branchBasedOn.paperId,
-            ownerId: ctx.auth.user.id,
-            content: branchBasedOn.content,
-            referencesCommitId: branchBasedOn.referencesCommitId,
-            isEditable: true,
-          })
-          .returning(),
-      );
-
-      if (branchCreationError || !createdBranch[0]) {
-        throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
-      }
-
-      return {
-        createdBranchId: createdBranch[0].id,
-        paperId: createdBranch[0].paperId,
-      };
+      return queriesResult;
     }),
 
   byId: protectedProcedure

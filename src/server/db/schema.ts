@@ -113,6 +113,7 @@ export const papers = createTable("papers", {
   updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
     () => new Date(),
   ),
+  slug: text("slug").notNull().unique(),
   title: text("title").notNull(),
   description: text("description"),
   createdByUserId: varchar("created_by_user_id", { length: 256 }),
@@ -154,7 +155,7 @@ export const commits = createTable("commits", {
   mergeCommitId: varchar("merge_commit_id", { length: 256 }),
 });
 
-export const decoupledBranch = createTable("decoupled_branches", {
+export const decoupledBranches = createTable("decoupled_branches", {
   id: varchar("id", { length: 256 })
     .primaryKey()
     .unique()
@@ -177,7 +178,7 @@ export const usersRelations = relations(users, ({ many }) => ({
   createdPapers: many(papers, { relationName: "creator" }),
   ownedBranches: many(branches, { relationName: "owner" }),
   createdCommits: many(commits, { relationName: "author" }),
-  decoupledBranches: many(decoupledBranch, { relationName: "decoupledUser" }),
+  decoupledBranches: many(decoupledBranches, { relationName: "decoupledUser" }),
 }));
 
 export const sessionsRelations = relations(sessions, ({ one }) => ({
@@ -229,7 +230,7 @@ export const branchesRelations = relations(branches, ({ one, many }) => ({
     references: [commits.id],
     relationName: "referencingBranches",
   }),
-  decoupled: many(decoupledBranch, { relationName: "originalBranch" }),
+  decoupled: many(decoupledBranches, { relationName: "originalBranch" }),
 }));
 
 export const commitsRelations = relations(commits, ({ one, many }) => ({
@@ -254,15 +255,15 @@ export const commitsRelations = relations(commits, ({ one, many }) => ({
 }));
 
 export const decoupledBranchRelations = relations(
-  decoupledBranch,
+  decoupledBranches,
   ({ one }) => ({
     decoupledUser: one(users, {
-      fields: [decoupledBranch.userId],
+      fields: [decoupledBranches.userId],
       references: [users.id],
       relationName: "decoupledUser",
     }),
     originalBranch: one(branches, {
-      fields: [decoupledBranch.branchId],
+      fields: [decoupledBranches.branchId],
       references: [branches.id],
       relationName: "originalBranch",
     }),
