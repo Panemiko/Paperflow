@@ -41,7 +41,7 @@ export async function NavPapers() {
               <Collapsible key={index} defaultOpen={true}>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
-                    <Link href={`/paper/${paper.id}`} title={paper.title}>
+                    <Link href={`/${paper.slug}`} title={paper.title}>
                       <span className="truncate">{paper.title}</span>
                     </Link>
                   </SidebarMenuButton>
