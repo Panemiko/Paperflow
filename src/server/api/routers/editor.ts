@@ -1,6 +1,6 @@
-import { branchSchema, paperSchema } from "@/lib/schema";
+import { branchSchema, decoupledBranchSchema, paperSchema } from "@/lib/schema";
 import { tryCatch } from "@/lib/utils";
-import { branches, papers } from "@/server/db/schema";
+import { branches, decoupledBranches, papers } from "@/server/db/schema";
 import { TRPCError } from "@trpc/server";
 import { and, desc, eq } from "drizzle-orm";
 import { z } from "zod";
@@ -82,6 +82,33 @@ export const editorRouter = createTRPCRouter({
           ...workingBranch,
           isMainBranch: workingBranchPaper.mainBranchId === workingBranch.id,
         },
+      };
+    }),
+
+  quickSaveContent: protectedProcedure
+    .input(
+      decoupledBranchSchema.pick({
+        content: true,
+        id: true,
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const [updatedValues, error] = await tryCatch(
+        ctx.db
+          .update(decoupledBranches)
+          .set({ content: input.content })
+          .where(eq(decoupledBranches.id, input.id)),
+      );
+
+      if (error) {
+        throw new TRPCError({
+          code: "FORBIDDEN",
+          message: "Error updating branch content",
+        });
+      }
+
+      return {
+        quickSaveSuccess: true,
       };
     }),
 });

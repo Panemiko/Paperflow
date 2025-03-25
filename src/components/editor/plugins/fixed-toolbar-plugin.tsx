@@ -8,8 +8,8 @@ import { FixedToolbarButtons } from "@/components/plate-ui/fixed-toolbar-buttons
 export const FixedToolbarPlugin = createPlatePlugin({
   key: "fixed-toolbar",
   render: {
-    beforeEditable: (editor) => {
-      if (editor.readOnly) return null;
+    beforeEditable: ({ readOnly }) => {
+      if (readOnly) return null;
 
       return (
         <FixedToolbar>

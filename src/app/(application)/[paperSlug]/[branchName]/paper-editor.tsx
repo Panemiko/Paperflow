@@ -1,5 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
+import { AutoSavePlugin } from "@/components/editor/plugins/auto-save-plugin";
 import { FramePlugin } from "@/components/editor/plugins/frame-plugin";
 import { useCreateEditor } from "@/components/editor/use-create-editor";
 import { Editor } from "@/components/plate-ui/editor";
@@ -30,6 +32,9 @@ interface PaperEditorProps {
   workingBranch: {
     name: string;
     isMainBranch: boolean;
+    decoupled: {
+      id: string;
+    }[];
   };
 }
 
@@ -40,7 +45,10 @@ export function EditorInstance({
 }: PaperEditorProps) {
   const editor = useEditorRef();
   const setReadOnly = usePlateSet("readOnly");
+  const decoupledBranch = workingBranch.decoupled?.[0];
+
   const framePlugin = useEditorPlugin(FramePlugin);
+  const autoSavePlugin = useEditorPlugin(AutoSavePlugin);
 
   useEffect(() => {
     setReadOnly(readOnly ?? false);
@@ -57,8 +65,11 @@ export function EditorInstance({
       },
       { name: workingBranch.name },
     ]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [paper, workingBranch]);
+
+  useEffect(() => {
+    autoSavePlugin.setOption("decoupledBranchId", decoupledBranch?.id ?? null);
+  }, [decoupledBranch?.id]);
 
   return <Editor variant="default" />;
 }

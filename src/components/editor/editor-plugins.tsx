@@ -21,27 +21,28 @@ import { FloatingToolbarPlugin } from "@/components/editor/plugins/floating-tool
 import { BlockDiscussion } from "@/components/plate-ui/block-discussion";
 import { SuggestionBelowNodes } from "@/components/plate-ui/suggestion-line-break";
 
-import { alignPlugin } from "./align-plugin";
-import { autoformatPlugin } from "./autoformat-plugin";
-import { basicNodesPlugins } from "./basic-nodes-plugins";
-import { blockMenuPlugins } from "./block-menu-plugins";
-import { commentsPlugin } from "./comments-plugin";
-import { cursorOverlayPlugin } from "./cursor-overlay-plugin";
-import { deletePlugins } from "./delete-plugins";
-import { dndPlugins } from "./dnd-plugins";
-import { equationPlugins } from "./equation-plugins";
-import { exitBreakPlugin } from "./exit-break-plugin";
-import { FramePlugin } from "./frame-plugin";
-import { indentListPlugins } from "./indent-list-plugins";
-import { lineHeightPlugin } from "./line-height-plugin";
-import { linkPlugin } from "./link-plugin";
-import { mediaPlugins } from "./media-plugins";
-import { resetBlockTypePlugin } from "./reset-block-type-plugin";
-import { skipMarkPlugin } from "./skip-mark-plugin";
-import { softBreakPlugin } from "./soft-break-plugin";
-import { suggestionPlugin } from "./suggestion-plugin";
-import { tablePlugin } from "./table-plugin";
-import { tocPlugin } from "./toc-plugin";
+import { alignPlugin } from "./plugins/align-plugin";
+import { AutoSavePlugin } from "./plugins/auto-save-plugin";
+import { autoformatPlugin } from "./plugins/autoformat-plugin";
+import { basicNodesPlugins } from "./plugins/basic-nodes-plugins";
+import { blockMenuPlugins } from "./plugins/block-menu-plugins";
+import { commentsPlugin } from "./plugins/comments-plugin";
+import { cursorOverlayPlugin } from "./plugins/cursor-overlay-plugin";
+import { deletePlugins } from "./plugins/delete-plugins";
+import { dndPlugins } from "./plugins/dnd-plugins";
+import { equationPlugins } from "./plugins/equation-plugins";
+import { exitBreakPlugin } from "./plugins/exit-break-plugin";
+import { FramePlugin } from "./plugins/frame-plugin";
+import { indentListPlugins } from "./plugins/indent-list-plugins";
+import { lineHeightPlugin } from "./plugins/line-height-plugin";
+import { linkPlugin } from "./plugins/link-plugin";
+import { mediaPlugins } from "./plugins/media-plugins";
+import { resetBlockTypePlugin } from "./plugins/reset-block-type-plugin";
+import { skipMarkPlugin } from "./plugins/skip-mark-plugin";
+import { softBreakPlugin } from "./plugins/soft-break-plugin";
+import { suggestionPlugin } from "./plugins/suggestion-plugin";
+import { tablePlugin } from "./plugins/table-plugin";
+import { tocPlugin } from "./plugins/toc-plugin";
 
 export const viewPlugins = [
   ...basicNodesPlugins,
@@ -80,6 +81,7 @@ export const editorPlugins = [
   ...viewPlugins,
 
   // Functionality
+  AutoSavePlugin,
   SlashPlugin.extend({
     options: {
       triggerQuery(editor) {
@@ -106,7 +108,7 @@ export const editorPlugins = [
   JuicePlugin,
 
   // UI
+  FramePlugin,
   FixedToolbarPlugin,
   FloatingToolbarPlugin,
-  FramePlugin,
 ];

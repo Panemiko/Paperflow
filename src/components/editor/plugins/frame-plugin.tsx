@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 
 import { Frame } from "@/components/frame";
@@ -14,9 +15,11 @@ export const FramePlugin = createPlatePlugin({
     breadcrumbItems: [] as BreadcrumbItem[],
   },
   render: {
-    beforeEditable({ children }) {
-      // eslint-disable-next-line react-hooks/rules-of-hooks
+    aboveSlate({ children }) {
       const breadcrumbItems = usePluginOption(FramePlugin, "breadcrumbItems");
+
+      // commit button
+      // new branch button
 
       return (
         <Frame

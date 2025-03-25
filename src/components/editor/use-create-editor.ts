@@ -50,12 +50,13 @@ import { TogglePlugin } from "@udecode/plate-toggle/react";
 import {
   type CreatePlateEditorOptions,
   ParagraphPlugin,
+  type PlateCorePlugin,
   PlateLeaf,
   type PlatePlugin,
   usePlateEditor,
 } from "@udecode/plate/react";
 
-import { editorPlugins } from "@/components/editor/plugins/editor-plugins";
+import { editorPlugins } from "@/components/editor/editor-plugins";
 import { FixedToolbarPlugin } from "@/components/editor/plugins/fixed-toolbar-plugin";
 import { FloatingToolbarPlugin } from "@/components/editor/plugins/floating-toolbar-plugin";
 import { BlockquoteElement } from "@/components/plate-ui/blockquote-element";
@@ -148,11 +149,11 @@ export const useCreateEditor = (
     readOnly,
     ...options
   }: {
-    components?: Record<string, any>;
+    components?: Record<string, unknown>;
     plugins?: PlatePlugin[];
     readOnly?: boolean;
   } & Omit<CreatePlateEditorOptions, "plugins"> = {},
-  deps: any[] = [],
+  deps: unknown[] = [],
 ) => {
   return usePlateEditor<Value>(
     {
@@ -163,7 +164,11 @@ export const useCreateEditor = (
         },
         ...override,
       },
-      plugins: [...editorPlugins, FixedToolbarPlugin, FloatingToolbarPlugin],
+      plugins: [
+        ...(editorPlugins as unknown as PlateCorePlugin[]),
+        FixedToolbarPlugin as unknown as PlateCorePlugin,
+        FloatingToolbarPlugin as unknown as PlateCorePlugin,
+      ],
       value: defaultPaperValue,
       readOnly,
       ...options,
