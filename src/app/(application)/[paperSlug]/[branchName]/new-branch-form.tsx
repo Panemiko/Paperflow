@@ -31,11 +31,11 @@ export function NewBranchForm({ originBranchId }: { originBranchId: string }) {
     resolver: zodResolver(formSchema),
   });
 
-  const { mutateAsync: createBranch } = api.branch.create.useMutation();
+  const { mutateAsync: forkBranch } = api.branch.fork.useMutation();
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
     const [response, error] = await tryCatch(
-      createBranch({
+      forkBranch({
         data: {
           name: data.name,
         },
@@ -51,7 +51,7 @@ export function NewBranchForm({ originBranchId }: { originBranchId: string }) {
     }
 
     redirect(
-      `${response.createdBranch.paper.slug}/${response.createdBranch.name}`,
+      `/${response.createdBranch.paper.slug}/${response.createdBranch.name}`,
     );
   }
 

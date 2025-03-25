@@ -7,31 +7,7 @@ import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 
 export const branchRouter = createTRPCRouter({
-  getMainBranchFromPaper: protectedProcedure
-    .input(
-      z.object({
-        paperId: idSchema,
-      }),
-    )
-    .query(async ({ ctx, input }) => {
-      const [paper, error] = await tryCatch(
-        ctx.db.query.papers.findFirst({
-          where: eq(papers.id, input.paperId),
-          with: {
-            mainBranch: true,
-          },
-        }),
-      );
-
-      if (error || !paper?.mainBranch) {
-        throw new TRPCError({
-          code: "FORBIDDEN",
-        });
-      }
-
-      return paper.mainBranch;
-    }),
-  create: protectedProcedure
+  fork: protectedProcedure
     .input(
       z.object({
         data: branchSchema.pick({ name: true }),
@@ -98,21 +74,5 @@ export const branchRouter = createTRPCRouter({
       }
 
       return queriesResult;
-    }),
-
-  byId: protectedProcedure
-    .input(z.object({ branchId: idSchema }))
-    .query(async ({ ctx, input }) => {
-      const [branch, error] = await tryCatch(
-        ctx.db.query.branches.findFirst({
-          where: eq(branches.id, input.branchId),
-        }),
-      );
-
-      if (error || !branch) {
-        throw new TRPCError({ code: "NOT_FOUND" });
-      }
-
-      return branch;
     }),
 });

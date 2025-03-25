@@ -34,7 +34,7 @@ export function PaperActions({
             </DialogDescription>
           </DialogHeader>
           <div>
-            <NewBranchForm branchId={workingBranch.id} />
+            <NewBranchForm originBranchId={workingBranch.id} />
           </div>
         </DialogContent>
       </Dialog>
