@@ -2,7 +2,11 @@
 "use client";
 
 import { Frame } from "@/components/frame";
-import { createPlatePlugin, usePluginOption } from "@udecode/plate/react";
+import { FrameActions } from "@/components/plate-ui/frame-actions";
+import {
+  createPlatePlugin,
+  usePluginOption
+} from "@udecode/plate/react";
 
 interface BreadcrumbItem {
   name: string;
@@ -18,18 +22,8 @@ export const FramePlugin = createPlatePlugin({
     aboveSlate({ children }) {
       const breadcrumbItems = usePluginOption(FramePlugin, "breadcrumbItems");
 
-      // commit button
-      // new branch button
-
       return (
-        <Frame
-          breadcrumbItems={breadcrumbItems}
-          actions={
-            <div>
-              <span className="text-foreground/70 text-sm">{"Salvo"}</span>
-            </div>
-          }
-        >
+        <Frame breadcrumbItems={breadcrumbItems} actions={<FrameActions />}>
           {children}
         </Frame>
       );

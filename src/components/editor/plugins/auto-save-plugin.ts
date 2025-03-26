@@ -8,15 +8,16 @@ export const AutoSavePlugin = createPlatePlugin({
     lastSavedTime: new Date(),
     decoupledBranchId: null as string | null,
     lastSavedContent: [] as Value,
+    isSaving: false,
   },
   handlers: {
-    onChange(editor) {
-      if (editor.api.isReadOnly()) return;
+    onChange({ value, api, getOption, setOption }) {
+      if (api.isReadOnly()) return;
 
       // in case the content is the same as the last saved content
-      if (editor.value === editor.getOption("lastSavedContent")) return;
+      if (value === getOption("lastSavedContent")) return;
 
-      const lastSavedTime = editor.getOption("lastSavedTime");
+      const lastSavedTime = getOption("lastSavedTime");
 
       // Prevent saving too frequently
       if (
@@ -27,16 +28,23 @@ export const AutoSavePlugin = createPlatePlugin({
         return;
       }
 
-      const decoupledBranchId = editor.getOption("decoupledBranchId");
+      const decoupledBranchId = getOption("decoupledBranchId");
       if (!decoupledBranchId) return;
 
+      setOption("isSaving", true);
+
       void standaloneApi.editor.quickSaveContent.mutate({
-        content: editor.value,
+        content: value,
         id: decoupledBranchId,
       });
 
-      editor.setOptions({ lastSavedTime: new Date() });
-      editor.setOptions({ lastSavedContent: editor.value });
+      // for some reason, being instant is a flaw -_-
+      setTimeout(() => {
+        setOption("isSaving", false);
+      }, 3000);
+
+      setOption("lastSavedTime", new Date());
+      setOption("lastSavedContent", value);
     },
   },
 });
