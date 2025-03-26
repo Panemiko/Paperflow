@@ -1,18 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
-import { AutoSavePlugin } from "@/components/editor/plugins/auto-save-plugin";
-import { FramePlugin } from "@/components/editor/plugins/frame-plugin";
+import { EditorStatePlugin } from "@/components/editor/plugins/editor-state-plugin";
 import { useCreateEditor } from "@/components/editor/use-create-editor";
 import { Editor } from "@/components/plate/editor";
-import { truncateText } from "@/lib/utils";
 import { type Value } from "@udecode/plate";
-import {
-  Plate,
-  useEditorPlugin,
-  useEditorRef,
-  usePlateSet,
-} from "@udecode/plate/react";
+import { Plate, useEditorPlugin, usePlateSet } from "@udecode/plate/react";
 import { useEffect } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
@@ -30,8 +23,10 @@ interface PaperEditorProps {
   };
 
   workingBranch: {
+    id: string;
     name: string;
     isMainBranch: boolean;
+    isEditable: boolean;
     decoupled: {
       id: string;
     }[];
@@ -43,33 +38,29 @@ export function EditorInstance({
   paper,
   workingBranch,
 }: PaperEditorProps) {
-  const editor = useEditorRef();
   const setReadOnly = usePlateSet("readOnly");
   const decoupledBranch = workingBranch.decoupled?.[0];
 
-  const framePlugin = useEditorPlugin(FramePlugin);
-  const autoSavePlugin = useEditorPlugin(AutoSavePlugin);
+  const editorStatePlugin = useEditorPlugin(EditorStatePlugin);
 
   useEffect(() => {
     setReadOnly(readOnly ?? false);
   }, [readOnly, setReadOnly]);
 
   useEffect(() => {
-    framePlugin.setOption("breadcrumbItems", [
-      { name: "Artigos" },
-      {
-        name: truncateText(paper.title, 40),
-        href: workingBranch.isMainBranch
-          ? `/${paper.slug}/${paper.mainBranch.name}`
-          : undefined,
-      },
-      { name: workingBranch.name },
-    ]);
-  }, [paper, workingBranch]);
+    editorStatePlugin.setOption("paper", paper);
+  }, [paper]);
 
   useEffect(() => {
-    autoSavePlugin.setOption("decoupledBranchId", decoupledBranch?.id ?? null);
+    editorStatePlugin.setOption(
+      "decoupledBranchId",
+      decoupledBranch?.id ?? null,
+    );
   }, [decoupledBranch?.id]);
+
+  useEffect(() => {
+    editorStatePlugin.setOption("workingBranch", workingBranch || null);
+  }, [workingBranch]);
 
   return <Editor variant="default" />;
 }

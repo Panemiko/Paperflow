@@ -30,6 +30,7 @@ import { commentsPlugin } from "./plugins/comments-plugin";
 import { cursorOverlayPlugin } from "./plugins/cursor-overlay-plugin";
 import { deletePlugins } from "./plugins/delete-plugins";
 import { dndPlugins } from "./plugins/dnd-plugins";
+import { EditorStatePlugin } from "./plugins/editor-state-plugin";
 import { equationPlugins } from "./plugins/equation-plugins";
 import { exitBreakPlugin } from "./plugins/exit-break-plugin";
 import { FramePlugin } from "./plugins/frame-plugin";
@@ -82,6 +83,7 @@ export const editorPlugins = [
 
   // Functionality
   AutoSavePlugin,
+  EditorStatePlugin,
   SlashPlugin.extend({
     options: {
       triggerQuery(editor) {

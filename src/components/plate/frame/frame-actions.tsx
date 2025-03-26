@@ -1,52 +1,45 @@
 "use client";
 
+import { EditorStatePlugin } from "@/components/editor/plugins/editor-state-plugin";
 import { usePlateValue, usePluginOption } from "@udecode/plate/react";
-import { GitBranchIcon } from "lucide-react";
 import { AutoSavePlugin } from "../../editor/plugins/auto-save-plugin";
-import { Button } from "../../ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "../../ui/dialog";
+import { CommitCreationMenu } from "./commit-creation-menu";
+import { NewBranchDialog } from "./new-branch-dialog";
+import { ViewCommits } from "./view-commits";
 
 export function FrameActions() {
   const readOnly = usePlateValue("readOnly");
   const isSaving = usePluginOption(AutoSavePlugin, "isSaving");
 
-  // commit button
-  // new branch button
+  const workingBranch = usePluginOption(EditorStatePlugin, "workingBranch");
 
   return (
-    <div>
+    <div className="flex items-center gap-2">
       {!readOnly && (
-        <span className="text-foreground/70 text-sm">
+        <span className="text-foreground/70 mr-10 text-xs">
           {isSaving ? "Salvando..." : "Salvo"}
         </span>
       )}
 
-      <div>
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button size="sm">
-              <GitBranchIcon />
-              Criar branch
-            </Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Criar branch</DialogTitle>
-              <DialogDescription>
-                Antes de prosseguir, defina um nome para sua branch.
-              </DialogDescription>
-            </DialogHeader>
-            <div></div>
-          </DialogContent>
-        </Dialog>
+      {/* <div className="h-5">
+        <Separator orientation="vertical" />
+      </div> */}
+
+      <div className="flex items-center gap-2">
+        <ViewCommits />
+        {workingBranch?.id && (
+          <NewBranchDialog
+            iconButton={workingBranch.isEditable}
+            originBranchId={workingBranch.id}
+          />
+        )}
       </div>
+
+      {/* <div className="h-5">
+        <Separator orientation="vertical" />
+      </div> */}
+
+      {workingBranch?.isEditable && <CommitCreationMenu />}
     </div>
   );
 }

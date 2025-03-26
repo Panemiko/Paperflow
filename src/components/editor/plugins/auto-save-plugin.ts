@@ -1,17 +1,17 @@
 import { standaloneApi } from "@/trpc/react";
 import { type Value } from "@udecode/plate";
 import { createPlatePlugin } from "@udecode/plate/react";
+import { EditorStatePlugin } from "./editor-state-plugin";
 
 export const AutoSavePlugin = createPlatePlugin({
   key: "auto-save",
   options: {
     lastSavedTime: new Date(),
-    decoupledBranchId: null as string | null,
     lastSavedContent: [] as Value,
     isSaving: false,
   },
   handlers: {
-    onChange({ value, api, getOption, setOption }) {
+    onChange({ value, api, getOption, editor, setOption }) {
       if (api.isReadOnly()) return;
 
       // in case the content is the same as the last saved content
@@ -24,11 +24,10 @@ export const AutoSavePlugin = createPlatePlugin({
         lastSavedTime &&
         new Date().getTime() - lastSavedTime.getTime() < 5000
       ) {
-        console.log("Saving too frequently");
         return;
       }
 
-      const decoupledBranchId = getOption("decoupledBranchId");
+      const { decoupledBranchId } = editor.getPlugin(EditorStatePlugin).options;
       if (!decoupledBranchId) return;
 
       setOption("isSaving", true);

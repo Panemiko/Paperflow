@@ -1,12 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 
-import { Frame } from "@/components/frame";
-import { FrameActions } from "@/components/plate/frame/frame-actions";
-import {
-  createPlatePlugin,
-  usePluginOption
-} from "@udecode/plate/react";
+import { EditorFrame } from "@/components/plate/frame/frame";
+import { createPlatePlugin } from "@udecode/plate/react";
 
 interface BreadcrumbItem {
   name: string;
@@ -20,13 +16,7 @@ export const FramePlugin = createPlatePlugin({
   },
   render: {
     aboveSlate({ children }) {
-      const breadcrumbItems = usePluginOption(FramePlugin, "breadcrumbItems");
-
-      return (
-        <Frame breadcrumbItems={breadcrumbItems} actions={<FrameActions />}>
-          {children}
-        </Frame>
-      );
+      return <EditorFrame>{children}</EditorFrame>;
     },
   },
 });
