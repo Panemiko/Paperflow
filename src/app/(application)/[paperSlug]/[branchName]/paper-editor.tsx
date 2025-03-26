@@ -4,7 +4,7 @@
 import { AutoSavePlugin } from "@/components/editor/plugins/auto-save-plugin";
 import { FramePlugin } from "@/components/editor/plugins/frame-plugin";
 import { useCreateEditor } from "@/components/editor/use-create-editor";
-import { Editor } from "@/components/plate-ui/editor";
+import { Editor } from "@/components/plate/editor";
 import { truncateText } from "@/lib/utils";
 import { type Value } from "@udecode/plate";
 import {

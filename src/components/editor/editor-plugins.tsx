@@ -18,8 +18,8 @@ import { TrailingBlockPlugin } from "@udecode/plate-trailing-block";
 
 import { FixedToolbarPlugin } from "@/components/editor/plugins/fixed-toolbar-plugin";
 import { FloatingToolbarPlugin } from "@/components/editor/plugins/floating-toolbar-plugin";
-import { BlockDiscussion } from "@/components/plate-ui/block-discussion";
-import { SuggestionBelowNodes } from "@/components/plate-ui/suggestion-line-break";
+import { BlockDiscussion } from "@/components/plate/discussion/block-discussion";
+import { SuggestionBelowNodes } from "@/components/plate/suggestion/suggestion-line-break";
 
 import { alignPlugin } from "./plugins/align-plugin";
 import { AutoSavePlugin } from "./plugins/auto-save-plugin";

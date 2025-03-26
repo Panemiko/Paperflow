@@ -59,39 +59,39 @@ import {
 import { editorPlugins } from "@/components/editor/editor-plugins";
 import { FixedToolbarPlugin } from "@/components/editor/plugins/fixed-toolbar-plugin";
 import { FloatingToolbarPlugin } from "@/components/editor/plugins/floating-toolbar-plugin";
-import { BlockquoteElement } from "@/components/plate-ui/blockquote-element";
-import { CodeBlockElement } from "@/components/plate-ui/code-block-element";
-import { CodeLeaf } from "@/components/plate-ui/code-leaf";
-import { CodeLineElement } from "@/components/plate-ui/code-line-element";
-import { CodeSyntaxLeaf } from "@/components/plate-ui/code-syntax-leaf";
-import { ColumnElement } from "@/components/plate-ui/column-element";
-import { ColumnGroupElement } from "@/components/plate-ui/column-group-element";
-import { CommentLeaf } from "@/components/plate-ui/comment-leaf";
-import { DateElement } from "@/components/plate-ui/date-element";
-import { EquationElement } from "@/components/plate-ui/equation-element";
-import { ExcalidrawElement } from "@/components/plate-ui/excalidraw-element";
-import { HeadingElement } from "@/components/plate-ui/heading-element";
-import { HighlightLeaf } from "@/components/plate-ui/highlight-leaf";
 import { HrElement } from "@/components/plate-ui/hr-element";
-import { ImageElement } from "@/components/plate-ui/image-element";
-import { InlineEquationElement } from "@/components/plate-ui/inline-equation-element";
-import { KbdLeaf } from "@/components/plate-ui/kbd-leaf";
-import { LinkElement } from "@/components/plate-ui/link-element";
-import { MediaEmbedElement } from "@/components/plate-ui/media-embed-element";
-import { MediaFileElement } from "@/components/plate-ui/media-file-element";
-import { MediaPlaceholderElement } from "@/components/plate-ui/media-placeholder-element";
-import { ParagraphElement } from "@/components/plate-ui/paragraph-element";
-import { withPlaceholders } from "@/components/plate-ui/placeholder";
-import { SlashInputElement } from "@/components/plate-ui/slash-input-element";
-import { SuggestionLeaf } from "@/components/plate-ui/suggestion-leaf";
+import { SlashInputElement } from "@/components/plate/block-selection/slash-input-element";
+import { BlockquoteElement } from "@/components/plate/blockquote/blockquote-element";
+import { CodeBlockElement } from "@/components/plate/code/code-block-element";
+import { CodeLeaf } from "@/components/plate/code/code-leaf";
+import { CodeLineElement } from "@/components/plate/code/code-line-element";
+import { CodeSyntaxLeaf } from "@/components/plate/code/code-syntax-leaf";
+import { ColumnElement } from "@/components/plate/columns/column-element";
+import { ColumnGroupElement } from "@/components/plate/columns/column-group-element";
+import { CommentLeaf } from "@/components/plate/comment/comment-leaf";
+import { EquationElement } from "@/components/plate/equation/equation-element";
+import { InlineEquationElement } from "@/components/plate/equation/inline-equation-element";
+import { ExcalidrawElement } from "@/components/plate/excalidraw/excalidraw-element";
+import { HeadingElement } from "@/components/plate/heading/heading-element";
+import { HighlightLeaf } from "@/components/plate/highlight/highlight-leaf";
+import { KbdLeaf } from "@/components/plate/kdb/kbd-leaf";
+import { LinkElement } from "@/components/plate/link/link-element";
+import { ImageElement } from "@/components/plate/media/image-element";
+import { MediaEmbedElement } from "@/components/plate/media/media-embed-element";
+import { MediaFileElement } from "@/components/plate/media/media-file-element";
+import { MediaPlaceholderElement } from "@/components/plate/media/media-placeholder-element";
+import { ParagraphElement } from "@/components/plate/paragraph/paragraph-element";
+import { withPlaceholders } from "@/components/plate/placeholder";
+import { SuggestionLeaf } from "@/components/plate/suggestion/suggestion-leaf";
 import {
   TableCellElement,
   TableCellHeaderElement,
-} from "@/components/plate-ui/table-cell-element";
-import { TableElement } from "@/components/plate-ui/table-element";
-import { TableRowElement } from "@/components/plate-ui/table-row-element";
-import { TocElement } from "@/components/plate-ui/toc-element";
-import { ToggleElement } from "@/components/plate-ui/toggle-element";
+} from "@/components/plate/table/table-cell-element";
+import { TableElement } from "@/components/plate/table/table-element";
+import { TableRowElement } from "@/components/plate/table/table-row-element";
+import { TocElement } from "@/components/plate/toc/toc-element";
+import { DateElement } from "@/components/plate/ui/date-element";
+import { ToggleElement } from "@/components/plate/ui/toggle-element";
 import { defaultPaperValue } from "@/mock/default-paper";
 
 export const viewComponents = {

@@ -2,7 +2,7 @@
 "use client";
 
 import { Frame } from "@/components/frame";
-import { FrameActions } from "@/components/plate-ui/frame-actions";
+import { FrameActions } from "@/components/plate/frame/frame-actions";
 import {
   createPlatePlugin,
   usePluginOption
