@@ -9,13 +9,13 @@ import { MediaEmbedPlugin, useMediaState } from "@udecode/plate-media/react";
 import { ResizableProvider, useResizableValue } from "@udecode/plate-resizable";
 import { PlateElement, withHOC } from "@udecode/plate/react";
 
-import { MediaPopover } from "../media-popover";
 import {
   mediaResizeHandleVariants,
   Resizable,
   ResizeHandle,
 } from "../ui/resizable";
 import { Caption, CaptionTextarea } from "./caption";
+import { MediaPopover } from "./media-popover";
 
 export const MediaEmbedElement = withHOC(
   ResizableProvider,

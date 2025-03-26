@@ -50,7 +50,7 @@ import {
   BlockSuggestionCard,
   isResolvedSuggestion,
   useResolveSuggestion,
-} from "./block-suggestion";
+} from "../suggestion/block-suggestion";
 
 export interface TDiscussion {
   id: string;

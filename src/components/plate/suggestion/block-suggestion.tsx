@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState } from "react";
 
 import type {
   TResolvedSuggestion,
   TSuggestionElement,
   TSuggestionText,
-} from '@udecode/plate-suggestion';
+} from "@udecode/plate-suggestion";
 
-import { cn } from '@udecode/cn';
+import { cn } from "@udecode/cn";
 import {
   type NodeEntry,
   type Path,
@@ -16,88 +16,88 @@ import {
   ElementApi,
   PathApi,
   TextApi,
-} from '@udecode/plate';
-import { BlockquotePlugin } from '@udecode/plate-block-quote/react';
-import { CalloutPlugin } from '@udecode/plate-callout/react';
-import { CodeBlockPlugin } from '@udecode/plate-code-block/react';
-import { HEADING_KEYS } from '@udecode/plate-heading';
-import { TocPlugin } from '@udecode/plate-heading/react';
-import { HorizontalRulePlugin } from '@udecode/plate-horizontal-rule/react';
-import { INDENT_LIST_KEYS, ListStyleType } from '@udecode/plate-indent-list';
-import { IndentListPlugin } from '@udecode/plate-indent-list/react';
-import { ColumnPlugin } from '@udecode/plate-layout/react';
-import { EquationPlugin } from '@udecode/plate-math/react';
+} from "@udecode/plate";
+import { BlockquotePlugin } from "@udecode/plate-block-quote/react";
+import { CalloutPlugin } from "@udecode/plate-callout/react";
+import { CodeBlockPlugin } from "@udecode/plate-code-block/react";
+import { HEADING_KEYS } from "@udecode/plate-heading";
+import { TocPlugin } from "@udecode/plate-heading/react";
+import { HorizontalRulePlugin } from "@udecode/plate-horizontal-rule/react";
+import { INDENT_LIST_KEYS, ListStyleType } from "@udecode/plate-indent-list";
+import { IndentListPlugin } from "@udecode/plate-indent-list/react";
+import { ColumnPlugin } from "@udecode/plate-layout/react";
+import { EquationPlugin } from "@udecode/plate-math/react";
 import {
   AudioPlugin,
   FilePlugin,
   ImagePlugin,
   MediaEmbedPlugin,
   VideoPlugin,
-} from '@udecode/plate-media/react';
+} from "@udecode/plate-media/react";
 import {
   acceptSuggestion,
   getSuggestionKey,
   keyId2SuggestionId,
   rejectSuggestion,
-} from '@udecode/plate-suggestion';
-import { SuggestionPlugin } from '@udecode/plate-suggestion/react';
-import { TablePlugin } from '@udecode/plate-table/react';
-import { TogglePlugin } from '@udecode/plate-toggle/react';
+} from "@udecode/plate-suggestion";
+import { SuggestionPlugin } from "@udecode/plate-suggestion/react";
+import { TablePlugin } from "@udecode/plate-table/react";
+import { TogglePlugin } from "@udecode/plate-toggle/react";
 import {
   ParagraphPlugin,
   useEditorPlugin,
   useStoreSelect,
-} from '@udecode/plate/react';
-import { CheckIcon, XIcon } from 'lucide-react';
+} from "@udecode/plate/react";
+import { CheckIcon, XIcon } from "lucide-react";
 
-import { suggestionPlugin } from '@/components/editor/plugins/suggestion-plugin';
+import { suggestionPlugin } from "@/components/editor/plugins/suggestion-plugin";
 
-import { Avatar, AvatarFallback, AvatarImage } from './avatar';
+import { type TComment, Comment, formatCommentDate } from "../comment/comment";
+import { CommentCreateForm } from "../comment/comment-create-form";
 import {
   type TDiscussion,
   discussionStore,
   useFakeUserInfo,
-} from './block-discussion';
-import { Button } from './button';
-import { type TComment, Comment, formatCommentDate } from './comment/comment';
-import { CommentCreateForm } from './comment/comment-create-form';
+} from "../discussion/block-discussion";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Button } from "../ui/button";
 
 export interface ResolvedSuggestion extends TResolvedSuggestion {
   comments: TComment[];
 }
 
-export const BLOCK_SUGGESTION = '__block__';
+export const BLOCK_SUGGESTION = "__block__";
 
 export const TYPE_TEXT_MAP: Record<string, (node?: TElement) => string> = {
-  [AudioPlugin.key]: () => 'Audio',
-  [BlockquotePlugin.key]: () => 'Blockquote',
-  [CalloutPlugin.key]: () => 'Callout',
-  [CodeBlockPlugin.key]: () => 'Code Block',
-  [ColumnPlugin.key]: () => 'Column',
-  [EquationPlugin.key]: () => 'Equation',
-  [FilePlugin.key]: () => 'File',
+  [AudioPlugin.key]: () => "Audio",
+  [BlockquotePlugin.key]: () => "Blockquote",
+  [CalloutPlugin.key]: () => "Callout",
+  [CodeBlockPlugin.key]: () => "Code Block",
+  [ColumnPlugin.key]: () => "Column",
+  [EquationPlugin.key]: () => "Equation",
+  [FilePlugin.key]: () => "File",
   [HEADING_KEYS.h1]: () => `Heading 1`,
   [HEADING_KEYS.h2]: () => `Heading 2`,
   [HEADING_KEYS.h3]: () => `Heading 3`,
   [HEADING_KEYS.h4]: () => `Heading 4`,
   [HEADING_KEYS.h5]: () => `Heading 5`,
   [HEADING_KEYS.h6]: () => `Heading 6`,
-  [HorizontalRulePlugin.key]: () => 'Horizontal Rule',
-  [ImagePlugin.key]: () => 'Image',
-  [MediaEmbedPlugin.key]: () => 'Media',
+  [HorizontalRulePlugin.key]: () => "Horizontal Rule",
+  [ImagePlugin.key]: () => "Image",
+  [MediaEmbedPlugin.key]: () => "Media",
   [ParagraphPlugin.key]: (node) => {
     if (node?.[IndentListPlugin.key] === INDENT_LIST_KEYS.todo)
-      return 'Todo List';
+      return "Todo List";
     if (node?.[IndentListPlugin.key] === ListStyleType.Decimal)
-      return 'Ordered List';
-    if (node?.[IndentListPlugin.key] === ListStyleType.Disc) return 'List';
+      return "Ordered List";
+    if (node?.[IndentListPlugin.key] === ListStyleType.Disc) return "List";
 
-    return 'Paragraph';
+    return "Paragraph";
   },
-  [TablePlugin.key]: () => 'Table',
-  [TocPlugin.key]: () => 'Table of Contents',
-  [TogglePlugin.key]: () => 'Toggle',
-  [VideoPlugin.key]: () => 'Video',
+  [TablePlugin.key]: () => "Table",
+  [TocPlugin.key]: () => "Table of Contents",
+  [TogglePlugin.key]: () => "Toggle",
+  [VideoPlugin.key]: () => "Video",
 };
 
 export const BlockSuggestionCard = ({
@@ -128,7 +128,7 @@ export const BlockSuggestionCard = ({
   const [hovering, setHovering] = useState(false);
 
   const suggestionText2Array = (text: string) => {
-    if (text === BLOCK_SUGGESTION) return ['line breaks'];
+    if (text === BLOCK_SUGGESTION) return ["line breaks"];
 
     return text.split(BLOCK_SUGGESTION).filter(Boolean);
   };
@@ -152,7 +152,7 @@ export const BlockSuggestionCard = ({
           <h4 className="mx-2 text-sm leading-none font-semibold">
             {userInfo?.name}
           </h4>
-          <div className="text-xs leading-none text-muted-foreground/80">
+          <div className="text-muted-foreground/80 text-xs leading-none">
             <span className="mr-1">
               {formatCommentDate(new Date(suggestion.createdAt))}
             </span>
@@ -161,11 +161,11 @@ export const BlockSuggestionCard = ({
 
         <div className="relative mt-1 mb-4 pl-[32px]">
           <div className="flex flex-col gap-2">
-            {suggestion.type === 'remove' && (
+            {suggestion.type === "remove" && (
               <React.Fragment>
                 {suggestionText2Array(suggestion.text!).map((text, index) => (
                   <div key={index} className="flex items-center gap-2">
-                    <span className="text-sm text-muted-foreground">
+                    <span className="text-muted-foreground text-sm">
                       Excluir:
                     </span>
 
@@ -177,56 +177,60 @@ export const BlockSuggestionCard = ({
               </React.Fragment>
             )}
 
-            {suggestion.type === 'insert' && (
+            {suggestion.type === "insert" && (
               <React.Fragment>
                 {suggestionText2Array(suggestion.newText!).map(
                   (text, index) => (
                     <div key={index} className="flex items-center gap-2">
-                      <span className="text-sm text-muted-foreground">
+                      <span className="text-muted-foreground text-sm">
                         Adicionar:
                       </span>
 
                       <span key={index} className="text-sm">
-                        {text || '(quebra de linha)'}
+                        {text || "(quebra de linha)"}
                       </span>
                     </div>
-                  )
+                  ),
                 )}
               </React.Fragment>
             )}
 
-            {suggestion.type === 'replace' && (
+            {suggestion.type === "replace" && (
               <div className="flex flex-col gap-2">
                 {suggestionText2Array(suggestion.newText!).map(
                   (text, index) => (
                     <React.Fragment key={index}>
                       <div
                         key={index}
-                        className="flex items-start gap-2 text-brand/80"
+                        className="text-brand/80 flex items-start gap-2"
                       >
                         <span className="text-sm">Com:</span>
-                        <span className="text-sm">{text || '(quebra de linha)'}</span>
+                        <span className="text-sm">
+                          {text || "(quebra de linha)"}
+                        </span>
                       </div>
                     </React.Fragment>
-                  )
+                  ),
                 )}
 
                 {suggestionText2Array(suggestion.text!).map((text, index) => (
                   <React.Fragment key={index}>
                     <div key={index} className="flex items-start gap-2">
-                      <span className="text-sm text-muted-foreground">
-                        {index === 0 ? 'Substituir:' : 'Excluir:'}
+                      <span className="text-muted-foreground text-sm">
+                        {index === 0 ? "Substituir:" : "Excluir:"}
                       </span>
-                      <span className="text-sm">{text || '(quebra de texto)'}</span>
+                      <span className="text-sm">
+                        {text || "(quebra de texto)"}
+                      </span>
                     </div>
                   </React.Fragment>
                 ))}
               </div>
             )}
 
-            {suggestion.type === 'update' && (
+            {suggestion.type === "update" && (
               <div className="flex items-center gap-2">
-                <span className="text-sm text-muted-foreground">
+                <span className="text-muted-foreground text-sm">
                   {Object.keys(suggestion.properties).map((key) => (
                     <span key={key}>Des{key}</span>
                   ))}
@@ -259,7 +263,7 @@ export const BlockSuggestionCard = ({
           <div className="absolute top-4 right-4 flex gap-2">
             <Button
               variant="ghost"
-              className="h-6 p-1 text-muted-foreground"
+              className="text-muted-foreground h-6 p-1"
               onClick={() => accept(suggestion)}
             >
               <CheckIcon className="size-4" />
@@ -267,7 +271,7 @@ export const BlockSuggestionCard = ({
 
             <Button
               variant="ghost"
-              className="h-6 p-1 text-muted-foreground"
+              className="text-muted-foreground h-6 p-1"
               onClick={() => reject(suggestion)}
             >
               <XIcon className="size-4" />
@@ -281,18 +285,18 @@ export const BlockSuggestionCard = ({
         />
       </div>
 
-      {!isLast && <div className="h-px w-full bg-muted" />}
+      {!isLast && <div className="bg-muted h-px w-full" />}
     </div>
   );
 };
 
 export const useResolveSuggestion = (
   suggestionNodes: NodeEntry<TElement | TSuggestionText>[],
-  blockPath: Path
+  blockPath: Path,
 ) => {
   const discussions = useStoreSelect(
     discussionStore,
-    (state) => state.discussions
+    (state) => state.discussions,
   );
 
   const { api, editor, getOption, setOption } =
@@ -300,7 +304,7 @@ export const useResolveSuggestion = (
 
   suggestionNodes.forEach(([node]) => {
     const id = api.suggestion.nodeId(node);
-    const map = getOption('uniquePathMap');
+    const map = getOption("uniquePathMap");
 
     if (!id) return;
 
@@ -317,16 +321,16 @@ export const useResolveSuggestion = (
       }
 
       if (!nodes && lineBreakId !== id) {
-        return setOption('uniquePathMap', new Map(map).set(id, blockPath));
+        return setOption("uniquePathMap", new Map(map).set(id, blockPath));
       }
 
       return;
     }
-    setOption('uniquePathMap', new Map(map).set(id, blockPath));
+    setOption("uniquePathMap", new Map(map).set(id, blockPath));
   });
 
   const resolvedSuggestion: ResolvedSuggestion[] = useMemo(() => {
-    const map = getOption('uniquePathMap');
+    const map = getOption("uniquePathMap");
 
     if (suggestionNodes.length === 0) return [];
 
@@ -336,20 +340,20 @@ export const useResolveSuggestion = (
           if (TextApi.isText(node)) {
             const dataList = api.suggestion.dataList(node);
             const includeUpdate = dataList.some(
-              (data) => data.type === 'update'
+              (data) => data.type === "update",
             );
 
             if (!includeUpdate) return api.suggestion.nodeId(node);
 
             return dataList
-              .filter((data) => data.type === 'update')
+              .filter((data) => data.type === "update")
               .map((d) => d.id);
           }
           if (ElementApi.isElement(node)) {
             return api.suggestion.nodeId(node);
           }
         })
-        .filter(Boolean)
+        .filter(Boolean),
     );
 
     const res: ResolvedSuggestion[] = [];
@@ -365,7 +369,7 @@ export const useResolveSuggestion = (
       const entries = [
         ...editor.api.nodes<TElement | TSuggestionText>({
           at: [],
-          mode: 'all',
+          mode: "all",
           match: (n) =>
             (n[SuggestionPlugin.key] && n[getSuggestionKey(id)]) ||
             api.suggestion.nodeId(n as TElement) === id,
@@ -377,8 +381,8 @@ export const useResolveSuggestion = (
         return PathApi.isChild(path1, path2) ? -1 : 1;
       });
 
-      let newText = '';
-      let text = '';
+      let newText = "";
+      let text = "";
       let properties: any = {};
       let newProperties: any = {};
 
@@ -391,17 +395,17 @@ export const useResolveSuggestion = (
             if (data.id !== id) return;
 
             switch (data.type) {
-              case 'insert': {
+              case "insert": {
                 newText += node.text;
 
                 break;
               }
-              case 'remove': {
+              case "remove": {
                 text += node.text;
 
                 break;
               }
-              case 'update': {
+              case "update": {
                 properties = {
                   ...properties,
                   ...data.properties,
@@ -425,11 +429,11 @@ export const useResolveSuggestion = (
             : undefined;
 
           if (lineBreakData?.id !== keyId2SuggestionId(id)) return;
-          if (lineBreakData.type === 'insert') {
+          if (lineBreakData.type === "insert") {
             newText += lineBreakData.isLineBreak
               ? BLOCK_SUGGESTION
               : BLOCK_SUGGESTION + TYPE_TEXT_MAP[node.type](node);
-          } else if (lineBreakData.type === 'remove') {
+          } else if (lineBreakData.type === "remove") {
             text += lineBreakData.isLineBreak
               ? BLOCK_SUGGESTION
               : BLOCK_SUGGESTION + TYPE_TEXT_MAP[node.type](node);
@@ -450,7 +454,7 @@ export const useResolveSuggestion = (
 
       const keyId = getSuggestionKey(id);
 
-      if (nodeData.type === 'update') {
+      if (nodeData.type === "update") {
         return res.push({
           comments,
           createdAt,
@@ -459,7 +463,7 @@ export const useResolveSuggestion = (
           newText,
           properties,
           suggestionId: keyId2SuggestionId(id),
-          type: 'update',
+          type: "update",
           userId: nodeData.userId,
         });
       }
@@ -471,7 +475,7 @@ export const useResolveSuggestion = (
           newText,
           suggestionId: keyId2SuggestionId(id),
           text,
-          type: 'replace',
+          type: "replace",
           userId: nodeData.userId,
         });
       }
@@ -482,7 +486,7 @@ export const useResolveSuggestion = (
           keyId,
           newText,
           suggestionId: keyId2SuggestionId(id),
-          type: 'insert',
+          type: "insert",
           userId: nodeData.userId,
         });
       }
@@ -493,7 +497,7 @@ export const useResolveSuggestion = (
           keyId,
           suggestionId: keyId2SuggestionId(id),
           text,
-          type: 'remove',
+          type: "remove",
           userId: nodeData.userId,
         });
       }
@@ -513,9 +517,9 @@ export const useResolveSuggestion = (
 };
 
 export const isResolvedSuggestion = (
-  suggestion: ResolvedSuggestion | TDiscussion
+  suggestion: ResolvedSuggestion | TDiscussion,
 ): suggestion is ResolvedSuggestion => {
-  return 'suggestionId' in suggestion;
+  return "suggestionId" in suggestion;
 };
 
 export function BlockSuggestion({ element }: { element: TSuggestionElement }) {
@@ -523,13 +527,13 @@ export function BlockSuggestion({ element }: { element: TSuggestionElement }) {
 
   if (suggestionData?.isLineBreak) return null;
 
-  const isRemove = suggestionData?.type === 'remove';
+  const isRemove = suggestionData?.type === "remove";
 
   return (
     <div
       className={cn(
-        'pointer-events-none absolute inset-0 z-1 border-2 border-brand/[0.8] transition-opacity',
-        isRemove && 'border-gray-300'
+        "border-brand/[0.8] pointer-events-none absolute inset-0 z-1 border-2 transition-opacity",
+        isRemove && "border-gray-300",
       )}
       contentEditable={false}
     />

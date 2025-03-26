@@ -59,7 +59,6 @@ import {
 import { editorPlugins } from "@/components/editor/editor-plugins";
 import { FixedToolbarPlugin } from "@/components/editor/plugins/fixed-toolbar-plugin";
 import { FloatingToolbarPlugin } from "@/components/editor/plugins/floating-toolbar-plugin";
-import { HrElement } from "@/components/plate-ui/hr-element";
 import { SlashInputElement } from "@/components/plate/block-selection/slash-input-element";
 import { BlockquoteElement } from "@/components/plate/blockquote/blockquote-element";
 import { CodeBlockElement } from "@/components/plate/code/code-block-element";
@@ -74,6 +73,7 @@ import { InlineEquationElement } from "@/components/plate/equation/inline-equati
 import { ExcalidrawElement } from "@/components/plate/excalidraw/excalidraw-element";
 import { HeadingElement } from "@/components/plate/heading/heading-element";
 import { HighlightLeaf } from "@/components/plate/highlight/highlight-leaf";
+import { HrElement } from "@/components/plate/hr/hr-element";
 import { KbdLeaf } from "@/components/plate/kdb/kbd-leaf";
 import { LinkElement } from "@/components/plate/link/link-element";
 import { ImageElement } from "@/components/plate/media/image-element";
@@ -81,7 +81,7 @@ import { MediaEmbedElement } from "@/components/plate/media/media-embed-element"
 import { MediaFileElement } from "@/components/plate/media/media-file-element";
 import { MediaPlaceholderElement } from "@/components/plate/media/media-placeholder-element";
 import { ParagraphElement } from "@/components/plate/paragraph/paragraph-element";
-import { withPlaceholders } from "@/components/plate/placeholder";
+import { withPlaceholders } from "@/components/plate/placeholder/placeholder";
 import { SuggestionLeaf } from "@/components/plate/suggestion/suggestion-leaf";
 import {
   TableCellElement,
