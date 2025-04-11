@@ -1,6 +1,16 @@
-import { branchSchema, decoupledBranchSchema, paperSchema } from "@/lib/schema";
+import {
+  branchSchema,
+  commitSchema,
+  decoupledBranchSchema,
+  paperSchema,
+} from "@/lib/schema";
 import { tryCatch } from "@/lib/utils";
-import { branches, decoupledBranches, papers } from "@/server/db/schema";
+import {
+  branches,
+  commits,
+  decoupledBranches,
+  papers,
+} from "@/server/db/schema";
 import { TRPCError } from "@trpc/server";
 import { and, desc, eq } from "drizzle-orm";
 import { z } from "zod";
@@ -22,7 +32,6 @@ export const editorRouter = createTRPCRouter({
             branches: {
               orderBy: desc(branches.updatedAt),
               columns: {
-                content: true,
                 id: true,
                 createdAt: true,
                 referencesCommitId: true,
@@ -51,6 +60,13 @@ export const editorRouter = createTRPCRouter({
           ),
           with: {
             decoupled: true,
+            referencedCommit: {
+              columns: {
+                id: true,
+                name: true,
+                contentState: true,
+              },
+            },
             owner: {
               columns: {
                 id: true,
@@ -88,15 +104,15 @@ export const editorRouter = createTRPCRouter({
   quickSaveContent: protectedProcedure
     .input(
       decoupledBranchSchema.pick({
-        content: true,
+        contentState: true,
         id: true,
       }),
     )
     .mutation(async ({ ctx, input }) => {
-      const [updatedValues, error] = await tryCatch(
+      const [, error] = await tryCatch(
         ctx.db
           .update(decoupledBranches)
-          .set({ content: input.content })
+          .set({ contentState: input.contentState })
           .where(eq(decoupledBranches.id, input.id)),
       );
 
@@ -110,5 +126,104 @@ export const editorRouter = createTRPCRouter({
       return {
         quickSaveSuccess: true,
       };
+    }),
+
+  commit: protectedProcedure
+    .input(
+      z.object({
+        branchId: branchSchema.shape.id,
+        previousCommitId: commitSchema.shape.id,
+
+        data: commitSchema.pick({
+          name: true,
+          description: true,
+          contentState: true,
+        }),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const [data, error] = await tryCatch(
+        ctx.db.transaction(async (tx) => {
+          const workingBranch = await tx.query.branches.findFirst({
+            where: eq(branches.id, input.branchId),
+          });
+
+          if (!workingBranch) {
+            throw new TRPCError({
+              code: "NOT_FOUND",
+              message: "Branch not found",
+            });
+          }
+
+          if (!workingBranch.isEditable) {
+            throw new TRPCError({
+              code: "FORBIDDEN",
+              message: "Branch is not editable",
+            });
+          }
+
+          const previousCommit = await tx.query.commits.findFirst({
+            where: eq(commits.id, input.previousCommitId),
+          });
+
+          if (!previousCommit) {
+            throw new TRPCError({
+              code: "NOT_FOUND",
+              message: "Previous commit not found",
+            });
+          }
+
+          if (previousCommit.paperId !== workingBranch.paperId) {
+            throw new TRPCError({
+              code: "FORBIDDEN",
+              message: "Previous commit does not belong to this paper",
+            });
+          }
+
+          const [createdCommit] = await tx
+            .insert(commits)
+            .values({
+              name: input.data.name,
+              description: input.data.description,
+              contentState: input.data.contentState,
+              madeByUserId: ctx.auth.user.id,
+              previousCommitId: input.previousCommitId,
+              paperId: workingBranch.paperId,
+            })
+            .returning();
+
+          if (!createdCommit) {
+            tx.rollback();
+            throw new TRPCError({
+              code: "INTERNAL_SERVER_ERROR",
+              message: "Error creating commit",
+            });
+          }
+
+          await tx
+            .update(branches)
+            .set({
+              referencesCommitId: createdCommit.id,
+            })
+            .where(and(eq(branches.id, input.branchId)));
+
+          return {
+            commit: createdCommit,
+          };
+        }),
+      );
+
+      if (error) {
+        if (error instanceof TRPCError) {
+          throw error;
+        }
+
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Error creating commit",
+        });
+      }
+
+      return data;
     }),
 });

@@ -132,7 +132,6 @@ export const branches = createTable("branches", {
     () => new Date(),
   ),
   name: text("name").notNull(),
-  content: json("content").notNull(),
   isEditable: boolean("is_editable").notNull(),
   ownerId: varchar("owner_id", { length: 256 }).notNull(),
   paperId: varchar("paper_id", { length: 256 }).notNull(),
@@ -149,7 +148,8 @@ export const commits = createTable("commits", {
     .notNull(),
   name: varchar("name", { length: 256 }).notNull(),
   description: varchar("description", { length: 2048 }).notNull(),
-  changes: json("changes").notNull(),
+  contentState: json("content_state").notNull(),
+  paperId: varchar("paper_id", { length: 256 }).notNull(),
   madeByUserId: varchar("made_by_user_id", { length: 256 }).notNull(),
   previousCommitId: varchar("previous_commit_id", { length: 256 }),
   mergeCommitId: varchar("merge_commit_id", { length: 256 }),
@@ -166,7 +166,7 @@ export const decoupledBranches = createTable("decoupled_branches", {
   updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
     () => new Date(),
   ),
-  content: json("content").notNull(),
+  contentState: json("content_state").notNull(),
   userId: varchar("user_id", { length: 256 }).notNull(),
   branchId: varchar("branch_id", { length: 256 }).notNull(),
 });
@@ -206,6 +206,7 @@ export const papersRelations = relations(papers, ({ one, many }) => ({
     references: [branches.id],
     relationName: "mainBranchFor",
   }),
+  commits: many(commits, { relationName: "paperCommits" }),
   branches: many(branches, { relationName: "paperBranches" }),
 }));
 
@@ -249,6 +250,10 @@ export const commitsRelations = relations(commits, ({ one, many }) => ({
     fields: [commits.mergeCommitId],
     references: [commits.id],
     relationName: "mergedFrom",
+  }),
+  paperId: one(papers, {
+    fields: [commits.paperId],
+    references: [papers.id],
   }),
   mergedFrom: many(commits, { relationName: "mergedFrom" }),
   referencingBranches: many(branches, { relationName: "referencingBranches" }),

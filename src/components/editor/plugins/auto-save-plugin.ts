@@ -27,13 +27,16 @@ export const AutoSavePlugin = createPlatePlugin({
         return;
       }
 
-      const { decoupledBranchId } = editor.getPlugin(EditorStatePlugin).options;
+      const decoupledBranchId = editor.getOption(
+        EditorStatePlugin,
+        "decoupledBranchId",
+      );
       if (!decoupledBranchId) return;
 
       setOption("isSaving", true);
 
       void standaloneApi.editor.quickSaveContent.mutate({
-        content: value,
+        contentState: value,
         id: decoupledBranchId,
       });
 

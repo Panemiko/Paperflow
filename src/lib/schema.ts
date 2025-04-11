@@ -38,7 +38,6 @@ export const branchSchema = baseModelSchema.extend({
     .min(1)
     .max(32)
     .regex(/^[a-zA-Z0-9_-]+$/),
-  content: z.any(),
   isEditable: z.boolean(),
   ownerId: idSchema,
   paperId: idSchema,
@@ -51,14 +50,14 @@ export const commitSchema = z.object({
   createdAt: timestampSchema,
   name: z.string().trim().min(1).max(64),
   description: z.string().trim().min(1).max(2048),
-  changes: z.any(),
+  contentState: z.any(),
   madeByUserId: idSchema,
   previousCommitId: idSchema.nullish(),
   mergeCommitId: idSchema.nullish(),
 });
 
 export const decoupledBranchSchema = baseModelSchema.extend({
-  content: z.any(),
+  contentState: z.any(),
   userId: idSchema,
   branchId: idSchema,
 });

@@ -1,6 +1,11 @@
 import { branchSchema, idSchema } from "@/lib/schema";
 import { tryCatch } from "@/lib/utils";
-import { branches, decoupledBranches, papers } from "@/server/db/schema";
+import {
+  branches,
+  commits,
+  decoupledBranches,
+  papers,
+} from "@/server/db/schema";
 import { TRPCError } from "@trpc/server";
 import { eq } from "drizzle-orm";
 import { z } from "zod";
@@ -22,6 +27,7 @@ export const branchRouter = createTRPCRouter({
           });
 
           if (!originalBranch) {
+            tx.rollback();
             throw new TRPCError({ code: "NOT_FOUND" });
           }
 
@@ -30,30 +36,36 @@ export const branchRouter = createTRPCRouter({
           });
 
           if (!paper) {
+            tx.rollback();
             throw new TRPCError({ code: "NOT_FOUND" });
           }
 
-          const [createdBranch, error] = await tryCatch(
-            tx
-              .insert(branches)
-              .values({
-                name: input.data.name,
-                ownerId: ctx.auth.user.id,
-                isEditable: true,
-                paperId: paper.id,
-                content: originalBranch.content,
-                referencesCommitId: originalBranch.referencesCommitId,
-              })
-              .returning(),
-          );
+          const createdBranch = await tx
+            .insert(branches)
+            .values({
+              name: input.data.name,
+              ownerId: ctx.auth.user.id,
+              isEditable: true,
+              paperId: paper.id,
+              referencesCommitId: originalBranch.referencesCommitId,
+            })
+            .returning();
 
-          if (error || !createdBranch[0]) {
+          if (!createdBranch[0]) {
+            tx.rollback();
             throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
           }
 
+          // only gather the referenced commit if it exists
+          const referencedCommit = createdBranch[0].referencesCommitId
+            ? await tx.query.commits.findFirst({
+                where: eq(commits.id, createdBranch[0].referencesCommitId),
+              })
+            : null;
+
           await tx.insert(decoupledBranches).values({
             branchId: createdBranch[0].id,
-            content: createdBranch[0].content,
+            contentState: referencedCommit?.contentState ?? [],
             userId: ctx.auth.user.id,
           });
 

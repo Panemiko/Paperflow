@@ -82,7 +82,6 @@ export const paperRouter = createTRPCRouter({
         const [mainBranch] = await tx
           .insert(branches)
           .values({
-            content: defaultPaperContent,
             name: input.mainBranch.name,
             ownerId: ctx.auth.user.id,
             paperId: createdPaper.id,
@@ -102,12 +101,28 @@ export const paperRouter = createTRPCRouter({
           })
           .where(eq(papers.id, createdPaper.id));
 
-        await tx.insert(commits).values({
-          name: "Conteúdo inicial",
-          description: "Explicação básica de como usar o Paperflow.",
-          changes: defaultPaperContent,
-          madeByUserId: ctx.auth.user.id,
-        });
+        const [firstCommit] = await tx
+          .insert(commits)
+          .values({
+            name: "Conteúdo inicial",
+            description: "Explicação básica de como usar o Paperflow.",
+            contentState: defaultPaperContent,
+            madeByUserId: ctx.auth.user.id,
+            paperId: createdPaper.id,
+          })
+          .returning();
+
+        if (!firstCommit) {
+          tx.rollback();
+          throw new Error("Failed to create first commit");
+        }
+
+        await tx
+          .update(branches)
+          .set({
+            referencesCommitId: firstCommit.id,
+          })
+          .where(eq(branches.id, mainBranch.id));
 
         return {
           paper: {

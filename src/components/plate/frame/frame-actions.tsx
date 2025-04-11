@@ -16,7 +16,7 @@ export function FrameActions() {
   return (
     <div className="flex items-center gap-2">
       {!readOnly && (
-        <span className="text-foreground/70 mr-10 text-xs">
+        <span className="text-foreground/70 mr-3 text-xs">
           {isSaving ? "Salvando..." : "Salvo"}
         </span>
       )}

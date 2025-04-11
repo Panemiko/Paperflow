@@ -45,8 +45,8 @@ export default async function Page({
       paper={{ mainBranch: paperMainBranch!, ...paper }}
       workingBranch={workingBranch}
       defaultContent={
-        ((editorContent.workingBranch.decoupled[0]?.content as Value) ||
-          (editorContent.workingBranch.content as Value)) ??
+        ((editorContent.workingBranch.decoupled[0]?.contentState as Value) ||
+          (editorContent.workingBranch.referencedCommit?.contentState as Value)) ??
         []
       }
     />
