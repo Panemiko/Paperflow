@@ -26,6 +26,7 @@ import { api } from "@/trpc/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEditorState } from "@udecode/plate/react";
 import { GalleryHorizontalEndIcon, GitCommit } from "lucide-react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -52,6 +53,7 @@ export function CommitCreationMenu({
 
   const editor = useEditorState();
   const { mutateAsync: commit } = api.editor.commit.useMutation();
+  const [sheetOpen, setSheetOpen] = useState(false);
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
     const [response, error] = await tryCatch(
@@ -72,10 +74,16 @@ export function CommitCreationMenu({
       });
       return;
     }
+
+    form.reset();
+    setSheetOpen(false);
+    toast.success("Commit criado com sucesso!", {
+      description: "O commit foi criado com sucesso.",
+    });
   }
 
   return (
-    <Sheet>
+    <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
       <SheetTrigger asChild>
         <Button size="sm">
           <GalleryHorizontalEndIcon />

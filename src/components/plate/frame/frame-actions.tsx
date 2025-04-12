@@ -1,8 +1,10 @@
 "use client";
 
 import { EditorStatePlugin } from "@/components/editor/plugins/editor-state-plugin";
+import { Separator } from "@/components/ui/separator";
 import { usePlateValue, usePluginOption } from "@udecode/plate/react";
 import { AutoSavePlugin } from "../../editor/plugins/auto-save-plugin";
+import { BranchActions } from "./branch-actions";
 import { CommitCreationMenu } from "./commit-creation-menu";
 import { NewBranchDialog } from "./new-branch-dialog";
 import { ViewCommits } from "./view-commits";
@@ -35,9 +37,9 @@ export function FrameActions() {
         )}
       </div>
 
-      {/* <div className="h-5">
+      <div className="h-5 px-4">
         <Separator orientation="vertical" />
-      </div> */}
+      </div>
 
       {workingBranch?.isEditable && workingBranch.referencesCommitId && (
         <CommitCreationMenu
@@ -45,6 +47,10 @@ export function FrameActions() {
           previousCommitId={workingBranch.referencesCommitId}
         />
       )}
+
+      <div>
+        <BranchActions />
+      </div>
     </div>
   );
 }

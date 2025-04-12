@@ -1,5 +1,7 @@
+import { env } from "@/env";
 import { branchSchema, paperSchema, userSchema } from "@/lib/schema";
 import { tryCatch } from "@/lib/utils";
+import { defaultPaperValue } from "@/mock/default-paper";
 import { branches, commits, papers } from "@/server/db/schema";
 import { TRPCError } from "@trpc/server";
 import { desc, eq } from "drizzle-orm";
@@ -7,6 +9,10 @@ import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 
 async function generateDefaultPaperContent(title: string, userName: string) {
+  if (env.NODE_ENV !== "production") {
+    return defaultPaperValue;
+  }
+
   return [
     {
       children: [

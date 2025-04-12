@@ -12,7 +12,7 @@ export function ViewCommits() {
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button size="smIcon" variant="outline">
+          <Button size="smIcon" variant="ghost">
             <HistoryIcon />
           </Button>
         </TooltipTrigger>

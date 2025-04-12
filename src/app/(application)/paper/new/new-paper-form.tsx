@@ -17,7 +17,7 @@ import { tryCatch } from "@/lib/utils";
 import { api } from "@/trpc/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PlusIcon } from "lucide-react";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -44,6 +44,7 @@ export function NewPaperForm() {
   });
 
   const { mutateAsync: createPaper } = api.paper.create.useMutation();
+  const router = useRouter();
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
     const [result, error] = await tryCatch(
@@ -63,7 +64,8 @@ export function NewPaperForm() {
       return;
     }
 
-    redirect(`/${result.paper.slug}/${result.branch.name}`);
+    router.push(`/${result.paper.slug}/${result.branch.name}`);
+    router.refresh();
   }
 
   return (

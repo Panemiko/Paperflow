@@ -27,6 +27,7 @@ interface PaperEditorProps {
     name: string;
     isMainBranch: boolean;
     isEditable: boolean;
+    referencesCommitId: string | null;
     decoupled: {
       id: string;
     }[];
@@ -59,7 +60,7 @@ export function EditorInstance({
   }, [decoupledBranch?.id]);
 
   useEffect(() => {
-    editorStatePlugin.setOption("workingBranch", workingBranch || null);
+    return editorStatePlugin.setOption("workingBranch", workingBranch || null);
   }, [workingBranch]);
 
   return <Editor variant="default" />;

@@ -84,7 +84,7 @@ export function NewBranchDialog({
           <DialogTrigger asChild>
             {iconButton ? (
               <TooltipTrigger asChild>
-                <Button size="smIcon" variant="outline">
+                <Button size="smIcon" variant="ghost">
                   <GitForkIcon />
                 </Button>
               </TooltipTrigger>
