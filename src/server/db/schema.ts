@@ -251,9 +251,10 @@ export const commitsRelations = relations(commits, ({ one, many }) => ({
     references: [commits.id],
     relationName: "mergedFrom",
   }),
-  paperId: one(papers, {
+  paper: one(papers, {
     fields: [commits.paperId],
     references: [papers.id],
+    relationName: "paperCommits",
   }),
   mergedFrom: many(commits, { relationName: "mergedFrom" }),
   referencingBranches: many(branches, { relationName: "referencingBranches" }),
