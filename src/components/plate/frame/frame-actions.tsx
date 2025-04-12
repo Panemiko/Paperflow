@@ -39,7 +39,12 @@ export function FrameActions() {
         <Separator orientation="vertical" />
       </div> */}
 
-      {workingBranch?.isEditable && <CommitCreationMenu />}
+      {workingBranch?.isEditable && workingBranch.referencesCommitId && (
+        <CommitCreationMenu
+          workingBranchId={workingBranch.id}
+          previousCommitId={workingBranch.referencesCommitId}
+        />
+      )}
     </div>
   );
 }

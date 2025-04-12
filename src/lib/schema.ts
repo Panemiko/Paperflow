@@ -49,7 +49,7 @@ export const commitSchema = z.object({
   id: idSchema,
   createdAt: timestampSchema,
   name: z.string().trim().min(1).max(64),
-  description: z.string().trim().min(1).max(2048),
+  description: z.string().trim().max(2048),
   contentState: z.any(),
   madeByUserId: idSchema,
   previousCommitId: idSchema.nullish(),

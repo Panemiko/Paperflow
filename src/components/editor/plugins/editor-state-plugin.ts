@@ -14,6 +14,7 @@ export const EditorStatePlugin = createPlatePlugin({
       name: string;
       isMainBranch: boolean;
       isEditable: boolean;
+      referencesCommitId: string | null;
       decoupled: { id: string }[];
     } | null,
   },

@@ -184,10 +184,10 @@ export const editorRouter = createTRPCRouter({
             .insert(commits)
             .values({
               name: input.data.name,
-              description: input.data.description,
-              contentState: input.data.contentState,
+              description: input.data.description ?? null,
+              contentState: input.data.contentState ?? [],
               madeByUserId: ctx.auth.user.id,
-              previousCommitId: input.previousCommitId,
+              previousCommitId: input.previousCommitId ?? null,
               paperId: workingBranch.paperId,
             })
             .returning();

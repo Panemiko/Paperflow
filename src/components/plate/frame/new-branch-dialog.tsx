@@ -30,7 +30,7 @@ import { tryCatch } from "@/lib/utils";
 import { api } from "@/trpc/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { GitBranchPlusIcon, GitForkIcon } from "lucide-react";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { type z } from "zod";
@@ -52,6 +52,7 @@ export function NewBranchDialog({
   });
 
   const { mutateAsync: forkBranch } = api.branch.fork.useMutation();
+  const router = useRouter();
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
     const [response, error] = await tryCatch(
@@ -70,32 +71,33 @@ export function NewBranchDialog({
       return;
     }
 
-    redirect(
-      `/${response.createdBranch.paper.slug}/${response.createdBranch.name}`,
-    );
+    const nextUrl = `/${response.createdBranch.paper.slug}/${response.createdBranch.name}`;
+
+    router.push(nextUrl);
+    router.refresh();
   }
 
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        {iconButton ? (
-          <TooltipProvider>
-            <Tooltip>
+      <TooltipProvider>
+        <Tooltip>
+          <DialogTrigger asChild>
+            {iconButton ? (
               <TooltipTrigger asChild>
                 <Button size="smIcon" variant="outline">
                   <GitForkIcon />
                 </Button>
               </TooltipTrigger>
-              <TooltipContent>Fazer fork</TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-        ) : (
-          <Button size="sm">
-            <GitForkIcon />
-            Fazer fork
-          </Button>
-        )}
-      </DialogTrigger>
+            ) : (
+              <Button size="sm">
+                <GitForkIcon />
+                Fazer fork
+              </Button>
+            )}
+          </DialogTrigger>
+          <TooltipContent>Fazer fork</TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Criar branch</DialogTitle>
