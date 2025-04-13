@@ -19,7 +19,7 @@ export function BranchActions() {
       <PopoverAnchor>
         <PopoverTrigger asChild>
           <Button
-            variant="outline"
+            variant="ghost"
             size="icon"
             className="data-[state=open]:bg-accent h-7 w-7"
           >

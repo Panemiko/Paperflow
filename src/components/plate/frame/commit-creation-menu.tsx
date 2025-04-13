@@ -85,7 +85,7 @@ export function CommitCreationMenu({
   return (
     <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
       <SheetTrigger asChild>
-        <Button size="sm">
+        <Button>
           <GalleryHorizontalEndIcon />
           Commit
         </Button>

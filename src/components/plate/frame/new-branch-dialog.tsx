@@ -89,7 +89,7 @@ export function NewBranchDialog({
                 </Button>
               </TooltipTrigger>
             ) : (
-              <Button size="sm">
+              <Button>
                 <GitForkIcon />
                 Fazer fork
               </Button>
