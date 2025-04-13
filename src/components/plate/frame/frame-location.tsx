@@ -1,8 +1,13 @@
 "use client";
 import { AutoSavePlugin } from "@/components/editor/plugins/auto-save-plugin";
 import { EditorStatePlugin } from "@/components/editor/plugins/editor-state-plugin";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
 import { usePlateValue, usePluginOption } from "@udecode/plate/react";
-import { CheckIcon, Loader2Icon, PenOffIcon } from "lucide-react";
+import { CheckIcon, InfoIcon, Loader2Icon, PenOffIcon } from "lucide-react";
 
 export function FrameLocation() {
   const paper = usePluginOption(EditorStatePlugin, "paper");
@@ -25,16 +30,35 @@ export function FrameLocation() {
         </span>
         {!readOnly && (
           <span className="text-foreground/70 mt-1 text-xs">
-            {isSaving ? (
-              <span className="flex items-center gap-0.5">
-                <Loader2Icon className="text-foreground/50 size-3 animate-spin" />{" "}
-                Salvando...
-              </span>
-            ) : (
-              <span className="flex items-center gap-0.5">
-                <CheckIcon className="text-foreground/50 size-3" /> Salvo
-              </span>
-            )}
+            <HoverCard>
+              <HoverCardTrigger asChild>
+                {isSaving ? (
+                  <span className="flex items-center gap-0.5">
+                    <Loader2Icon className="text-foreground/50 size-3 animate-spin" />{" "}
+                    Salvando...
+                  </span>
+                ) : (
+                  <span className="flex items-center gap-0.5">
+                    <CheckIcon className="text-foreground/50 size-3" /> Salvo
+                  </span>
+                )}
+              </HoverCardTrigger>
+              <HoverCardContent side="right" align="start">
+                <InfoIcon className="text-primary mb-1 size-6" />
+                <span className="text-primary mb-3 block">
+                  O seu documento{" "}
+                  {isSaving ? "está sendo salvo..." : "foi salvo com sucesso!"}
+                </span>
+                <p className="text-foreground/70 mb-1 text-sm">
+                  As alterações do seu projeto são salvas conforme você digita
+                  apenas para sua visualização.
+                </p>
+                <p className="text-foreground/70 text-sm">
+                  Para compartilhar o estado do seu documento com seus colegas,
+                  faça um commit.
+                </p>
+              </HoverCardContent>
+            </HoverCard>
           </span>
         )}
         {workingBranch.isMainBranch && (
