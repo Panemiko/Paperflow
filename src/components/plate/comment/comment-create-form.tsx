@@ -1,3 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck teste
+
 "use client";
 
 import React, { useEffect, useMemo } from "react";

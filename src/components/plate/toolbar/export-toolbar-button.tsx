@@ -70,7 +70,6 @@ import { useEditorRef } from "@udecode/plate/react";
 import { all, createLowlight } from "lowlight";
 import { ArrowDownToLineIcon } from "lucide-react";
 
-import { HrElementStatic } from "@/components/plate-ui/hr-element-static";
 import { BlockquoteElementStatic } from "@/components/plate/blockquote/blockquote-element-static";
 import { CodeBlockElementStatic } from "@/components/plate/code/code-block-element-static";
 import { CodeLeafStatic } from "@/components/plate/code/code-leaf-static";
@@ -79,9 +78,9 @@ import { CodeSyntaxLeafStatic } from "@/components/plate/code/code-syntax-leaf-s
 import { ColumnElementStatic } from "@/components/plate/columns/column-element-static";
 import { ColumnGroupElementStatic } from "@/components/plate/columns/column-group-element-static";
 import { CommentLeafStatic } from "@/components/plate/comment/comment-leaf-static";
-import { DateElementStatic } from "@/components/plate/date-element-static";
 import { HeadingElementStatic } from "@/components/plate/heading/heading-element-static";
 import { HighlightLeafStatic } from "@/components/plate/highlight/highlight-leaf-static";
+import { HrElementStatic } from "@/components/plate/hr/hr-element-static";
 import {
   FireLiComponent,
   FireMarker,
@@ -105,7 +104,8 @@ import {
 import { TableElementStatic } from "@/components/plate/table/table-element-static";
 import { TableRowElementStatic } from "@/components/plate/table/table-row-element-static";
 import { TocElementStatic } from "@/components/plate/toc/toc-element-static";
-import { ToggleElementStatic } from "@/components/plate/toggle-element-static";
+import { DateElementStatic } from "@/components/plate/ui/date-element-static";
+import { ToggleElementStatic } from "@/components/plate/ui/toggle-element-static";
 
 import { EditorStatic } from "../editor-static";
 import { EquationElementStatic } from "../equation/equation-element-static";

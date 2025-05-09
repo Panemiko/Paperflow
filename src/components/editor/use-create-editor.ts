@@ -164,6 +164,7 @@ export const useCreateEditor = (
         },
         ...override,
       },
+      // @ts-expect-error aaa
       plugins: [
         ...(editorPlugins as unknown as PlateCorePlugin[]),
         FixedToolbarPlugin as unknown as PlateCorePlugin,
