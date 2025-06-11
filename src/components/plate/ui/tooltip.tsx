@@ -2,29 +2,15 @@
 
 import React from "react";
 
-import * as TooltipPrimitive from "@radix-ui/react-tooltip";
-import { withCn, withProps } from "@udecode/cn";
+import type * as TooltipPrimitive from "@radix-ui/react-tooltip";
 
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { Button } from "./button";
-
-export const TooltipProvider = withProps(TooltipPrimitive.Provider, {
-  delayDuration: 0,
-  disableHoverableContent: true,
-  skipDelayDuration: 0,
-});
-
-export const Tooltip = TooltipPrimitive.Root;
-
-export const TooltipTrigger = TooltipPrimitive.Trigger;
-
-export const TooltipPortal = TooltipPrimitive.Portal;
-
-export const TooltipContent = withCn(
-  withProps(TooltipPrimitive.Content, {
-    sideOffset: 4,
-  }),
-  "z-50 overflow-hidden rounded-md bg-black px-3 py-1.5 text-sm font-semibold text-white shadow-md",
-);
 
 type TooltipProps<T extends React.ElementType> = {
   delayDuration?: number;
@@ -75,11 +61,7 @@ export function withTooltip<T extends React.ElementType>(Component: T) {
               {component}
             </TooltipTrigger>
 
-            <TooltipPortal>
-              <TooltipContent {...tooltipContentProps}>
-                {tooltip}
-              </TooltipContent>
-            </TooltipPortal>
+            <TooltipContent {...tooltipContentProps}>{tooltip}</TooltipContent>
           </Tooltip>
         </TooltipProvider>
       );

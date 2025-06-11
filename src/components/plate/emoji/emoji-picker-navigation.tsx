@@ -3,13 +3,13 @@ import type { UseEmojiPickerType } from '@udecode/plate-emoji/react';
 
 import { cn } from '@udecode/cn';
 
-import { Button } from '../ui/button';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '../ui/tooltip';
+} from '@/components/ui/tooltip';
+import { Button } from '../ui/button';
 
 export type EmojiPickerNavigationProps = {
   onClick: (id: EmojiCategoryList) => void;

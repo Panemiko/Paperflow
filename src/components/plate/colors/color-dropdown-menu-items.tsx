@@ -7,14 +7,14 @@ import type { DropdownMenuItemProps } from '@radix-ui/react-dropdown-menu';
 import { cn } from '@udecode/cn';
 import { Check } from 'lucide-react';
 
-import { buttonVariants } from '../ui/button';
-import { DropdownMenuItem } from '../ui/dropdown-menu';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '../ui/tooltip';
+} from '@/components/ui/tooltip';
+import { buttonVariants } from '../ui/button';
+import { DropdownMenuItem } from '../ui/dropdown-menu';
 
 export type TColor = {
   isBrightColor: boolean;
