@@ -95,7 +95,8 @@ export function MediaToolbarButton({
   const { openFilePicker } = useFilePicker({
     accept: currentConfig?.accept,
     multiple: true,
-    onFilesSelected: ({ plainFiles: updatedFiles }: { plainFiles: File[] }) => {
+    onFilesSelected: (data: any) => {
+      const updatedFiles: File[] = (data?.plainFiles ?? []) as File[];
       // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       (
         editor.tf as unknown as { insert: { media(files: File[]): void } }

@@ -81,11 +81,8 @@ export const MediaPlaceholderElement = withHOC(
     const { openFilePicker } = useFilePicker({
       accept: currentContent?.accept,
       multiple: true,
-      onFilesSelected: ({
-        plainFiles: updatedFiles,
-      }: {
-        plainFiles: File[];
-      }) => {
+      onFilesSelected: (data: any) => {
+        const updatedFiles: File[] = (data?.plainFiles ?? []) as File[];
         const firstFile = updatedFiles[0];
 
         if (!firstFile) return;
