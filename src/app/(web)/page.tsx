@@ -1,9 +1,14 @@
 "use client";
 
 import { CommitHistory } from "@/components/commit-history";
-import { FeatureBlock } from "@/components/feature-block";
+import { LiveEditor } from "@/components/live-editor";
 import { MaxWidth } from "@/components/max-width";
-import { SplitCanvas } from "@/components/split-canvas";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { WaitlistForm } from "@/components/waitlist-form";
 import { motion } from "framer-motion";
 
@@ -200,6 +205,31 @@ const faqs = [
     answer:
       "Paperflow is built as a cloud-native web application that works beautifully on desktop and tablet browsers. We are currently developing dedicated native apps for macOS and iPadOS for offline-first writing.",
   },
+  {
+    question: "How does the 'verified authorship' work?",
+    answer:
+      "We track the entropy of your keystrokes and session patterns to create a unique behavioral signature. This is then cryptographically hashed and stored alongside your version history, allowing you to prove that the work was created by a human in real-time.",
+  },
+  {
+    question: "Is there a limit to how many branches I can create?",
+    answer:
+      "No. Branch as much as you need. Whether you're exploring three different endings or fifty minor plot variations, Paperflow is built to handle complex narrative structures without slowing down.",
+  },
+  {
+    question: "Can I work offline?",
+    answer:
+      "Yes. Our upcoming native desktop applications are built with an offline-first architecture. Your work is saved locally and synced automatically once you're back online, with built-in conflict resolution to ensure no data loss.",
+  },
+  {
+    question: "Does Paperflow support Markdown?",
+    answer:
+      "Yes. Every manuscript is stored as a collection of Markdown files. You can export your work at any time and it will be perfectly readable by any text editor.",
+  },
+  {
+    question: "Who is Paperflow for?",
+    answer:
+      "Serious authors who value their craft, their data, and their legacy. If you're tired of being treated as a data point for AI training and want a tool that respects the sanctity of the writing process, Paperflow is for you.",
+  },
 ];
 
 export default function Home() {
@@ -275,7 +305,7 @@ export default function Home() {
       </section>
 
       {/* Section 3: The Logic (Split Canvas) */}
-      <section className="py-24 lg:py-32 border-b border-border">
+      <section id="mechanism" className="py-24 lg:py-32 border-b border-border">
         <MaxWidth>
           <motion.div
             className="mb-16"
@@ -292,7 +322,7 @@ export default function Home() {
             </h2>
           </motion.div>
 
-          <SplitCanvas />
+          <LiveEditor />
 
           <motion.p
             className="mt-12 text-center font-mono text-xs text-muted-foreground max-w-xl mx-auto"
@@ -307,7 +337,7 @@ export default function Home() {
       </section>
 
       {/* Section 4: Philosophy */}
-      <section className="py-24 lg:py-32 bg-secondary/30">
+      <section id="philosophy" className="py-24 lg:py-32 bg-secondary/30">
         <MaxWidth>
           <div className="max-w-3xl mx-auto text-center">
             <motion.div
@@ -428,7 +458,10 @@ export default function Home() {
       </section>
 
       {/* Section 6: Our Stance (No-AI) */}
-      <section className="py-24 lg:py-32 bg-foreground text-background">
+      <section
+        id="ethics"
+        className="py-24 lg:py-32 bg-foreground text-background"
+      >
         <MaxWidth>
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div>
@@ -626,81 +659,6 @@ export default function Home() {
         </MaxWidth>
       </section>
 
-      {/* Section 9: Architecture */}
-      <section className="py-24 lg:py-32 bg-secondary/30">
-        <MaxWidth>
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
-            <FeatureBlock
-              label="08 / Architecture"
-              title="Infrastructure That Outlasts Trends"
-              description="Paperflow is built on decades-old, battle-tested foundations. No magic. No black boxes. Just reliable engineering that will work when you're revising your manuscript in 2040."
-            >
-              <div className="grid grid-cols-2 gap-4 mt-8">
-                {[
-                  { label: "Data Model", value: "Append-Only" },
-                  { label: "Storage", value: "Cloud-Native" },
-                  { label: "Sync", value: "Conflict-Free" },
-                  { label: "Encryption", value: "E2E AES-256" },
-                ].map((item) => (
-                  <motion.div
-                    key={item.label}
-                    className="border border-border p-4 bg-background"
-                    whileHover={{ borderColor: "var(--primary)" }}
-                  >
-                    <p className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground mb-1">
-                      {item.label}
-                    </p>
-                    <p className="font-mono text-sm text-foreground font-medium">
-                      {item.value}
-                    </p>
-                  </motion.div>
-                ))}
-              </div>
-            </FeatureBlock>
-
-            <div className="lg:pt-20">
-              <motion.div
-                className="border border-border bg-card p-6 font-mono text-xs"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-              >
-                <p className="text-muted-foreground mb-2">// What we believe</p>
-                <p className="text-foreground">
-                  <span className="text-primary">const</span> principles = {"{"}
-                </p>
-                <p className="pl-4 text-foreground">
-                  yourDataYourControl:{" "}
-                  <span className="text-primary">true</span>,
-                </p>
-                <p className="pl-4 text-foreground">
-                  syncWithNeutrality: <span className="text-primary">true</span>
-                  ,
-                </p>
-                <p className="pl-4 text-foreground">
-                  readableFormats: <span className="text-primary">true</span>,
-                </p>
-                <p className="pl-4 text-foreground">
-                  noVendorLockin: <span className="text-primary">true</span>,
-                </p>
-                <p className="text-foreground">{"}"}</p>
-              </motion.div>
-
-              <motion.p
-                className="mt-6 text-sm text-muted-foreground leading-relaxed"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-              >
-                Your manuscripts are stored in open text formats. Even if you
-                decide to leave, your entire creative evolution remains portable
-                and accessible.
-              </motion.p>
-            </div>
-          </div>
-        </MaxWidth>
-      </section>
-
       {/* Section 10: Testimonials */}
       <section className="py-24 lg:py-32 border-t border-border">
         <MaxWidth>
@@ -711,7 +669,7 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
-              09 / Writers Speak
+              08 / Writers Speak
             </span>
             <h2 className="mt-4 font-serif text-3xl md:text-4xl font-bold text-foreground">
               Early Voices
@@ -756,7 +714,7 @@ export default function Home() {
       </section>
 
       {/* Section 11: FAQ */}
-      <section className="py-24 lg:py-32 border-t border-border">
+      <section id="faq" className="py-24 lg:py-32 border-t border-border">
         <MaxWidth>
           <div className="grid lg:grid-cols-3 gap-12">
             <div className="lg:col-span-1">
@@ -766,7 +724,7 @@ export default function Home() {
                 viewport={{ once: true }}
               >
                 <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
-                  10 / Clarifications
+                  09 / Clarifications
                 </span>
                 <h2 className="mt-4 font-serif text-3xl md:text-4xl font-bold text-foreground text-balance">
                   Common Questions
@@ -778,23 +736,30 @@ export default function Home() {
               </motion.div>
             </div>
 
-            <div className="lg:col-span-2 space-y-12 text-left">
-              {faqs.map((faq, index) => (
-                <motion.div
-                  key={faq.question}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <h3 className="font-serif text-xl font-semibold text-foreground mb-4">
-                    {faq.question}
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {faq.answer}
-                  </p>
-                </motion.div>
-              ))}
+            <div className="lg:col-span-2">
+              <Accordion type="single" collapsible className="w-full">
+                {faqs.map((faq, index: number) => (
+                  <motion.div
+                    key={faq.question}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.05 }}
+                  >
+                    <AccordionItem
+                      value={`item-${index}`}
+                      className="border-border"
+                    >
+                      <AccordionTrigger className="font-serif text-lg py-6 hover:no-underline hover:text-primary transition-colors">
+                        {faq.question}
+                      </AccordionTrigger>
+                      <AccordionContent className="text-muted-foreground text-base leading-relaxed pb-8">
+                        {faq.answer}
+                      </AccordionContent>
+                    </AccordionItem>
+                  </motion.div>
+                ))}
+              </Accordion>
             </div>
           </div>
         </MaxWidth>
@@ -813,7 +778,7 @@ export default function Home() {
               viewport={{ once: true }}
             >
               <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-background/50">
-                11 / Final Draft
+                10 / Final Draft
               </span>
               <h2 className="mt-4 font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-background leading-tight text-balance">
                 Ready to elevate your prose?

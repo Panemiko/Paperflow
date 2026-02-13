@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { ArrowRight, Check, Loader2 } from "lucide-react";
+import { ArrowRight, Check, Loader2, Mail } from "lucide-react";
 import React, { useState } from "react";
 
 export function WaitlistForm({
@@ -33,14 +33,17 @@ export function WaitlistForm({
   if (variant === "compact") {
     return (
       <form onSubmit={handleSubmit} className="flex gap-3">
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="your@email.com"
-          className="flex-1 px-4 py-3 border-2 border-border bg-card text-foreground font-mono text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
-          required
-        />
+        <div className="relative flex-1">
+          <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="your@email.com"
+            className="w-full pl-11 pr-4 py-3 border-2 border-border bg-card text-foreground font-mono text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
+            required
+          />
+        </div>
         <Button
           type="submit"
           disabled={status === "loading"}
@@ -68,14 +71,17 @@ export function WaitlistForm({
     return (
       <form onSubmit={handleSubmit} className="w-full max-w-xl">
         <div className="flex flex-col sm:flex-row gap-3">
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email"
-            className="flex-1 px-5 py-4 border-2 border-background/20 bg-background/5 text-background font-mono text-sm placeholder:text-background/40 focus:outline-none focus:border-primary transition-colors"
-            required
-          />
+          <div className="relative flex-1">
+            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-background/40" />
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+              className="w-full pl-11 pr-5 py-4 border-2 border-background/20 bg-background/5 text-background font-mono text-sm placeholder:text-background/40 focus:outline-none focus:border-primary transition-colors"
+              required
+            />
+          </div>
           <Button
             type="submit"
             variant="dark"
@@ -121,12 +127,13 @@ export function WaitlistForm({
     <form onSubmit={handleSubmit} className="w-full max-w-xl">
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1">
+          <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
-            className="w-full px-5 py-4 border-2 border-border bg-card text-foreground font-mono text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
+            className="w-full pl-11 pr-5 py-4 border-2 border-border bg-card text-foreground font-mono text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
             required
           />
         </div>

@@ -17,6 +17,22 @@ export function Header() {
             Paperflow
           </span>
         </div>
+        <nav className="hidden md:flex items-center gap-8">
+          {[
+            { label: "Mechanism", href: "#mechanism" },
+            { label: "Philosophy", href: "#philosophy" },
+            { label: "Ethics", href: "#ethics" },
+            { label: "FAQ", href: "#faq" },
+          ].map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
         <div className="flex items-center gap-6">
           <Button asChild className="group">
             <a href="#waitlist">
