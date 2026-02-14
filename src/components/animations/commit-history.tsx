@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useInView } from "framer-motion";
 import { ChevronDown, GitBranchIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
@@ -250,10 +250,12 @@ export function CommitHistory() {
   const [isHovered, setIsHovered] = useState(false);
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const counterRef = useRef(0);
+  const containerRef = useRef(null);
+  const isInView = useInView(containerRef, { once: true, amount: 0.5 });
 
   // Sync animation clock
   useEffect(() => {
-    if (isHovered || expandedId) return;
+    if (isHovered || expandedId || !isInView) return;
 
     // Resume from the FIRST item (most recently added in a top-feed)
     const firstItem = items[0];
@@ -281,7 +283,7 @@ export function CommitHistory() {
     }, 4000);
 
     return () => clearInterval(interval);
-  }, [isHovered, expandedId]);
+  }, [isHovered, expandedId, isInView]);
 
   const transition = {
     duration: 0.8,
@@ -290,6 +292,7 @@ export function CommitHistory() {
 
   return (
     <div
+      ref={containerRef}
       className="border border-border bg-card shadow-xl relative"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}

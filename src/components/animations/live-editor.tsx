@@ -203,7 +203,7 @@ export function LiveEditor() {
 
     runSimulation();
     return () => clearTimeout(timeout);
-  }, [phase, displaySegments, commitName, stepIndex, commits]);
+  }, [phase, displaySegments, commitName, stepIndex, commits, isInView]);
 
   return (
     <div

@@ -1,10 +1,10 @@
 "use client";
 
-import { CommentVisual } from "@/components/comment-visual";
-import { CommitHistory } from "@/components/commit-history";
-import { LiveEditor } from "@/components/live-editor";
+import { CommentVisual } from "@/components/animations/comment-visual";
+import { CommitHistory } from "@/components/animations/commit-history";
+import { LiveEditor } from "@/components/animations/live-editor";
+import { PhilosophyVisual } from "@/components/animations/philosophy-visual";
 import { MaxWidth } from "@/components/max-width";
-import { PhilosophyVisual } from "@/components/philosophy-visual";
 import {
   Accordion,
   AccordionContent,

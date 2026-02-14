@@ -1,7 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { motion, useInView } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
 interface PhilosophyVisualProps {
   activeIndex: number | null;
@@ -9,23 +9,28 @@ interface PhilosophyVisualProps {
 
 export function PhilosophyVisual({ activeIndex }: PhilosophyVisualProps) {
   const [internalIndex, setInternalIndex] = useState(0);
+  const containerRef = useRef(null);
+  const isInView = useInView(containerRef, { once: true, amount: 0.5 });
 
   // Auto-cycle index through all 4 stages when not hovering
   useEffect(() => {
-    if (activeIndex !== null) return;
+    if (activeIndex !== null || !isInView) return;
 
     const interval = setInterval(() => {
       setInternalIndex((prev) => (prev + 1) % 4);
     }, 4000);
 
     return () => clearInterval(interval);
-  }, [activeIndex]);
+  }, [activeIndex, isInView]);
 
   // Stage 0: Draft, 1: Diverge, 2: Compare, 3: Merge
   const effectiveStage = activeIndex !== null ? activeIndex + 1 : internalIndex;
 
   return (
-    <div className="relative w-full h-48 flex items-center justify-center overflow-hidden">
+    <div
+      ref={containerRef}
+      className="relative w-full h-48 flex items-center justify-center overflow-hidden"
+    >
       {/* Background Architectural Grid */}
       <div className="absolute inset-0 flex justify-between px-4 opacity-10 pointer-events-none">
         {[...Array(5)].map((_, i) => (
