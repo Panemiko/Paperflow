@@ -1,8 +1,8 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
-import { useEffect, useState } from "react";
+import { ChevronDown, GitBranchIcon } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 const getDate = (daysAgo: number) => {
   const date = new Date();
@@ -249,38 +249,39 @@ export function CommitHistory() {
   );
   const [isHovered, setIsHovered] = useState(false);
   const [expandedId, setExpandedId] = useState<string | null>(null);
-  const [copiedHash, setCopiedHash] = useState<string | null>(null);
+  const counterRef = useRef(0);
 
   // Sync animation clock
   useEffect(() => {
     if (isHovered || expandedId) return;
 
-    let nextIndex = 4;
-    let counter = 0;
+    // Resume from the FIRST item (most recently added in a top-feed)
+    const firstItem = items[0];
+    const firstHash = firstItem?.hash;
+    const firstIndex = ALL_COMMITS.findIndex((c) => c.hash === firstHash);
+
+    // If we can't find it (shouldn't happen) or list is initial, continue sequence
+    let nextIndex =
+      firstIndex === -1 ? 4 : (firstIndex + 1) % ALL_COMMITS.length;
 
     const interval = setInterval(() => {
-      setItems((prev) => {
-        const rawCommit = ALL_COMMITS[nextIndex];
-        const nextCommit = {
-          ...rawCommit,
-          id: `stream-${counter++}`,
-          date: getDate(rawCommit.daysAgo),
-        };
-        nextIndex = (nextIndex + 1) % ALL_COMMITS.length;
+      const rawCommit = ALL_COMMITS[nextIndex];
+      const nextCommit = {
+        ...rawCommit,
+        id: `stream-${counterRef.current++}`,
+        date: getDate(rawCommit.daysAgo),
+      };
 
-        // Sync removal and addition in one state cycle
+      setItems((prev) => {
+        // Prepend mode: Add first, Remove last to simulate new items arriving at top
         return [nextCommit, ...prev.slice(0, prev.length - 1)];
       });
+
+      nextIndex = (nextIndex + 1) % ALL_COMMITS.length;
     }, 4000);
 
     return () => clearInterval(interval);
   }, [isHovered, expandedId]);
-
-  const copyToClipboard = (hash: string) => {
-    navigator.clipboard.writeText(hash);
-    setCopiedHash(hash);
-    setTimeout(() => setCopiedHash(null), 2000);
-  };
 
   const transition = {
     duration: 0.8,
@@ -289,11 +290,31 @@ export function CommitHistory() {
 
   return (
     <div
-      className="border border-border bg-card shadow-xl"
+      className="border border-border bg-card shadow-xl relative"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Header Commented Out per User Request */}
+      <div className="px-6 py-4 border-b border-border bg-secondary/50 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2">
+            {isHovered || expandedId ? (
+              <div className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+            ) : (
+              <div className="relative flex h-1.5 w-1.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500"></span>
+              </div>
+            )}
+            <span className="font-mono text-[10px] tracking-widest uppercase text-muted-foreground font-bold">
+              Latest changes
+            </span>
+          </div>
+        </div>
+        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+          <GitBranchIcon className="size-3.5 text-foreground/70" />
+          <span className="font-mono">main</span>
+        </div>
+      </div>
       {/* Footer Commented Out per User Request */}
 
       {/* Commits Container */}
@@ -303,7 +324,7 @@ export function CommitHistory() {
         style={{ height: 440 }}
       >
         <AnimatePresence mode="popLayout" initial={false}>
-          {items.map((commit: CommitItem) => (
+          {items.map((commit: CommitItem, index: number) => (
             <motion.div
               key={commit.id}
               layout
@@ -317,7 +338,7 @@ export function CommitHistory() {
                 opacity: 0,
                 y: 40,
                 height: 0,
-                transition: { duration: 0.8 },
+                transition: { duration: 0.4 },
               }}
               transition={transition}
               onClick={() =>
@@ -327,28 +348,15 @@ export function CommitHistory() {
                 expandedId === commit.id
                   ? "bg-secondary/40 ring-1 ring-inset ring-primary/20 z-10"
                   : "hover:bg-secondary/20"
-              }`}
+              } ${index === 0 && !isHovered && !expandedId ? "animate-pulse bg-primary/5" : ""}`}
             >
               <div className="min-h-[110px] px-6 py-5 flex flex-col justify-center relative">
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-3 mb-2">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          copyToClipboard(commit.hash);
-                        }}
-                        className="group/hash relative flex items-center gap-1.5"
-                      >
-                        <code className="font-mono text-[10px] text-primary bg-primary/10 px-2 py-0.5 group-hover/hash:bg-primary/20 transition-colors">
-                          {commit.hash}
-                        </code>
-                        <span className="opacity-0 group-hover/hash:opacity-100 transition-opacity text-[9px] font-mono text-muted-foreground whitespace-nowrap">
-                          {copiedHash === commit.hash
-                            ? "✓ Copied"
-                            : "Copy Hash"}
-                        </span>
-                      </button>
+                      <code className="font-mono text-[10px] text-primary bg-primary/10 px-2 py-0.5 relative noise">
+                        {commit.hash}
+                      </code>
                       {commit.isMerge && (
                         <span className="font-mono text-[8px] uppercase tracking-wider text-muted-foreground border border-border px-2 py-0.5">
                           Merge

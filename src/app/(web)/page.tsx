@@ -3,6 +3,7 @@
 import { CommitHistory } from "@/components/commit-history";
 import { LiveEditor } from "@/components/live-editor";
 import { MaxWidth } from "@/components/max-width";
+import { PhilosophyVisual } from "@/components/philosophy-visual";
 import {
   Accordion,
   AccordionContent,
@@ -11,6 +12,7 @@ import {
 } from "@/components/ui/accordion";
 import { WaitlistForm } from "@/components/waitlist-form";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 const writerPersonas = [
   {
@@ -208,7 +210,7 @@ const faqs = [
   {
     question: "How does the 'verified authorship' work?",
     answer:
-      "We track the entropy of your keystrokes and session patterns to create a unique behavioral signature. This is then cryptographically hashed and stored alongside your version history, allowing you to prove that the work was created by a human in real-time.",
+      "We track the entropy of your keystrokes and session patterns to create a unique behavioral signature. This is then cryptographically verified and stored alongside your version history, allowing you to prove that the work was created by a human in real-time.",
   },
   {
     question: "Is there a limit to how many branches I can create?",
@@ -233,6 +235,10 @@ const faqs = [
 ];
 
 export default function Home() {
+  const [activePhilosophyIndex, setActivePhilosophyIndex] = useState<
+    number | null
+  >(null);
+
   return (
     <main className="min-h-screen bg-background">
       {/* Section 1: Hero */}
@@ -245,13 +251,13 @@ export default function Home() {
               transition={{ duration: 0.6 }}
               className="mb-8"
             >
-              <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-primary border border-primary px-3 py-1 rounded-full">
+              <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-primary border border-primary px-3 py-1 rounded-lg relative noise">
                 Waitlist open
               </span>
             </motion.div>
 
             <motion.h1
-              className="font-serif text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold leading-[0.9] tracking-tight text-foreground  relative z-10"
+              className="font-serif text-6xl sm:text-7xl md:text-8xl lg:text-8xl font-bold leading-[0.9] tracking-tight text-foreground  relative z-10"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
@@ -314,7 +320,7 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
-              02 / The Mechanism
+              The Mechanism
             </span>
             <h2 className="mt-4 font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-balance">
               Write Fearlessly.{" "}
@@ -332,8 +338,21 @@ export default function Home() {
       </section>
 
       {/* Section 4: Philosophy */}
-      <section id="philosophy" className="py-24 lg:py-32 bg-secondary/30">
-        <MaxWidth>
+      <section
+        id="philosophy"
+        className="py-24 lg:py-32 bg-secondary/30 relative overflow-hidden"
+      >
+        {/* Subtle background pattern for integration */}
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.03]"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle, currentColor 1px, transparent 1px)",
+            backgroundSize: "32px 32px",
+          }}
+        />
+
+        <MaxWidth className="relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -341,7 +360,7 @@ export default function Home() {
               viewport={{ once: true }}
             >
               <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
-                03 / Philosophy
+                Philosophy
               </span>
               <h2 className="mt-4 font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight text-balance">
                 Every Draft Is a Decision
@@ -351,6 +370,15 @@ export default function Home() {
                 demands history. Paperflow makes your creative process visible
                 to yourself, and to anyone you choose to show.
               </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mt-16 bg-background/50 border-y border-border backdrop-blur-sm"
+            >
+              <PhilosophyVisual activeIndex={activePhilosophyIndex} />
             </motion.div>
 
             <motion.div
@@ -379,12 +407,14 @@ export default function Home() {
               ].map((item, index) => (
                 <motion.div
                   key={item.title}
-                  className="text-left p-6 border border-border bg-background hover:border-primary transition-colors"
+                  className="text-left p-6 border border-border bg-background hover:border-primary transition-colors cursor-default"
                   whileHover={{ y: -4 }}
                   transition={{ delay: index * 0.1 }}
+                  onMouseEnter={() => setActivePhilosophyIndex(index)}
+                  onMouseLeave={() => setActivePhilosophyIndex(null)}
                 >
-                  <div className="w-8 h-8 bg-primary flex items-center justify-center mb-4">
-                    <span className="font-mono text-xs text-foreground font-bold">
+                  <div className="w-8 h-8 bg-primary flex items-center justify-center mb-4 relative noise">
+                    <span className="font-mono text-xs text-primary-foreground font-bold">
                       {index + 1}
                     </span>
                   </div>
@@ -412,7 +442,7 @@ export default function Home() {
                 viewport={{ once: true }}
               >
                 <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
-                  04 / The Result
+                  The Result
                 </span>
                 <h2 className="mt-4 font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight text-balance">
                   Every Edit, Forever
@@ -431,9 +461,8 @@ export default function Home() {
                   ].map((item) => (
                     <li
                       key={item}
-                      className="flex items-start gap-3 text-sm text-muted-foreground"
+                      className="flex items-start text-sm text-balance text-muted-foreground before:content-['+'] before:text-primary before:mr-3 before:select-none"
                     >
-                      <span className="text-primary mt-0.5">+</span>
                       {item}
                     </li>
                   ))}
@@ -466,7 +495,7 @@ export default function Home() {
                 viewport={{ once: true }}
               >
                 <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-background/50">
-                  05 / Ethics
+                  Ethics
                 </span>
                 <h2 className="mt-4 font-serif text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-background text-balance">
                   Your Voice. <br />
@@ -557,7 +586,7 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
-              06 / Principles
+              Principles
             </span>
             <h2 className="mt-4 font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-balance">
               What We Refuse to Build
@@ -617,7 +646,7 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
-              07 / Audience
+              Audience
             </span>
             <h2 className="mt-4 font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-balance">
               Built for Serious Writers
@@ -639,7 +668,7 @@ export default function Home() {
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -4 }}
               >
-                <div className="w-12 h-12 border border-border group-hover:border-primary group-hover:bg-primary flex items-center justify-center mb-4 transition-all duration-300 text-muted-foreground group-hover:text-primary-foreground">
+                <div className="w-12 h-12 border border-border group-hover:border-primary group-hover:bg-primary flex items-center justify-center mb-4 transition-all duration-300 text-muted-foreground group-hover:text-primary-foreground relative noise">
                   {persona.icon}
                 </div>
                 <h3 className="font-serif text-xl font-semibold text-foreground mb-2">
@@ -664,7 +693,7 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
-              08 / Writers Speak
+              Writers Speak
             </span>
             <h2 className="mt-4 font-serif text-3xl md:text-4xl font-bold text-foreground">
               Early Voices
@@ -719,7 +748,7 @@ export default function Home() {
                 viewport={{ once: true }}
               >
                 <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
-                  09 / Clarifications
+                  Clarifications
                 </span>
                 <h2 className="mt-4 font-serif text-3xl md:text-4xl font-bold text-foreground text-balance">
                   Common Questions
@@ -773,7 +802,7 @@ export default function Home() {
               viewport={{ once: true }}
             >
               <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-background/50">
-                10 / Final Draft
+                Final Draft
               </span>
               <h2 className="mt-4 font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-background leading-tight text-balance">
                 Ready to elevate your prose?

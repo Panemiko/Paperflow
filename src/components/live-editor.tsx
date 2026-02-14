@@ -207,7 +207,7 @@ export function LiveEditor() {
         <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-secondary/30">
           <span className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground/60 hidden sm:inline">
             {phase === "idling"
-              ? "Awaiting delta..."
+              ? "Awaiting change..."
               : phase === "altering"
                 ? "Patching buffer..."
                 : phase === "refreshing"
@@ -216,7 +216,7 @@ export function LiveEditor() {
           </span>
           <div className="flex items-center gap-2">
             <div
-              className={`w-1.5 h-1.5 rounded-full ${phase === "idling" && stepIndex === 0 && commits.length === 1 ? "bg-muted-foreground" : "bg-primary animate-pulse"}`}
+              className={`w-1.5 h-1.5 rounded-full ${phase === "idling" && stepIndex === 0 && commits.length === 1 ? "bg-muted-foreground" : "bg-primary animate-pulse relative noise"}`}
             />
             <span className="font-mono text-[9px] text-muted-foreground">
               {phase === "idling" && stepIndex === 0 && commits.length === 1
@@ -279,7 +279,7 @@ export function LiveEditor() {
                 <div className="bg-foreground text-background px-6 py-3 shadow-xl flex items-center gap-3">
                   <Clock className="w-4 h-4 text-primary animate-spin" />
                   <span className="font-mono text-xs uppercase tracking-wider">
-                    Hashing Delta...
+                    Securing change...
                   </span>
                 </div>
               </motion.div>
@@ -308,15 +308,15 @@ export function LiveEditor() {
                 exit={{ opacity: 0, y: 20 }}
                 className="absolute bottom-6 right-6"
               >
-                <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
+                <Popover open={isPopoverOpen}>
                   <PopoverTrigger asChild>
-                    <div className="bg-primary text-primary-foreground px-4 py-2 text-[10px] font-mono uppercase tracking-widest flex items-center gap-2 shadow-lg cursor-default">
+                    <div className="bg-primary text-primary-foreground px-4 py-2 text-[10px] font-mono uppercase tracking-widest flex items-center gap-2 shadow-lg cursor-default relative noise">
                       <Send className="w-3 h-3" />
                       Commit Change
                     </div>
                   </PopoverTrigger>
                   <PopoverContent
-                    className="w-80 p-4 bg-background border-border shadow-2xl pointer-events-none"
+                    className="w-80 p-4 bg-background border-border shadow-2xl z-10 pointer-events-none"
                     align="end"
                     sideOffset={12}
                     side="top"
@@ -337,7 +337,7 @@ export function LiveEditor() {
                           readOnly
                           className="h-8 text-xs font-serif bg-secondary/10"
                         />
-                        <div className="w-full bg-primary/20 text-primary-foreground/50 px-4 py-2 text-[9px] font-mono uppercase tracking-widest text-center">
+                        <div className="w-full bg-primary/20 text-primary-foreground/50 px-4 py-2 text-[9px] font-mono uppercase tracking-widest text-center relative noise">
                           Updating Buffer...
                         </div>
                       </div>
@@ -378,12 +378,12 @@ export function LiveEditor() {
                 key={commit.hash}
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: "auto", opacity: 1 }}
-                transition={{ type: "spring", bounce: 0, duration: 0.5 }}
+                transition={{ type: "spring", bounce: 0, duration: 0.3 }}
                 className="px-6 py-6 group relative hover:bg-secondary/5 transition-colors"
               >
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2">
-                    <span className="font-mono text-[9px] text-primary px-1.5 py-0.5 bg-primary/10 border border-primary/20">
+                    <span className="font-mono text-[9px] text-primary px-1.5 py-0.5 bg-primary/10 border border-primary/20 relative noise">
                       {commit.hash}
                     </span>
                     {index === 0 && (
@@ -423,10 +423,10 @@ export function LiveEditor() {
         <div className="p-4 bg-secondary/30 mt-auto border-t border-border">
           <div className="flex items-center justify-between text-muted-foreground">
             <span className="font-mono text-[8px] uppercase tracking-tighter">
-              {phase === "refreshing" ? "Refreshing..." : "Active Manuscript"}
+              {phase === "refreshing" ? "Refreshing..." : "Paperflow"}
             </span>
             <span className="font-mono text-[8px] uppercase tracking-tighter">
-              v2.4.0-stable
+              Branch: New section
             </span>
           </div>
         </div>
