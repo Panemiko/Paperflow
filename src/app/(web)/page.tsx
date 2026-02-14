@@ -245,7 +245,7 @@ export default function Home() {
               transition={{ duration: 0.6 }}
               className="mb-8"
             >
-              <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-muted-foreground border border-border px-3 py-1 rounded-full">
+              <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-primary border border-primary px-3 py-1 rounded-full">
                 Waitlist open
               </span>
             </motion.div>
@@ -320,19 +320,14 @@ export default function Home() {
               Write Fearlessly.{" "}
               <span className="text-muted-foreground">Revert Instantly.</span>
             </h2>
+            <p className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-2xl">
+              Every branch is a safe space to explore. Every merge is a
+              conscious decision. Delete that chapter. You can always bring it
+              back.
+            </p>
           </motion.div>
 
           <LiveEditor />
-
-          <motion.p
-            className="mt-12 text-center font-mono text-xs text-muted-foreground max-w-xl mx-auto"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            Every branch is a safe space to explore. Every merge is a conscious
-            decision. Delete that chapter. You can always bring it back.
-          </motion.p>
         </MaxWidth>
       </section>
 
