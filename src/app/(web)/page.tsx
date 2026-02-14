@@ -19,10 +19,10 @@ const writerPersonas = [
   {
     title: "The Novelist",
     description:
-      "Managing drafts across three years, four endings, and one character who refuses to die.",
+      "Managing complex drafts across years, alternate endings, and characters that evolve with the story.",
     icon: (
       <svg
-        className="w-6 h-6"
+        className="w-5 h-5"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -37,72 +37,12 @@ const writerPersonas = [
     ),
   },
   {
-    title: "The Journalist",
+    title: "The Academic",
     description:
-      "Source protection meets version control. Every fact-check documented, every edit traceable.",
+      "Literature reviews, evolving hypotheses, and the precision required for rigorous scholarly publication.",
     icon: (
       <svg
-        className="w-6 h-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        strokeWidth={1.5}
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z"
-        />
-      </svg>
-    ),
-  },
-  {
-    title: "The Essayist",
-    description:
-      "Ideas that need room to breathe, arguments that demand revision, thoughts worth preserving.",
-    icon: (
-      <svg
-        className="w-6 h-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        strokeWidth={1.5}
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
-        />
-      </svg>
-    ),
-  },
-  {
-    title: "The Screenwriter",
-    description:
-      "Scene variations, dialogue rewrites, and the version where the hero actually wins.",
-    icon: (
-      <svg
-        className="w-6 h-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        strokeWidth={1.5}
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 01-1.125-1.125M3.375 19.5h1.5C5.496 19.5 6 18.996 6 18.375m-3.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504-1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-1.5A1.125 1.125 0 0118 18.375M20.625 4.5H3.375m17.25 0c.621 0 1.125.504 1.125 1.125M20.625 4.5h-1.5C18.504 4.5 18 5.004 18 5.625m3.75 0v1.5c0 .621-.504 1.125-1.125 1.125M3.375 4.5c-.621 0-1.125.504-1.125 1.125M3.375 4.5h1.5C5.496 4.5 6 5.004 6 5.625m-3.75 0v1.5c0 .621.504 1.125 1.125 1.125m0 0h1.5m-1.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m1.5-3.75C5.496 8.25 6 7.746 6 7.125v-1.5M4.875 8.25C5.496 8.25 6 8.754 6 9.375v1.5m0-5.25v5.25m0-5.25C6 5.004 6.504 4.5 7.125 4.5h9.75c.621 0 1.125.504 1.125 1.125m1.125 2.625h1.5m-1.5 0A1.125 1.125 0 0118 7.125v-1.5m1.125 2.625c-.621 0-1.125.504-1.125 1.125v1.5m2.625-2.625c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125M18 5.625v5.25M7.125 12h9.75m-9.75 0A1.125 1.125 0 016 10.875M7.125 12C6.504 12 6 12.504 6 13.125m0-2.25C6 11.496 5.496 12 4.875 12M18 10.875c0 .621-.504 1.125-1.125 1.125M18 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m-12 5.25v-5.25m0 5.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125m-12 0v-1.5c0-.621-.504-1.125-1.125-1.125M18 18.375v-5.25m0 5.25v-1.5c0-.621.504-1.125 1.125-1.125M18 13.125v1.5c0 .621.504 1.125 1.125 1.125M18 13.125c0-.621.504-1.125 1.125-1.125M6 13.125v1.5c0 .621-.504 1.125-1.125 1.125M6 13.125C6 12.504 5.496 12 4.875 12m-1.5 0h1.5m-1.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M19.125 12h1.5m0 0c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h1.5m14.25 0h1.5"
-        />
-      </svg>
-    ),
-  },
-  {
-    title: "The Researcher",
-    description:
-      "Literature reviews, evolving hypotheses, and the paper that's been in progress since 2019.",
-    icon: (
-      <svg
-        className="w-6 h-6"
+        className="w-5 h-5"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -117,12 +57,12 @@ const writerPersonas = [
     ),
   },
   {
-    title: "The Poet",
+    title: "The Lawyer",
     description:
-      "Where line breaks matter. Where every deleted word leaves a ghost. Where revision is ritual.",
+      "Privileged drafts, clause-by-clause history, and the precision that wins cases before they reach court.",
     icon: (
       <svg
-        className="w-6 h-6"
+        className="w-5 h-5"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -131,31 +71,75 @@ const writerPersonas = [
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
-          d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"
+          d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.303.485 2.713.75 4.185.75m-8.37 0c0-6.21 5.04-11.25 11.25-11.25m-11.25 0a11.25 11.25 0 0111.25-11.25"
+        />
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M3 13.5h18m-18-4.5h18"
         />
       </svg>
     ),
   },
-];
-
-const testimonials = [
   {
-    quote:
-      "I've lost entire chapters to cloud sync failures. With Paperflow, I sync with confidence, knowing I can export my entire history anytime.",
-    author: "Marcus Webb",
-    role: "Novelist, 3 published books",
+    title: "The Executive",
+    description:
+      "Strategic plans, board reports, and quarterly narratives where every word choice has market impact.",
+    icon: (
+      <svg
+        className="w-5 h-5"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        strokeWidth={1.5}
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m-1.5 3h1.5m4.5-9H15m0 3H15m0 3H15m0 3H15"
+        />
+      </svg>
+    ),
   },
   {
-    quote:
-      "When an editor asks 'what did the original say?', I can show them exactly. Down to the keystroke.",
-    author: "Priya Sharma",
-    role: "Investigative Journalist",
+    title: "The Policy Analyst",
+    description:
+      "Evolving legislation, complex white papers, and the detailed history of every policy transition.",
+    icon: (
+      <svg
+        className="w-5 h-5"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        strokeWidth={1.5}
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z"
+        />
+      </svg>
+    ),
   },
   {
-    quote:
-      "My dissertation has 47 branches. Paperflow is the only reason I haven't lost my mind, or my work.",
-    author: "Dr. James Okonkwo",
-    role: "Philosophy Researcher",
+    title: "The Technical Lead",
+    description:
+      "Specifications and technical documentation where the architecture of prose reflects the code.",
+    icon: (
+      <svg
+        className="w-5 h-5"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        strokeWidth={1.5}
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M4.5 12a7.5 7.5 0 0015 0m-15 0a7.5 7.5 0 1115 0m-15 0H3m16.5 0H21m-1.5 0a5.999 5.999 0 01-5.999 5.999M19.5 12a5.999 5.999 0 00-5.999-5.999m0 11.998a5.999 5.999 0 01-5.999-5.999m5.999-5.999a5.999 5.999 0 00-5.999 5.999"
+        />
+      </svg>
+    ),
   },
 ];
 
@@ -171,9 +155,9 @@ const antiFeatures = [
       "We don't read your work. We don't train on your work. We don't even know what you're writing.",
   },
   {
-    title: "No Generative AI",
+    title: "Opt-in Intelligence",
     description:
-      "We will never write your text for you. Paperflow enhances your process, it doesn't replace it.",
+      "AI will never access your content unless you ask. And if used, every AI contribution is clearly marked.",
   },
   {
     title: "No Data Hostage",
@@ -184,9 +168,9 @@ const antiFeatures = [
 
 const faqs = [
   {
-    question: "Is Paperflow really 'No-AI'?",
+    question: "Is Paperflow 'No-AI'?",
     answer:
-      "Yes. We believe that human authorship is becoming a rare and valuable commodity. Paperflow is designed to enhance your own creative process, not to replace it with generated text. We will never integrate LLMs into your writing flow.",
+      "AI is entirely optional. It never accesses your work without permission. If used, AI text is always visually distinct from your own.",
   },
   {
     question: "How do I get my data if I decide to leave?",
@@ -293,21 +277,6 @@ export default function Home() {
               <WaitlistForm />
             </motion.div>
           </div>
-        </MaxWidth>
-      </section>
-
-      {/* Section 2: Quote */}
-      <section className="py-16 lg:py-20 border-y border-border bg-secondary/30">
-        <MaxWidth className="max-w-5xl text-center">
-          <motion.blockquote
-            className="font-serif text-2xl md:text-3xl lg:text-4xl text-foreground leading-relaxed italic"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            "Writing is revision. Revision requires comparison. Comparison
-            demands history."
-          </motion.blockquote>
         </MaxWidth>
       </section>
 
@@ -610,8 +579,8 @@ export default function Home() {
                   <li className="flex items-start gap-3">
                     <span className="text-primary mt-1">+</span>
                     <span>
-                      No generative writing features. We never write your text
-                      for you.
+                      AI is optional. If used, its contributions are clearly
+                      marked.
                     </span>
                   </li>
                   <li className="flex items-start gap-3">
@@ -688,10 +657,10 @@ export default function Home() {
       </section>
 
       {/* Section 8: Who Writes With Paperflow */}
-      <section className="py-24 lg:py-32">
+      <section className="py-16 lg:py-24">
         <MaxWidth>
           <motion.div
-            className="max-w-2xl mb-16"
+            className="max-w-2xl mb-10"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -703,8 +672,9 @@ export default function Home() {
               Built for Serious Writers
             </h2>
             <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-              Whether you're crafting your first novel or your fiftieth article,
-              Paperflow gives you the infrastructure your words deserve.
+              Whether you're crafting your first novel or your fiftieth policy
+              white paper, Paperflow gives you the infrastructure your words
+              deserve.
             </p>
           </motion.div>
 
@@ -712,76 +682,22 @@ export default function Home() {
             {writerPersonas.map((persona, index) => (
               <motion.div
                 key={persona.title}
-                className="group p-6 border border-border hover:border-primary transition-all duration-300"
+                className="group p-5 border border-border hover:border-primary transition-all duration-300"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -4 }}
               >
-                <div className="w-12 h-12 border border-border group-hover:border-primary group-hover:bg-primary flex items-center justify-center mb-4 transition-all duration-300 text-muted-foreground group-hover:text-primary-foreground relative noise">
+                <div className="w-10 h-10 border border-border group-hover:border-primary group-hover:bg-primary flex items-center justify-center mb-4 transition-all duration-300 text-muted-foreground group-hover:text-primary-foreground relative noise">
                   {persona.icon}
                 </div>
-                <h3 className="font-serif text-xl font-semibold text-foreground mb-2">
+                <h3 className="font-serif text-lg font-semibold text-foreground mb-1.5 leading-tight">
                   {persona.title}
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-xs text-muted-foreground leading-relaxed">
                   {persona.description}
                 </p>
-              </motion.div>
-            ))}
-          </div>
-        </MaxWidth>
-      </section>
-
-      {/* Section 10: Testimonials */}
-      <section className="py-24 lg:py-32 border-t border-border">
-        <MaxWidth>
-          <motion.div
-            className="mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
-              Writers Speak
-            </span>
-            <h2 className="mt-4 font-serif text-3xl md:text-4xl font-bold text-foreground">
-              Early Voices
-            </h2>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={testimonial.author}
-                className="p-6 border border-border"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <blockquote className="font-serif text-lg text-foreground leading-relaxed mb-6">
-                  "{testimonial.quote}"
-                </blockquote>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-secondary flex items-center justify-center">
-                    <span className="font-serif text-sm font-bold text-foreground">
-                      {testimonial.author
-                        .split(" ")
-                        .map((n) => n[0])
-                        .join("")}
-                    </span>
-                  </div>
-                  <div>
-                    <p className="font-medium text-sm text-foreground">
-                      {testimonial.author}
-                    </p>
-                    <p className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
-                      {testimonial.role}
-                    </p>
-                  </div>
-                </div>
               </motion.div>
             ))}
           </div>

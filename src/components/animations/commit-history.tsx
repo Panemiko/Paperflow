@@ -1,13 +1,23 @@
 "use client";
 
 import { AnimatePresence, motion, useInView } from "framer-motion";
-import { ChevronDown, GitBranchIcon } from "lucide-react";
+import { Bot, ChevronDown, GitBranchIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 const getDate = (daysAgo: number) => {
   const date = new Date();
   date.setDate(date.getDate() - daysAgo);
   return date.toISOString().split("T")[0];
+};
+
+const AUTHORS = {
+  "Elena Vasquez":
+    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=faces",
+  "Sarah Chen":
+    "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=faces",
+  "Marcus Thorne":
+    "https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=150&h=150&fit=crop&crop=faces",
+  "Paperflow Bot": "/bot-avatar-placeholder", // We'll handle this in the component
 };
 
 const ALL_COMMITS = [
@@ -19,10 +29,24 @@ const ALL_COMMITS = [
     time: "11:03 UTC",
     color: "bg-blue-500",
     details: {
-      words: "+87,234",
+      diff: { added: 87234, removed: 120 },
       section: "Full Manuscript",
       description:
         "Initial assembly of all chapters into a single master document.",
+    },
+  },
+  {
+    hash: "ai-1b2c",
+    message: "Auto-format: Standardized dialogue punctuation",
+    author: "Paperflow Bot",
+    daysAgo: 13,
+    time: "03:12 UTC",
+    isAi: true,
+    color: "bg-purple-500",
+    details: {
+      diff: { added: 12, removed: 12 },
+      section: "Global",
+      description: "Applied standard em-dash formatting rules across dialogue.",
     },
   },
   {
@@ -33,7 +57,7 @@ const ALL_COMMITS = [
     time: "16:48 UTC",
     color: "bg-amber-500",
     details: {
-      words: "+42",
+      diff: { added: 42, removed: 15 },
       section: "Introduction",
       description:
         "Verified dates and locations against the 1924 architectural archives.",
@@ -48,7 +72,7 @@ const ALL_COMMITS = [
     isMerge: true,
     color: "bg-emerald-500",
     details: {
-      words: "-1,204",
+      diff: { added: 150, removed: 1204 },
       section: "Chapter 24",
       description:
         "Consolidated the 'Harbor' and 'Departure' endings into a single resolution.",
@@ -62,7 +86,7 @@ const ALL_COMMITS = [
     time: "14:32 UTC",
     color: "bg-blue-500",
     details: {
-      words: "-85",
+      diff: { added: 24, removed: 109 },
       section: "Chapter 12",
       description:
         "Removed redundant phrasing to increase tension in the ballroom scene.",
@@ -76,10 +100,25 @@ const ALL_COMMITS = [
     time: "08:12 UTC",
     color: "bg-emerald-500",
     details: {
-      words: "+156",
+      diff: { added: 156, removed: 12 },
       section: "Chapter 18",
       description:
         "Added transitional prose to smooth the jump between settings.",
+    },
+  },
+  {
+    hash: "ai-3d4e",
+    message: "Consistency: Renamed 'Theatre' to 'Theater'",
+    author: "Paperflow Bot",
+    daysAgo: 8,
+    time: "04:45 UTC",
+    isAi: true,
+    color: "bg-purple-500",
+    details: {
+      diff: { added: 8, removed: 8 },
+      section: "Global",
+      description:
+        "Enforced US English spelling conventions per project settings.",
     },
   },
   {
@@ -90,7 +129,7 @@ const ALL_COMMITS = [
     time: "11:45 UTC",
     color: "bg-blue-500",
     details: {
-      words: "+210",
+      diff: { added: 210, removed: 45 },
       section: "Chapter 4",
       description:
         "Enhanced the protagonist's internal monologue for deeper POV.",
@@ -104,7 +143,7 @@ const ALL_COMMITS = [
     time: "16:20 UTC",
     color: "bg-amber-500",
     details: {
-      words: "+0",
+      diff: { added: 15, removed: 15 },
       section: "Technical Appendix",
       description: "Corrected DOI links and bibliography formatting.",
     },
@@ -117,7 +156,7 @@ const ALL_COMMITS = [
     time: "09:30 UTC",
     color: "bg-emerald-500",
     details: {
-      words: "-4,500",
+      diff: { added: 0, removed: 4500 },
       section: "Chapter 7",
       description:
         "Leaner narrative achieved by moving backstory to Chapter 1.",
@@ -131,9 +170,23 @@ const ALL_COMMITS = [
     time: "21:15 UTC",
     color: "bg-blue-500",
     details: {
-      words: "+890",
+      diff: { added: 890, removed: 45 },
       section: "Epilogue",
       description: "Completed the final sequence and thematic closure.",
+    },
+  },
+  {
+    hash: "ai-5f6g",
+    message: "Typography: Curly quotes application",
+    author: "Paperflow Bot",
+    daysAgo: 4,
+    time: "21:16 UTC",
+    isAi: true,
+    color: "bg-purple-500",
+    details: {
+      diff: { added: 45, removed: 45 },
+      section: "Epilogue",
+      description: "Converted straight quotes to smart quotes.",
     },
   },
   {
@@ -144,7 +197,7 @@ const ALL_COMMITS = [
     time: "14:05 UTC",
     color: "bg-amber-500",
     details: {
-      words: "-12",
+      diff: { added: 12, removed: 24 },
       section: "Global",
       description: "Final proofreading for consistency, spelling, and grammar.",
     },
@@ -158,9 +211,23 @@ const ALL_COMMITS = [
     isMerge: true,
     color: "bg-emerald-500",
     details: {
-      words: "-2,300",
+      diff: { added: 0, removed: 2300 },
       section: "Chapters 15-17",
       description: "Removed subplots as requested for the initial print run.",
+    },
+  },
+  {
+    hash: "ai-6g7h",
+    message: "Cleanup: Removed trailing whitespace",
+    author: "Paperflow Bot",
+    daysAgo: 2,
+    time: "10:55 UTC",
+    isAi: true,
+    color: "bg-purple-500",
+    details: {
+      diff: { added: 0, removed: 15 },
+      section: "Global",
+      description: "Removed unnecessary whitespace from end of lines.",
     },
   },
   {
@@ -171,7 +238,7 @@ const ALL_COMMITS = [
     time: "13:22 UTC",
     color: "bg-blue-500",
     details: {
-      words: "+1,450",
+      diff: { added: 1450, removed: 0 },
       section: "Chapter 12",
       description:
         "Recovered original prose after deciding against the rewrite.",
@@ -185,7 +252,7 @@ const ALL_COMMITS = [
     time: "08:45 UTC",
     color: "bg-emerald-500",
     details: {
-      words: "+65",
+      diff: { added: 65, removed: 12 },
       section: "Introduction",
       description: "Reworked the opening hook to grab reader attention faster.",
     },
@@ -198,7 +265,7 @@ const ALL_COMMITS = [
     time: "17:10 UTC",
     color: "bg-amber-500",
     details: {
-      words: "+0",
+      diff: { added: 5, removed: 5 },
       section: "Chronology",
       description: "Ensured age consistency across the 40-year timeline.",
     },
@@ -212,7 +279,7 @@ const ALL_COMMITS = [
     isMerge: true,
     color: "bg-blue-500",
     details: {
-      words: "+0",
+      diff: { added: 0, removed: 0 },
       section: "Global",
       description: "Version locked for final typesetting.",
     },
@@ -227,8 +294,9 @@ interface Commit {
   time: string;
   color: string;
   isMerge?: boolean;
+  isAi?: boolean;
   details: {
-    words: string;
+    diff: { added: number; removed: number };
     section: string;
     description: string;
   };
@@ -237,6 +305,7 @@ interface Commit {
 interface CommitItem extends Commit {
   id: string;
   date: string;
+  avatar: string;
 }
 
 export function CommitHistory() {
@@ -245,6 +314,7 @@ export function CommitHistory() {
       ...c,
       id: `init-${i}`,
       date: getDate(c.daysAgo),
+      avatar: AUTHORS[c.author as keyof typeof AUTHORS],
     })),
   );
   const [isHovered, setIsHovered] = useState(false);
@@ -272,6 +342,7 @@ export function CommitHistory() {
         ...rawCommit,
         id: `stream-${counterRef.current++}`,
         date: getDate(rawCommit.daysAgo),
+        avatar: AUTHORS[rawCommit.author as keyof typeof AUTHORS],
       };
 
       setItems((prev) => {
@@ -297,7 +368,7 @@ export function CommitHistory() {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="px-6 py-4 border-b border-border bg-secondary/50 flex items-center justify-between">
+      <div className="px-6 py-4 border-b border-border bg-secondary/50 flex items-center justify-between relative z-10">
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-2">
             {isHovered || expandedId ? (
@@ -323,7 +394,7 @@ export function CommitHistory() {
       {/* Commits Container */}
 
       <div
-        className="divide-y divide-border bg-card relative"
+        className="divide-y divide-border bg-card relative z-0"
         style={{ height: 440 }}
       >
         <AnimatePresence mode="popLayout" initial={false}>
@@ -355,39 +426,72 @@ export function CommitHistory() {
             >
               <div className="min-h-[110px] px-6 py-5 flex flex-col justify-center relative">
                 <div className="flex items-start justify-between gap-4">
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-3 mb-2">
-                      <code className="font-mono text-[10px] text-primary bg-primary/10 px-2 py-0.5 relative noise">
-                        {commit.hash}
-                      </code>
-                      {commit.isMerge && (
-                        <span className="font-mono text-[8px] uppercase tracking-wider text-muted-foreground border border-border px-2 py-0.5">
-                          Merge
-                        </span>
-                      )}
-                    </div>
-                    <p className="text-sm text-foreground font-medium leading-tight text-balance pr-8">
-                      {commit.message}
-                    </p>
-                    <div className="mt-3 flex items-center gap-2">
+                  <div className="flex items-start w-full gap-4">
+                    <div className="mt-1 shrink-0">
                       <div
-                        className={`w-1.5 h-1.5 rounded-full ${commit.color}`}
-                      />
-                      <p className="font-mono text-[10px] text-muted-foreground tracking-tight">
-                        {commit.author}
+                        className={`w-8 h-8 rounded-full overflow-hidden border flex items-center justify-center ${
+                          commit.isAi
+                            ? "bg-purple-500/10 border-purple-500/20 text-purple-600"
+                            : "bg-primary/10 border-primary/20"
+                        }`}
+                      >
+                        {commit.isAi ? (
+                          <div className="relative w-full h-full flex items-center justify-center">
+                            <Bot className="w-5 h-5" />
+                            <div className="absolute top-0 right-0 w-2 h-2 rounded-full bg-purple-500 animate-pulse" />
+                          </div>
+                        ) : (
+                          <img
+                            src={commit.avatar}
+                            alt={commit.author}
+                            className="w-full h-full object-cover"
+                          />
+                        )}
+                      </div>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-3 mb-1 justify-between">
+                        <div className="flex items-center gap-2">
+                          <code className="font-mono text-[10px] text-primary bg-primary/10 px-1.5 py-0.5 rounded-[2px] relative noise">
+                            {commit.hash}
+                          </code>
+                          <span className="text-xs text-muted-foreground">
+                            {commit.time}
+                          </span>
+                          {commit.isMerge && (
+                            <span className="font-mono text-[8px] uppercase tracking-wider text-muted-foreground border border-border px-2 py-0.5">
+                              Merge
+                            </span>
+                          )}
+                          {commit.isAi && (
+                            <span className="font-mono text-[8px] uppercase tracking-wider text-purple-600 border border-purple-200 bg-purple-50 px-2 py-0.5 flex items-center gap-1">
+                              AI Authored
+                            </span>
+                          )}
+                        </div>
+                        <span className="flex items-center gap-1 font-mono text-[10px]">
+                          <span className="text-green-600">
+                            +{commit.details.diff.added}
+                          </span>
+                          <span className="text-red-500">
+                            -{commit.details.diff.removed}
+                          </span>
+                        </span>
+                      </div>
+                      <p className="text-sm text-foreground font-medium leading-tight text-balance">
+                        {commit.message}
+                      </p>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Authored by {commit.author}
                       </p>
                     </div>
                   </div>
                   <div className="text-right shrink-0 flex flex-col items-end">
-                    <p className="font-mono text-[10px] text-foreground font-bold">
-                      {commit.date}
-                    </p>
-                    <p className="font-mono text-[9px] text-muted-foreground opacity-60">
-                      {commit.time}
-                    </p>
                     <div className="mt-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity">
                       <ChevronDown
-                        className={`size-3.5 transition-transform duration-300 ${expandedId === commit.id ? "rotate-180" : ""}`}
+                        className={`size-3.5 transition-transform duration-300 ${
+                          expandedId === commit.id ? "rotate-180" : ""
+                        }`}
                       />
                     </div>
                   </div>
@@ -410,7 +514,8 @@ export function CommitHistory() {
                               Impact
                             </p>
                             <p className="text-xs font-serif italic text-primary">
-                              {commit.details.words} words
+                              +{commit.details.diff.added} / -
+                              {commit.details.diff.removed} words
                             </p>
                           </div>
                           <div>

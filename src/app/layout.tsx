@@ -17,7 +17,7 @@ const _jetbrains = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Paperflow | Versioning the Human Legacy",
   description:
-    "Git for Authors. A version control system built for researchers, writers, and original thinkers. Zero AI generation. Pure human provenance.",
+    "Git for Authors. A version control system built for researchers, writers, and original thinkers. AI is optional. Clear distinction between human and AI content.",
   generator: "v0.app",
   icons: {
     icon: [

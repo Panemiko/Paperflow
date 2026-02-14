@@ -42,9 +42,7 @@ export function Footer() {
           <p className="font-mono text-[10px] text-muted-foreground">
             © 2026 Paperflow. All rights reserved.
           </p>
-          <p className="font-mono text-[10px] text-muted-foreground">
-            No AI was used to write this page.
-          </p>
+          <p className="font-mono text-[10px] text-muted-foreground"></p>
         </div>
       </MaxWidth>
     </footer>
