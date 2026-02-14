@@ -1,5 +1,6 @@
 "use client";
 
+import { CommentVisual } from "@/components/comment-visual";
 import { CommitHistory } from "@/components/commit-history";
 import { LiveEditor } from "@/components/live-editor";
 import { MaxWidth } from "@/components/max-width";
@@ -427,6 +428,56 @@ export default function Home() {
                 </motion.div>
               ))}
             </motion.div>
+          </div>
+        </MaxWidth>
+      </section>
+
+      {/* Section 4.5: Review and Comment */}
+      <section className="py-24 lg:py-32 border-b border-border bg-background">
+        <MaxWidth>
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <motion.div
+              className="order-2 lg:order-1"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <CommentVisual />
+            </motion.div>
+
+            <div className="order-1 lg:order-2">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+              >
+                <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
+                  Feedback Loop
+                </span>
+                <h2 className="mt-4 font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight text-balance">
+                  Review Without Resistance
+                </h2>
+                <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
+                  Leave comments on specific versions. Discuss changes in
+                  context. Resolve threads as you merge branches.
+                </p>
+                <ul className="mt-8 space-y-3">
+                  {[
+                    "Inline commenting on any draft",
+                    "Threaded discussions for deep dives",
+                    "Resolve feedback with a single click", // Fixed typo "feeback"
+                    "Keep the conversation attached to the code",
+                  ].map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start text-sm text-balance text-muted-foreground before:content-['+'] before:text-primary before:mr-3 before:select-none"
+                    >
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            </div>
           </div>
         </MaxWidth>
       </section>

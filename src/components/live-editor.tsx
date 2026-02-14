@@ -1,8 +1,8 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useInView } from "framer-motion";
 import { Check, Clock, RotateCcw, Send } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Input } from "@/components/ui/input";
 import {
@@ -73,10 +73,15 @@ export function LiveEditor() {
   const [commitName, setCommitName] = useState("");
   const [stepIndex, setStepIndex] = useState(0);
 
+  const containerRef = useRef(null);
+  const isInView = useInView(containerRef, { once: true, amount: 0.5 });
+
   useEffect(() => {
     let timeout: NodeJS.Timeout;
 
     const runSimulation = async () => {
+      if (!isInView) return;
+
       // 1. Idling Phase
       if (phase === "idling") {
         timeout = setTimeout(() => setPhase("altering"), 2500);
@@ -201,7 +206,10 @@ export function LiveEditor() {
   }, [phase, displaySegments, commitName, stepIndex, commits]);
 
   return (
-    <div className="grid lg:grid-cols-5 gap-0 border border-border bg-card overflow-hidden shadow-2xl h-[440px]">
+    <div
+      ref={containerRef}
+      className="grid lg:grid-cols-5 gap-0 border border-border bg-card overflow-hidden shadow-2xl h-[440px]"
+    >
       {/* Simulation Pane (Software View) */}
       <div className="lg:col-span-3 border-b lg:border-b-0 lg:border-r border-border bg-background flex flex-col relative">
         <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-secondary/30">
