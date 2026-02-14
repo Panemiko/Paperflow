@@ -2,21 +2,13 @@
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { Logo } from "./brand/logo";
 
 export function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-sm border-b border-border">
       <div className="py-4 px-12 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-foreground flex items-center justify-center">
-            <span className="font-serif text-background text-lg font-bold">
-              P
-            </span>
-          </div>
-          <span className="font-serif text-lg font-semibold tracking-tight text-foreground">
-            Paperflow
-          </span>
-        </div>
+        <Logo className="h-8 w-auto" />
         <nav className="hidden md:flex items-center gap-8">
           {[
             { label: "Mechanism", href: "#mechanism" },

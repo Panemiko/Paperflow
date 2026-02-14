@@ -13,29 +13,8 @@ import {
 } from "@/components/ui/accordion";
 import { WaitlistForm } from "@/components/waitlist-form";
 import { motion } from "framer-motion";
-import { useState } from "react";
 
 const writerPersonas = [
-  {
-    title: "The Novelist",
-    description:
-      "Managing complex drafts across years, alternate endings, and characters that evolve with the story.",
-    icon: (
-      <svg
-        className="w-5 h-5"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        strokeWidth={1.5}
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"
-        />
-      </svg>
-    ),
-  },
   {
     title: "The Academic",
     description:
@@ -101,6 +80,28 @@ const writerPersonas = [
       </svg>
     ),
   },
+
+  {
+    title: "The Technical Lead",
+    description:
+      "Specifications and technical documentation where the architecture of prose reflects the code.",
+    icon: (
+      <svg
+        className="w-5 h-5"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        strokeWidth={1.5}
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M4.5 12a7.5 7.5 0 0015 0m-15 0a7.5 7.5 0 1115 0m-15 0H3m16.5 0H21m-1.5 0a5.999 5.999 0 01-5.999 5.999M19.5 12a5.999 5.999 0 00-5.999-5.999m0 11.998a5.999 5.999 0 01-5.999-5.999m5.999-5.999a5.999 5.999 0 00-5.999 5.999"
+        />
+      </svg>
+    ),
+  },
+
   {
     title: "The Policy Analyst",
     description:
@@ -122,9 +123,9 @@ const writerPersonas = [
     ),
   },
   {
-    title: "The Technical Lead",
+    title: "The Novelist",
     description:
-      "Specifications and technical documentation where the architecture of prose reflects the code.",
+      "Managing complex drafts across years, alternate endings, and characters that evolve with the story.",
     icon: (
       <svg
         className="w-5 h-5"
@@ -136,7 +137,7 @@ const writerPersonas = [
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
-          d="M4.5 12a7.5 7.5 0 0015 0m-15 0a7.5 7.5 0 1115 0m-15 0H3m16.5 0H21m-1.5 0a5.999 5.999 0 01-5.999 5.999M19.5 12a5.999 5.999 0 00-5.999-5.999m0 11.998a5.999 5.999 0 01-5.999-5.999m5.999-5.999a5.999 5.999 0 00-5.999 5.999"
+          d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"
         />
       </svg>
     ),
@@ -220,14 +221,10 @@ const faqs = [
 ];
 
 export default function Home() {
-  const [activePhilosophyIndex, setActivePhilosophyIndex] = useState<
-    number | null
-  >(null);
-
   return (
     <main className="min-h-screen bg-background">
       {/* Section 1: Hero */}
-      <section className="pt-32 pb-24 lg:pt-40 lg:pb-32">
+      <section className="pt-32 pb-24 lg:pt-40 lg:pb-32 border-b border-border">
         <MaxWidth>
           <div className="max-w-5xl mx-auto text-center">
             <motion.div
@@ -310,7 +307,7 @@ export default function Home() {
       {/* Section 4: Philosophy */}
       <section
         id="philosophy"
-        className="py-24 lg:py-32 bg-secondary/30 relative overflow-hidden"
+        className="py-24 lg:py-32 bg-secondary/30 relative overflow-hidden border-b border-border"
       >
         {/* Subtle background pattern for integration */}
         <div
@@ -348,7 +345,7 @@ export default function Home() {
               viewport={{ once: true }}
               className="mt-16 bg-background/50 border-y border-border backdrop-blur-sm"
             >
-              <PhilosophyVisual activeIndex={activePhilosophyIndex} />
+              <PhilosophyVisual />
             </motion.div>
 
             <motion.div
@@ -380,8 +377,6 @@ export default function Home() {
                   className="text-left p-6 border border-border bg-background hover:border-primary transition-colors cursor-default"
                   whileHover={{ y: -4 }}
                   transition={{ delay: index * 0.1 }}
-                  onMouseEnter={() => setActivePhilosophyIndex(index)}
-                  onMouseLeave={() => setActivePhilosophyIndex(null)}
                 >
                   <div className="w-8 h-8 bg-primary flex items-center justify-center mb-4 relative noise">
                     <span className="font-mono text-xs text-primary-foreground font-bold">
@@ -452,7 +447,7 @@ export default function Home() {
       </section>
 
       {/* Section 5: Your Archive */}
-      <section className="py-24 lg:py-32 border-y border-border">
+      <section className="py-24 lg:py-32 border-b border-border">
         <MaxWidth>
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
             <div>
@@ -657,7 +652,7 @@ export default function Home() {
       </section>
 
       {/* Section 8: Who Writes With Paperflow */}
-      <section className="py-16 lg:py-24">
+      <section className="py-16 lg:py-24 border-b border-border">
         <MaxWidth>
           <motion.div
             className="max-w-2xl mb-10"
@@ -705,7 +700,7 @@ export default function Home() {
       </section>
 
       {/* Section 11: FAQ */}
-      <section id="faq" className="py-24 lg:py-32 border-t border-border">
+      <section id="faq" className="py-24 lg:py-32">
         <MaxWidth>
           <div className="grid lg:grid-cols-3 gap-12">
             <div className="lg:col-span-1">

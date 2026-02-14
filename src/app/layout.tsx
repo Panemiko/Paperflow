@@ -38,6 +38,8 @@ export const metadata: Metadata = {
   },
 };
 
+import { VerticalGuidelines } from "@/components/ui/vertical-guidelines";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -46,8 +48,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${_inter.variable} ${_bitter.variable} ${_jetbrains.variable} font-sans antialiased`}
+        className={`${_inter.variable} ${_bitter.variable} ${_jetbrains.variable} font-sans antialiased relative`}
       >
+        <VerticalGuidelines />
         {children}
         <Analytics />
       </body>

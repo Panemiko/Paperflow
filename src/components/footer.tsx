@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Logo } from "./brand/logo";
 import { MaxWidth } from "./max-width";
 
 export function Footer() {
@@ -9,16 +10,7 @@ export function Footer() {
       <MaxWidth>
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <div>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-8 h-8 bg-foreground flex items-center justify-center">
-                <span className="font-serif text-background text-lg font-bold">
-                  P
-                </span>
-              </div>
-              <span className="font-serif text-lg font-semibold text-foreground">
-                Paperflow
-              </span>
-            </div>
+            <Logo className="h-12 mb-4 w-auto" />
             <p className="font-mono text-[10px] tracking-widest uppercase text-muted-foreground">
               For writers who believe words matter.
             </p>
