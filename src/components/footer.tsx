@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Logo } from "./brand/logo";
+import { BrandLogo } from "./brand/logo";
 import { MaxWidth } from "./max-width";
 
 export function Footer() {
@@ -10,7 +10,7 @@ export function Footer() {
       <MaxWidth>
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <div>
-            <Logo className="h-12 mb-4 w-auto" />
+            <BrandLogo className="h-12 mb-4 w-auto" />
             <p className="font-mono text-[10px] tracking-widest uppercase text-muted-foreground">
               For writers who believe words matter.
             </p>

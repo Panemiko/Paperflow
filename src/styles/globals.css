@@ -125,6 +125,12 @@
   }
   body {
     @apply bg-background text-foreground font-sans antialiased;
+    background-image:
+      linear-gradient(to right, hsl(var(--border) / 0.1) 1px, transparent 1px),
+      linear-gradient(to right, hsl(var(--border) / 0.1) 1px, transparent 1px);
+    background-position: center top;
+    background-size: min(100vw, 1280px) 100%;
+    background-repeat: no-repeat;
   }
 }
 

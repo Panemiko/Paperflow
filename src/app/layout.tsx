@@ -1,3 +1,4 @@
+import { VerticalGuidelines } from "@/components/ui/vertical-guidelines";
 import "@/styles/globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
@@ -37,8 +38,6 @@ export const metadata: Metadata = {
     apple: "/apple-icon.png",
   },
 };
-
-import { VerticalGuidelines } from "@/components/ui/vertical-guidelines";
 
 export default function RootLayout({
   children,
