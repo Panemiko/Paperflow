@@ -244,12 +244,12 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
             >
-              The Professional
+              The editor that
               <br />
-              Standard for
+              lets you
               <br />
               <strong className="text-muted-foreground font-bold">
-                Serious Authors
+                change your mind.
               </strong>
             </motion.h1>
 
@@ -259,10 +259,10 @@ export default function Home() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              The flexible cloud editor for serious writers. Paperflow provides
-              the structure to branch your ideas, track their evolution, and
-              merge your best thoughts into a unified whole with zero data
-              lock-in.
+              Create parallel branches for any document and merge the best
+              insights into your final masterpiece. Paperflow gives you the
+              structure to branch your ideas, track their evolution, and merge
+              your best thoughts into a unified whole.
             </motion.p>
 
             <motion.div

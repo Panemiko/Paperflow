@@ -8,7 +8,7 @@ export function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-sm border-b border-border">
       <div className="py-4 px-12 flex items-center justify-between">
-        <BrandLogo className="h-8 w-auto" />
+        <BrandLogo className="h-10 w-auto" />
         <nav className="hidden md:flex items-center gap-8">
           {[
             { label: "Mechanism", href: "#mechanism" },
