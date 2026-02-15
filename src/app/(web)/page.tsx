@@ -84,7 +84,7 @@ const writerPersonas = [
   {
     title: "The Technical Lead",
     description:
-      "Specifications and technical documentation where the architecture of prose reflects the code.",
+      "Specifications and technical documentation where the architecture of the writing reflects the code.",
     icon: (
       <svg
         className="w-5 h-5"
@@ -181,7 +181,7 @@ const faqs = [
   {
     question: "Is this just Git for writers?",
     answer:
-      "While we use battle-tested version control principles, the interface is built from the ground up for prose. You don't need to know what a 'rebase' is to use Paperflow—but you get all the power of branching and merging dedicated to your narrative.",
+      "While we use the same principles found in professional development tools, our editor is built from the ground up for writing. You don't need to know what a 'rebase' is to use Paperflow—but you get all the power of branching and merging dedicated to your narrative.",
   },
   {
     question: "Is my work private and secure?",
@@ -239,30 +239,27 @@ export default function Home() {
             </motion.div>
 
             <motion.h1
-              className="font-serif text-6xl sm:text-7xl md:text-8xl lg:text-8xl font-bold leading-[0.9] tracking-tight text-foreground  relative z-10"
+              className="font-serif text-6xl sm:text-7xl md:text-8xl lg:text-8xl font-bold leading-[0.9] tracking-tight text-foreground relative z-10"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
             >
-              The editor that
-              <br />
-              lets you
+              Write with an
               <br />
               <strong className="text-muted-foreground font-bold">
-                change your mind.
+                infinite safety net
               </strong>
             </motion.h1>
 
             <motion.p
-              className="mt-12 text-xl md:text-2xl text-muted-foreground leading-relaxed max-w-3xl mx-auto"
+              className="mt-12 text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              Create parallel branches for any document and merge the best
-              insights into your final masterpiece. Paperflow gives you the
-              structure to branch your ideas, track their evolution, and merge
-              your best thoughts into a unified whole.
+              A multi-branch editor for surgical drafting and writing.
+              <br /> Built for academics, authors, creative professionals and
+              whoever needs secure, version-controlled writing.
             </motion.p>
 
             <motion.div
@@ -499,7 +496,7 @@ export default function Home() {
       {/* Section 6: Our Stance (No-AI) */}
       <section
         id="ethics"
-        className="py-24 lg:py-32 bg-foreground text-background"
+        className="py-24 lg:py-32 z-20 relative bg-foreground text-background"
       >
         <MaxWidth>
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -767,7 +764,7 @@ export default function Home() {
                 Final Draft
               </span>
               <h2 className="mt-4 font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-background leading-tight text-balance">
-                Ready to elevate your prose?
+                Ready to elevate your writing?
               </h2>
               <p className="mt-6 text-lg text-background/70 leading-relaxed max-w-xl mx-auto">
                 Join our waitlist for early access. We invite founding authors
