@@ -14,207 +14,129 @@ import {
 import { PaperflowCard } from "@/components/ui/card";
 import { WaitlistForm } from "@/components/waitlist-form";
 import { motion } from "framer-motion";
+import {
+  Briefcase,
+  ClipboardList,
+  EyeOff,
+  Feather,
+  GraduationCap,
+  Lock,
+  PenTool,
+  Scale,
+  ShieldCheck,
+} from "lucide-react";
 import { useState } from "react";
 
 const writerPersonas = [
   {
     title: "The Academic",
     description:
-      "Literature reviews, evolving hypotheses, and the precision required for rigorous scholarly publication.",
-    icon: (
-      <svg
-        className="w-5 h-5"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        strokeWidth={1.5}
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"
-        />
-      </svg>
-    ),
+      "Manage research, evolving theories, and the precision needed for scholarly publishing.",
+    icon: <GraduationCap className="w-5 h-5" />,
   },
   {
     title: "The Lawyer",
     description:
-      "Privileged drafts, clause-by-clause history, and the precision that wins cases before they reach court.",
-    icon: (
-      <svg
-        className="w-5 h-5"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        strokeWidth={1.5}
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.303.485 2.713.75 4.185.75m-8.37 0c0-6.21 5.04-11.25 11.25-11.25m-11.25 0a11.25 11.25 0 0111.25-11.25"
-        />
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M3 13.5h18m-18-4.5h18"
-        />
-      </svg>
-    ),
+      "Track every clause and version history to ensure accuracy before reaching court.",
+    icon: <Scale className="w-5 h-5" />,
   },
   {
     title: "The Executive",
     description:
-      "Strategic plans, board reports, and quarterly narratives where every word choice has market impact.",
-    icon: (
-      <svg
-        className="w-5 h-5"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        strokeWidth={1.5}
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m-1.5 3h1.5m4.5-9H15m0 3H15m0 3H15m0 3H15"
-        />
-      </svg>
-    ),
+      "Build strategic plans and reports where every word choice impacts the business.",
+    icon: <Briefcase className="w-5 h-5" />,
   },
-
   {
-    title: "The Technical Lead",
+    title: "The Copywriter",
     description:
-      "Specifications and technical documentation where the architecture of the writing reflects the code.",
-    icon: (
-      <svg
-        className="w-5 h-5"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        strokeWidth={1.5}
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M4.5 12a7.5 7.5 0 0015 0m-15 0a7.5 7.5 0 1115 0m-15 0H3m16.5 0H21m-1.5 0a5.999 5.999 0 01-5.999 5.999M19.5 12a5.999 5.999 0 00-5.999-5.999m0 11.998a5.999 5.999 0 01-5.999-5.999m5.999-5.999a5.999 5.999 0 00-5.999 5.999"
-        />
-      </svg>
-    ),
+      "Test headlines, refine campaigns, and manage multiple drafts without the clutter.",
+    icon: <PenTool className="w-5 h-5" />,
   },
-
   {
-    title: "The Policy Analyst",
+    title: "The Product Manager",
     description:
-      "Evolving legislation, complex white papers, and the detailed history of every policy transition.",
-    icon: (
-      <svg
-        className="w-5 h-5"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        strokeWidth={1.5}
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z"
-        />
-      </svg>
-    ),
+      "Keep requirements, user stories, and roadmaps aligned as the project evolves.",
+    icon: <ClipboardList className="w-5 h-5" />,
   },
   {
     title: "The Novelist",
     description:
-      "Managing complex drafts across years, alternate endings, and characters that evolve with the story.",
-    icon: (
-      <svg
-        className="w-5 h-5"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        strokeWidth={1.5}
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"
-        />
-      </svg>
-    ),
+      "Manage complex stories with multiple paths and characters that evolve over time.",
+    icon: <Feather className="w-5 h-5" />,
   },
 ];
 
 const antiFeatures = [
   {
-    title: "No Vendor Lock-in",
+    title: "No AI Training",
     description:
-      "Your work is yours. Sync to the cloud for accessibility, but export your entire history in open formats whenever you want.",
+      "We never use your private text to train artificial intelligence models.",
+    icon: <EyeOff className="w-5 h-5" />,
   },
   {
-    title: "No Surveillance",
+    title: "No Lock-in",
     description:
-      "We don't read your work. We don't train on your work. We don't even know what you're writing.",
+      "Your data is yours. Export your documents to standard formats at any time.",
+    icon: <Lock className="w-5 h-5" />,
   },
   {
-    title: "Opt-in Intelligence",
+    title: "No Distractions",
     description:
-      "AI will never access your content unless you ask. And if used, every AI contribution is clearly marked.",
-  },
-  {
-    title: "No Data Hostage",
-    description:
-      "Your data is yours. Export everything, always. No lock-in, ever.",
+      "No badges, streaks, or gamification. Just a quiet place to focus.",
+    icon: <ShieldCheck className="w-5 h-5" />,
   },
 ];
 
 const faqs = [
   {
-    question: "Is Paperflow 'No-AI'?",
+    question: "Who is Paperflow for?",
     answer:
-      "AI is entirely optional. It never accesses your work without permission. If used, AI text is always visually distinct from your own.",
+      "Paperflow is designed for professionals who manage complex, high-stakes documents. It is built for academics, lawyers, technical writers, and authors who need absolute control over their revision history.",
   },
   {
-    question: "How do I get my data if I decide to leave?",
+    question: "Do you use my writing to train AI?",
     answer:
-      "Your data is always yours. You can export your entire project history in open formats like Markdown and standard Git-compatible structures. No proprietary formats, no gatekeeping.",
+      "No. We do not use your text to train artificial intelligence models. Your work remains private and is never used to feed our algorithms.",
+  },
+  {
+    question: "Why use Markdown?",
+    answer:
+      "We use Markdown to ensure formatting never becomes a distraction. You focus purely on the structure and content while writing, but you can export to any styled format (PDF, Word, LaTeX) when you are ready to publish.",
+  },
+  {
+    question: "What platforms will be supported?",
+    answer:
+      "Paperflow will launch initially as a web application optimized for desktop browsers. This allows us to deliver updates quickly before we expand to native desktop or mobile apps.",
+  },
+  {
+    question: "How do I get my data out?",
+    answer:
+      "Data ownership is a core principle. You will be able to export your individual documents or your entire repository to standard formats like Markdown, Docx, or PDF at any time.",
+  },
+  {
+    question: "How is this different from Google Docs?",
+    answer:
+      "Google Docs is designed for live collaboration, which often results in a messy history. Paperflow is designed for version control, providing a clean, permanent record of every major decision you make.",
+  },
+  {
+    question: "Do I need technical skills to use this?",
+    answer:
+      "No. While the technology is powerful, the interface is simple. We use concepts like 'Save Version' and 'Explore Idea' so you get the benefits of version control without needing to be a developer.",
+  },
+  {
+    question: "Is there a limit to how many versions I can save?",
+    answer:
+      "We plan to offer unlimited version history. We believe your history is a valuable asset, not a storage problem that needs to be deleted.",
   },
   {
     question: "Is this just Git for writers?",
     answer:
-      "While we use the same principles found in professional development tools, our editor is built from the ground up for writing. You don't need to know what a 'rebase' is to use Paperflow—but you get all the power of branching and merging dedicated to your narrative.",
+      "It shares the same philosophy as Git (branching, merging, history), but the interface and features are built specifically for prose, legal text, and academic writing.",
   },
   {
-    question: "Is my work private and secure?",
+    question: "When can I start using Paperflow?",
     answer:
-      "Absolutely. We use end-to-end AES-256 encryption. We don't read your manuscripts, we don't sell your data, and we don't use it to train any models. Your thoughts are yours alone.",
-  },
-  {
-    question: "What platforms do you support?",
-    answer:
-      "Paperflow is built as a cloud-native web application that works beautifully on desktop and tablet browsers. We are currently developing dedicated native apps for macOS and iPadOS for offline-first writing.",
-  },
-
-  {
-    question: "Is there a limit to how many branches I can create?",
-    answer:
-      "No. Branch as much as you need. Whether you're exploring three different endings or fifty minor plot variations, Paperflow is built to handle complex narrative structures without slowing down.",
-  },
-  {
-    question: "Can I work offline?",
-    answer:
-      "Yes. Our upcoming native desktop applications are built with an offline-first architecture. Your work is saved locally and synced automatically once you're back online, with built-in conflict resolution to ensure no data loss.",
-  },
-  {
-    question: "Does Paperflow support Markdown?",
-    answer:
-      "Yes. Every manuscript is stored as a collection of Markdown files. You can export your work at any time and it will be perfectly readable by any text editor.",
-  },
-  {
-    question: "Who is Paperflow for?",
-    answer:
-      "Serious authors who value their craft, their data, and their legacy. If you're tired of being treated as a data point for AI training and want a tool that respects the sanctity of the writing process, Paperflow is for you.",
+      "Paperflow is currently in active development. We are opening access in waves to ensure stability. Join the waitlist to secure your spot for the first public release.",
   },
 ];
 
@@ -276,9 +198,8 @@ export default function Home() {
         </MaxWidth>
       </section>
 
-      {/* Section 2: The Mechanism (Live Editor) */}
       <section
-        id="mechanism"
+        id="how-it-works"
         className="py-24 lg:py-32 border-b border-border relative"
       >
         <MaxWidth>
@@ -289,16 +210,16 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
-              The Mechanism
+              How it works
             </span>
             <h2 className="mt-4 font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-balance">
-              Write Fearlessly.{" "}
-              <span className="text-muted-foreground">Revert Instantly.</span>
+              Test new ideas,{" "}
+              <span className="text-muted-foreground">keep what works.</span>
             </h2>
             <p className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-2xl">
-              Every branch is a safe space to explore. Every merge is a
-              conscious decision. Delete that chapter. You can always bring it
-              back.
+              Explore different directions for your document in a safe space. If
+              a change works, keep it. If it doesn’t, go back to your original
+              draft with one click.
             </p>
           </motion.div>
 
@@ -308,7 +229,7 @@ export default function Home() {
 
       {/* Section 3: Chat (Review and Comment) */}
       <section
-        id="chat"
+        id="collaboration"
         className="py-24 lg:py-32 border-b border-border bg-background relative overflow-hidden"
       >
         <MaxWidth>
@@ -329,21 +250,21 @@ export default function Home() {
                 viewport={{ once: true }}
               >
                 <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
-                  Chat
+                  Collaborate with clarity
                 </span>
-                <h2 className="mt-4 font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight text-balance">
-                  Review Without Resistance
+                <h2 className="mt-4 font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-balance">
+                  Get feedback without the friction
                 </h2>
                 <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-                  Leave comments on specific versions. Discuss changes in
-                  context. Resolve threads as you merge branches.
+                  Share your work and get notes exactly where they belong.
+                  Discuss changes in context and approve updates with one click.
                 </p>
                 <ul className="mt-8 space-y-3">
                   {[
-                    "Inline commenting on any draft",
-                    "Threaded discussions for deep dives",
-                    "Resolve feedback with a single click",
-                    "Keep the conversation attached to the code",
+                    "Add comments directly to any draft.",
+                    "Discuss changes in organized threads.",
+                    "Fix problems with one click.",
+                    "Keep every conversation attached to the right change.",
                   ].map((item) => (
                     <li
                       key={item}
@@ -373,22 +294,22 @@ export default function Home() {
                 viewport={{ once: true }}
               >
                 <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
-                  The Result
+                  The Record
                 </span>
                 <h2 className="mt-4 font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight text-balance">
-                  Every Edit, Forever
+                  Your entire process, perfectly preserved
                 </h2>
                 <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-                  Your commit history isn't just a backup. It's a chronicle of
-                  your creative evolution. Scholars study writers' drafts for
-                  insight. Paperflow makes that possible for everyone.
+                  Save your progress whenever you reach a milestone. You can go
+                  back in time to see how your work evolved or recover something
+                  you changed weeks ago.
                 </p>
                 <ul className="mt-8 space-y-3">
                   {[
-                    "Time-travel to any version instantly",
-                    "See exactly what you changed and when",
-                    "Restore deleted passages with a click",
-                    "Share your creative process with readers",
+                    "Go back to any saved version instantly.",
+                    "See exactly what was changed and when.",
+                    "Bring back deleted text with one click.",
+                    "Share specific versions with others easily.",
                   ].map((item) => (
                     <li
                       key={item}
@@ -436,15 +357,16 @@ export default function Home() {
               className="max-w-3xl"
             >
               <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
-                Philosophy
+                The Method
               </span>
               <h2 className="mt-4 font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight text-balance">
-                Every Draft Is a Decision
+                A better way to build your work
               </h2>
               <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-                Writing is revision. Revision requires comparison. Comparison
-                demands history. Paperflow makes your creative process visible
-                to yourself, and to anyone you choose to show.
+                Most tools want you to write faster. We want you to write
+                better. Paperflow gives you the space to explore ideas, the
+                clarity to make decisions, and the confidence to share your best
+                work.
               </p>
             </motion.div>
 
@@ -462,22 +384,22 @@ export default function Home() {
                 {
                   title: "Draft",
                   description:
-                    "Capture every thought as it happens. A clean slate backed by a permanent, invisible history.",
+                    "Write your thoughts freely. Every version you save is kept in a permanent history.",
                 },
                 {
-                  title: "Diverge",
+                  title: "Explore",
                   description:
-                    "What if the detective was the killer? What if chapter three came first? Branch and find out.",
+                    "Try a new direction. Create a separate path for a new idea without changing your main work.",
                 },
                 {
                   title: "Compare",
                   description:
-                    "See the version from Tuesday beside the version from today. Word by word, line by line.",
+                    "Put two versions side-by-side. See exactly what changed line by line to choose the best one.",
                 },
                 {
-                  title: "Merge",
+                  title: "Combine",
                   description:
-                    "Take the ending from branch A, the middle from branch B. Your manuscript, your rules.",
+                    "Bring the best parts together. Put your favorite ideas into one polished final work.",
                 },
               ].map((item, index) => (
                 <PaperflowCard
@@ -510,15 +432,14 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-primary font-bold">
-              Public
+              Built for Professionals
             </span>
             <h2 className="mt-4 font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-balance">
-              Built for Professional Writing
+              Precision for every project
             </h2>
             <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-              Whether you're crafting your first novel or your fiftieth policy
-              white paper, Paperflow gives you the infrastructure your words
-              deserve.
+              Whether you are writing a novel or a legal contract, Paperflow
+              gives you the tools to manage complex documents with confidence.
             </p>
           </motion.div>
 
@@ -550,18 +471,18 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-primary font-bold">
-              What We Refuse to Build
+              Our Principles
             </span>
             <h2 className="mt-4 font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-balance">
-              Principles of Absence
+              Your work belongs to you
             </h2>
             <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-              Some features are absent by design. These are promises, not
-              limitations.
+              Paperflow is built to protect your process, not to exploit it. We
+              believe in privacy, ownership, and the human act of writing.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-3 gap-6">
             {antiFeatures.map((feature, index) => (
               <PaperflowCard
                 key={feature.title}
@@ -570,19 +491,7 @@ export default function Home() {
                 transition={{ delay: index * 0.05, duration: 0.4 }}
                 icon={
                   <div className="w-full h-full flex items-center justify-center">
-                    <svg
-                      className="w-4 h-4 text-inherit"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={3}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
+                    {feature.icon}
                   </div>
                 }
               />
@@ -656,14 +565,14 @@ export default function Home() {
               viewport={{ once: true }}
             >
               <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-background/50">
-                Final Draft
+                Early Access
               </span>
               <h2 className="mt-4 font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-background leading-tight text-balance">
-                Ready to elevate your writing?
+                Ready to take control of your work?
               </h2>
               <p className="mt-6 text-lg text-background/70 leading-relaxed max-w-xl mx-auto">
-                Join our waitlist for early access. We invite founding authors
-                in waves to ensure the best experience for everyone.
+                Paperflow is currently in active development. Join the waitlist
+                to be notified when early access opens.
               </p>
             </motion.div>
 
