@@ -247,20 +247,21 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
             >
-              Writing built for <br className="hidden lg:sm" />
+              Write with <br className="hidden lg:sm" />
               <strong className="text-muted-foreground font-bold">
-                speed and control
-              </strong>
+                total control
+              </strong>{" "}
+              over your work
             </motion.h1>
 
             <motion.p
-              className="mt-12 text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto"
+              className="mt-12 text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              Multi-branch drafting, surgical history, private by design,
-              <br /> and more — in any environment.
+              A professional writing tool for people who need to explore ideas
+              without losing their original draft.
             </motion.p>
 
             <motion.div

@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { BrandLogo } from "./brand/logo";
 import { MaxWidth } from "./max-width";
 
@@ -10,16 +11,16 @@ export function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-sm border-b border-border">
       <MaxWidth className="py-4 flex items-center">
         <div className="flex-1 flex justify-start">
-          <a href="/" className="hover:opacity-80 transition-opacity">
+          <Link href="/" className="hover:opacity-80 transition-opacity">
             <BrandLogo className="h-8 w-auto" />
-          </a>
+          </Link>
         </div>
         <nav className="hidden md:flex items-center gap-8">
           {[
-            { label: "Mechanism", href: "#mechanism" },
-            { label: "Philosophy", href: "#philosophy" },
-            { label: "Ethics", href: "#ethics" },
-            { label: "FAQ", href: "#faq" },
+            { label: "Mechanism", href: "/#mechanism" },
+            { label: "Philosophy", href: "/#philosophy" },
+            { label: "Ethics", href: "/#ethics" },
+            { label: "FAQ", href: "/#faq" },
           ].map((link) => (
             <a
               key={link.label}
