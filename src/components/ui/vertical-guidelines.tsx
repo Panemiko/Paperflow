@@ -80,7 +80,7 @@ export function VerticalGuidelines() {
         {/* 55% - Public (Role) */}
         <div className="absolute right-[-2px] top-[55%] flex flex-col gap-4 items-start translate-x-full pl-4 opacity-[0.15] hover:opacity-80 transition-opacity duration-500 pointer-events-auto cursor-default">
           <div className="w-px h-8 bg-[#777777]/30 ml-px" />
-          <span className="font-mono text-[9px] tracking-widest uppercase opacity-60 text-secondary">
+          <span className="font-mono text-[9px] tracking-widest uppercase opacity-60 text-primary">
             Role: Editor / Public
           </span>
         </div>

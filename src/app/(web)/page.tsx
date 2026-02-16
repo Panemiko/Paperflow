@@ -222,11 +222,11 @@ const faqs = [
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen">
       {/* Section 1: Hero */}
       <section
         id="hero"
-        className="pt-32 pb-24 lg:pt-40 lg:pb-32 border-b border-border relative"
+        className="pt-32 pb-24 lg:pt-40 lg:pb-32 border-b border-border relative overflow-hidden"
       >
         <MaxWidth>
           <div className="max-w-5xl mx-auto text-center">
@@ -309,7 +309,7 @@ export default function Home() {
       {/* Section 3: Chat (Review and Comment) */}
       <section
         id="chat"
-        className="py-24 lg:py-32 border-b border-border bg-background relative"
+        className="py-24 lg:py-32 border-b border-border bg-background relative overflow-hidden"
       >
         <MaxWidth>
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -415,7 +415,7 @@ export default function Home() {
       {/* Section 5: Philosophy (Restored) */}
       <section
         id="philosophy"
-        className="py-24 lg:py-32 bg-secondary/30 relative overflow-hidden border-b border-border"
+        className="py-24 lg:py-32 bg-primary/2 relative overflow-hidden border-b border-border"
       >
         {/* Subtle background pattern for integration */}
         <div
@@ -507,7 +507,7 @@ export default function Home() {
       {/* Section 6: Public (Audience) */}
       <section
         id="public"
-        className="py-16 lg:py-24 border-b border-border relative bg-primary/2"
+        className="py-16 lg:py-24 border-b border-border relative bg-primary/2 overflow-hidden"
       >
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none" />
         <MaxWidth>
@@ -560,9 +560,9 @@ export default function Home() {
       {/* Section 7: What We Refuse to Build (Principles) */}
       <section
         id="refuse"
-        className="py-24 lg:py-32 border-b border-border relative bg-secondary/2"
+        className="py-24 lg:py-32 border-b border-border relative bg-primary/2 overflow-hidden"
       >
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-secondary/5 blur-[120px] rounded-full -translate-x-1/2 translate-y-1/2 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/5 blur-[120px] rounded-full -translate-x-1/2 translate-y-1/2 pointer-events-none" />
         <MaxWidth>
           <motion.div
             className="max-w-2xl mx-auto text-center mb-16 pt-6 relative"
@@ -570,8 +570,8 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-secondary" />
-            <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-secondary font-bold">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-primary" />
+            <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-primary font-bold">
               What We Refuse to Build
             </span>
             <h2 className="mt-4 font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-balance">
@@ -587,16 +587,16 @@ export default function Home() {
             {antiFeatures.map((feature, index) => (
               <motion.div
                 key={feature.title}
-                className="p-6 border border-border hover:border-secondary transition-colors group"
+                className="p-6 border border-border hover:border-primary transition-colors group"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
               >
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-6 h-6 border border-border flex items-center justify-center group-hover:border-secondary transition-colors">
+                  <div className="w-6 h-6 border border-border flex items-center justify-center group-hover:border-primary transition-colors">
                     <svg
-                      className="w-3 h-3 text-secondary"
+                      className="w-3 h-3 text-primary"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -625,7 +625,7 @@ export default function Home() {
       {/* Section 8: Your Voice Verified (Ethics) */}
       <section
         id="ethics"
-        className="py-24 lg:py-32 relative border-b border-border bg-primary/2"
+        className="py-24 lg:py-32 relative border-b border-border bg-primary/2 overflow-hidden"
       >
         <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-primary/5 blur-[100px] rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
         <MaxWidth>

@@ -228,7 +228,7 @@ export function LiveEditor() {
     >
       {/* Simulation Pane (Software View) */}
       <div className="lg:col-span-3 border-b lg:border-b-0 lg:border-r border-border bg-background flex flex-col relative">
-        <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-secondary/30">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-background">
           <span className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground/60 hidden sm:inline">
             {phase === "idling"
               ? "Awaiting change..."
@@ -359,7 +359,7 @@ export function LiveEditor() {
                           id="commit-name"
                           value={commitName}
                           readOnly
-                          className="h-8 text-xs font-serif bg-secondary/10"
+                          className="h-8 text-xs font-serif bg-primary/5"
                         />
                         <div className="w-full bg-primary/20 text-primary-foreground/50 px-4 py-2 text-[9px] font-mono uppercase tracking-widest text-center relative noise">
                           Updating Buffer...
@@ -376,7 +376,7 @@ export function LiveEditor() {
 
       {/* Commit History Pane */}
       <div className="lg:col-span-2 flex flex-col h-full overflow-hidden">
-        <div className="px-6 py-4 border-b border-border bg-secondary/10 flex items-center justify-between">
+        <div className="px-6 py-4 border-b border-border bg-background flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Clock className="w-3.5 h-3.5 text-muted-foreground" />
             <span className="font-mono text-[10px] tracking-widest uppercase text-muted-foreground font-bold">
@@ -403,7 +403,7 @@ export function LiveEditor() {
                 initial={{ height: 0, opacity: 0, y: -20 }}
                 animate={{ height: "auto", opacity: 1, y: 0 }}
                 transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-                className={`px-6 py-5 group relative border-b border-border last:border-0 transition-colors duration-300 hover:bg-secondary/20 ${
+                className={`px-6 py-5 group relative border-b border-border last:border-0 transition-colors duration-300 hover:bg-primary/5 ${
                   index === 0 && phase !== "refreshing" ? "bg-primary/5" : ""
                 }`}
               >
@@ -468,7 +468,7 @@ export function LiveEditor() {
           </AnimatePresence>
         </div>
 
-        <div className="p-4 bg-secondary/30 mt-auto border-t border-border">
+        <div className="p-4 bg-background mt-auto border-t border-border">
           <div className="flex items-center justify-between text-muted-foreground">
             <span className="font-mono text-[8px] uppercase tracking-tighter">
               {phase === "refreshing" ? "Refreshing..." : "Paperflow"}

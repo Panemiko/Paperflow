@@ -19,7 +19,7 @@ const COMMENTS = [
     author: "Amara Okafor",
     initials: "AO",
     text: "This removal is aggressive. Are we losing the character motivation here?",
-    color: "bg-blue-500",
+    color: "bg-primary",
     avatar:
       "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=150&h=150&fit=crop&crop=faces&q=80",
   },
@@ -82,7 +82,7 @@ export function CommentVisual() {
       ref={containerRef}
       className="w-full h-[440px] border border-border bg-card shadow-2xl overflow-hidden relative flex flex-col"
     >
-      <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-secondary/30">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-background">
         <div className="flex items-center gap-2">
           <div className="w-1.5 h-1.5 rounded-full bg-primary/20" />
           <span className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground/60">
@@ -248,7 +248,7 @@ export function CommentVisual() {
               </span>
             </div>
           ) : (
-            <div className="w-6 h-6 rounded flex items-center justify-center bg-secondary text-muted-foreground">
+            <div className="w-6 h-6 rounded flex items-center justify-center bg-primary/20 text-primary">
               <ChevronDown className="w-3 h-3" />
             </div>
           )}

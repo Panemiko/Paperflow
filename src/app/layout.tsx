@@ -47,7 +47,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${_inter.variable} ${_bitter.variable} ${_jetbrains.variable} font-sans antialiased relative`}
+        className={`${_inter.variable} ${_bitter.variable} ${_jetbrains.variable} font-sans antialiased relative overflow-x-hidden`}
       >
         <VerticalGuidelines />
         {children}

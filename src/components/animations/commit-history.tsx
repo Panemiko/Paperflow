@@ -27,7 +27,7 @@ const ALL_COMMITS = [
     author: "Liam O'Sullivan (You)",
     daysAgo: 14,
     time: "11:03 UTC",
-    color: "bg-blue-500",
+    color: "bg-primary",
     details: {
       diff: { added: 87234, removed: 120 },
       section: "Full Manuscript",
@@ -84,7 +84,7 @@ const ALL_COMMITS = [
     author: "Liam O'Sullivan (You)",
     daysAgo: 9,
     time: "14:32 UTC",
-    color: "bg-blue-500",
+    color: "bg-primary",
     details: {
       diff: { added: 24, removed: 109 },
       section: "Chapter 12",
@@ -127,7 +127,7 @@ const ALL_COMMITS = [
     author: "Liam O'Sullivan (You)",
     daysAgo: 7,
     time: "11:45 UTC",
-    color: "bg-blue-500",
+    color: "bg-primary",
     details: {
       diff: { added: 210, removed: 45 },
       section: "Chapter 4",
@@ -168,7 +168,7 @@ const ALL_COMMITS = [
     author: "Liam O'Sullivan (You)",
     daysAgo: 4,
     time: "21:15 UTC",
-    color: "bg-blue-500",
+    color: "bg-primary",
     details: {
       diff: { added: 890, removed: 45 },
       section: "Epilogue",
@@ -236,7 +236,7 @@ const ALL_COMMITS = [
     author: "Liam O'Sullivan (You)",
     daysAgo: 1,
     time: "13:22 UTC",
-    color: "bg-blue-500",
+    color: "bg-primary",
     details: {
       diff: { added: 1450, removed: 0 },
       section: "Chapter 12",
@@ -277,7 +277,7 @@ const ALL_COMMITS = [
     daysAgo: 0,
     time: "23:55 UTC",
     isMerge: true,
-    color: "bg-blue-500",
+    color: "bg-primary",
     details: {
       diff: { added: 0, removed: 0 },
       section: "Global",
@@ -368,7 +368,7 @@ export function CommitHistory() {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="px-6 py-4 border-b border-border bg-secondary/50 flex items-center justify-between relative z-10">
+      <div className="px-6 py-4 border-b border-border bg-background flex items-center justify-between relative z-10">
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-2">
             {isHovered || expandedId ? (
@@ -420,8 +420,8 @@ export function CommitHistory() {
               }
               className={`group cursor-pointer border-b border-border last:border-0 relative transition-colors duration-300 ${
                 expandedId === commit.id
-                  ? "bg-secondary/40 ring-1 ring-inset ring-primary/20 z-10"
-                  : "hover:bg-secondary/20"
+                  ? "bg-primary/5 ring-1 ring-inset ring-primary/20 z-10"
+                  : "hover:bg-primary/5"
               } ${index === 0 && !isHovered && !expandedId ? "animate-pulse bg-primary/5" : ""}`}
             >
               <div className="min-h-[110px] px-6 py-5 flex flex-col justify-center relative">
