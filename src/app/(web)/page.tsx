@@ -242,13 +242,12 @@ export default function Home() {
             </motion.div>
 
             <motion.h1
-              className="font-serif text-6xl sm:text-7xl md:text-8xl lg:text-8xl font-bold leading-[0.9] tracking-tight text-foreground relative z-10"
+              className="font-serif text-5xl sm:text-7xl md:text-8xl lg:text-8xl font-bold leading-[0.9] tracking-tight text-foreground relative z-10"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
             >
-              Writing built for
-              <br />
+              Writing built for <br className="hidden lg:sm" />
               <strong className="text-muted-foreground font-bold">
                 speed and control
               </strong>

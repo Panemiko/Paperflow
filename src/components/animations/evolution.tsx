@@ -74,6 +74,7 @@ export function Evolution() {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [commitName, setCommitName] = useState("");
   const [stepIndex, setStepIndex] = useState(0);
+  const [isHistoryExpanded, setIsHistoryExpanded] = useState(false);
 
   const containerRef = useRef(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.5 });
@@ -219,11 +220,20 @@ export function Evolution() {
   return (
     <div
       ref={containerRef}
-      className="grid lg:grid-cols-5 gap-0 border border-border bg-card overflow-hidden shadow-2xl h-[440px]"
+      className="grid grid-cols-1 lg:grid-cols-5 gap-0 border border-border bg-card overflow-hidden shadow-2xl h-auto lg:h-[440px]"
     >
       {/* Simulation Pane (Software View) */}
-      <div className="lg:col-span-3 border-b lg:border-b-0 lg:border-r border-border bg-background flex flex-col relative">
-        <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-background">
+      <div className="lg:col-span-3 border-b lg:border-b-0 lg:border-r border-border bg-background flex flex-col relative h-[400px] lg:h-auto">
+        {/* Background Vertical Guidelines */}
+        <div className="absolute inset-0 flex justify-between px-12 opacity-10 pointer-events-none select-none">
+          {[...Array(5)].map((_, i) => (
+            <div key={i} className="relative w-px h-full">
+              <div className="absolute inset-0 bg-linear-to-b from-transparent via-border to-transparent" />
+            </div>
+          ))}
+        </div>
+
+        <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-background relative z-10 shrink-0">
           <span className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground/60 hidden sm:inline">
             {phase === "idling"
               ? "Awaiting change..."
@@ -245,7 +255,7 @@ export function Evolution() {
           </div>
         </div>
 
-        <div className="flex-1 p-12 pb-16 font-serif text-lg leading-relaxed relative flex flex-col">
+        <div className="flex-1 p-6 lg:p-12 pb-16 font-serif text-lg leading-relaxed relative flex flex-col">
           <div className="flex-1 relative">
             <motion.div
               layout
@@ -298,7 +308,7 @@ export function Evolution() {
                 <div className="bg-foreground text-background px-6 py-3 shadow-xl flex items-center gap-3">
                   <Clock className="w-4 h-4 text-primary animate-spin" />
                   <span className="font-mono text-xs uppercase tracking-wider">
-                    Securing change...
+                    Registering change...
                   </span>
                 </div>
               </motion.div>
@@ -342,7 +352,7 @@ export function Evolution() {
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95, y: 10 }}
                         transition={{ duration: 0.2, ease: "easeOut" }}
-                        className="absolute bottom-full right-0 mb-3 w-80 p-4 bg-background border border-border shadow-2xl z-30 pointer-events-none"
+                        className="absolute bottom-full right-0 mb-3 w-72 p-4 bg-background border border-border shadow-2xl z-30 pointer-events-none"
                       >
                         <div className="space-y-4">
                           <div className="space-y-2">
@@ -378,8 +388,8 @@ export function Evolution() {
       </div>
 
       {/* Commit History Pane */}
-      <div className="lg:col-span-2 flex flex-col h-full overflow-hidden">
-        <div className="px-6 py-4 border-b border-border bg-background flex items-center justify-between">
+      <div className="lg:col-span-2 flex flex-col h-full overflow-hidden relative">
+        <div className="px-6 py-4 border-b border-border bg-background flex items-center justify-between shrink-0">
           <div className="flex items-center gap-2">
             <Clock className="w-3.5 h-3.5 text-muted-foreground" />
             <span className="font-mono text-[10px] tracking-widest uppercase text-muted-foreground font-bold">
@@ -398,80 +408,101 @@ export function Evolution() {
           </AnimatePresence>
         </div>
 
-        <div className="flex-1 divide-y divide-border overflow-y-auto custom-scrollbar bg-card border-l border-border/50">
-          <AnimatePresence initial={false}>
-            {commits.map((commit, index) => (
-              <motion.div
-                key={commit.hash}
-                initial={{ height: 0, opacity: 0, y: -20 }}
-                animate={{ height: "auto", opacity: 1, y: 0 }}
-                transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-                className={`px-6 py-5 group relative border-b border-border last:border-0 transition-colors duration-300 hover:bg-primary/5 ${
-                  index === 0 && phase !== "refreshing" ? "bg-primary/5" : ""
-                }`}
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex items-start w-full gap-4">
-                    <div className="mt-1 shrink-0">
-                      <div
-                        className={`w-8 h-8 rounded-full overflow-hidden border flex items-center justify-center ${
-                          commit.isAi
-                            ? "bg-purple-500/10 border-purple-500/20 text-purple-600"
-                            : "bg-primary/10 border-primary/20"
-                        }`}
-                      >
-                        {commit.isAi ? (
-                          <div className="relative w-full h-full flex items-center justify-center">
-                            <Bot className="w-5 h-5" />
-                          </div>
-                        ) : (
-                          <img
-                            src={commit.avatar}
-                            alt={commit.author}
-                            className="w-full h-full object-cover"
-                          />
-                        )}
+        <div
+          className={`flex-1 overflow-y-auto custom-scrollbar bg-card border-l border-border/50 ${!isHistoryExpanded ? "h-[120px] lg:h-auto" : ""}`}
+        >
+          <div className="divide-y divide-border">
+            <AnimatePresence initial={false}>
+              {commits.map((commit, index) => (
+                <motion.div
+                  key={commit.hash}
+                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                  className={`px-6 py-5 group relative border-b border-border last:border-0 transition-colors duration-300 hover:bg-primary/5 ${
+                    index === 0 && phase !== "refreshing" ? "bg-primary/5" : ""
+                  } ${index > 0 && !isHistoryExpanded ? "hidden lg:block" : ""}`}
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex items-start w-full gap-4">
+                      <div className="mt-1 shrink-0">
+                        <div
+                          className={`w-8 h-8 rounded-full overflow-hidden border flex items-center justify-center ${
+                            commit.isAi
+                              ? "bg-purple-500/10 border-purple-500/20 text-purple-600"
+                              : "bg-primary/10 border-primary/20"
+                          }`}
+                        >
+                          {commit.isAi ? (
+                            <div className="relative w-full h-full flex items-center justify-center">
+                              <Bot className="w-5 h-5" />
+                            </div>
+                          ) : (
+                            <img
+                              src={commit.avatar}
+                              alt={commit.author}
+                              className="w-full h-full object-cover"
+                            />
+                          )}
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-3 mb-1 justify-between">
-                        <div className="flex items-center gap-2">
-                          <code className="font-mono text-[10px] text-primary bg-primary/10 px-1.5 py-0.5 rounded-[2px] relative noise">
-                            {commit.hash}
-                          </code>
-                          <span className="text-xs text-muted-foreground">
-                            {commit.time || commit.date}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-3 mb-1 justify-between">
+                          <div className="flex items-center gap-2">
+                            <code className="font-mono text-[10px] text-primary bg-primary/10 px-1.5 py-0.5 rounded-[2px] relative noise">
+                              {commit.hash}
+                            </code>
+                            <span className="text-xs text-muted-foreground">
+                              {commit.time || commit.date}
+                            </span>
+                          </div>
+                          <span className="flex items-center gap-1 font-mono text-[10px]">
+                            <span className="text-green-600">
+                              +{commit.diff?.added || 0}
+                            </span>
+                            <span className="text-red-500">
+                              -{commit.diff?.removed || 0}
+                            </span>
                           </span>
                         </div>
-                        <span className="flex items-center gap-1 font-mono text-[10px]">
-                          <span className="text-green-600">
-                            +{commit.diff?.added || 0}
-                          </span>
-                          <span className="text-red-500">
-                            -{commit.diff?.removed || 0}
-                          </span>
-                        </span>
+                        <p className="text-sm text-foreground font-medium leading-tight truncate">
+                          {commit.message}
+                        </p>
+                        <p className="text-xs text-muted-foreground mt-1">
+                          Authored by {commit.author}
+                        </p>
                       </div>
-                      <p className="text-sm text-foreground font-medium leading-tight text-balance">
-                        {commit.message}
-                      </p>
-                      <p className="text-xs text-muted-foreground mt-1">
-                        Authored by {commit.author}
-                      </p>
+                    </div>
+                    <div className="text-right shrink-0 flex flex-col items-end">
+                      <div className="mt-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                        <ChevronDown className="size-3.5 transition-transform duration-300" />
+                      </div>
                     </div>
                   </div>
-                  <div className="text-right shrink-0 flex flex-col items-end">
-                    <div className="mt-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                      <ChevronDown className="size-3.5 transition-transform duration-300" />
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </div>
         </div>
 
-        <div className="p-4 bg-background mt-auto border-t border-border">
+        {/* Mobile Expand/Collapse Button */}
+        <button
+          onClick={() => setIsHistoryExpanded(!isHistoryExpanded)}
+          disabled={commits.length <= 1}
+          className={`w-full py-3 bg-muted/30 border-t border-border text-[10px] font-mono uppercase tracking-widest text-muted-foreground transition-colors lg:hidden shrink-0 ${
+            commits.length <= 1
+              ? "opacity-50 cursor-not-allowed"
+              : "hover:bg-muted/50"
+          }`}
+        >
+          {commits.length <= 1
+            ? "No Additional History"
+            : isHistoryExpanded
+              ? "Collapse History"
+              : `View ${commits.length - 1} More Updates`}
+        </button>
+
+        <div className="p-4 bg-background mt-auto border-t border-border hidden lg:block">
           <div className="flex items-center justify-between text-muted-foreground">
             <span className="font-mono text-[8px] uppercase tracking-tighter">
               {phase === "refreshing" ? "Refreshing..." : "Paperflow"}

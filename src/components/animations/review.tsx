@@ -80,7 +80,7 @@ export function Review() {
   return (
     <div
       ref={containerRef}
-      className="w-full h-[440px] border border-border bg-card shadow-2xl overflow-hidden relative flex flex-col"
+      className="w-full h-[500px] border border-border bg-card shadow-2xl overflow-hidden relative flex flex-col"
     >
       <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-background">
         <div className="flex items-center gap-2">
@@ -155,13 +155,13 @@ export function Review() {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <div className="space-y-1">
+                  <div className="space-y-1 flex-1 min-w-0">
                     <div className="flex items-center gap-2">
                       <span className="text-xs font-semibold">
                         {COMMENTS[0].author}
                       </span>
                     </div>
-                    <div className="text-sm text-foreground bg-background p-2 rounded-lg border border-border shadow-sm w-[320px] h-[60px]">
+                    <div className="text-sm text-foreground bg-background p-2 rounded-lg border border-border shadow-sm w-fit max-w-[calc(100%-2.3rem)] md:max-w-[320px] h-auto min-h-[60px] break-words">
                       {phase === "commenting" ? (
                         <Typewriter text={COMMENTS[0].text} />
                       ) : (
@@ -189,13 +189,13 @@ export function Review() {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <div className="space-y-1 text-right">
+                  <div className="space-y-1 text-right flex-1 flex flex-col items-end min-w-0">
                     <div className="flex items-center gap-2 justify-end">
                       <span className="text-xs font-semibold">
                         {COMMENTS[1].author}
                       </span>
                     </div>
-                    <div className="text-sm text-primary-foreground bg-primary p-2 rounded-lg border border-primary/20 shadow-sm text-left w-[320px] h-[60px]">
+                    <div className="text-sm text-primary-foreground bg-primary p-2 rounded-lg border border-primary/20 shadow-sm text-left w-fit max-w-[calc(100%-2.3rem)] md:max-w-[320px] h-auto min-h-[60px] break-words">
                       {COMMENTS[1].text}
                     </div>
                   </div>

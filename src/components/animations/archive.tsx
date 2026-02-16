@@ -393,10 +393,7 @@ export function Archive() {
 
       {/* Commits Container */}
 
-      <div
-        className="divide-y divide-border bg-card relative z-0"
-        style={{ height: 440 }}
-      >
+      <div className="divide-y divide-border bg-card relative z-0 h-[500px] md:h-[440px]">
         <AnimatePresence mode="popLayout" initial={false}>
           {items.map((commit: CommitItem, index: number) => (
             <motion.div
@@ -406,7 +403,7 @@ export function Archive() {
               animate={{
                 opacity: 1,
                 y: 0,
-                height: 110,
+                height: "auto",
               }}
               exit={{
                 opacity: 0,
@@ -424,9 +421,9 @@ export function Archive() {
                   : "hover:bg-primary/5"
               } ${index === 0 && !isHovered && !expandedId ? "animate-pulse bg-primary/5" : ""}`}
             >
-              <div className="min-h-[110px] px-6 py-5 flex flex-col justify-center relative">
+              <div className="min-h-[125px] md:min-h-[110px] pl-4 pr-2 md:px-6 py-3 md:py-5 flex flex-col justify-center relative">
                 <div className="flex items-start justify-between gap-4">
-                  <div className="flex items-start w-full gap-4">
+                  <div className="flex items-start flex-1 min-w-0 gap-4">
                     <div className="mt-1 shrink-0">
                       <div
                         className={`w-8 h-8 rounded-full overflow-hidden border flex items-center justify-center ${
@@ -450,26 +447,69 @@ export function Archive() {
                       </div>
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-3 mb-1 justify-between">
-                        <div className="flex items-center gap-2">
+                      <div className="flex items-center justify-between mb-1 min-h-[20px]">
+                        <div className="flex items-center gap-2 overflow-hidden">
                           <code className="font-mono text-[10px] text-primary bg-primary/10 px-1.5 py-0.5 rounded-[2px] relative noise">
                             {commit.hash}
                           </code>
-                          <span className="text-xs text-muted-foreground">
+                          <span className="text-xs text-muted-foreground whitespace-nowrap">
                             {commit.time}
                           </span>
-                          {commit.isMerge && (
-                            <span className="font-mono text-[8px] uppercase tracking-wider text-muted-foreground border border-border px-2 py-0.5">
-                              Merge
-                            </span>
-                          )}
-                          {commit.isAi && (
-                            <span className="font-mono text-[8px] uppercase tracking-wider text-purple-600 border border-purple-200 bg-purple-50 px-2 py-0.5 flex items-center gap-1">
-                              AI Authored
-                            </span>
-                          )}
+
+                          {/* Desktop Badges */}
+                          <div className="hidden md:flex items-center gap-2">
+                            {commit.isMerge && (
+                              <span className="font-mono text-[8px] uppercase tracking-wider text-muted-foreground border border-border px-2 py-0.5 whitespace-nowrap">
+                                Merge
+                              </span>
+                            )}
+                            {commit.isAi && (
+                              <span className="font-mono text-[8px] uppercase tracking-wider text-purple-600 border border-purple-200 bg-purple-50 px-2 py-0.5 flex items-center gap-1 whitespace-nowrap">
+                                AI Authored
+                              </span>
+                            )}
+                          </div>
                         </div>
-                        <span className="flex items-center gap-1 font-mono text-[10px]">
+
+                        {/* Top Right Group: Mobile Badges + Desktop Diffs */}
+                        <div className="flex items-center gap-2 ml-2 shrink-0">
+                          {/* Mobile Badges */}
+                          <div className="flex md:hidden items-center gap-2">
+                            {commit.isMerge && (
+                              <span className="font-mono text-[8px] uppercase tracking-wider text-muted-foreground border border-border px-2 py-0.5 whitespace-nowrap">
+                                Merge
+                              </span>
+                            )}
+                            {commit.isAi && (
+                              <span className="font-mono text-[8px] uppercase tracking-wider text-purple-600 border border-purple-200 bg-purple-50 px-2 py-0.5 flex items-center gap-1 whitespace-nowrap">
+                                AI
+                              </span>
+                            )}
+                          </div>
+
+                          {/* Desktop Diffs */}
+                          <span className="hidden md:flex items-center gap-1 font-mono text-[10px]">
+                            <span className="text-green-600">
+                              +{commit.details.diff.added}
+                            </span>
+                            <span className="text-red-500">
+                              -{commit.details.diff.removed}
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+
+                      <p className="text-sm text-foreground line-clamp-2 font-medium leading-tight text-balance">
+                        {commit.message}
+                      </p>
+
+                      <div className="flex items-center justify-between mt-1">
+                        <p className="text-xs text-muted-foreground">
+                          by {commit.author}
+                        </p>
+
+                        {/* Mobile Diffs */}
+                        <span className="flex md:hidden items-center gap-1 font-mono text-[10px]">
                           <span className="text-green-600">
                             +{commit.details.diff.added}
                           </span>
@@ -478,12 +518,6 @@ export function Archive() {
                           </span>
                         </span>
                       </div>
-                      <p className="text-sm text-foreground font-medium leading-tight text-balance">
-                        {commit.message}
-                      </p>
-                      <p className="text-xs text-muted-foreground mt-1">
-                        Authored by {commit.author}
-                      </p>
                     </div>
                   </div>
                   <div className="text-right shrink-0 flex flex-col items-end">
