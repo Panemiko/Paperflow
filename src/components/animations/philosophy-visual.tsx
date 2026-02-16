@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export function PhilosophyVisual() {
   return (
-    <div className="relative w-full h-48 flex items-center justify-center overflow-hidden">
+    <div className="relative w-full min-h-[120px] md:h-48 flex items-center justify-center overflow-hidden">
       {/* Background Architectural Grid (Subtle) */}
       <div className="absolute inset-0 flex justify-between px-4 opacity-10 pointer-events-none">
         {[...Array(5)].map((_, i) => (

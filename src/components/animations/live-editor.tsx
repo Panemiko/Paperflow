@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion, useInView } from "framer-motion";
-import { Check, Clock, RotateCcw, Send } from "lucide-react";
+import { Bot, ChevronDown, Clock, RotateCcw, Send } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 import { Input } from "@/components/ui/input";
@@ -15,9 +15,13 @@ const INITIAL_PHRASE = "Ideas leave a small path.";
 
 const INITIAL_COMMIT = {
   hash: "a9b1e8f",
-  message: "Initial draft",
-  author: "Elena Vasquez",
+  message: "Initial manuscript",
+  author: "David Park (You)",
+  avatar:
+    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=faces&q=80",
   date: "10 min ago",
+  time: "11:45 UTC",
+  diff: { added: 5, removed: 0 },
   content: INITIAL_PHRASE,
 };
 
@@ -31,7 +35,8 @@ interface Segment {
 const SIMULATION_SEQUENCE = [
   {
     type: "add",
-    name: "Extended the thought",
+    name: "Expanded the opening statement",
+    diff: { added: 3, removed: 0 },
     segments: [
       { text: INITIAL_PHRASE, type: "stable" as SegmentType },
       { text: "\nNotice the change.", type: "added" as SegmentType },
@@ -39,22 +44,24 @@ const SIMULATION_SEQUENCE = [
   },
   {
     type: "add",
-    name: "Expanded the flow",
+    name: "Clarified the philosophy",
+    diff: { added: 5, removed: 0 },
     segments: [
       { text: INITIAL_PHRASE, type: "stable" as SegmentType },
       { text: "\nNotice the change.", type: "stable" as SegmentType },
-      { text: "\nFollow the flow.", type: "added" as SegmentType },
+      { text: "\nEvery draft is a decision.", type: "added" as SegmentType },
     ],
   },
   {
     type: "remove",
-    name: "Focused the opening",
+    name: "Precision edit for impact",
+    diff: { added: 0, removed: 1 },
     segments: [
       { text: "Ideas leave a", type: "stable" as SegmentType },
       { text: " small ", type: "removed" as SegmentType },
       { text: "path.", type: "stable" as SegmentType },
       { text: "\nNotice the change.", type: "stable" as SegmentType },
-      { text: "\nFollow the flow.", type: "stable" as SegmentType },
+      { text: "\nEvery draft is a decision.", type: "stable" as SegmentType },
     ],
   },
 ];
@@ -164,8 +171,17 @@ export function LiveEditor() {
           const newCommit = {
             hash: Math.random().toString(16).substring(2, 9),
             message: step.name,
-            author: "You",
+            author: "David Park (You)",
+            avatar:
+              "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=faces&q=80",
             date: "Just now",
+            time:
+              new Date().toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: false,
+              }) + " UTC",
+            diff: step.diff,
             content: commitContent,
           };
           setCommits((prev) => [newCommit, ...prev]);
@@ -384,44 +400,68 @@ export function LiveEditor() {
             {commits.map((commit, index) => (
               <motion.div
                 key={commit.hash}
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                transition={{ type: "spring", bounce: 0, duration: 0.3 }}
-                className="px-6 py-6 group relative hover:bg-secondary/5 transition-colors"
+                initial={{ height: 0, opacity: 0, y: -20 }}
+                animate={{ height: "auto", opacity: 1, y: 0 }}
+                transition={{ type: "spring", bounce: 0, duration: 0.4 }}
+                className={`px-6 py-5 group relative border-b border-border last:border-0 transition-colors duration-300 hover:bg-secondary/20 ${
+                  index === 0 && phase !== "refreshing" ? "bg-primary/5" : ""
+                }`}
               >
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-2">
-                    <span className="font-mono text-[9px] text-primary px-1.5 py-0.5 bg-primary/10 border border-primary/20 relative noise">
-                      {commit.hash}
-                    </span>
-                    {index === 0 && (
-                      <motion.span
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        className="flex items-center gap-1 font-mono text-[8px] uppercase text-green-600 font-bold"
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex items-start w-full gap-4">
+                    <div className="mt-1 shrink-0">
+                      <div
+                        className={`w-8 h-8 rounded-full overflow-hidden border flex items-center justify-center ${
+                          commit.isAi
+                            ? "bg-purple-500/10 border-purple-500/20 text-purple-600"
+                            : "bg-primary/10 border-primary/20"
+                        }`}
                       >
-                        <Check className="w-2.5 h-2.5" />
-                        Signed
-                      </motion.span>
-                    )}
+                        {commit.isAi ? (
+                          <div className="relative w-full h-full flex items-center justify-center">
+                            <Bot className="w-5 h-5" />
+                          </div>
+                        ) : (
+                          <img
+                            src={commit.avatar}
+                            alt={commit.author}
+                            className="w-full h-full object-cover"
+                          />
+                        )}
+                      </div>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-3 mb-1 justify-between">
+                        <div className="flex items-center gap-2">
+                          <code className="font-mono text-[10px] text-primary bg-primary/10 px-1.5 py-0.5 rounded-[2px] relative noise">
+                            {commit.hash}
+                          </code>
+                          <span className="text-xs text-muted-foreground">
+                            {commit.time || commit.date}
+                          </span>
+                        </div>
+                        <span className="flex items-center gap-1 font-mono text-[10px]">
+                          <span className="text-green-600">
+                            +{commit.diff?.added || 0}
+                          </span>
+                          <span className="text-red-500">
+                            -{commit.diff?.removed || 0}
+                          </span>
+                        </span>
+                      </div>
+                      <p className="text-sm text-foreground font-medium leading-tight text-balance">
+                        {commit.message}
+                      </p>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Authored by {commit.author}
+                      </p>
+                    </div>
                   </div>
-                  <span className="font-mono text-[9px] text-muted-foreground/60">
-                    {commit.date}
-                  </span>
-                </div>
-
-                <h3 className="text-[13px] text-foreground font-bold leading-tight mb-2">
-                  {commit.message}
-                </h3>
-
-                <p className="text-[10px] text-muted-foreground/70 leading-relaxed line-clamp-2 italic font-serif">
-                  {commit.content.split("\n")[0]}...
-                </p>
-
-                <div className="mt-4 flex items-center justify-between">
-                  <span className="font-mono text-[9px] text-muted-foreground uppercase tracking-tighter">
-                    Author: {commit.author}
-                  </span>
+                  <div className="text-right shrink-0 flex flex-col items-end">
+                    <div className="mt-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                      <ChevronDown className="size-3.5 transition-transform duration-300" />
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             ))}

@@ -3,11 +3,12 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { BrandLogo } from "./brand/logo";
+import { MaxWidth } from "./max-width";
 
 export function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-sm border-b border-border">
-      <div className="py-4 px-12 flex items-center">
+      <MaxWidth className="py-4 flex items-center">
         <div className="flex-1 flex justify-start">
           <BrandLogo className="h-8 w-auto" />
         </div>
@@ -35,7 +36,7 @@ export function Header() {
             </a>
           </Button>
         </div>
-      </div>
+      </MaxWidth>
     </header>
   );
 }

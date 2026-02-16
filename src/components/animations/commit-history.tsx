@@ -11,12 +11,12 @@ const getDate = (daysAgo: number) => {
 };
 
 const AUTHORS = {
-  "Elena Vasquez":
-    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=faces",
-  "Sarah Chen":
-    "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=faces",
-  "Marcus Thorne":
-    "https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=150&h=150&fit=crop&crop=faces",
+  "Liam O'Sullivan (You)":
+    "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&h=150&fit=crop&crop=faces&q=80",
+  "Yuki Sato":
+    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=faces&q=80",
+  "Isabella Conti":
+    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=faces&q=80",
   "Paperflow Bot": "/bot-avatar-placeholder", // We'll handle this in the component
 };
 
@@ -24,7 +24,7 @@ const ALL_COMMITS = [
   {
     hash: "8e2a9b7",
     message: "First draft complete: 87,234 words",
-    author: "Elena Vasquez",
+    author: "Liam O'Sullivan (You)",
     daysAgo: 14,
     time: "11:03 UTC",
     color: "bg-blue-500",
@@ -52,7 +52,7 @@ const ALL_COMMITS = [
   {
     hash: "2d4f6c1",
     message: "Fact-check complete: historical preamble",
-    author: "Sarah Chen",
+    author: "Yuki Sato",
     daysAgo: 12,
     time: "16:48 UTC",
     color: "bg-amber-500",
@@ -66,7 +66,7 @@ const ALL_COMMITS = [
   {
     hash: "a9b1e8f",
     message: "Merged branch: alternate-ending",
-    author: "Marcus Thorne",
+    author: "Isabella Conti",
     daysAgo: 10,
     time: "09:15 UTC",
     isMerge: true,
@@ -81,7 +81,7 @@ const ALL_COMMITS = [
   {
     hash: "f7c3a2d",
     message: "Final pass: tightened dialogue in confrontation",
-    author: "Elena Vasquez",
+    author: "Liam O'Sullivan (You)",
     daysAgo: 9,
     time: "14:32 UTC",
     color: "bg-blue-500",
@@ -95,7 +95,7 @@ const ALL_COMMITS = [
   {
     hash: "b3d1e4a",
     message: "Adjusted pacing in the third act bridge",
-    author: "Marcus Thorne",
+    author: "Isabella Conti",
     daysAgo: 8,
     time: "08:12 UTC",
     color: "bg-emerald-500",
@@ -124,7 +124,7 @@ const ALL_COMMITS = [
   {
     hash: "c9f2b8d",
     message: "Character voice refinement: Chapter 4",
-    author: "Elena Vasquez",
+    author: "Liam O'Sullivan (You)",
     daysAgo: 7,
     time: "11:45 UTC",
     color: "bg-blue-500",
@@ -138,7 +138,7 @@ const ALL_COMMITS = [
   {
     hash: "e4a5d6c",
     message: "Updated source citations: Lunar Colonies",
-    author: "Sarah Chen",
+    author: "Yuki Sato",
     daysAgo: 6,
     time: "16:20 UTC",
     color: "bg-amber-500",
@@ -151,7 +151,7 @@ const ALL_COMMITS = [
   {
     hash: "d1f2g3h",
     message: "Structural edit: removed redundant flashback",
-    author: "Marcus Thorne",
+    author: "Isabella Conti",
     daysAgo: 5,
     time: "09:30 UTC",
     color: "bg-emerald-500",
@@ -165,7 +165,7 @@ const ALL_COMMITS = [
   {
     hash: "h2j3k4l",
     message: "Finalized epilogue: 'The Long Wait'",
-    author: "Elena Vasquez",
+    author: "Liam O'Sullivan (You)",
     daysAgo: 4,
     time: "21:15 UTC",
     color: "bg-blue-500",
@@ -192,7 +192,7 @@ const ALL_COMMITS = [
   {
     hash: "m4n5p6q",
     message: "Grammar sweep: complete manuscript",
-    author: "Sarah Chen",
+    author: "Yuki Sato",
     daysAgo: 3,
     time: "14:05 UTC",
     color: "bg-amber-500",
@@ -205,7 +205,7 @@ const ALL_COMMITS = [
   {
     hash: "r7s8t9u",
     message: "Merged branch: publisher-requested-cuts",
-    author: "Marcus Thorne",
+    author: "Isabella Conti",
     daysAgo: 2,
     time: "10:50 UTC",
     isMerge: true,
@@ -233,7 +233,7 @@ const ALL_COMMITS = [
   {
     hash: "v1w2x3y",
     message: "Restored Chapter 12: 'The Pier' (Draft 4)",
-    author: "Elena Vasquez",
+    author: "Liam O'Sullivan (You)",
     daysAgo: 1,
     time: "13:22 UTC",
     color: "bg-blue-500",
@@ -247,7 +247,7 @@ const ALL_COMMITS = [
   {
     hash: "z4a5b6c",
     message: "Tone adjustment: increased suspense in intro",
-    author: "Marcus Thorne",
+    author: "Isabella Conti",
     daysAgo: 0,
     time: "08:45 UTC",
     color: "bg-emerald-500",
@@ -260,7 +260,7 @@ const ALL_COMMITS = [
   {
     hash: "d7e8f9g",
     message: "Cross-referenced timelines for consistency",
-    author: "Sarah Chen",
+    author: "Yuki Sato",
     daysAgo: 0,
     time: "17:10 UTC",
     color: "bg-amber-500",
@@ -273,7 +273,7 @@ const ALL_COMMITS = [
   {
     hash: "h1i2j3k",
     message: "Final pre-publication binary freeze",
-    author: "Elena Vasquez",
+    author: "Liam O'Sullivan (You)",
     daysAgo: 0,
     time: "23:55 UTC",
     isMerge: true,

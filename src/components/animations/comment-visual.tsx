@@ -7,29 +7,29 @@ import { useEffect, useRef, useState } from "react";
 const COMMIT_DATA = {
   hash: "7f2a9c1",
   message: "Refactored the bridge sequence for clarity",
-  author: "Elena Vasquez",
+  author: "Sofia Morales (You)",
   avatar:
-    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=faces",
+    "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=150&h=150&fit=crop&crop=faces&q=80",
   time: "2h ago",
   diff: { added: 12, removed: 45 },
 };
 
 const COMMENTS = [
   {
-    author: "Marcus Thorne",
-    initials: "MT",
+    author: "Amara Okafor",
+    initials: "AO",
     text: "This removal is aggressive. Are we losing the character motivation here?",
     color: "bg-blue-500",
     avatar:
-      "https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=150&h=150&fit=crop&crop=faces",
+      "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=150&h=150&fit=crop&crop=faces&q=80",
   },
   {
-    author: "Elena Vasquez",
-    initials: "EV",
+    author: "Sofia Morales (You)",
+    initials: "SM",
     text: "It was redundant. I moved the motivation to the previous chapter.",
     color: "bg-emerald-500",
     avatar:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=faces",
+      "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=150&h=150&fit=crop&crop=faces&q=80",
   },
 ];
 

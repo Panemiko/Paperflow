@@ -224,7 +224,10 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-background">
       {/* Section 1: Hero */}
-      <section className="pt-32 pb-24 lg:pt-40 lg:pb-32 border-b border-border">
+      <section
+        id="hero"
+        className="pt-32 pb-24 lg:pt-40 lg:pb-32 border-b border-border relative"
+      >
         <MaxWidth>
           <div className="max-w-5xl mx-auto text-center">
             <motion.div
@@ -244,10 +247,10 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
             >
-              Write with an
+              Writing built for
               <br />
               <strong className="text-muted-foreground font-bold">
-                infinite safety net
+                speed and control
               </strong>
             </motion.h1>
 
@@ -257,9 +260,8 @@ export default function Home() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              A multi-branch editor for surgical drafting and writing.
-              <br /> Built for academics, authors, creative professionals and
-              whoever needs secure, version-controlled writing.
+              Multi-branch drafting, surgical history, private by design,
+              <br /> and more — in any environment.
             </motion.p>
 
             <motion.div
@@ -274,8 +276,11 @@ export default function Home() {
         </MaxWidth>
       </section>
 
-      {/* Section 3: The Logic (Split Canvas) */}
-      <section id="mechanism" className="py-24 lg:py-32 border-b border-border">
+      {/* Section 2: The Mechanism (Live Editor) */}
+      <section
+        id="mechanism"
+        className="py-24 lg:py-32 border-b border-border relative"
+      >
         <MaxWidth>
           <motion.div
             className="mb-16"
@@ -301,7 +306,113 @@ export default function Home() {
         </MaxWidth>
       </section>
 
-      {/* Section 4: Philosophy */}
+      {/* Section 3: Chat (Review and Comment) */}
+      <section
+        id="chat"
+        className="py-24 lg:py-32 border-b border-border bg-background relative"
+      >
+        <MaxWidth>
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <motion.div
+              className="order-2 lg:order-1"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <CommentVisual />
+            </motion.div>
+
+            <div className="order-1 lg:order-2">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+              >
+                <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
+                  Chat
+                </span>
+                <h2 className="mt-4 font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight text-balance">
+                  Review Without Resistance
+                </h2>
+                <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
+                  Leave comments on specific versions. Discuss changes in
+                  context. Resolve threads as you merge branches.
+                </p>
+                <ul className="mt-8 space-y-3">
+                  {[
+                    "Inline commenting on any draft",
+                    "Threaded discussions for deep dives",
+                    "Resolve feedback with a single click",
+                    "Keep the conversation attached to the code",
+                  ].map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start text-sm text-balance text-muted-foreground before:content-['+'] before:text-primary before:mr-3 before:select-none"
+                    >
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            </div>
+          </div>
+        </MaxWidth>
+      </section>
+
+      {/* Section 4: The Result (Your Archive) */}
+      <section
+        id="result"
+        className="py-24 lg:py-32 border-b border-border relative"
+      >
+        <MaxWidth>
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+            <div>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+              >
+                <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
+                  The Result
+                </span>
+                <h2 className="mt-4 font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight text-balance">
+                  Every Edit, Forever
+                </h2>
+                <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
+                  Your commit history isn't just a backup. It's a chronicle of
+                  your creative evolution. Scholars study writers' drafts for
+                  insight. Paperflow makes that possible for everyone.
+                </p>
+                <ul className="mt-8 space-y-3">
+                  {[
+                    "Time-travel to any version instantly",
+                    "See exactly what you changed and when",
+                    "Restore deleted passages with a click",
+                    "Share your creative process with readers",
+                  ].map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start text-sm text-balance text-muted-foreground before:content-['+'] before:text-primary before:mr-3 before:select-none"
+                    >
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <CommitHistory />
+            </motion.div>
+          </div>
+        </MaxWidth>
+      </section>
+
+      {/* Section 5: Philosophy (Restored) */}
       <section
         id="philosophy"
         className="py-24 lg:py-32 bg-secondary/30 relative overflow-hidden border-b border-border"
@@ -340,7 +451,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="mt-16 bg-background/50 border-y border-border backdrop-blur-sm"
+              className="mt-16 bg-background/50 border-y border-border backdrop-blur-sm hidden md:block"
             >
               <PhilosophyVisual />
             </motion.div>
@@ -393,132 +504,152 @@ export default function Home() {
         </MaxWidth>
       </section>
 
-      {/* Section 4.5: Review and Comment */}
-      <section className="py-24 lg:py-32 border-b border-border bg-background">
+      {/* Section 6: Public (Audience) */}
+      <section
+        id="public"
+        className="py-16 lg:py-24 border-b border-border relative bg-primary/2"
+      >
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none" />
         <MaxWidth>
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            <motion.div
-              className="order-2 lg:order-1"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <CommentVisual />
-            </motion.div>
+          <motion.div
+            className="max-w-2xl mb-10 pl-6 border-l-2 border-primary"
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-primary font-bold">
+              Public
+            </span>
+            <h2 className="mt-4 font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-balance">
+              Built for Professional Writing
+            </h2>
+            <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
+              Whether you're crafting your first novel or your fiftieth policy
+              white paper, Paperflow gives you the infrastructure your words
+              deserve.
+            </p>
+          </motion.div>
 
-            <div className="order-1 lg:order-2">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {writerPersonas.map((persona, index) => (
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
+                key={persona.title}
+                className="group p-5 border border-border hover:border-primary transition-all duration-300 relative overflow-hidden"
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ y: -4 }}
               >
-                <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
-                  Feedback Loop
-                </span>
-                <h2 className="mt-4 font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight text-balance">
-                  Review Without Resistance
-                </h2>
-                <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-                  Leave comments on specific versions. Discuss changes in
-                  context. Resolve threads as you merge branches.
+                <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                <div className="w-10 h-10 border border-border group-hover:border-primary group-hover:bg-primary flex items-center justify-center mb-4 transition-all duration-300 text-primary group-hover:text-primary-foreground relative noise">
+                  {persona.icon}
+                </div>
+                <h3 className="font-serif text-lg font-semibold text-foreground mb-1.5 leading-tight">
+                  {persona.title}
+                </h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  {persona.description}
                 </p>
-                <ul className="mt-8 space-y-3">
-                  {[
-                    "Inline commenting on any draft",
-                    "Threaded discussions for deep dives",
-                    "Resolve feedback with a single click", // Fixed typo "feeback"
-                    "Keep the conversation attached to the code",
-                  ].map((item) => (
-                    <li
-                      key={item}
-                      className="flex items-start text-sm text-balance text-muted-foreground before:content-['+'] before:text-primary before:mr-3 before:select-none"
-                    >
-                      {item}
-                    </li>
-                  ))}
-                </ul>
               </motion.div>
-            </div>
+            ))}
           </div>
         </MaxWidth>
       </section>
 
-      {/* Section 5: Your Archive */}
-      <section className="py-24 lg:py-32 border-b border-border">
+      {/* Section 7: What We Refuse to Build (Principles) */}
+      <section
+        id="refuse"
+        className="py-24 lg:py-32 border-b border-border relative bg-secondary/2"
+      >
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-secondary/5 blur-[120px] rounded-full -translate-x-1/2 translate-y-1/2 pointer-events-none" />
         <MaxWidth>
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-            <div>
+          <motion.div
+            className="max-w-2xl mx-auto text-center mb-16 pt-6 relative"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-secondary" />
+            <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-secondary font-bold">
+              What We Refuse to Build
+            </span>
+            <h2 className="mt-4 font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-balance">
+              Principles of Absence
+            </h2>
+            <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
+              Some features are absent by design. These are promises, not
+              limitations.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {antiFeatures.map((feature, index) => (
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
+                key={feature.title}
+                className="p-6 border border-border hover:border-secondary transition-colors group"
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
               >
-                <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
-                  The Result
-                </span>
-                <h2 className="mt-4 font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight text-balance">
-                  Every Edit, Forever
-                </h2>
-                <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-                  Your commit history isn't just a backup. It's a chronicle of
-                  your creative evolution. Scholars study writers' drafts for
-                  insight. Paperflow makes that possible for everyone.
-                </p>
-                <ul className="mt-8 space-y-3">
-                  {[
-                    "Time-travel to any version instantly",
-                    "See exactly what you changed and when",
-                    "Restore deleted passages with a click",
-                    "Share your creative process with readers",
-                  ].map((item) => (
-                    <li
-                      key={item}
-                      className="flex items-start text-sm text-balance text-muted-foreground before:content-['+'] before:text-primary before:mr-3 before:select-none"
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-6 h-6 border border-border flex items-center justify-center group-hover:border-secondary transition-colors">
+                    <svg
+                      className="w-3 h-3 text-secondary"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={3}
                     >
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </div>
+                  <h3 className="font-serif text-lg font-semibold text-foreground">
+                    {feature.title}
+                  </h3>
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed pl-9">
+                  {feature.description}
+                </p>
               </motion.div>
-            </div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <CommitHistory />
-            </motion.div>
+            ))}
           </div>
         </MaxWidth>
       </section>
 
-      {/* Section 6: Our Stance (No-AI) */}
+      {/* Section 8: Your Voice Verified (Ethics) */}
       <section
         id="ethics"
-        className="py-24 lg:py-32 z-20 relative bg-foreground text-background"
+        className="py-24 lg:py-32 relative border-b border-border bg-primary/2"
       >
+        <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-primary/5 blur-[100px] rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
         <MaxWidth>
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div>
               <motion.div
+                className="pl-6 border-l-2 border-primary"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
               >
-                <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-background/50">
-                  Ethics
+                <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-primary font-bold">
+                  Your Voice Verified
                 </span>
-                <h2 className="mt-4 font-serif text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-background text-balance">
+                <h2 className="mt-4 font-serif text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-foreground text-balance">
                   Your Voice. <br />
                   Verified.
                 </h2>
-                <p className="mt-6 text-lg text-background/70 leading-relaxed">
+                <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
                   In an age where anyone can generate ten thousand words in
                   seconds, human authorship becomes rare. Valuable. Worth
                   protecting.
                 </p>
-                <p className="mt-4 text-lg text-background/70 leading-relaxed">
+                <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
                   Paperflow doesn't just store your words. It certifies them as
                   yours.
                 </p>
@@ -531,9 +662,9 @@ export default function Home() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
             >
-              <div className="border-2 border-background/20 p-8 lg:p-10">
+              <div className="border border-border p-8 lg:p-10 bg-background/50">
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 border-2 border-primary flex items-center justify-center">
+                  <div className="w-12 h-12 border border-primary flex items-center justify-center">
                     <svg
                       className="w-6 h-6 text-primary"
                       fill="none"
@@ -549,7 +680,7 @@ export default function Home() {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="font-serif text-xl font-semibold text-background">
+                    <h3 className="font-serif text-xl font-semibold text-foreground">
                       Human-Only Authorship
                     </h3>
                     <p className="font-mono text-[10px] uppercase tracking-wider text-primary">
@@ -557,7 +688,7 @@ export default function Home() {
                     </p>
                   </div>
                 </div>
-                <ul className="space-y-4 text-background/70">
+                <ul className="space-y-4 text-muted-foreground">
                   <li className="flex items-start gap-3">
                     <span className="text-primary mt-1">+</span>
                     <span>Every keystroke attributed to a human author</span>
@@ -588,116 +719,8 @@ export default function Home() {
         </MaxWidth>
       </section>
 
-      {/* Section 7: Principles */}
-      <section className="py-24 lg:py-32 border-b border-border">
-        <MaxWidth>
-          <motion.div
-            className="max-w-2xl mx-auto text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
-              Principles
-            </span>
-            <h2 className="mt-4 font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-balance">
-              What We Refuse to Build
-            </h2>
-            <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-              Some features are absent by design. These are promises, not
-              limitations.
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {antiFeatures.map((feature, index) => (
-              <motion.div
-                key={feature.title}
-                className="p-6 border border-border hover:border-foreground transition-colors"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-6 h-6 border border-foreground flex items-center justify-center">
-                    <svg
-                      className="w-3 h-3 text-foreground"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={3}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
-                  </div>
-                  <h3 className="font-serif text-lg font-semibold text-foreground">
-                    {feature.title}
-                  </h3>
-                </div>
-                <p className="text-sm text-muted-foreground leading-relaxed pl-9">
-                  {feature.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </MaxWidth>
-      </section>
-
-      {/* Section 8: Who Writes With Paperflow */}
-      <section className="py-16 lg:py-24 border-b border-border">
-        <MaxWidth>
-          <motion.div
-            className="max-w-2xl mb-10"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
-              Audience
-            </span>
-            <h2 className="mt-4 font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-balance">
-              Built for Serious Writers
-            </h2>
-            <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-              Whether you're crafting your first novel or your fiftieth policy
-              white paper, Paperflow gives you the infrastructure your words
-              deserve.
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {writerPersonas.map((persona, index) => (
-              <motion.div
-                key={persona.title}
-                className="group p-5 border border-border hover:border-primary transition-all duration-300"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -4 }}
-              >
-                <div className="w-10 h-10 border border-border group-hover:border-primary group-hover:bg-primary flex items-center justify-center mb-4 transition-all duration-300 text-muted-foreground group-hover:text-primary-foreground relative noise">
-                  {persona.icon}
-                </div>
-                <h3 className="font-serif text-lg font-semibold text-foreground mb-1.5 leading-tight">
-                  {persona.title}
-                </h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  {persona.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </MaxWidth>
-      </section>
-
-      {/* Section 11: FAQ */}
-      <section id="faq" className="py-24 lg:py-32">
+      {/* Section 8: FAQ */}
+      <section id="faq" className="py-24 lg:py-32 border-b border-border">
         <MaxWidth>
           <div className="grid lg:grid-cols-3 gap-12">
             <div className="lg:col-span-1">
@@ -714,7 +737,7 @@ export default function Home() {
                 </h2>
                 <p className="mt-6 text-sm text-muted-foreground leading-relaxed">
                   Everything you need to know about the professional standard
-                  for authors.
+                  for the modern editor.
                 </p>
               </motion.div>
             </div>
@@ -748,10 +771,10 @@ export default function Home() {
         </MaxWidth>
       </section>
 
-      {/* Section 12: Final Call */}
+      {/* Section 9: Final Call */}
       <section
         id="waitlist"
-        className="py-24 lg:py-32 bg-foreground text-background"
+        className="py-24 lg:py-32 bg-foreground relative text-background"
       >
         <MaxWidth>
           <div className="max-w-3xl mx-auto text-center">
