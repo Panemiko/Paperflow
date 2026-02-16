@@ -308,7 +308,7 @@ interface CommitItem extends Commit {
   avatar: string;
 }
 
-export function CommitHistory() {
+export function Archive() {
   const [items, setItems] = useState<CommitItem[]>(() =>
     ALL_COMMITS.slice(0, 4).map((c, i) => ({
       ...c,

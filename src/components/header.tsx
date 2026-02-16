@@ -10,7 +10,9 @@ export function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-sm border-b border-border">
       <MaxWidth className="py-4 flex items-center">
         <div className="flex-1 flex justify-start">
-          <BrandLogo className="h-8 w-auto" />
+          <a href="/" className="hover:opacity-80 transition-opacity">
+            <BrandLogo className="h-8 w-auto" />
+          </a>
         </div>
         <nav className="hidden md:flex items-center gap-8">
           {[

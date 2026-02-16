@@ -33,7 +33,7 @@ const COMMENTS = [
   },
 ];
 
-export function CommentVisual() {
+export function Review() {
   const [phase, setPhase] = useState<
     "idle" | "focus" | "commenting" | "typing" | "replying" | "resolved"
   >("idle");

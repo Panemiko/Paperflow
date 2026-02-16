@@ -1,9 +1,9 @@
 "use client";
 
-import { CommentVisual } from "@/components/animations/comment-visual";
-import { CommitHistory } from "@/components/animations/commit-history";
-import { LiveEditor } from "@/components/animations/live-editor";
-import { PhilosophyVisual } from "@/components/animations/philosophy-visual";
+import { Archive } from "@/components/animations/archive";
+import { Evolution } from "@/components/animations/evolution";
+import { Methodology } from "@/components/animations/methodology";
+import { Review } from "@/components/animations/review";
 import { MaxWidth } from "@/components/max-width";
 import {
   Accordion,
@@ -11,8 +11,10 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { PaperflowCard } from "@/components/ui/card";
 import { WaitlistForm } from "@/components/waitlist-form";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 const writerPersonas = [
   {
@@ -193,11 +195,7 @@ const faqs = [
     answer:
       "Paperflow is built as a cloud-native web application that works beautifully on desktop and tablet browsers. We are currently developing dedicated native apps for macOS and iPadOS for offline-first writing.",
   },
-  {
-    question: "How does the 'verified authorship' work?",
-    answer:
-      "We track the entropy of your keystrokes and session patterns to create a unique behavioral signature. This is then cryptographically verified and stored alongside your version history, allowing you to prove that the work was created by a human in real-time.",
-  },
+
   {
     question: "Is there a limit to how many branches I can create?",
     answer:
@@ -221,6 +219,8 @@ const faqs = [
 ];
 
 export default function Home() {
+  const [activePhase, setActivePhase] = useState<number | null>(null);
+
   return (
     <main className="min-h-screen">
       {/* Section 1: Hero */}
@@ -302,7 +302,7 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <LiveEditor />
+          <Evolution />
         </MaxWidth>
       </section>
 
@@ -319,7 +319,7 @@ export default function Home() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <CommentVisual />
+              <Review />
             </motion.div>
 
             <div className="order-1 lg:order-2">
@@ -406,7 +406,7 @@ export default function Home() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <CommitHistory />
+              <Archive />
             </motion.div>
           </div>
         </MaxWidth>
@@ -428,11 +428,12 @@ export default function Home() {
         />
 
         <MaxWidth className="relative z-10">
-          <div className="max-w-3xl mx-auto text-center">
+          <div className="text-left">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
+              className="max-w-3xl"
             >
               <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
                 Philosophy
@@ -451,19 +452,18 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="mt-16 bg-background/50 border-y border-border backdrop-blur-sm hidden md:block"
+              className="mt-16 bg-background/50 border-y border-border backdrop-blur-sm hidden md:block w-full"
             >
-              <PhilosophyVisual />
+              <Methodology activePhase={activePhase} />
             </motion.div>
 
-            <motion.div
-              className="mt-16 grid md:grid-cols-3 gap-8"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-            >
+            <div className="mt-16 grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
+                {
+                  title: "Draft",
+                  description:
+                    "Capture every thought as it happens. A clean slate backed by a permanent, invisible history.",
+                },
                 {
                   title: "Diverge",
                   description:
@@ -480,26 +480,18 @@ export default function Home() {
                     "Take the ending from branch A, the middle from branch B. Your manuscript, your rules.",
                 },
               ].map((item, index) => (
-                <motion.div
+                <PaperflowCard
                   key={item.title}
-                  className="text-left p-6 border border-border bg-background hover:border-primary transition-colors cursor-default"
-                  whileHover={{ y: -4 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <div className="w-8 h-8 bg-primary flex items-center justify-center mb-4 relative noise">
-                    <span className="font-mono text-xs text-primary-foreground font-bold">
-                      {index + 1}
-                    </span>
-                  </div>
-                  <h3 className="font-serif text-lg font-semibold text-foreground mb-2">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {item.description}
-                  </p>
-                </motion.div>
+                  index={index}
+                  title={item.title}
+                  description={item.description}
+                  onMouseEnter={() => setActivePhase(index)}
+                  onMouseLeave={() => setActivePhase(null)}
+                  transition={{ delay: index * 0.05, duration: 0.4 }}
+                  hoverGlow={false}
+                />
               ))}
-            </motion.div>
+            </div>
           </div>
         </MaxWidth>
       </section>
@@ -532,26 +524,13 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {writerPersonas.map((persona, index) => (
-              <motion.div
+              <PaperflowCard
                 key={persona.title}
-                className="group p-5 border border-border hover:border-primary transition-all duration-300 relative overflow-hidden"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -4 }}
-              >
-                <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-                <div className="w-10 h-10 border border-border group-hover:border-primary group-hover:bg-primary flex items-center justify-center mb-4 transition-all duration-300 text-primary group-hover:text-primary-foreground relative noise">
-                  {persona.icon}
-                </div>
-                <h3 className="font-serif text-lg font-semibold text-foreground mb-1.5 leading-tight">
-                  {persona.title}
-                </h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  {persona.description}
-                </p>
-              </motion.div>
+                icon={persona.icon}
+                title={persona.title}
+                description={persona.description}
+                transition={{ delay: index * 0.05, duration: 0.4 }}
+              />
             ))}
           </div>
         </MaxWidth>
@@ -565,12 +544,12 @@ export default function Home() {
         <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/5 blur-[120px] rounded-full -translate-x-1/2 translate-y-1/2 pointer-events-none" />
         <MaxWidth>
           <motion.div
-            className="max-w-2xl mx-auto text-center mb-16 pt-6 relative"
+            className="max-w-2xl mb-16 pt-6 relative"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-primary" />
+            <div className="absolute top-0 left-0 w-12 h-1 bg-primary" />
             <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-primary font-bold">
               What We Refuse to Build
             </span>
@@ -583,20 +562,17 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-6">
             {antiFeatures.map((feature, index) => (
-              <motion.div
+              <PaperflowCard
                 key={feature.title}
-                className="p-6 border border-border hover:border-primary transition-colors group"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-6 h-6 border border-border flex items-center justify-center group-hover:border-primary transition-colors">
+                title={feature.title}
+                description={feature.description}
+                transition={{ delay: index * 0.05, duration: 0.4 }}
+                icon={
+                  <div className="w-full h-full flex items-center justify-center">
                     <svg
-                      className="w-3 h-3 text-primary"
+                      className="w-4 h-4 text-inherit"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -609,112 +585,9 @@ export default function Home() {
                       />
                     </svg>
                   </div>
-                  <h3 className="font-serif text-lg font-semibold text-foreground">
-                    {feature.title}
-                  </h3>
-                </div>
-                <p className="text-sm text-muted-foreground leading-relaxed pl-9">
-                  {feature.description}
-                </p>
-              </motion.div>
+                }
+              />
             ))}
-          </div>
-        </MaxWidth>
-      </section>
-
-      {/* Section 8: Your Voice Verified (Ethics) */}
-      <section
-        id="ethics"
-        className="py-24 lg:py-32 relative border-b border-border bg-primary/2 overflow-hidden"
-      >
-        <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-primary/5 blur-[100px] rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-        <MaxWidth>
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            <div>
-              <motion.div
-                className="pl-6 border-l-2 border-primary"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-              >
-                <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-primary font-bold">
-                  Your Voice Verified
-                </span>
-                <h2 className="mt-4 font-serif text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-foreground text-balance">
-                  Your Voice. <br />
-                  Verified.
-                </h2>
-                <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-                  In an age where anyone can generate ten thousand words in
-                  seconds, human authorship becomes rare. Valuable. Worth
-                  protecting.
-                </p>
-                <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
-                  Paperflow doesn't just store your words. It certifies them as
-                  yours.
-                </p>
-              </motion.div>
-            </div>
-
-            <motion.div
-              className="relative"
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-            >
-              <div className="border border-border p-8 lg:p-10 bg-background/50">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 border border-primary flex items-center justify-center">
-                    <svg
-                      className="w-6 h-6 text-primary"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={2}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="font-serif text-xl font-semibold text-foreground">
-                      Human-Only Authorship
-                    </h3>
-                    <p className="font-mono text-[10px] uppercase tracking-wider text-primary">
-                      Cryptographically Verified
-                    </p>
-                  </div>
-                </div>
-                <ul className="space-y-4 text-muted-foreground">
-                  <li className="flex items-start gap-3">
-                    <span className="text-primary mt-1">+</span>
-                    <span>Every keystroke attributed to a human author</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-primary mt-1">+</span>
-                    <span>
-                      Timestamped commits create unforgeable provenance
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-primary mt-1">+</span>
-                    <span>
-                      AI is optional. If used, its contributions are clearly
-                      marked.
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-primary mt-1">+</span>
-                    <span>
-                      Exportable proof of authorship for publishers and courts
-                    </span>
-                  </li>
-                </ul>
-              </div>
-            </motion.div>
           </div>
         </MaxWidth>
       </section>
@@ -750,7 +623,7 @@ export default function Home() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: index * 0.05 }}
+                    transition={{ delay: index * 0.05, duration: 0.4 }}
                   >
                     <AccordionItem
                       value={`item-${index}`}

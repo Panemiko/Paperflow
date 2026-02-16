@@ -1,8 +1,12 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
-export function PhilosophyVisual() {
+interface PhilosophyVisualProps {
+  activePhase?: number | null;
+}
+
+export function Methodology({ activePhase = null }: PhilosophyVisualProps) {
   return (
     <div className="relative w-full min-h-[120px] md:h-48 flex items-center justify-center overflow-hidden">
       {/* Background Architectural Grid (Subtle) */}
@@ -30,17 +34,45 @@ export function PhilosophyVisual() {
         </defs>
 
         {/* Phase Labels */}
-        <g className="font-mono text-[8px] uppercase tracking-[0.3em] fill-muted-foreground/40">
-          <text x="75" y="20" textAnchor="middle">
+        <g className="font-mono text-[8px] uppercase tracking-[0.3em] transition-colors duration-500">
+          <text
+            x="75"
+            y="20"
+            textAnchor="middle"
+            className={
+              activePhase === 0 ? "fill-primary" : "fill-muted-foreground/40"
+            }
+          >
             Draft
           </text>
-          <text x="225" y="20" textAnchor="middle">
+          <text
+            x="225"
+            y="20"
+            textAnchor="middle"
+            className={
+              activePhase === 1 ? "fill-primary" : "fill-muted-foreground/40"
+            }
+          >
             Diverge
           </text>
-          <text x="375" y="20" textAnchor="middle">
+          <text
+            x="375"
+            y="20"
+            textAnchor="middle"
+            className={
+              activePhase === 2 ? "fill-primary" : "fill-muted-foreground/40"
+            }
+          >
             Compare
           </text>
-          <text x="525" y="20" textAnchor="middle">
+          <text
+            x="525"
+            y="20"
+            textAnchor="middle"
+            className={
+              activePhase === 3 ? "fill-primary" : "fill-muted-foreground/40"
+            }
+          >
             Merge
           </text>
         </g>
@@ -67,6 +99,26 @@ export function PhilosophyVisual() {
             strokeLinecap="round"
           />
         </g>
+
+        {/* Active phase highlights */}
+        <AnimatePresence>
+          {activePhase !== null && (
+            <motion.g
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="text-primary/10"
+            >
+              <rect
+                x={activePhase * 150}
+                y="0"
+                width="150"
+                height="120"
+                fill="currentColor"
+              />
+            </motion.g>
+          )}
+        </AnimatePresence>
 
         {/* The Flow Animation */}
         <g className="text-primary" filter="url(#flowGlow)">

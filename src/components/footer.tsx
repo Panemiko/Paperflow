@@ -6,11 +6,13 @@ import { MaxWidth } from "./max-width";
 
 export function Footer() {
   return (
-    <footer className="py-16 border-t border-border">
+    <footer className="py-16 border-t border-border relative z-50 bg-background">
       <MaxWidth>
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <div>
-            <BrandLogo className="h-12 mb-4 w-auto" />
+            <a href="/" className="hover:opacity-80 transition-opacity">
+              <BrandLogo className="h-12 mb-4 w-auto" />
+            </a>
             <p className="font-mono text-[10px] tracking-widest uppercase text-muted-foreground">
               For writers who believe words matter.
             </p>

@@ -1,4 +1,3 @@
-import { VerticalGuidelines } from "@/components/ui/vertical-guidelines";
 import "@/styles/globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
@@ -49,7 +48,6 @@ export default function RootLayout({
       <body
         className={`${_inter.variable} ${_bitter.variable} ${_jetbrains.variable} font-sans antialiased relative overflow-x-hidden`}
       >
-        <VerticalGuidelines />
         {children}
         <Analytics />
       </body>

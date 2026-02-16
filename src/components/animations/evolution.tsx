@@ -5,11 +5,6 @@ import { Bot, ChevronDown, Clock, RotateCcw, Send } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 import { Input } from "@/components/ui/input";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 
 const INITIAL_PHRASE = "Ideas leave a small path.";
 
@@ -66,7 +61,7 @@ const SIMULATION_SEQUENCE = [
   },
 ];
 
-export function LiveEditor() {
+export function Evolution() {
   const [commits, setCommits] = useState<any[]>([INITIAL_COMMIT]);
   const [phase, setPhase] = useState<
     "idling" | "altering" | "naming" | "committing" | "refreshing"
@@ -332,42 +327,50 @@ export function LiveEditor() {
                 exit={{ opacity: 0, y: 20 }}
                 className="absolute bottom-6 right-6"
               >
-                <Popover open={isPopoverOpen}>
-                  <PopoverTrigger asChild>
-                    <div className="bg-primary text-primary-foreground px-4 py-2 text-[10px] font-mono uppercase tracking-widest flex items-center gap-2 shadow-lg cursor-default relative noise">
-                      <Send className="w-3 h-3" />
-                      Commit Change
-                    </div>
-                  </PopoverTrigger>
-                  <PopoverContent
-                    className="w-80 p-4 bg-background border-border shadow-2xl z-10 pointer-events-none"
-                    align="end"
-                    sideOffset={12}
-                    side="top"
-                  >
-                    <div className="space-y-4">
-                      <div className="space-y-2">
-                        <h4 className="font-serif text-sm font-medium leading-none">
-                          Record Evolution
-                        </h4>
-                        <p className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground">
-                          Documenting this file state.
-                        </p>
-                      </div>
-                      <div className="grid gap-2">
-                        <Input
-                          id="commit-name"
-                          value={commitName}
-                          readOnly
-                          className="h-8 text-xs font-serif bg-primary/5"
-                        />
-                        <div className="w-full bg-primary/20 text-primary-foreground/50 px-4 py-2 text-[9px] font-mono uppercase tracking-widest text-center relative noise">
-                          Updating Buffer...
+                <div className="relative inline-block">
+                  {/* Trigger */}
+                  <div className="bg-primary text-primary-foreground px-4 py-2 text-[10px] font-mono uppercase tracking-widest flex items-center gap-2 shadow-lg cursor-default relative noise">
+                    <Send className="w-3 h-3" />
+                    Commit Change
+                  </div>
+
+                  {/* Popover Content */}
+                  <AnimatePresence>
+                    {isPopoverOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.95, y: 10 }}
+                        transition={{ duration: 0.2, ease: "easeOut" }}
+                        className="absolute bottom-full right-0 mb-3 w-80 p-4 bg-background border border-border shadow-2xl z-30 pointer-events-none"
+                      >
+                        <div className="space-y-4">
+                          <div className="space-y-2">
+                            <h4 className="font-serif text-sm font-medium leading-none text-foreground">
+                              Record Evolution
+                            </h4>
+                            <p className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground">
+                              Documenting this file state.
+                            </p>
+                          </div>
+                          <div className="grid gap-2">
+                            <Input
+                              id="commit-name"
+                              value={commitName}
+                              readOnly
+                              className="h-8 text-xs font-serif bg-primary/5"
+                            />
+                            <div className="w-full bg-primary/20 text-primary-foreground/50 px-4 py-2 text-[9px] font-mono uppercase tracking-widest text-center relative noise text-balance">
+                              Updating Buffer...
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                  </PopoverContent>
-                </Popover>
+                        {/* Arrow/Tail */}
+                        <div className="absolute top-full right-6 w-3 h-3 bg-background border-r border-b border-border rotate-45 -translate-y-1.5" />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
