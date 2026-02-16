@@ -409,9 +409,11 @@ export function Evolution() {
         </div>
 
         <div
-          className={`flex-1 overflow-y-auto custom-scrollbar bg-card border-l border-border/50 ${!isHistoryExpanded ? "h-[120px] lg:h-auto" : ""}`}
+          className={`overflow-y-auto custom-scrollbar bg-card border-l border-border/50 transition-[height] duration-300 ${
+            !isHistoryExpanded ? "h-[125px] lg:h-auto" : "h-[500px] lg:h-auto"
+          }`}
         >
-          <div className="divide-y divide-border">
+          <div>
             <AnimatePresence initial={false}>
               {commits.map((commit, index) => (
                 <motion.div
@@ -419,63 +421,65 @@ export function Evolution() {
                   initial={{ opacity: 0, y: 10, scale: 0.95 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   transition={{ duration: 0.3, ease: "easeOut" }}
-                  className={`px-6 py-5 group relative border-b border-border last:border-0 transition-colors duration-300 hover:bg-primary/5 ${
+                  className={`group relative border-b border-border last:border-0 transition-colors duration-300 hover:bg-primary/5 ${
                     index === 0 && phase !== "refreshing" ? "bg-primary/5" : ""
                   } ${index > 0 && !isHistoryExpanded ? "hidden lg:block" : ""}`}
                 >
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex items-start w-full gap-4">
-                      <div className="mt-1 shrink-0">
-                        <div
-                          className={`w-8 h-8 rounded-full overflow-hidden border flex items-center justify-center ${
-                            commit.isAi
-                              ? "bg-purple-500/10 border-purple-500/20 text-purple-600"
-                              : "bg-primary/10 border-primary/20"
-                          }`}
-                        >
-                          {commit.isAi ? (
-                            <div className="relative w-full h-full flex items-center justify-center">
-                              <Bot className="w-5 h-5" />
-                            </div>
-                          ) : (
-                            <img
-                              src={commit.avatar}
-                              alt={commit.author}
-                              className="w-full h-full object-cover"
-                            />
-                          )}
+                  <div className="h-[125px] px-6 flex flex-col justify-center relative">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex items-start w-full gap-4">
+                        <div className="mt-1 shrink-0">
+                          <div
+                            className={`w-8 h-8 rounded-full overflow-hidden border flex items-center justify-center ${
+                              commit.isAi
+                                ? "bg-purple-500/10 border-purple-500/20 text-purple-600"
+                                : "bg-primary/10 border-primary/20"
+                            }`}
+                          >
+                            {commit.isAi ? (
+                              <div className="relative w-full h-full flex items-center justify-center">
+                                <Bot className="w-5 h-5" />
+                              </div>
+                            ) : (
+                              <img
+                                src={commit.avatar}
+                                alt={commit.author}
+                                className="w-full h-full object-cover"
+                              />
+                            )}
+                          </div>
                         </div>
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-3 mb-1 justify-between">
-                          <div className="flex items-center gap-2">
-                            <code className="font-mono text-[10px] text-primary bg-primary/10 px-1.5 py-0.5 rounded-[2px] relative noise">
-                              {commit.hash}
-                            </code>
-                            <span className="text-xs text-muted-foreground">
-                              {commit.time || commit.date}
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-3 mb-1 justify-between">
+                            <div className="flex items-center gap-2">
+                              <code className="font-mono text-[10px] text-primary bg-primary/10 px-1.5 py-0.5 rounded-[2px] relative noise">
+                                {commit.hash}
+                              </code>
+                              <span className="text-xs text-muted-foreground">
+                                {commit.time || commit.date}
+                              </span>
+                            </div>
+                            <span className="flex items-center gap-1 font-mono text-[10px]">
+                              <span className="text-green-600">
+                                +{commit.diff?.added || 0}
+                              </span>
+                              <span className="text-red-500">
+                                -{commit.diff?.removed || 0}
+                              </span>
                             </span>
                           </div>
-                          <span className="flex items-center gap-1 font-mono text-[10px]">
-                            <span className="text-green-600">
-                              +{commit.diff?.added || 0}
-                            </span>
-                            <span className="text-red-500">
-                              -{commit.diff?.removed || 0}
-                            </span>
-                          </span>
+                          <p className="text-sm text-foreground font-medium leading-tight truncate">
+                            {commit.message}
+                          </p>
+                          <p className="text-xs text-muted-foreground mt-1">
+                            Authored by {commit.author}
+                          </p>
                         </div>
-                        <p className="text-sm text-foreground font-medium leading-tight truncate">
-                          {commit.message}
-                        </p>
-                        <p className="text-xs text-muted-foreground mt-1">
-                          Authored by {commit.author}
-                        </p>
                       </div>
-                    </div>
-                    <div className="text-right shrink-0 flex flex-col items-end">
-                      <div className="mt-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                        <ChevronDown className="size-3.5 transition-transform duration-300" />
+                      <div className="text-right shrink-0 flex flex-col items-end">
+                        <div className="mt-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                          <ChevronDown className="size-3.5 transition-transform duration-300" />
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -489,17 +493,25 @@ export function Evolution() {
         <button
           onClick={() => setIsHistoryExpanded(!isHistoryExpanded)}
           disabled={commits.length <= 1}
-          className={`w-full py-3 bg-muted/30 border-t border-border text-[10px] font-mono uppercase tracking-widest text-muted-foreground transition-colors lg:hidden shrink-0 ${
+          className={`w-full py-3 bg-muted/30 border-t border-border text-[10px] font-mono uppercase tracking-widest text-muted-foreground transition-colors lg:hidden shrink-0 flex items-center justify-center gap-2 ${
             commits.length <= 1
               ? "opacity-50 cursor-not-allowed"
               : "hover:bg-muted/50"
           }`}
         >
-          {commits.length <= 1
-            ? "No Additional History"
-            : isHistoryExpanded
-              ? "Collapse History"
-              : `View ${commits.length - 1} More Updates`}
+          {commits.length <= 1 ? (
+            <span>No Additional History</span>
+          ) : isHistoryExpanded ? (
+            <>
+              <span>Collapse History</span>
+              <ChevronDown className="w-3 h-3 rotate-180" />
+            </>
+          ) : (
+            <>
+              <span>View {commits.length - 1} More Updates</span>
+              <ChevronDown className="w-3 h-3" />
+            </>
+          )}
         </button>
 
         <div className="p-4 bg-background mt-auto border-t border-border hidden lg:block">

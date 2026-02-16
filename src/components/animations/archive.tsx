@@ -421,7 +421,7 @@ export function Archive() {
                   : "hover:bg-primary/5"
               } ${index === 0 && !isHovered && !expandedId ? "animate-pulse bg-primary/5" : ""}`}
             >
-              <div className="min-h-[125px] md:min-h-[110px] pl-4 pr-2 md:px-6 py-3 md:py-5 flex flex-col justify-center relative">
+              <div className="h-[125px] md:h-[110px] pl-4 pr-2 md:px-6 py-3 md:py-5 flex flex-col justify-center relative">
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex items-start flex-1 min-w-0 gap-4">
                     <div className="mt-1 shrink-0">
@@ -521,7 +521,7 @@ export function Archive() {
                     </div>
                   </div>
                   <div className="text-right shrink-0 flex flex-col items-end">
-                    <div className="mt-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="mt-2 text-primary opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
                       <ChevronDown
                         className={`size-3.5 transition-transform duration-300 ${
                           expandedId === commit.id ? "rotate-180" : ""

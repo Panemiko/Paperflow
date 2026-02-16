@@ -503,7 +503,7 @@ export default function Home() {
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none" />
         <MaxWidth>
           <motion.div
-            className="max-w-2xl mb-10 pl-6 border-l-2 border-primary"
+            className="max-w-2xl mb-10"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -543,12 +543,11 @@ export default function Home() {
         <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/5 blur-[120px] rounded-full -translate-x-1/2 translate-y-1/2 pointer-events-none" />
         <MaxWidth>
           <motion.div
-            className="max-w-2xl mb-16 pt-6 relative"
+            className="max-w-2xl mb-16 relative"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <div className="absolute top-0 left-0 w-12 h-1 bg-primary" />
             <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-primary font-bold">
               What We Refuse to Build
             </span>
