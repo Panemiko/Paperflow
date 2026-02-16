@@ -17,9 +17,10 @@ export function Header() {
         </div>
         <nav className="hidden md:flex items-center gap-8">
           {[
-            { label: "Mechanism", href: "/#mechanism" },
-            { label: "Philosophy", href: "/#philosophy" },
-            { label: "Ethics", href: "/#ethics" },
+            { label: "How it Works", href: "/#how-it-works" },
+            { label: "Collaboration", href: "/#collaboration" },
+            { label: "The Record", href: "/#result" },
+            { label: "Principles", href: "/#refuse" },
             { label: "FAQ", href: "/#faq" },
           ].map((link) => (
             <a

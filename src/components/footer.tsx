@@ -14,19 +14,25 @@ export function Footer() {
               <BrandLogo className="h-12 mb-4 w-auto" />
             </a>
             <p className="font-mono text-[10px] tracking-widest uppercase text-muted-foreground">
-              For writers who believe words matter.
+              Write with Control.
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-8">
-            {["About", "Privacy", "Terms", "Contact"].map((link) => (
+            {[
+              { label: "How it Works", href: "/#how-it-works" },
+              { label: "Collaboration", href: "/#collaboration" },
+              { label: "The Record", href: "/#result" },
+              { label: "Principles", href: "/#refuse" },
+              { label: "FAQ", href: "/#faq" },
+            ].map((link) => (
               <motion.a
-                key={link}
-                href="#"
-                className="font-mono text-xs text-muted-foreground hover:text-foreground transition-colors"
+                key={link.label}
+                href={link.href}
+                className="font-mono text-xs text-muted-foreground hover:text-foreground transition-colors uppercase tracking-wider"
                 whileHover={{ y: -2 }}
               >
-                {link}
+                {link.label}
               </motion.a>
             ))}
           </div>
@@ -34,7 +40,7 @@ export function Footer() {
 
         <div className="mt-12 pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="font-mono text-[10px] text-muted-foreground">
-            © 2026 Paperflow. All rights reserved.
+            © {new Date().getFullYear()} Paperflow. All rights reserved.
           </p>
           <p className="font-mono text-[10px] text-muted-foreground"></p>
         </div>

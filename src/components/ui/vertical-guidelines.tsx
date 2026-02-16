@@ -9,144 +9,110 @@ export function VerticalGuidelines() {
         {/* Right line */}
         <div className="absolute right-0 lg:right-0 top-0 bottom-0 w-px bg-[#777777]/15" />
 
-        {/* 
-            LEFT COLUMN MARKERS 
-        */}
+        {/* LEFT COLUMN MARKERS
+         */}
 
-        {/* 5% - Start */}
+        {/* 5% - Engine Version */}
         <div className="absolute left-[-2px] top-[5%] flex flex-col gap-2 items-end -translate-x-full pr-4 opacity-[0.2] hover:opacity-80 transition-opacity duration-500 pointer-events-auto cursor-default">
           <div className="[writing-mode:vertical-rl] rotate-180 font-mono text-[9px] tracking-[0.3em] uppercase whitespace-nowrap">
-            Paperflow Protocol v1.0.4
+            Paperflow Core v0.9.2 (Beta)
           </div>
           <div className="w-px h-12 bg-[#777777]/30 mr-px" />
         </div>
 
-        {/* 12% - Session (New content, original style) */}
-        <div className="absolute left-[-2px] top-[12%] flex flex-col gap-3 items-end -translate-x-full pr-4 opacity-[0.15] hover:opacity-80 transition-opacity duration-500 pointer-events-auto cursor-default">
+        {/* 15% - Storage Mode (emphasizing Local/Offline) */}
+        <div className="absolute left-[-2px] top-[15%] flex flex-col gap-3 items-end -translate-x-full pr-4 opacity-[0.15] hover:opacity-80 transition-opacity duration-500 pointer-events-auto cursor-default">
           <div className="w-4 h-px bg-[#777777]/30" />
           <div className="[writing-mode:vertical-rl] rotate-180 font-mono text-[8px] tracking-widest uppercase opacity-60">
-            Session: active_node_0x1
+            Storage: Encrypted
           </div>
         </div>
 
-        {/* 25% - Chat (Diff) */}
-        <div className="absolute left-[-2px] top-[25%] flex flex-col gap-4 items-end -translate-x-full pr-4 opacity-[0.15] hover:opacity-80 transition-opacity duration-500 pointer-events-auto cursor-default">
+        {/* 30% - The Diff (Writing context) */}
+        <div className="absolute left-[-2px] top-[30%] flex flex-col gap-4 items-end -translate-x-full pr-4 opacity-[0.15] hover:opacity-80 transition-opacity duration-500 pointer-events-auto cursor-default">
           <div className="font-mono text-[9px] tracking-widest uppercase text-right">
-            Diff: +420 / -12
+            Diff: +1,204 / -32 words
             <br />
-            <span className="opacity-60">Status: Reviewed</span>
+            <span className="opacity-60">Context: ch3_draft_v2</span>
           </div>
           <div className="w-8 h-px bg-[#777777]/30" />
         </div>
 
-        {/* 35% - Arch (New content, original style) */}
-        <div className="absolute left-[-2px] top-[35%] flex flex-col gap-4 items-end -translate-x-full pr-4 opacity-[0.15] hover:opacity-80 transition-opacity duration-500 pointer-events-auto cursor-default">
-          <div className="w-px h-16 bg-linear-to-b from-transparent via-[#777777]/30 to-transparent mr-px" />
-          <div className="[writing-mode:vertical-rl] rotate-180 font-mono text-[8px] tracking-[0.4em] uppercase opacity-40">
-            Architecture_Layer_01
-          </div>
-        </div>
-
-        {/* 45% - Philosophy (Merge) */}
+        {/* 45% - Merge Status */}
         <div className="absolute left-[-2px] top-[45%] flex flex-col gap-4 items-end -translate-x-full pr-4 opacity-[0.15] hover:opacity-80 transition-opacity duration-500 pointer-events-auto cursor-default">
           <div className="w-px h-16 bg-linear-to-b from-transparent via-[#777777]/30 to-transparent mr-px" />
           <div className="font-mono text-[9px] tracking-widest uppercase text-right opacity-60 text-primary">
-            Merge: origin/philosophy
+            Merge: experiment/alt-ending
           </div>
         </div>
 
-        {/* 65% - Refuse (Integrity) */}
-        <div className="absolute left-[-2px] top-[65%] flex flex-col gap-4 items-end -translate-x-full pr-4 opacity-[0.15] hover:opacity-80 transition-opacity duration-500 pointer-events-auto cursor-default">
-          <div className="w-4 h-px bg-[#777777]/30" />
-          <div className="font-mono text-[9px] tracking-widest uppercase text-right">
-            Absence_Integrity: OK
-          </div>
-        </div>
-
-        {/* 60% - Protocol (New content, original style - Moved logically) */}
+        {/* 60% - Format */}
         <div className="absolute left-[-2px] top-[60%] flex flex-col gap-2 items-end -translate-x-full pr-4 opacity-[0.15] hover:opacity-80 transition-opacity duration-500 pointer-events-auto cursor-default">
           <div className="w-6 h-px bg-[#777777]/30" />
           <div className="[writing-mode:vertical-rl] rotate-180 font-mono text-[8px] tracking-[0.2em] uppercase opacity-60">
-            Protocol: RFC-912
+            Format: CommonMark / MD
           </div>
         </div>
 
-        {/* 85% - FAQ (EOF) */}
-        <div className="absolute left-[-2px] top-[85%] flex flex-col gap-4 items-end -translate-x-full pr-4 opacity-[0.2] hover:opacity-80 transition-opacity duration-500 pointer-events-auto cursor-default">
+        {/* 75% - Data Ownership */}
+        <div className="absolute left-[-2px] top-[75%] flex flex-col gap-4 items-end -translate-x-full pr-4 opacity-[0.15] hover:opacity-80 transition-opacity duration-500 pointer-events-auto cursor-default">
           <div className="font-mono text-[9px] tracking-widest uppercase text-right">
-            EOF: 124,042 bytes
+            Export: .docx / .pdf / .md
           </div>
           <div className="w-4 h-px bg-[#777777]/30" />
         </div>
 
-        {/* 
-            RIGHT COLUMN MARKERS 
-        */}
+        {/* RIGHT COLUMN MARKERS
+         */}
 
-        {/* 8% - Metadata (New content, original style) */}
-        <div className="absolute right-[-2px] top-[8%] flex flex-col gap-3 items-start translate-x-full pl-4 opacity-[0.15] hover:opacity-80 transition-opacity duration-500 pointer-events-auto cursor-default">
+        {/* 10% - Snapshot ID */}
+        <div className="absolute right-[-2px] top-[10%] flex flex-col gap-3 items-start translate-x-full pl-4 opacity-[0.15] hover:opacity-80 transition-opacity duration-500 pointer-events-auto cursor-default">
           <div className="w-px h-12 bg-[#777777]/30 ml-px" />
           <div className="[writing-mode:vertical-rl] font-mono text-[8px] tracking-[0.3em] uppercase opacity-60">
-            Metadata: 001.002.003
+            Snapshot: #8a2f9c
           </div>
         </div>
 
-        {/* 15% - Mechanism (Commit) */}
-        <div className="absolute right-[-2px] top-[15%] flex flex-col gap-4 items-start translate-x-full pl-4 opacity-[0.15] hover:opacity-80 transition-opacity duration-500 pointer-events-auto cursor-default">
+        {/* 25% - Active Branch */}
+        <div className="absolute right-[-2px] top-[25%] flex flex-col gap-4 items-start translate-x-full pl-4 opacity-[0.15] hover:opacity-80 transition-opacity duration-500 pointer-events-auto cursor-default">
           <div className="font-mono text-[9px] tracking-widest uppercase">
-            Commit: 7f3a2b
+            Head: main
             <br />
-            <span className="opacity-60">feat: core_mechanic</span>
+            <span className="opacity-60">Status: Clean</span>
           </div>
           <div className="w-4 h-px bg-[#777777]/30" />
         </div>
 
-        {/* 35% - Result (History) */}
-        <div className="absolute right-[-2px] top-[35%] flex flex-col gap-4 items-start translate-x-full pl-4 opacity-[0.15] hover:opacity-80 transition-opacity duration-500 pointer-events-auto cursor-default">
+        {/* 40% - Integrity Check */}
+        <div className="absolute right-[-2px] top-[40%] flex flex-col gap-4 items-start translate-x-full pl-4 opacity-[0.15] hover:opacity-80 transition-opacity duration-500 pointer-events-auto cursor-default">
           <div className="[writing-mode:vertical-rl] font-mono text-[9px] tracking-[0.2em] uppercase whitespace-nowrap opacity-60">
-            git verify-signature
+            Integrity: Verified
           </div>
           <div className="w-px h-12 bg-[#777777]/30 ml-px" />
         </div>
 
-        {/* 32% - Verify (New content, original style) */}
-        <div className="absolute right-[-2px] top-[32%] flex flex-col gap-3 items-start translate-x-full pl-4 opacity-[0.15] hover:opacity-80 transition-opacity duration-500 pointer-events-auto cursor-default">
-          <div className="w-8 h-px bg-[#777777]/30" />
-          <div className="[writing-mode:vertical-rl] font-mono text-[8px] tracking-widest uppercase opacity-60">
-            Verify: sha256_checksum
-          </div>
-        </div>
-
-        {/* 55% - Public (Role) */}
+        {/* 55% - AI Policy (Important) */}
         <div className="absolute right-[-2px] top-[55%] flex flex-col gap-4 items-start translate-x-full pl-4 opacity-[0.15] hover:opacity-80 transition-opacity duration-500 pointer-events-auto cursor-default">
           <div className="w-px h-8 bg-[#777777]/30 ml-px" />
           <span className="font-mono text-[9px] tracking-widest uppercase opacity-60 text-primary">
-            Role: Editor / Public
+            Training: Disabled
           </span>
         </div>
 
-        {/* 75% - Ethics (Auth) */}
-        <div className="absolute right-[-2px] top-[75%] flex flex-col gap-4 items-start translate-x-full pl-4 opacity-[0.15] hover:opacity-80 transition-opacity duration-500 pointer-events-auto cursor-default">
-          <div className="[writing-mode:vertical-rl] font-mono text-[8px] tracking-[0.4em] uppercase whitespace-nowrap">
-            Human_Authorship_Verified
-          </div>
-          <div className="w-px h-24 bg-[#777777]/30 ml-px" />
-        </div>
-
-        {/* 68% - Branch (New content, original style) */}
-        <div className="absolute right-[-2px] top-[68%] flex flex-col gap-3 items-start translate-x-full pl-4 opacity-[0.15] hover:opacity-80 transition-opacity duration-500 pointer-events-auto cursor-default">
+        {/* 70% - Human Verification */}
+        <div className="absolute right-[-2px] top-[70%] flex flex-col gap-3 items-start translate-x-full pl-4 opacity-[0.15] hover:opacity-80 transition-opacity duration-500 pointer-events-auto cursor-default">
           <div className="w-6 h-px bg-[#777777]/30" />
           <div className="[writing-mode:vertical-rl] font-mono text-[8px] tracking-[0.4em] uppercase opacity-40">
-            Branch: ephemeral-main
+            Author: Human_Verified
           </div>
         </div>
 
-        {/* 95% - Final (Encryption) */}
-        <div className="absolute right-[-2px] top-[95%] flex flex-col gap-4 items-start translate-x-full pl-4 opacity-[0.15] hover:opacity-80 transition-opacity duration-500 pointer-events-auto cursor-default">
+        {/* 90% - Encryption Standard */}
+        <div className="absolute right-[-2px] top-[90%] flex flex-col gap-4 items-start translate-x-full pl-4 opacity-[0.15] hover:opacity-80 transition-opacity duration-500 pointer-events-auto cursor-default">
           <div className="flex items-center gap-2">
             <div className="w-1.5 h-1.5 rounded-full bg-green-500/50" />
             <span className="font-mono text-[9px] tracking-widest uppercase">
-              AES-256 Encrypted
+              AES-256-GCM
             </span>
           </div>
         </div>
