@@ -4,41 +4,82 @@ import { motion, useInView } from "framer-motion";
 import { Check, ChevronDown } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-const COMMIT_DATA = {
+const COMMIT_DATA_TEMPLATE = {
   hash: "7f2a9c1",
-  message: "Refactored the bridge sequence for clarity",
-  author: "Sofia Morales (You)",
   avatar:
     "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=150&h=150&fit=crop&crop=faces&q=80",
-  time: "2h ago",
   diff: { added: 12, removed: 45 },
 };
 
-const COMMENTS = [
+const COMMENTS_TEMPLATE = [
   {
-    author: "Amara Okafor",
     initials: "AO",
-    text: "This removal is aggressive. Are we losing the character motivation here?",
     color: "bg-primary",
     avatar:
       "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=150&h=150&fit=crop&crop=faces&q=80",
   },
   {
-    author: "Sofia Morales (You)",
     initials: "SM",
-    text: "It was redundant. I moved the motivation to the previous chapter.",
     color: "bg-emerald-500",
     avatar:
       "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=150&h=150&fit=crop&crop=faces&q=80",
   },
 ];
 
-export function Review() {
+export function Review({ dict }: { dict?: any }) {
+  const d = dict || {
+    reviewing: "Reviewing...",
+    reply_to_thread: "Reply to thread...",
+    thread_resolved: "Thread Resolved",
+    resolved: "Resolved",
+    thread_marked_resolved: "Thread marked as resolved",
+    commit: {
+      message: "Refactored the bridge sequence for clarity",
+      author: "Sofia Morales (You)",
+      time: "2h ago",
+    },
+    comments: [
+      {
+        author: "Amara Okafor",
+        text: "This removal is aggressive. Are we losing the character motivation here?",
+      },
+      {
+        author: "Sofia Morales (You)",
+        text: "It was redundant. I moved the motivation to the previous chapter.",
+      },
+    ],
+  };
+
+  const COMMIT_DATA = {
+    ...COMMIT_DATA_TEMPLATE,
+    message: d.commit.message,
+    author: d.commit.author,
+    time: d.commit.time,
+  };
+
+  const COMMENTS = [
+    {
+      ...COMMENTS_TEMPLATE[0],
+      author: d.comments[0].author,
+      text: d.comments[0].text,
+    },
+    {
+      ...COMMENTS_TEMPLATE[1],
+      author: d.comments[1].author,
+      text: d.comments[1].text,
+    },
+  ];
+
   const [phase, setPhase] = useState<
     "idle" | "focus" | "commenting" | "typing" | "replying" | "resolved"
   >("idle");
   const containerRef = useRef(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.5 });
+
+  // Reset on dict change
+  useEffect(() => {
+    setPhase("idle");
+  }, [d.commit.message]);
 
   // Animation Loop
   useEffect(() => {
@@ -86,7 +127,7 @@ export function Review() {
         <div className="flex items-center gap-2">
           <div className="w-1.5 h-1.5 rounded-full bg-primary/20" />
           <span className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground/60">
-            Reviewing...
+            {d.reviewing}
           </span>
         </div>
       </div>
@@ -126,7 +167,7 @@ export function Review() {
               {COMMIT_DATA.message}
             </h3>
             <p className="text-xs text-muted-foreground mt-1">
-              Authored by {COMMIT_DATA.author}
+              {d.ui?.by || "By"} {COMMIT_DATA.author}
             </p>
           </div>
         </div>
@@ -214,7 +255,7 @@ export function Review() {
                   <div className="flex items-center gap-1.5 text-muted-foreground">
                     <Check className="w-3 h-3" />
                     <span className="text-[10px] font-medium uppercase tracking-wider">
-                      Thread marked as resolved
+                      {d.thread_marked_resolved}
                     </span>
                   </div>
                   <div className="h-px bg-border flex-1" />
@@ -230,13 +271,13 @@ export function Review() {
         <div className="mt-auto w-full p-3 border-t border-border bg-background flex items-center justify-between relative z-20">
           <span className="text-[10px] text-muted-foreground uppercase tracking-wider font-mono">
             {phase === "resolved" ? (
-              "Thread Resolved"
+              d.thread_resolved
             ) : phase === "typing" ? (
               <span className="text-foreground normal-case tracking-normal font-sans text-sm ml-1">
                 <Typewriter text={COMMENTS[1].text} speed={20} />
               </span>
             ) : (
-              "Reply to thread..."
+              d.reply_to_thread
             )}
           </span>
 
@@ -244,7 +285,7 @@ export function Review() {
             <div className="flex items-center gap-1 text-green-600 bg-green-100 px-2 py-1 rounded-lg border border-green-200">
               <Check className="w-3 h-3" />
               <span className="text-[9px] font-bold uppercase tracking-wider">
-                Resolved
+                {d.resolved}
               </span>
             </div>
           ) : (

@@ -4,27 +4,33 @@ import { motion } from "framer-motion";
 import { BrandLogo } from "./brand/logo";
 import { MaxWidth } from "./max-width";
 
-export function Footer() {
+export function Footer({ dict, lang }: { dict: any; lang: string }) {
   return (
     <footer className="py-16 border-t border-border relative z-50 bg-background">
       <MaxWidth>
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <div>
-            <a href="/" className="hover:opacity-80 transition-opacity">
+            <a
+              href={`/${lang}`}
+              className="hover:opacity-80 transition-opacity"
+            >
               <BrandLogo className="h-12 mb-4 w-auto" />
             </a>
             <p className="font-mono text-[10px] tracking-widest uppercase text-muted-foreground">
-              Write with Control.
+              {dict.description}
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-8">
             {[
-              { label: "How it Works", href: "/#how-it-works" },
-              { label: "Collaboration", href: "/#collaboration" },
-              { label: "The Record", href: "/#result" },
-              { label: "Principles", href: "/#refuse" },
-              { label: "FAQ", href: "/#faq" },
+              { label: dict.links.how_it_works, href: `/${lang}#how-it-works` },
+              {
+                label: dict.links.collaboration,
+                href: `/${lang}#collaboration`,
+              },
+              { label: dict.links.the_record, href: `/${lang}#result` },
+              { label: dict.links.principles, href: `/${lang}#refuse` },
+              { label: dict.links.faq, href: `/${lang}#faq` },
             ].map((link) => (
               <motion.a
                 key={link.label}
@@ -40,7 +46,10 @@ export function Footer() {
 
         <div className="mt-12 pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="font-mono text-[10px] text-muted-foreground">
-            © {new Date().getFullYear()} Paperflow. All rights reserved.
+            {dict.copyright.replace(
+              "{year}",
+              new Date().getFullYear().toString(),
+            )}
           </p>
           <p className="font-mono text-[10px] text-muted-foreground"></p>
         </div>

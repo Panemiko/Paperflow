@@ -7,13 +7,26 @@ import React, { useState } from "react";
 
 export function WaitlistForm({
   variant = "default",
+  dict,
 }: {
   variant?: "default" | "compact" | "dark";
+  dict?: any; // We'll make this optional to avoid breaking other usages if any
 }) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
+
+  const d = dict?.[variant] ||
+    dict?.default || {
+      placeholder: "your@email.com",
+      join: "Join",
+      joined: "Joined!",
+      joining: "Joining...",
+      welcome: "Welcome Aboard!",
+      error: "Try Again",
+      success_status: "You're on the list. We'll be in touch soon.",
+    };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,7 +52,7 @@ export function WaitlistForm({
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="your@email.com"
+            placeholder={d.placeholder}
             className="w-full pl-11 pr-4 py-3 border-2 border-border bg-card text-foreground font-mono text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
             required
           />
@@ -53,12 +66,12 @@ export function WaitlistForm({
             <Loader2 className="w-4 h-4 animate-spin" />
           ) : status === "success" ? (
             <>
-              Joined!
+              {d.joined}
               <Check className="w-4 h-4" />
             </>
           ) : (
             <>
-              Join
+              {d.join}
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </>
           )}
@@ -77,7 +90,7 @@ export function WaitlistForm({
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
+              placeholder={d.placeholder}
               className="w-full pl-11 pr-5 py-4 border-2 border-background/20 bg-background/5 text-background font-mono text-sm placeholder:text-background/40 focus:outline-none focus:border-primary transition-colors"
               required
             />
@@ -91,20 +104,20 @@ export function WaitlistForm({
           >
             {status === "loading" && (
               <>
-                Joining...
+                {d.joining}
                 <Loader2 className="w-4 h-4 animate-spin" />
               </>
             )}
             {status === "success" && (
               <>
-                Welcome Aboard!
+                {d.welcome}
                 <Check className="w-4 h-4" />
               </>
             )}
-            {status === "error" && "Try Again"}
+            {status === "error" && d.error}
             {status === "idle" && (
               <>
-                Join the Waitlist
+                {d.join}
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </>
             )}
@@ -116,7 +129,7 @@ export function WaitlistForm({
             animate={{ opacity: 1, y: 0 }}
             className="mt-3 font-mono text-xs text-primary"
           >
-            You're on the list. We'll be in touch soon.
+            {d.success_status}
           </motion.p>
         )}
       </form>
@@ -132,7 +145,7 @@ export function WaitlistForm({
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email"
+            placeholder={d.placeholder}
             className="w-full pl-11 pr-5 py-4 border-2 border-border bg-card text-foreground font-mono text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
             required
           />
@@ -145,20 +158,20 @@ export function WaitlistForm({
         >
           {status === "loading" && (
             <>
-              Joining...
+              {d.joining}
               <Loader2 className="w-4 h-4 animate-spin" />
             </>
           )}
           {status === "success" && (
             <>
-              Welcome Aboard!
+              {d.welcome}
               <Check className="w-4 h-4" />
             </>
           )}
-          {status === "error" && "Try Again"}
+          {status === "error" && d.error}
           {status === "idle" && (
             <>
-              Join the Waitlist
+              {d.join}
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </>
           )}
@@ -170,7 +183,7 @@ export function WaitlistForm({
           animate={{ opacity: 1, y: 0 }}
           className="mt-3 font-mono text-xs text-primary"
         >
-          You're on the list. We'll be in touch soon.
+          {d.success_status}
         </motion.p>
       )}
     </form>

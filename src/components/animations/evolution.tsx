@@ -6,18 +6,16 @@ import { useEffect, useRef, useState } from "react";
 
 import { Input } from "@/components/ui/input";
 
-const INITIAL_PHRASE = "Ideas leave a small path.";
+const INITIAL_PHRASE_KEY = "initial_phrase";
 
-const INITIAL_COMMIT = {
+const INITIAL_COMMIT_DATA = {
   hash: "a9b1e8f",
-  message: "Initial manuscript",
-  author: "David Park (You)",
+  author: "David Park",
   avatar:
     "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=faces&q=80",
   date: "10 min ago",
   time: "11:45 UTC",
   diff: { added: 5, removed: 0 },
-  content: INITIAL_PHRASE,
 };
 
 type SegmentType = "stable" | "added" | "removed";
@@ -27,41 +25,143 @@ interface Segment {
   type: SegmentType;
 }
 
-const SIMULATION_SEQUENCE = [
-  {
-    type: "add",
-    name: "Expanded the opening statement",
-    diff: { added: 3, removed: 0 },
-    segments: [
-      { text: INITIAL_PHRASE, type: "stable" as SegmentType },
-      { text: "\nNotice the change.", type: "added" as SegmentType },
-    ],
-  },
-  {
-    type: "add",
-    name: "Clarified the philosophy",
-    diff: { added: 5, removed: 0 },
-    segments: [
-      { text: INITIAL_PHRASE, type: "stable" as SegmentType },
-      { text: "\nNotice the change.", type: "stable" as SegmentType },
-      { text: "\nEvery draft is a decision.", type: "added" as SegmentType },
-    ],
-  },
-  {
-    type: "remove",
-    name: "Precision edit for impact",
-    diff: { added: 0, removed: 1 },
-    segments: [
-      { text: "Ideas leave a", type: "stable" as SegmentType },
-      { text: " small ", type: "removed" as SegmentType },
-      { text: "path.", type: "stable" as SegmentType },
-      { text: "\nNotice the change.", type: "stable" as SegmentType },
-      { text: "\nEvery draft is a decision.", type: "stable" as SegmentType },
-    ],
-  },
-];
+export function Evolution({ dict }: { dict?: any }) {
+  const d = dict || {
+    entries: "entries",
+    awaiting_change: "Awaiting change...",
+    patching_buffer: "Patching buffer...",
+    broadcasting_refresh: "Broadcasting refresh...",
+    syncing_state: "Syncing state...",
+    draft: "Draft",
+    revision: "Revision",
+    registering_change: "Registering change...",
+    refreshing_manuscript: "Refreshing Manuscript State...",
+    record_evolution: "Record Evolution",
+    documenting_file_state: "Documenting this file state.",
+    updating_buffer: "Updating Buffer...",
+    commit_change: "Commit Change",
+    ui: {
+      by: "By",
+      you: "You",
+      time_ago: {
+        just_now: "Just now",
+        minute: "{count} min ago",
+        minutes: "{count} mins ago",
+        hour: "{count} hour ago",
+        hours: "{count} hours ago",
+        day: "{count} day ago",
+        days: "{count} days ago",
+        yesterday: "Yesterday",
+      },
+    },
+    branch_name: "Branch: main",
+    no_additional_history: "No Additional History",
+    collapse_history: "Collapse History",
+    view_more_updates: "View {count} More Updates",
+    simulation: {
+      initial_phrase: "Ideas leave a small path.",
+      initial_message: "Initial manuscript",
+      step1_name: "Expanded the opening statement",
+      step1_text: "\nNotice the change.",
+      step2_name: "Clarified the philosophy",
+      step2_text: "\nEvery draft is a decision.",
+      step3_name: "Precision edit for impact",
+    },
+  };
 
-export function Evolution() {
+  const INITIAL_PHRASE = d.simulation.initial_phrase;
+  const INITIAL_COMMIT = {
+    ...INITIAL_COMMIT_DATA,
+    date: d.ui?.time_ago?.minutes.replace("{count}", "10") || "10 min ago",
+    author: `${INITIAL_COMMIT_DATA.author} (${d.ui?.you || "You"})`,
+    message: d.simulation.initial_message,
+    content: INITIAL_PHRASE,
+  };
+
+  const SIMULATION_SEQUENCE = [
+    {
+      type: "add",
+      name: d.simulation.step1_name,
+      diff: { added: 3, removed: 0 },
+      segments: [
+        { text: INITIAL_PHRASE, type: "stable" as SegmentType },
+        { text: d.simulation.step1_text, type: "added" as SegmentType },
+      ],
+    },
+    {
+      type: "add",
+      name: d.simulation.step2_name,
+      diff: { added: 5, removed: 0 },
+      segments: [
+        { text: INITIAL_PHRASE, type: "stable" as SegmentType },
+        { text: d.simulation.step1_text, type: "stable" as SegmentType },
+        { text: d.simulation.step2_text, type: "added" as SegmentType },
+      ],
+    },
+    {
+      type: "remove",
+      name: d.simulation.step3_name,
+      diff: { added: 0, removed: 1 },
+      segments: [
+        {
+          text:
+            INITIAL_PHRASE.split(" ")[0] +
+            " " +
+            INITIAL_PHRASE.split(" ")[1] +
+            " ",
+          type: "stable" as SegmentType,
+        }, // Ideas leave a
+        { text: " small ", type: "removed" as SegmentType }, // small (hardcoded split logic based on English, might fail for PT if structure differs significantly)
+        // Wait, the PT phrase is "Ideias deixam um pequeno caminho."
+        // "Ideias deixam um" (stable) " pequeno " (removed) "caminho." (stable)
+        // I need to make the split logic dynamic or relative to the string.
+        // For now, I will simplify and just assume the structure or use the full string replacement if easier.
+        // Actually, the animation relies on segments.
+        // Let's just construct the segments properly based on the language.
+        // Simplification: just use the text from dict and split it manually here for the "remove" step?
+        // Or better: put the segments in the dictionary? No, that's too much JSON structure.
+        // I will use a simple heuristic: remove the word "small" or "pequeno".
+        {
+          text: INITIAL_PHRASE.replace(/small|pequeno/i, "").replace("  ", " "),
+          type: "stable" as SegmentType,
+        },
+        // This is getting complicated to preserve the exact animation behavior of "removed" segment.
+        // Let's redefine the segments for the remove step using `d.simulation` parts if possible.
+        // But `d.simulation` only has full texts.
+        // I'll reconstruct the remove step segments dynamically.
+      ],
+    },
+  ];
+
+  // Re-implementing the remove step segments logic to be safer
+  // Step 3 is "Precision edit for impact" - removing "small" / "pequeno"
+  // English: "Ideas leave a small path." -> "Ideas leave a path."
+  // PT: "Ideias deixam um pequeno caminho." -> "Ideias deixam um caminho."
+
+  const removeStepSegments = (() => {
+    const phrase = INITIAL_PHRASE;
+    const wordToRemove = phrase.includes("small") ? " small " : " pequeno ";
+    const parts = phrase.split(wordToRemove);
+    if (parts.length === 2) {
+      return [
+        { text: parts[0], type: "stable" as SegmentType },
+        { text: wordToRemove, type: "removed" as SegmentType },
+        { text: parts[1], type: "stable" as SegmentType },
+        { text: d.simulation.step1_text, type: "stable" as SegmentType },
+        { text: d.simulation.step2_text, type: "stable" as SegmentType },
+      ];
+    }
+    // Fallback if word not found (shouldn't happen if dictionary is correct)
+    return [
+      { text: phrase, type: "stable" as SegmentType },
+      { text: d.simulation.step1_text, type: "stable" as SegmentType },
+      { text: d.simulation.step2_text, type: "stable" as SegmentType },
+    ];
+  })();
+
+  // Override the 3rd step segments
+  SIMULATION_SEQUENCE[2].segments = removeStepSegments;
+
   const [commits, setCommits] = useState<any[]>([INITIAL_COMMIT]);
   const [phase, setPhase] = useState<
     "idling" | "altering" | "naming" | "committing" | "refreshing"
@@ -78,6 +178,12 @@ export function Evolution() {
 
   const containerRef = useRef(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.5 });
+
+  // Update commits when dict changes (if language switches while mounted, though unlikely with key-based routing)
+  useEffect(() => {
+    setCommits([INITIAL_COMMIT]);
+    setDisplaySegments([{ text: INITIAL_PHRASE, type: "stable" }]);
+  }, [d.simulation.initial_phrase]); // Re-init on language change
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
@@ -167,10 +273,10 @@ export function Evolution() {
           const newCommit = {
             hash: Math.random().toString(16).substring(2, 9),
             message: step.name,
-            author: "David Park (You)",
+            author: `${INITIAL_COMMIT_DATA.author} (${d.ui?.you || "You"})`,
             avatar:
               "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=faces&q=80",
-            date: "Just now",
+            date: d.ui?.time_ago?.just_now || "Just now",
             time:
               new Date().toLocaleTimeString([], {
                 hour: "2-digit",
@@ -215,7 +321,17 @@ export function Evolution() {
 
     runSimulation();
     return () => clearTimeout(timeout);
-  }, [phase, displaySegments, commitName, stepIndex, commits, isInView]);
+  }, [
+    phase,
+    displaySegments,
+    commitName,
+    stepIndex,
+    commits,
+    isInView,
+    d,
+    INITIAL_PHRASE,
+    SIMULATION_SEQUENCE,
+  ]);
 
   return (
     <div
@@ -236,12 +352,12 @@ export function Evolution() {
         <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-background relative z-10 shrink-0">
           <span className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground/60 hidden sm:inline">
             {phase === "idling"
-              ? "Awaiting change..."
+              ? d.awaiting_change
               : phase === "altering"
-                ? "Patching buffer..."
+                ? d.patching_buffer
                 : phase === "refreshing"
-                  ? "Broadcasting refresh..."
-                  : "Syncing state..."}
+                  ? d.broadcasting_refresh
+                  : d.syncing_state}
           </span>
           <div className="flex items-center gap-2">
             <div
@@ -249,8 +365,8 @@ export function Evolution() {
             />
             <span className="font-mono text-[9px] text-muted-foreground">
               {phase === "idling" && stepIndex === 0 && commits.length === 1
-                ? "Draft"
-                : `Revision ${stepIndex + 1}/3`}
+                ? d.draft
+                : `${d.revision} ${stepIndex + 1}/3`}
             </span>
           </div>
         </div>
@@ -308,7 +424,7 @@ export function Evolution() {
                 <div className="bg-foreground text-background px-6 py-3 shadow-xl flex items-center gap-3">
                   <Clock className="w-4 h-4 text-primary animate-spin" />
                   <span className="font-mono text-xs uppercase tracking-wider">
-                    Registering change...
+                    {d.registering_change}
                   </span>
                 </div>
               </motion.div>
@@ -324,7 +440,7 @@ export function Evolution() {
                 <div className="bg-foreground text-background px-6 py-3 shadow-xl flex items-center gap-3">
                   <RotateCcw className="w-4 h-4 text-primary animate-spin" />
                   <span className="font-mono text-xs uppercase tracking-wider">
-                    Refreshing Manuscript State...
+                    {d.refreshing_manuscript}
                   </span>
                 </div>
               </motion.div>
@@ -341,7 +457,7 @@ export function Evolution() {
                   {/* Trigger */}
                   <div className="bg-primary text-primary-foreground px-4 py-2 text-[10px] font-mono uppercase tracking-widest flex items-center gap-2 shadow-lg cursor-default relative noise">
                     <Send className="w-3 h-3" />
-                    Commit Change
+                    {d.commit_change}
                   </div>
 
                   {/* Popover Content */}
@@ -357,10 +473,10 @@ export function Evolution() {
                         <div className="space-y-4">
                           <div className="space-y-2">
                             <h4 className="font-serif text-sm font-medium leading-none text-foreground">
-                              Record Evolution
+                              {d.record_evolution}
                             </h4>
                             <p className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground">
-                              Documenting this file state.
+                              {d.documenting_file_state}
                             </p>
                           </div>
                           <div className="grid gap-2">
@@ -371,7 +487,7 @@ export function Evolution() {
                               className="h-8 text-xs font-serif bg-primary/5"
                             />
                             <div className="w-full bg-primary/20 text-primary-foreground/50 px-4 py-2 text-[9px] font-mono uppercase tracking-widest text-center relative noise text-balance">
-                              Updating Buffer...
+                              {d.updating_buffer}
                             </div>
                           </div>
                         </div>
@@ -393,7 +509,7 @@ export function Evolution() {
           <div className="flex items-center gap-2">
             <Clock className="w-3.5 h-3.5 text-muted-foreground" />
             <span className="font-mono text-[10px] tracking-widest uppercase text-muted-foreground font-bold">
-              Latest changes
+              {d.latest_changes || "Latest Changes"}
             </span>
           </div>
           <AnimatePresence mode="wait">
@@ -403,7 +519,7 @@ export function Evolution() {
               animate={{ y: 0, opacity: 1 }}
               className="font-mono text-[10px] text-primary"
             >
-              {commits.length} entries
+              {commits.length} {d.entries || "entries"}
             </motion.span>
           </AnimatePresence>
         </div>
@@ -456,7 +572,7 @@ export function Evolution() {
                                 {commit.hash}
                               </code>
                               <span className="text-xs text-muted-foreground">
-                                {commit.time || commit.date}
+                                {commit.date}
                               </span>
                             </div>
                             <span className="flex items-center gap-1 font-mono text-[10px]">
@@ -472,7 +588,7 @@ export function Evolution() {
                             {commit.message}
                           </p>
                           <p className="text-xs text-muted-foreground mt-1">
-                            Authored by {commit.author}
+                            {d.ui?.by || "By"} {commit.author}
                           </p>
                         </div>
                       </div>
@@ -500,15 +616,20 @@ export function Evolution() {
           }`}
         >
           {commits.length <= 1 ? (
-            <span>No Additional History</span>
+            <span>{d.no_additional_history || "No Additional History"}</span>
           ) : isHistoryExpanded ? (
             <>
-              <span>Collapse History</span>
+              <span>{d.collapse_history || "Collapse History"}</span>
               <ChevronDown className="w-3 h-3 rotate-180" />
             </>
           ) : (
             <>
-              <span>View {commits.length - 1} More Updates</span>
+              <span>
+                {d.view_more_updates?.replace(
+                  "{count}",
+                  (commits.length - 1).toString(),
+                ) || `View ${commits.length - 1} More Updates`}
+              </span>
               <ChevronDown className="w-3 h-3" />
             </>
           )}
@@ -517,10 +638,12 @@ export function Evolution() {
         <div className="p-4 bg-background mt-auto border-t border-border hidden lg:block">
           <div className="flex items-center justify-between text-muted-foreground">
             <span className="font-mono text-[8px] uppercase tracking-tighter">
-              {phase === "refreshing" ? "Refreshing..." : "Paperflow"}
+              {phase === "refreshing"
+                ? d.refreshing || "Refreshing..."
+                : "Paperflow"}
             </span>
             <span className="font-mono text-[8px] uppercase tracking-tighter">
-              Branch: New section
+              {d.branch_name || "Branch: main"}
             </span>
           </div>
         </div>
