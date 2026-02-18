@@ -1,11 +1,11 @@
 {
   "home": {
     "hero": {
-      "waitlist_badge": "Lista de espera aberta",
-      "title_start": "Escreva com",
-      "title_strong": "controle total",
-      "title_end": "sobre o seu trabalho",
-      "description": "Uma ferramenta de escrita profissional para quem precisa explorar ideias sem perder o rascunho original."
+      "waitlist_badge": "Acesso antecipado",
+      "title_start": "Escreva sem o medo de",
+      "title_strong": "perder seu trabalho",
+      "title_end": "",
+      "description": "Paperflow é uma ferramenta de escrita profissional para quem precisa explorar ideias sem perder o rascunho original."
     },
     "features": {
       "how_it_works_badge": "Como funciona",
@@ -493,7 +493,7 @@
     },
     "final": {
       "badge": "Acesso Antecipado",
-      "title": "Pronto para assumir o controle do seu trabalho?",
+      "title": "Pronto para escrever sem o medo de perder seu trabalho?",
       "description": "O Paperflow está atualmente em desenvolvimento ativo. Junte-se à lista de espera para ser notificado quando o acesso antecipado abrir.",
       "benefits": [
         "Acesso antecipado",
@@ -511,7 +511,7 @@
     "join_waitlist": "Entrar na Lista de Espera"
   },
   "footer": {
-    "description": "Escreva com Controle.",
+    "description": "Escreva sem o medo de perder seu trabalho.",
     "links": {
       "how_it_works": "Como Funciona",
       "collaboration": "Colaboração",
@@ -524,11 +524,13 @@
   "waitlist": {
     "default": {
       "placeholder": "seu@email.com",
+      "label": "Entre na lista para acesso antecipado",
       "join": "Entrar",
       "joined": "Entrou!"
     },
     "dark": {
       "placeholder": "Digite seu email",
+      "label": "Pronto para escrever sem medo?",
       "join": "Entrar na Lista",
       "joining": "Entrando...",
       "welcome": "Bem-vindo a bordo!",
@@ -537,7 +539,7 @@
     }
   },
   "metadata": {
-    "title": "Paperflow | Escreva com Controle.",
+    "title": "Paperflow | Escreva sem o medo de perder seu trabalho.",
     "description": "A infraestrutura que suas ideias merecem. Gerencie documentos complexos com precisão absoluta—ramifique, funda e acompanhe cada versão sem o caos."
   },
   "animations": {

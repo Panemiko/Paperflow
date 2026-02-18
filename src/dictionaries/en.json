@@ -2,10 +2,10 @@
   "home": {
     "hero": {
       "waitlist_badge": "Waitlist open",
-      "title_start": "Write with",
-      "title_strong": "total control",
-      "title_end": "over your work",
-      "description": "A professional writing tool for people who need to explore ideas without losing their original draft."
+      "title_start": "Write without the fear of",
+      "title_strong": "losing work",
+      "title_end": "",
+      "description": "Paperflow is a professional writing tool for people who need to explore ideas without losing their original draft."
     },
     "features": {
       "how_it_works_badge": "How it works",
@@ -493,7 +493,7 @@
     },
     "final": {
       "badge": "Early Access",
-      "title": "Ready to take control of your work?",
+      "title": "Ready to write without the fear of losing work?",
       "description": "Paperflow is currently in active development. Join the waitlist to be notified when early access opens.",
       "benefits": [
         "Early access",
@@ -511,7 +511,7 @@
     "join_waitlist": "Join Waitlist"
   },
   "footer": {
-    "description": "Write with Control.",
+    "description": "Write without the fear of losing work.",
     "links": {
       "how_it_works": "How it Works",
       "collaboration": "Collaboration",
@@ -524,11 +524,13 @@
   "waitlist": {
     "default": {
       "placeholder": "your@email.com",
+      "label": "Join the waitlist for early access",
       "join": "Join",
       "joined": "Joined!"
     },
     "dark": {
       "placeholder": "Enter your email",
+      "label": "Ready to take control of your work?",
       "join": "Join the Waitlist",
       "joining": "Joining...",
       "welcome": "Welcome Aboard!",
@@ -537,7 +539,7 @@
     }
   },
   "metadata": {
-    "title": "Paperflow | Write with Control.",
+    "title": "Paperflow | Write without the fear of losing work.",
     "description": "The infrastructure your ideas deserve. Manage complex documents with absolute precision—branch, merge, and track every version without the chaos."
   },
   "animations": {

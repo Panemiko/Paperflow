@@ -83,6 +83,11 @@ export function WaitlistForm({
   if (variant === "dark") {
     return (
       <form onSubmit={handleSubmit} className="w-full max-w-xl">
+        {d.label && (
+          <label className="block text-center mt-2 mb-6 text-[10px] font-mono tracking-[0.3em] uppercase text-primary/90">
+            {d.label}
+          </label>
+        )}
         <div className="flex flex-col sm:flex-row gap-3">
           <div className="relative flex-1">
             <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-background/40" />
@@ -138,6 +143,11 @@ export function WaitlistForm({
 
   return (
     <form onSubmit={handleSubmit} className="w-full max-w-xl">
+      {d.label && (
+        <label className="block text-center mt-2 mb-6 text-[10px] font-mono tracking-[0.3em] uppercase text-primary/90">
+          {d.label}
+        </label>
+      )}
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1">
           <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
