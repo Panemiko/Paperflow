@@ -202,14 +202,14 @@ export function Review({ dict }: { dict?: any }) {
                         {COMMENTS[0].author}
                       </span>
                     </div>
-                    <div className="text-sm text-foreground bg-background p-2 rounded-lg border border-border shadow-sm w-fit max-w-[calc(100%-2.3rem)] md:max-w-[320px] h-auto min-h-[60px] break-words">
+                    <div className="text-sm text-foreground bg-background p-2 rounded-lg border border-border shadow-sm w-fit max-w-[calc(100%-2.3rem)] md:max-w-[320px] h-auto min-h-[60px] wrap-break-word">
                       {phase === "commenting" ? (
                         <Typewriter text={COMMENTS[0].text} />
                       ) : (
                         COMMENTS[0].text
                       )}
                     </div>
-                  </div>
+                  </div>{" "}
                 </motion.div>
               )}
 
@@ -236,7 +236,7 @@ export function Review({ dict }: { dict?: any }) {
                         {COMMENTS[1].author}
                       </span>
                     </div>
-                    <div className="text-sm text-primary-foreground bg-primary p-2 rounded-lg border border-primary/20 shadow-sm text-left w-fit max-w-[calc(100%-2.3rem)] md:max-w-[320px] h-auto min-h-[60px] break-words">
+                    <div className="text-sm text-primary-foreground bg-primary p-2 rounded-lg border border-primary/20 shadow-sm text-left w-fit max-w-[calc(100%-2.3rem)] md:max-w-[320px] h-auto min-h-[60px] wrap-break-word">
                       {COMMENTS[1].text}
                     </div>
                   </div>

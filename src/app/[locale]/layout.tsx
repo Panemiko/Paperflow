@@ -24,10 +24,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ locale: Locale }>;
+  params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const dict = await getDictionary(locale);
+  const dict = await getDictionary(locale as Locale);
 
   return {
     title: dict.metadata.title,
@@ -40,10 +40,10 @@ export default async function RootLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ locale: Locale }>;
+  params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const dict = await getDictionary(locale);
+  const dict = await getDictionary(locale as Locale);
 
   return (
     <html lang={locale} suppressHydrationWarning>
