@@ -1,67 +1,67 @@
 {
   "home": {
     "hero": {
-      "waitlist_badge": "Acesso antecipado",
-      "title_start": "Escreva sem o medo de",
-      "title_strong": "perder seu trabalho",
+      "waitlist_badge": "Waitlist open",
+      "title_start": "Write without the fear of",
+      "title_strong": "losing work",
       "title_end": "",
-      "description": "Paperflow é uma ferramenta de escrita profissional para quem precisa explorar ideias sem perder o rascunho original."
+      "description": "Paperflow is a professional writing tool for people who need to explore ideas without losing their original draft."
     },
     "features": {
-      "how_it_works_badge": "Como funciona",
-      "test_ideas": "Teste novas ideias,",
-      "keep_works": "mantenha o que funciona.",
-      "description": "Explore diferentes direções para seu documento em um espaço seguro. Se uma mudança funcionar, mantenha-a. Se não, volte ao seu rascunho original com um clique."
+      "how_it_works_badge": "How it works",
+      "test_ideas": "Test new ideas,",
+      "keep_works": "keep what works.",
+      "description": "Explore different directions for your document in a safe space. If a change works, keep it. If it doesn’t, go back to your original draft with one click."
     },
     "collaboration": {
-      "badge": "Colabore com clareza",
-      "title": "Feedback sem atrito",
-      "description": "Compartilhe seu trabalho e receba anotações exatamente onde elas pertencem. Discuta mudanças no contexto e aprove atualizações com um clique.",
+      "badge": "Collaborate with clarity",
+      "title": "Get feedback without the friction",
+      "description": "Share your work and get notes exactly where they belong. Discuss changes in context and approve updates with one click.",
       "items": [
-        "Adicione comentários diretamente em qualquer rascunho.",
-        "Discuta mudanças em tópicos organizados.",
-        "Corrija problemas com um clique.",
-        "Mantenha cada conversa anexada à mudança correta."
+        "Add comments directly to any draft.",
+        "Discuss changes in organized threads.",
+        "Fix problems with one click.",
+        "Keep every conversation attached to the right change."
       ]
     },
     "archive": {
-      "badge": "O Registro",
-      "title": "Todo o seu processo, perfeitamente preservado",
-      "description": "Salve seu progresso sempre que atingir um marco. Você pode voltar no tempo para ver como seu trabalho evoluiu ou recuperar algo que mudou semanas atrás.",
+      "badge": "The Record",
+      "title": "Your entire process, perfectly preserved",
+      "description": "Save your progress whenever you reach a milestone. You can go back in time to see how your work evolved or recover something you changed weeks ago.",
       "items": [
-        "Volte para qualquer versão salva instantaneamente.",
-        "Veja exatamente o que foi alterado e quando.",
-        "Traga de volta texto excluído com um clique.",
-        "Compartilhe versões específicas com facilidade."
+        "Go back to any saved version instantly.",
+        "See exactly what was changed and when.",
+        "Bring back deleted text with one click.",
+        "Share specific versions with others easily."
       ],
-      "latest_changes": "Últimas alterações",
+      "latest_changes": "Latest changes",
       "branch": "main",
       "ui": {
-        "impact": "Impacto",
-        "domain": "Domínio",
-        "editorial_note": "Nota Editorial",
-        "words": "palavras",
-        "by": "Por",
-        "you": "Você",
-        "merge": "Mesclar",
-        "ai_authored": "Autoria IA",
-        "ai": "IA",
+        "impact": "Impact",
+        "domain": "Domain",
+        "editorial_note": "Editorial Note",
+        "words": "words",
+        "by": "",
+        "you": "You",
+        "merge": "Merge",
+        "ai_authored": "AI Authored",
+        "ai": "AI",
         "time_ago": {
-          "just_now": "Agora mesmo",
-          "minute": "{count} min atrás",
-          "minutes": "{count} mins atrás",
-          "hour": "{count} hora atrás",
-          "hours": "{count} horas atrás",
-          "day": "{count} dia atrás",
-          "days": "{count} dias atrás",
-          "yesterday": "Ontem"
+          "just_now": "Just now",
+          "minute": "{count} min ago",
+          "minutes": "{count} mins ago",
+          "hour": "{count} hour ago",
+          "hours": "{count} hours ago",
+          "day": "{count} day ago",
+          "days": "{count} days ago",
+          "yesterday": "Yesterday"
         }
       },
       "commits": [
         {
           "hash": "8e2a9b7",
-          "message": "Primeiro rascunho completo: 87.234 palavras",
-          "author": "Liam O'Sullivan (Você)",
+          "message": "First draft complete: 87,234 words",
+          "author": "Liam O'Sullivan (You)",
           "daysAgo": 14,
           "time": "11:03 UTC",
           "color": "bg-primary",
@@ -70,13 +70,13 @@
               "added": 87234,
               "removed": 120
             },
-            "section": "Manuscrito Completo",
-            "description": "Montagem inicial de todos os capítulos em um único documento mestre."
+            "section": "Full Manuscript",
+            "description": "Initial assembly of all chapters into a single master document."
           }
         },
         {
-          "hash": "ai-1b2c",
-          "message": "Auto-formato: Pontuação de diálogo padronizada",
+          "hash": "1b2c3d4",
+          "message": "Auto-format: Standardized dialogue punctuation",
           "author": "Paperflow Bot",
           "daysAgo": 13,
           "time": "03:12 UTC",
@@ -88,12 +88,12 @@
               "removed": 12
             },
             "section": "Global",
-            "description": "Aplicadas regras padrão de travessão em todo o diálogo."
+            "description": "Applied standard em-dash formatting rules across dialogue."
           }
         },
         {
           "hash": "2d4f6c1",
-          "message": "Verificação de fatos: preâmbulo histórico",
+          "message": "Fact-check complete: historical preamble",
           "author": "Yuki Sato",
           "daysAgo": 12,
           "time": "16:48 UTC",
@@ -103,13 +103,13 @@
               "added": 42,
               "removed": 15
             },
-            "section": "Introdução",
-            "description": "Datas e locais verificados com os arquivos arquitetônicos de 1924."
+            "section": "Introduction",
+            "description": "Verified dates and locations against the 1924 architectural archives."
           }
         },
         {
           "hash": "a9b1e8f",
-          "message": "Branch fundido: final-alternativo",
+          "message": "Merged branch: alternate-ending",
           "author": "Isabella Conti",
           "daysAgo": 10,
           "time": "09:15 UTC",
@@ -120,14 +120,14 @@
               "added": 150,
               "removed": 1204
             },
-            "section": "Capítulo 24",
-            "description": "Consolidou os finais 'Porto' e 'Partida' em uma única resolução."
+            "section": "Chapter 24",
+            "description": "Consolidated the 'Harbor' and 'Departure' endings into a single resolution."
           }
         },
         {
           "hash": "f7c3a2d",
-          "message": "Passe final: diálogo mais firme no confronto",
-          "author": "Liam O'Sullivan (Você)",
+          "message": "Final pass: tightened dialogue in confrontation",
+          "author": "Liam O'Sullivan (You)",
           "daysAgo": 9,
           "time": "14:32 UTC",
           "color": "bg-primary",
@@ -136,13 +136,13 @@
               "added": 24,
               "removed": 109
             },
-            "section": "Capítulo 12",
-            "description": "Removido fraseado redundante para aumentar a tensão na cena do baile."
+            "section": "Chapter 12",
+            "description": "Removed redundant phrasing to increase tension in the ballroom scene."
           }
         },
         {
           "hash": "b3d1e4a",
-          "message": "Ritmo ajustado na ponte do terceiro ato",
+          "message": "Adjusted pacing in the third act bridge",
           "author": "Isabella Conti",
           "daysAgo": 8,
           "time": "08:12 UTC",
@@ -152,13 +152,13 @@
               "added": 156,
               "removed": 12
             },
-            "section": "Capítulo 18",
-            "description": "Adicionada prosa de transição para suavizar o salto entre cenários."
+            "section": "Chapter 18",
+            "description": "Added transitional prose to smooth the jump between settings."
           }
         },
         {
-          "hash": "ai-3d4e",
-          "message": "Consistência: Renomeado 'Theatre' para 'Theater'",
+          "hash": "3d4e5f6",
+          "message": "Consistency: Renamed 'Theatre' to 'Theater'",
           "author": "Paperflow Bot",
           "daysAgo": 8,
           "time": "04:45 UTC",
@@ -170,13 +170,13 @@
               "removed": 8
             },
             "section": "Global",
-            "description": "Convenções de ortografia em inglês dos EUA aplicadas conforme configurações do projeto."
+            "description": "Enforced US English spelling conventions per project settings."
           }
         },
         {
           "hash": "c9f2b8d",
-          "message": "Refinamento de voz do personagem: Capítulo 4",
-          "author": "Liam O'Sullivan (Você)",
+          "message": "Character voice refinement: Chapter 4",
+          "author": "Liam O'Sullivan (You)",
           "daysAgo": 7,
           "time": "11:45 UTC",
           "color": "bg-primary",
@@ -185,13 +185,13 @@
               "added": 210,
               "removed": 45
             },
-            "section": "Capítulo 4",
-            "description": "Melhorado o monólogo interno do protagonista para um POV mais profundo."
+            "section": "Chapter 4",
+            "description": "Enhanced the protagonist's internal monologue for deeper POV."
           }
         },
         {
           "hash": "e4a5d6c",
-          "message": "Citações de fonte atualizadas: Colônias Lunares",
+          "message": "Updated source citations: Lunar Colonies",
           "author": "Yuki Sato",
           "daysAgo": 6,
           "time": "16:20 UTC",
@@ -201,13 +201,13 @@
               "added": 15,
               "removed": 15
             },
-            "section": "Apêndice Técnico",
-            "description": "Links DOI corridos e formatação de bibliografia."
+            "section": "Technical Appendix",
+            "description": "Corrected DOI links and bibliography formatting."
           }
         },
         {
           "hash": "d1f2g3h",
-          "message": "Edição estrutural: flashback redundante removido",
+          "message": "Structural edit: removed redundant flashback",
           "author": "Isabella Conti",
           "daysAgo": 5,
           "time": "09:30 UTC",
@@ -217,14 +217,14 @@
               "added": 0,
               "removed": 4500
             },
-            "section": "Capítulo 7",
-            "description": "Narrativa mais enxuta alcançada movendo a história de fundo para o Capítulo 1."
+            "section": "Chapter 7",
+            "description": "Leaner narrative achieved by moving backstory to Chapter 1."
           }
         },
         {
           "hash": "h2j3k4l",
-          "message": "Epílogo finalizado: 'A Longa Espera'",
-          "author": "Liam O'Sullivan (Você)",
+          "message": "Finalized epilogue: 'The Long Wait'",
+          "author": "Liam O'Sullivan (You)",
           "daysAgo": 4,
           "time": "21:15 UTC",
           "color": "bg-primary",
@@ -233,13 +233,13 @@
               "added": 890,
               "removed": 45
             },
-            "section": "Epílogo",
-            "description": "Concluída a sequência final e o fechamento temático."
+            "section": "Epilogue",
+            "description": "Completed the final sequence and thematic closure."
           }
         },
         {
-          "hash": "ai-5f6g",
-          "message": "Tipografia: Aplicação de aspas curvas",
+          "hash": "5f6g7h8",
+          "message": "Typography: Curly quotes application",
           "author": "Paperflow Bot",
           "daysAgo": 4,
           "time": "21:16 UTC",
@@ -250,13 +250,13 @@
               "added": 45,
               "removed": 45
             },
-            "section": "Epílogo",
-            "description": "Convertidas aspas retas para aspas inteligentes."
+            "section": "Epilogue",
+            "description": "Converted straight quotes to smart quotes."
           }
         },
         {
           "hash": "m4n5p6q",
-          "message": "Varredura gramatical: manuscrito completo",
+          "message": "Grammar sweep: complete manuscript",
           "author": "Yuki Sato",
           "daysAgo": 3,
           "time": "14:05 UTC",
@@ -267,12 +267,12 @@
               "removed": 24
             },
             "section": "Global",
-            "description": "Revisão final para consistência, ortografia e gramática."
+            "description": "Final proofreading for consistency, spelling, and grammar."
           }
         },
         {
           "hash": "r7s8t9u",
-          "message": "Branch fundido: cortes-solicitados-editora",
+          "message": "Merged branch: publisher-requested-cuts",
           "author": "Isabella Conti",
           "daysAgo": 2,
           "time": "10:50 UTC",
@@ -283,13 +283,13 @@
               "added": 0,
               "removed": 2300
             },
-            "section": "Capítulos 15-17",
-            "description": "Removidos subenredos conforme solicitado para a primeira tiragem."
+            "section": "Chapters 15-17",
+            "description": "Removed subplots as requested for the initial print run."
           }
         },
         {
-          "hash": "ai-6g7h",
-          "message": "Limpeza: Removido espaço em branco final",
+          "hash": "6g7h8i9",
+          "message": "Cleanup: Removed trailing whitespace",
           "author": "Paperflow Bot",
           "daysAgo": 2,
           "time": "10:55 UTC",
@@ -301,13 +301,13 @@
               "removed": 15
             },
             "section": "Global",
-            "description": "Removido espaço em branco desnecessário do final das linhas."
+            "description": "Removed unnecessary whitespace from end of lines."
           }
         },
         {
           "hash": "v1w2x3y",
-          "message": "Restaurando Capítulo 12: 'O Píer' (Rascunho 4)",
-          "author": "Liam O'Sullivan (Você)",
+          "message": "Restored Chapter 12: 'The Pier' (Draft 4)",
+          "author": "Liam O'Sullivan (You)",
           "daysAgo": 1,
           "time": "13:22 UTC",
           "color": "bg-primary",
@@ -316,13 +316,13 @@
               "added": 1450,
               "removed": 0
             },
-            "section": "Capítulo 12",
-            "description": "Prosa original recuperada após decidir contra a reescrita."
+            "section": "Chapter 12",
+            "description": "Recovered original prose after deciding against the rewrite."
           }
         },
         {
           "hash": "z4a5b6c",
-          "message": "Ajustando tom: suspense aumentado na introdução",
+          "message": "Tone adjustment: increased suspense in intro",
           "author": "Isabella Conti",
           "daysAgo": 0,
           "time": "08:45 UTC",
@@ -332,13 +332,13 @@
               "added": 65,
               "removed": 12
             },
-            "section": "Introdução",
-            "description": "Retrabalhado o gancho de abertura para prender a atenção do leitor mais rápido."
+            "section": "Introduction",
+            "description": "Reworked the opening hook to grab reader attention faster."
           }
         },
         {
           "hash": "d7e8f9g",
-          "message": "Cruzando cronogramas para consistência",
+          "message": "Cross-referenced timelines for consistency",
           "author": "Yuki Sato",
           "daysAgo": 0,
           "time": "17:10 UTC",
@@ -349,13 +349,13 @@
               "removed": 5
             },
             "section": "Chronology",
-            "description": "Garantida consistência de idade ao longo da linha do tempo de 40 anos."
+            "description": "Ensured age consistency across the 40-year timeline."
           }
         },
         {
           "hash": "h1i2j3k",
-          "message": "Congelando binário final pré-publicação",
-          "author": "Liam O'Sullivan (Você)",
+          "message": "Final pre-publication binary freeze",
+          "author": "Liam O'Sullivan (You)",
           "daysAgo": 0,
           "time": "23:55 UTC",
           "isMerge": true,
@@ -366,269 +366,269 @@
               "removed": 0
             },
             "section": "Global",
-            "description": "Versão travada para composição final."
+            "description": "Version locked for final typesetting."
           }
         }
       ]
     },
     "philosophy": {
-      "badge": "O Método",
-      "title": "Uma maneira melhor de construir seu trabalho",
-      "description": "A maioria das ferramentas quer que você escreva mais rápido. Nós queremos que você escreva melhor. O Paperflow oferece o espaço para explorar ideias, a clareza para tomar decisões e a confiança para compartilhar seu melhor trabalho.",
+      "badge": "The Method",
+      "title": "A better way to build your work",
+      "description": "Most tools want you to write faster. We want you to write better. Paperflow gives you the space to explore ideas, the clarity to make decisions, and the confidence to share your best work.",
       "items": [
         {
-          "title": "Rascunho",
-          "description": "Escreva seus pensamentos livremente. Cada versão que você salva é mantida em um histórico permanente."
+          "title": "Draft",
+          "description": "Write your thoughts freely. Every version you save is kept in a permanent history."
         },
         {
-          "title": "Explorar",
-          "description": "Tente uma nova direção. Crie um caminho separado para uma nova ideia sem alterar seu trabalho principal."
+          "title": "Explore",
+          "description": "Try a new direction. Create a separate path for a new idea without changing your main work."
         },
         {
-          "title": "Comparar",
-          "description": "Coloque duas versões lado a lado. Veja exatamente o que mudou linha por linha para escolher a melhor."
+          "title": "Compare",
+          "description": "Put two versions side-by-side. See exactly what changed line by line to choose the best one."
         },
         {
-          "title": "Combinar",
-          "description": "Junte as melhores partes. Coloque suas ideias favoritas em um trabalho final polido."
+          "title": "Combine",
+          "description": "Bring the best parts together. Put your favorite ideas into one polished final work."
         }
       ]
     },
     "audience": {
-      "badge": "Feito para Profissionais",
-      "title": "Precisão para cada projeto",
-      "description": "Seja escrevendo um romance ou um contrato legal, o Paperflow oferece as ferramentas para gerenciar documentos complexos com confiança.",
+      "badge": "Built for Professionals",
+      "title": "Precision for every project",
+      "description": "Whether you are writing a novel or a legal contract, Paperflow gives you the tools to manage complex documents with confidence.",
       "personas": [
         {
-          "title": "O Acadêmico",
-          "description": "Gerencie pesquisas, teorias em evolução e a precisão necessária para publicações acadêmicas."
+          "title": "The Academic",
+          "description": "Manage research, evolving theories, and the precision needed for scholarly publishing."
         },
         {
-          "title": "O Advogado",
-          "description": "Acompanhe cada cláusula e histórico de versão para garantir precisão antes de chegar ao tribunal."
+          "title": "The Lawyer",
+          "description": "Track every clause and version history to ensure accuracy before reaching court."
         },
         {
-          "title": "O Executivo",
-          "description": "Construa planos estratégicos e relatórios onde cada escolha de palavra impacta o negócio."
+          "title": "The Executive",
+          "description": "Build strategic plans and reports where every word choice impacts the business."
         },
         {
-          "title": "O Copywriter",
-          "description": "Teste manchetes, refine campanhas e gerencie múltiplos rascunhos sem bagunça."
+          "title": "The Copywriter",
+          "description": "Test headlines, refine campaigns, and manage multiple drafts without the clutter."
         },
         {
-          "title": "O Gerente de Produto",
-          "description": "Mantenha requisitos, histórias de usuário e roadmaps alinhados conforme o projeto evolui."
+          "title": "The Product Manager",
+          "description": "Keep requirements, user stories, and roadmaps aligned as the project evolves."
         },
         {
-          "title": "O Romancista",
-          "description": "Gerencie histórias complexas com múltiplos caminhos e personagens que evoluem com o tempo."
+          "title": "The Novelist",
+          "description": "Manage complex stories with multiple paths and characters that evolve over time."
         }
       ]
     },
     "principles": {
-      "badge": "Nossos Princípios",
-      "title": "Seu trabalho pertence a você",
-      "description": "O Paperflow é construído para proteger seu processo, não para explorá-lo. Acreditamos na privacidade, propriedade e no ato humano de escrever.",
+      "badge": "Our Principles",
+      "title": "Your work belongs to you",
+      "description": "Paperflow is built to protect your process, not to exploit it. We believe in privacy, ownership, and the human act of writing.",
       "items": [
         {
-          "title": "Sem Treinamento de IA",
-          "description": "Nunca usamos seu texto privado para treinar modelos de inteligência artificial."
+          "title": "No AI Training",
+          "description": "We never use your private text to train artificial intelligence models."
         },
         {
-          "title": "Sem Aprisionamento",
-          "description": "Seus dados são seus. Exporte seus documentos para formatos padrão a qualquer momento."
+          "title": "No Lock-in",
+          "description": "Your data is yours. Export your documents to standard formats at any time."
         },
         {
-          "title": "Sem Distrações",
-          "description": "Sem emblemas, sequências ou gamificação. Apenas um lugar tranquilo para focar."
+          "title": "No Distractions",
+          "description": "No badges, streaks, or gamification. Just a quiet place to focus."
         }
       ]
     },
     "faq": {
-      "badge": "Esclarecimentos",
-      "title": "Perguntas Frequentes",
-      "description": "Tudo o que você precisa saber sobre o padrão profissional para o editor moderno.",
+      "badge": "Clarifications",
+      "title": "Common Questions",
+      "description": "Everything you need to know about the professional standard for the modern editor.",
       "items": [
         {
-          "question": "Para quem é o Paperflow?",
-          "answer": "O Paperflow é projetado para profissionais que gerenciam documentos complexos e de alto risco. É construído para acadêmicos, advogados, redatores técnicos e autores que precisam de controle absoluto sobre seu histórico de revisão."
+          "question": "Who is Paperflow for?",
+          "answer": "Paperflow is designed for professionals who manage complex, high-stakes documents. It is built for academics, lawyers, technical writers, and authors who need absolute control over their revision history."
         },
         {
-          "question": "Vocês usam minha escrita para treinar IA?",
-          "answer": "Não. Não usamos seu texto para treinar modelos de inteligência artificial. Seu trabalho permanece privado e nunca é usado para alimentar nossos algoritmos."
+          "question": "Do you use my writing to train AI?",
+          "answer": "No. We do not use your text to train artificial intelligence models. Your work remains private and is never used to feed our algorithms."
         },
         {
-          "question": "Por que usar Markdown?",
-          "answer": "Usamos Markdown para garantir que a formatação nunca se torne uma distração. Você foca puramente na estrutura e no conteúdo enquanto escreve, mas pode exportar para qualquer formato estilizado (PDF, Word, LaTeX) quando estiver pronto para publicar."
+          "question": "Why use Markdown?",
+          "answer": "We use Markdown to ensure formatting never becomes a distraction. You focus purely on the structure and content while writing, but you can export to any styled format (PDF, Word, LaTeX) when you are ready to publish."
         },
         {
-          "question": "Quais plataformas serão suportadas?",
-          "answer": "O Paperflow será lançado inicialmente como uma aplicação web otimizada para navegadores desktop. Isso nos permite entregar atualizações rapidamente antes de expandirmos para aplicativos nativos de desktop ou móveis."
+          "question": "What platforms will be supported?",
+          "answer": "Paperflow will launch initially as a web application optimized for desktop browsers. This allows us to deliver updates quickly before we expand to native desktop or mobile apps."
         },
         {
-          "question": "Como retiro meus dados?",
-          "answer": "A propriedade dos dados é um princípio fundamental. Você poderá exportar seus documentos individuais ou todo o seu repositório para formatos padrão como Markdown, Docx ou PDF a qualquer momento."
+          "question": "How do I get my data out?",
+          "answer": "Data ownership is a core principle. You will be able to export your individual documents or your entire repository to standard formats like Markdown, Docx, or PDF at any time."
         },
         {
-          "question": "Como isso é diferente do Google Docs?",
-          "answer": "O Google Docs é projetado para colaboração ao vivo, o que frequentemente resulta em um histórico bagunçado. O Paperflow é projetado para controle de versão, fornecendo um registro limpo e permanente de cada grande decisão que você toma."
+          "question": "How is this different from Google Docs?",
+          "answer": "Google Docs is designed for live collaboration, which often results in a messy history. Paperflow is designed for version control, providing a clean, permanent record of every major decision you make."
         },
         {
-          "question": "Preciso de habilidades técnicas para usar?",
-          "answer": "Não. Embora a tecnologia seja poderosa, a interface é simples. Usamos conceitos como 'Salvar Versão' e 'Explorar Ideia' para que você obtenha os benefícios do controle de versão sem precisar ser um desenvolvedor."
+          "question": "Do I need technical skills to use this?",
+          "answer": "No. While the technology is powerful, the interface is simple. We use concepts like 'Save Version' and 'Explore Idea' so you get the benefits of version control without needing to be a developer."
         },
         {
-          "question": "Existe um limite de quantas versões posso salvar?",
-          "answer": "Planejamos oferecer histórico de versões ilimitado. Acreditamos que seu histórico é um ativo valioso, não um problema de armazenamento que precisa ser excluído."
+          "question": "Is there a limit to how many versions I can save?",
+          "answer": "We plan to offer unlimited version history. We believe your history is a valuable asset, not a storage problem that needs to be deleted."
         },
         {
-          "question": "Isso é apenas Git para escritores?",
-          "answer": "Compartilha a mesma filosofia do Git (ramificação, fusão, histórico), mas a interface e os recursos são construídos especificamente para prosa, texto legal e escrita acadêmica."
+          "question": "Is this just Git for writers?",
+          "answer": "It shares the same philosophy as Git (branching, merging, history), but the interface and features are built specifically for prose, legal text, and academic writing."
         },
         {
-          "question": "Quando posso começar a usar o Paperflow?",
-          "answer": "O Paperflow está atualmente em desenvolvimento ativo. Estamos abrindo o acesso em ondas para garantir a estabilidade. Junte-se à lista de espera para garantir seu lugar para o primeiro lançamento público."
+          "question": "When can I start using Paperflow?",
+          "answer": "Paperflow is currently in active development. We are opening access in waves to ensure stability. Join the waitlist to secure your spot for the first public release."
         }
       ]
     },
     "final": {
-      "badge": "Acesso Antecipado",
-      "title": "Pronto para escrever sem o medo de perder seu trabalho?",
-      "description": "O Paperflow está atualmente em desenvolvimento ativo. Junte-se à lista de espera para ser notificado quando o acesso antecipado abrir.",
+      "badge": "Early Access",
+      "title": "Ready to write without the fear of losing work?",
+      "description": "Paperflow is currently in active development. Join the waitlist to be notified when early access opens.",
       "benefits": [
-        "Acesso antecipado",
-        "Moldar o roadmap",
-        "Lugar reservado"
+        "Early access",
+        "Shape the roadmap",
+        "Reserved spot"
       ]
     }
   },
   "header": {
-    "how_it_works": "Como Funciona",
-    "collaboration": "Colaboração",
-    "the_record": "O Registro",
-    "principles": "Princípios",
+    "how_it_works": "How it Works",
+    "collaboration": "Collaboration",
+    "the_record": "The Record",
+    "principles": "Principles",
     "faq": "FAQ",
-    "join_waitlist": "Entrar na Lista de Espera"
+    "join_waitlist": "Join Waitlist"
   },
   "footer": {
-    "description": "Escreva sem o medo de perder seu trabalho.",
+    "description": "Write without the fear of losing work.",
     "links": {
-      "how_it_works": "Como Funciona",
-      "collaboration": "Colaboração",
-      "the_record": "O Registro",
-      "principles": "Princípios",
+      "how_it_works": "How it Works",
+      "collaboration": "Collaboration",
+      "the_record": "The Record",
+      "principles": "Principles",
       "faq": "FAQ"
     },
-    "copyright": "© {year} Paperflow. Todos os direitos reservados."
+    "copyright": "© {year} Paperflow. All rights reserved."
   },
   "waitlist": {
     "default": {
-      "placeholder": "seu@email.com",
-      "label": "Entre na lista para acesso antecipado",
-      "join": "Entrar",
-      "joined": "Entrou!"
+      "placeholder": "your@email.com",
+      "label": "Join the waitlist for early access",
+      "join": "Join",
+      "joined": "Joined!"
     },
     "dark": {
-      "placeholder": "Digite seu email",
-      "label": "Pronto para escrever sem medo?",
-      "join": "Entrar na Lista",
-      "joining": "Entrando...",
-      "welcome": "Bem-vindo a bordo!",
-      "error": "Tentar Novamente",
-      "success_status": "Você está na lista. Entraremos em contato em breve."
+      "placeholder": "Enter your email",
+      "label": "Ready to take control of your work?",
+      "join": "Join the Waitlist",
+      "joining": "Joining...",
+      "welcome": "Welcome Aboard!",
+      "error": "Try Again",
+      "success_status": "You're on the list. We'll be in touch soon."
     }
   },
   "metadata": {
-    "title": "Paperflow | Escreva sem o medo de perder seu trabalho.",
-    "description": "A infraestrutura que suas ideias merecem. Gerencie documentos complexos com precisão absoluta—ramifique, funda e acompanhe cada versão sem o caos."
+    "title": "Paperflow | Write without the fear of losing work.",
+    "description": "The infrastructure your ideas deserve. Manage complex documents with absolute precision—branch, merge, and track every version without the chaos."
   },
   "animations": {
     "evolution": {
-      "entries": "entradas",
+      "entries": "entries",
       "ui": {
-        "by": "Por",
-        "you": "Você",
+        "by": "",
+        "you": "You",
         "time_ago": {
-          "just_now": "Agora mesmo",
-          "minute": "{count} min atrás",
-          "minutes": "{count} mins atrás",
-          "hour": "{count} hora atrás",
-          "hours": "{count} horas atrás",
-          "day": "{count} dia atrás",
-          "days": "{count} dias atrás",
-          "yesterday": "Ontem"
+          "just_now": "Just now",
+          "minute": "{count} min ago",
+          "minutes": "{count} mins ago",
+          "hour": "{count} hour ago",
+          "hours": "{count} hours ago",
+          "day": "{count} day ago",
+          "days": "{count} days ago",
+          "yesterday": "Yesterday"
         }
       },
-      "no_additional_history": "Sem histórico adicional",
-      "collapse_history": "Recolher histórico",
-      "view_more_updates": "Ver mais {count} atualizações",
-      "branch_name": "Ramo: main",
-      "awaiting_change": "Aguardando mudança...",
-      "patching_buffer": "Aplicando buffer...",
-      "broadcasting_refresh": "Transmitindo atualização...",
-      "syncing_state": "Sincronizando estado...",
-      "draft": "Rascunho",
-      "revision": "Revisão",
-      "registering_change": "Registrando mudança...",
-      "refreshing_manuscript": "Atualizando Estado do Manuscrito...",
-      "record_evolution": "Registrar Evolução",
-      "documenting_file_state": "Documentando este estado de arquivo.",
-      "updating_buffer": "Atualizando Buffer...",
-      "commit_change": "Commitar Mudança",
-      "latest_changes": "Últimas Alterações",
+      "no_additional_history": "No Additional History",
+      "collapse_history": "Collapse History",
+      "view_more_updates": "View {count} More Updates",
+      "branch_name": "Branch: main",
+      "awaiting_change": "Awaiting change...",
+      "patching_buffer": "Patching buffer...",
+      "broadcasting_refresh": "Broadcasting refresh...",
+      "syncing_state": "Syncing state...",
+      "draft": "Draft",
+      "revision": "Revision",
+      "registering_change": "Registering change...",
+      "refreshing_manuscript": "Refreshing Manuscript State...",
+      "record_evolution": "Record Evolution",
+      "documenting_file_state": "Documenting this file state.",
+      "updating_buffer": "Updating Buffer...",
+      "commit_change": "Commit Change",
+      "latest_changes": "Latest Changes",
       "simulation": {
-        "initial_phrase": "Ideias deixam um pequeno caminho.",
-        "initial_message": "Manuscrito inicial",
-        "step1_name": "Expandindo a declaração de abertura",
-        "step1_text": "\nNote a mudança.",
-        "step2_name": "Esclarecendo a filosofia",
-        "step2_text": "\nCada rascunho é uma decisão.",
-        "step3_name": "Edição de precisão para impacto"
+        "initial_phrase": "Ideas leave a small path.",
+        "initial_message": "Initial manuscript",
+        "step1_name": "Expanded the opening statement",
+        "step1_text": "\nNotice the change.",
+        "step2_name": "Clarified the philosophy",
+        "step2_text": "\nEvery draft is a decision.",
+        "step3_name": "Precision edit for impact"
       }
     },
     "review": {
       "ui": {
-        "by": "Por",
-        "you": "Você",
+        "by": "",
+        "you": "You",
         "time_ago": {
-          "just_now": "Agora mesmo",
-          "minute": "{count} min atrás",
-          "minutes": "{count} mins atrás",
-          "hour": "{count} hora atrás",
-          "hours": "{count} horas atrás",
-          "day": "{count} dia atrás",
-          "days": "{count} dias atrás",
-          "yesterday": "Ontem"
+          "just_now": "Just now",
+          "minute": "{count} min ago",
+          "minutes": "{count} mins ago",
+          "hour": "{count} hour ago",
+          "hours": "{count} hours ago",
+          "day": "{count} day ago",
+          "days": "{count} days ago",
+          "yesterday": "Yesterday"
         }
       },
-      "reviewing": "Revisando...",
-      "reply_to_thread": "Responder ao tópico...",
-      "thread_resolved": "Tópico Resolvido",
-      "resolved": "Resolvido",
-      "thread_marked_resolved": "Tópico marcado como resolvido",
+      "reviewing": "Reviewing...",
+      "reply_to_thread": "Reply to thread...",
+      "thread_resolved": "Thread Resolved",
+      "resolved": "Resolved",
+      "thread_marked_resolved": "Thread marked as resolved",
       "commit": {
-        "message": "Refatorando transição e ritmo do capítulo 3",
-        "author": "Elena Vasquez (Você)",
-        "time": "2 horas atrás"
+        "message": "Refactored chapter 3 transition and pacing",
+        "author": "Elena Vasquez (You)",
+        "time": "2 hours ago"
       },
       "comments": [
         {
           "author": "David Park",
-          "text": "Esse fluxo está muito melhor. A transição parece natural agora.",
-          "time": "1h atrás"
+          "text": "This flow is much better. The transition feels natural now.",
+          "time": "1h ago"
         },
         {
-          "author": "Elena Vasquez (Você)",
-          "text": "Obrigada! Cortei cerca de 400 palavras para deixar mais firme.",
-          "time": "Agora mesmo"
+          "author": "Elena Vasquez (You)",
+          "text": "Thanks! I chopped about 400 words to make it tighter.",
+          "time": "Just now"
         }
       ]
     },
     "methodology": {
-      "draft": "Rascunho",
-      "diverge": "Divergir",
-      "compare": "Comparar",
-      "merge": "Mesclar"
+      "draft": "Draft",
+      "diverge": "Diverge",
+      "compare": "Compare",
+      "merge": "Merge"
     }
   }
 }

@@ -41,7 +41,7 @@ export function Evolution({ dict }: { dict?: any }) {
     updating_buffer: "Updating Buffer...",
     commit_change: "Commit Change",
     ui: {
-      by: "By",
+      by: "",
       you: "You",
       time_ago: {
         just_now: "Just now",
@@ -588,7 +588,7 @@ export function Evolution({ dict }: { dict?: any }) {
                             {commit.message}
                           </p>
                           <p className="text-xs text-muted-foreground mt-1">
-                            {d.ui?.by || "By"} {commit.author}
+                            {commit.author}
                           </p>
                         </div>
                       </div>

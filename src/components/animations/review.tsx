@@ -167,7 +167,7 @@ export function Review({ dict }: { dict?: any }) {
               {COMMIT_DATA.message}
             </h3>
             <p className="text-xs text-muted-foreground mt-1">
-              {d.ui?.by || "By"} {COMMIT_DATA.author}
+              {COMMIT_DATA.author}
             </p>
           </div>
         </div>

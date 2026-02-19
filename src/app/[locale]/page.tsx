@@ -17,10 +17,8 @@ import {
   Briefcase,
   ClipboardList,
   EyeOff,
-  Feather,
-  GraduationCap,
+  FileText,
   Lock,
-  PenTool,
   Scale,
   ShieldCheck,
 } from "lucide-react";
@@ -37,32 +35,32 @@ export default async function Page({
     {
       title: dictionary.home.audience.personas[0].title,
       description: dictionary.home.audience.personas[0].description,
-      icon: <GraduationCap className="w-5 h-5" />,
+      icon: <Scale className="w-5 h-5" />,
     },
     {
       title: dictionary.home.audience.personas[1].title,
       description: dictionary.home.audience.personas[1].description,
-      icon: <Scale className="w-5 h-5" />,
+      icon: <Briefcase className="w-5 h-5" />,
     },
     {
       title: dictionary.home.audience.personas[2].title,
       description: dictionary.home.audience.personas[2].description,
-      icon: <Briefcase className="w-5 h-5" />,
+      icon: <ShieldCheck className="w-5 h-5" />,
     },
     {
       title: dictionary.home.audience.personas[3].title,
       description: dictionary.home.audience.personas[3].description,
-      icon: <PenTool className="w-5 h-5" />,
+      icon: <ClipboardList className="w-5 h-5" />,
     },
     {
       title: dictionary.home.audience.personas[4].title,
       description: dictionary.home.audience.personas[4].description,
-      icon: <ClipboardList className="w-5 h-5" />,
+      icon: <Lock className="w-5 h-5" />,
     },
     {
       title: dictionary.home.audience.personas[5].title,
       description: dictionary.home.audience.personas[5].description,
-      icon: <Feather className="w-5 h-5" />,
+      icon: <FileText className="w-5 h-5" />,
     },
   ];
 

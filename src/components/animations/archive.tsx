@@ -56,7 +56,7 @@ export function Archive({ dict }: { dict?: any }) {
       domain: "Domain",
       editorial_note: "Editorial Note",
       words: "words",
-      by: "By",
+      by: "",
       you: "You",
       merge: "Merge",
       ai_authored: "AI Authored",
@@ -310,7 +310,7 @@ export function Archive({ dict }: { dict?: any }) {
 
                       <div className="flex items-center justify-between mt-1">
                         <p className="text-xs text-muted-foreground">
-                          {d.ui.by || "By"} {commit.author}
+                          {commit.author}
                         </p>
 
                         {/* Mobile Diffs */}
