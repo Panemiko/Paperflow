@@ -2,45 +2,45 @@
   "home": {
     "hero": {
       "waitlist_badge": "Waitlist open",
-      "title_start": "Review contracts without the fear of",
-      "title_strong": "losing critical clauses",
+      "title_start": "Write without the fear of",
+      "title_strong": "losing work",
       "title_end": "",
-      "description": "Paperflow is the infrastructure for professional legal review. Manage complex documents with absolute precision—branch, merge, and track every version without the chaos."
+      "description": "Paperflow is a professional writing tool for people who need to explore ideas without losing their original draft."
     },
     "features": {
       "how_it_works_badge": "How it works",
-      "test_ideas": "Test new wordings,",
-      "keep_works": "maintain legal certainty.",
-      "description": "Explore different directions for your clauses in a safe space. If a change works, keep it. If it doesn’t, go back to your original draft with one click."
+      "test_ideas": "Test new ideas,",
+      "keep_works": "keep what works.",
+      "description": "Explore different directions for your document in a safe space. If a change works, keep it. If it doesn’t, go back to your original draft with one click."
     },
     "collaboration": {
       "badge": "Collaborate with clarity",
-      "title": "Get legal review without the friction",
-      "description": "Share your contract and get notes exactly where they belong. Discuss changes in context and approve updates with one click.",
+      "title": "Get feedback without the friction",
+      "description": "Share your work and get notes exactly where they belong. Discuss changes in context and approve updates with one click.",
       "items": [
-        "Add comments directly to any clause.",
-        "Discuss wording in organized threads.",
-        "Accept suggested changes with one click.",
-        "Keep every conversation attached to the right legal revision."
+        "Add comments directly to any draft.",
+        "Discuss changes in organized threads.",
+        "Fix problems with one click.",
+        "Keep every conversation attached to the right change."
       ]
     },
     "archive": {
       "badge": "The Record",
-      "title": "Your legal history, perfectly preserved",
-      "description": "Save your progress whenever you reach a negotiation milestone. You can go back in time to see how a clause evolved or recover terms you changed weeks ago.",
+      "title": "Your entire process, perfectly preserved",
+      "description": "Save your progress whenever you reach a milestone. You can go back in time to see how your work evolved or recover something you changed weeks ago.",
       "items": [
         "Go back to any saved version instantly.",
         "See exactly what was changed and when.",
-        "Bring back deleted clause language with one click.",
-        "Share specific versions with legal counsel easily."
+        "Bring back deleted text with one click.",
+        "Share specific versions with others easily."
       ],
       "latest_changes": "Latest changes",
       "branch": "main",
       "ui": {
         "impact": "Impact",
-        "domain": "Section",
-        "editorial_note": "Technical Note",
-        "words": "lines",
+        "domain": "Domain",
+        "editorial_note": "Editorial Note",
+        "words": "words",
         "by": "",
         "you": "You",
         "merge": "Merge",
@@ -60,23 +60,23 @@
       "commits": [
         {
           "hash": "8e2a9b7",
-          "message": "Initial Draft: Software as a Service Agreement",
+          "message": "First draft complete: 87,234 words",
           "author": "Liam O'Sullivan (You)",
           "daysAgo": 14,
           "time": "11:03 UTC",
           "color": "bg-primary",
           "details": {
             "diff": {
-              "added": 1450,
-              "removed": 0
+              "added": 87234,
+              "removed": 120
             },
-            "section": "Main Body",
-            "description": "Initial assembly of contract based on the firm's standard enterprise template."
+            "section": "Full Manuscript",
+            "description": "Initial assembly of all chapters into a single master document."
           }
         },
         {
           "hash": "1b2c3d4",
-          "message": "Auto-format: Standardized legal citations and defined terms",
+          "message": "Auto-format: Standardized dialogue punctuation",
           "author": "Paperflow Bot",
           "daysAgo": 13,
           "time": "03:12 UTC",
@@ -88,12 +88,12 @@
               "removed": 12
             },
             "section": "Global",
-            "description": "Applied standard formatting rules to all cross-references and definitions."
+            "description": "Applied standard em-dash formatting rules across dialogue."
           }
         },
         {
           "hash": "2d4f6c1",
-          "message": "Compliance Review: GDPR and CCPA updates",
+          "message": "Fact-check complete: historical preamble",
           "author": "Yuki Sato",
           "daysAgo": 12,
           "time": "16:48 UTC",
@@ -103,13 +103,13 @@
               "added": 42,
               "removed": 15
             },
-            "section": "Data Privacy Addendum",
-            "description": "Verified clauses against the latest regulatory updates for international data transfers."
+            "section": "Introduction",
+            "description": "Verified dates and locations against the 1924 architectural archives."
           }
         },
         {
           "hash": "a9b1e8f",
-          "message": "Merged branch: negotiation-round-2",
+          "message": "Merged branch: alternate-ending",
           "author": "Isabella Conti",
           "daysAgo": 10,
           "time": "09:15 UTC",
@@ -120,13 +120,13 @@
               "added": 150,
               "removed": 1204
             },
-            "section": "Liability & Indemnity",
-            "description": "Consolidated the 'Standard' and 'Extended' indemnity paths into a single resolution."
+            "section": "Chapter 24",
+            "description": "Consolidated the 'Harbor' and 'Departure' endings into a single resolution."
           }
         },
         {
           "hash": "f7c3a2d",
-          "message": "Revision: Tightened Force Majeure language",
+          "message": "Final pass: tightened dialogue in confrontation",
           "author": "Liam O'Sullivan (You)",
           "daysAgo": 9,
           "time": "14:32 UTC",
@@ -136,13 +136,13 @@
               "added": 24,
               "removed": 109
             },
-            "section": "General Provisions",
-            "description": "Removed redundant phrasing to ensure the clause only triggers on specific uncontrollable events."
+            "section": "Chapter 12",
+            "description": "Removed redundant phrasing to increase tension in the ballroom scene."
           }
         },
         {
           "hash": "b3d1e4a",
-          "message": "Adjusted payment terms and net days",
+          "message": "Adjusted pacing in the third act bridge",
           "author": "Isabella Conti",
           "daysAgo": 8,
           "time": "08:12 UTC",
@@ -152,8 +152,8 @@
               "added": 156,
               "removed": 12
             },
-            "section": "Exhibit A",
-            "description": "Updated payment language to reflect the negotiated 60-day window."
+            "section": "Chapter 18",
+            "description": "Added transitional prose to smooth the jump between settings."
           }
         },
         {
@@ -175,7 +175,7 @@
         },
         {
           "hash": "c9f2b8d",
-          "message": "IP Clause Refinement: Ownership of Deliverables",
+          "message": "Character voice refinement: Chapter 4",
           "author": "Liam O'Sullivan (You)",
           "daysAgo": 7,
           "time": "11:45 UTC",
@@ -185,13 +185,13 @@
               "added": 210,
               "removed": 45
             },
-            "section": "Intellectual Property",
-            "description": "Clarified that all intellectual property created during the term remains the client's property."
+            "section": "Chapter 4",
+            "description": "Enhanced the protagonist's internal monologue for deeper POV."
           }
         },
         {
           "hash": "e4a5d6c",
-          "message": "Updated source citations: Case Law References",
+          "message": "Updated source citations: Lunar Colonies",
           "author": "Yuki Sato",
           "daysAgo": 6,
           "time": "16:20 UTC",
@@ -201,13 +201,13 @@
               "added": 15,
               "removed": 15
             },
-            "section": "Legal Appendix",
-            "description": "Corrected official case law citations and bibliography links."
+            "section": "Technical Appendix",
+            "description": "Corrected DOI links and bibliography formatting."
           }
         },
         {
           "hash": "d1f2g3h",
-          "message": "Structural edit: removed redundant indemnity paths",
+          "message": "Structural edit: removed redundant flashback",
           "author": "Isabella Conti",
           "daysAgo": 5,
           "time": "09:30 UTC",
@@ -217,13 +217,13 @@
               "added": 0,
               "removed": 4500
             },
-            "section": "Liability",
-            "description": "Streamlined the indemnity section by removing redundant clauses and cross-references."
+            "section": "Chapter 7",
+            "description": "Leaner narrative achieved by moving backstory to Chapter 1."
           }
         },
         {
           "hash": "h2j3k4l",
-          "message": "Finalized Termination Section: 'For Cause'",
+          "message": "Finalized epilogue: 'The Long Wait'",
           "author": "Liam O'Sullivan (You)",
           "daysAgo": 4,
           "time": "21:15 UTC",
@@ -233,13 +233,13 @@
               "added": 890,
               "removed": 45
             },
-            "section": "Termination",
-            "description": "Finalized the conditions for termination for cause, ensuring compliance with local laws."
+            "section": "Epilogue",
+            "description": "Completed the final sequence and thematic closure."
           }
         },
         {
           "hash": "5f6g7h8",
-          "message": "Typo Sweep: Definitions section",
+          "message": "Typography: Curly quotes application",
           "author": "Paperflow Bot",
           "daysAgo": 4,
           "time": "21:16 UTC",
@@ -250,13 +250,13 @@
               "added": 45,
               "removed": 45
             },
-            "section": "Section 1",
-            "description": "Converted straight quotes to smart quotes across all legal definitions."
+            "section": "Epilogue",
+            "description": "Converted straight quotes to smart quotes."
           }
         },
         {
           "hash": "m4n5p6q",
-          "message": "Final Proofread: Complete Agreement",
+          "message": "Grammar sweep: complete manuscript",
           "author": "Yuki Sato",
           "daysAgo": 3,
           "time": "14:05 UTC",
@@ -267,12 +267,12 @@
               "removed": 24
             },
             "section": "Global",
-            "description": "Final proofreading for consistency, spelling, and grammar across the entire agreement."
+            "description": "Final proofreading for consistency, spelling, and grammar."
           }
         },
         {
           "hash": "r7s8t9u",
-          "message": "Merged: Counterparty-requested-edits",
+          "message": "Merged branch: publisher-requested-cuts",
           "author": "Isabella Conti",
           "daysAgo": 2,
           "time": "10:50 UTC",
@@ -283,13 +283,13 @@
               "added": 0,
               "removed": 2300
             },
-            "section": "Sections 15-17",
-            "description": "Adjusted high-value liability limits based on counterparty requests during final negotiation."
+            "section": "Chapters 15-17",
+            "description": "Removed subplots as requested for the initial print run."
           }
         },
         {
           "hash": "6g7h8i9",
-          "message": "Cleanup: Removed internal counsel comments",
+          "message": "Cleanup: Removed trailing whitespace",
           "author": "Paperflow Bot",
           "daysAgo": 2,
           "time": "10:55 UTC",
@@ -301,12 +301,12 @@
               "removed": 15
             },
             "section": "Global",
-            "description": "Removed all internal draft comments and annotations before final export."
+            "description": "Removed unnecessary whitespace from end of lines."
           }
         },
         {
           "hash": "v1w2x3y",
-          "message": "Restored Confidentiality Clause (Draft 2)",
+          "message": "Restored Chapter 12: 'The Pier' (Draft 4)",
           "author": "Liam O'Sullivan (You)",
           "daysAgo": 1,
           "time": "13:22 UTC",
@@ -316,13 +316,13 @@
               "added": 1450,
               "removed": 0
             },
-            "section": "Confidentiality",
-            "description": "Recovered original language after deciding against the counter-proposal's rewrite."
+            "section": "Chapter 12",
+            "description": "Recovered original prose after deciding against the rewrite."
           }
         },
         {
           "hash": "z4a5b6c",
-          "message": "Refinement: Increased specificity in Governing Law",
+          "message": "Tone adjustment: increased suspense in intro",
           "author": "Isabella Conti",
           "daysAgo": 0,
           "time": "08:45 UTC",
@@ -332,13 +332,13 @@
               "added": 65,
               "removed": 12
             },
-            "section": "Dispute Resolution",
-            "description": "Enhanced the governing law clause to specifically include choices of forum and venue."
+            "section": "Introduction",
+            "description": "Reworked the opening hook to grab reader attention faster."
           }
         },
         {
           "hash": "d7e8f9g",
-          "message": "Cross-referenced Timeline: Delivery Schedule",
+          "message": "Cross-referenced timelines for consistency",
           "author": "Yuki Sato",
           "daysAgo": 0,
           "time": "17:10 UTC",
@@ -348,13 +348,13 @@
               "added": 5,
               "removed": 5
             },
-            "section": "Exhibit B",
-            "description": "Verified that all delivery dates and milestones are consistent across the exhibits."
+            "section": "Chronology",
+            "description": "Ensured age consistency across the 40-year timeline."
           }
         },
         {
           "hash": "h1i2j3k",
-          "message": "Final Version for Execution (Docusign)",
+          "message": "Final pre-publication binary freeze",
           "author": "Liam O'Sullivan (You)",
           "daysAgo": 0,
           "time": "23:55 UTC",
@@ -366,155 +366,155 @@
               "removed": 0
             },
             "section": "Global",
-            "description": "Document finalized and locked for execution via Docusign."
+            "description": "Version locked for final typesetting."
           }
         }
       ]
     },
     "philosophy": {
       "badge": "The Method",
-      "title": "A better way to build your contracts",
-      "description": "Most tools want you to draft faster. We want you to draft with certainty. Paperflow gives you the space to explore clauses, the clarity to negotiate, and the confidence to sign.",
+      "title": "A better way to build your work",
+      "description": "Most tools want you to write faster. We want you to write better. Paperflow gives you the space to explore ideas, the clarity to make decisions, and the confidence to share your best work.",
       "items": [
         {
           "title": "Draft",
-          "description": "Write your initial terms freely. Every version you save is kept in a permanent history."
+          "description": "Write your thoughts freely. Every version you save is kept in a permanent history."
         },
         {
           "title": "Explore",
-          "description": "Try a new direction. Create a separate path for a new clause without changing your main document."
+          "description": "Try a new direction. Create a separate path for a new idea without changing your main work."
         },
         {
           "title": "Compare",
-          "description": "Put two versions side-by-side. See exactly what changed line by line to choose the best wording."
+          "description": "Put two versions side-by-side. See exactly what changed line by line to choose the best one."
         },
         {
           "title": "Combine",
-          "description": "Bring the best parts together. Put your favorite terms into one polished final agreement."
+          "description": "Bring the best parts together. Put your favorite ideas into one polished final work."
         }
       ]
     },
     "audience": {
-      "badge": "Built for Legal Professionals",
-      "title": "Precision for every agreement",
-      "description": "Whether you are reviewing a simple NDA or a complex M&A agreement, Paperflow gives you the tools to manage high-stakes documents with confidence.",
+      "badge": "Built for Professionals",
+      "title": "Precision for every project",
+      "description": "Whether you are writing a novel or a legal contract, Paperflow gives you the tools to manage complex documents with confidence.",
       "personas": [
         {
-          "title": "The M&A Lawyer",
-          "description": "Manage hundreds of evolving clauses during rigorous due diligence and merger negotiations."
+          "title": "The Academic",
+          "description": "Manage research, evolving theories, and the precision needed for scholarly publishing."
         },
         {
-          "title": "General Counsel",
-          "description": "Oversee company templates and ensuring all departments stay aligned on the latest standard terms."
+          "title": "The Lawyer",
+          "description": "Track every clause and version history to ensure accuracy before reaching court."
         },
         {
-          "title": "Compliance Officer",
-          "description": "Track every policy change and version history to ensure regulatory accuracy."
+          "title": "The Executive",
+          "description": "Build strategic plans and reports where every word choice impacts the business."
         },
         {
-          "title": "The Paralegal",
-          "description": "Organize version history and cross-references across complex filing schedules."
+          "title": "The Copywriter",
+          "description": "Test headlines, refine campaigns, and manage multiple drafts without the clutter."
         },
         {
-          "title": "Privacy Expert",
-          "description": "Refine DPAs and data processing clauses as international regulations evolve."
+          "title": "The Product Manager",
+          "description": "Keep requirements, user stories, and roadmaps aligned as the project evolves."
         },
         {
-          "title": "The Contract Manager",
-          "description": "Manage the lifecycle of commercial agreements with a transparent record of all changes."
+          "title": "The Novelist",
+          "description": "Manage complex stories with multiple paths and characters that evolve over time."
         }
       ]
     },
     "principles": {
       "badge": "Our Principles",
       "title": "Your work belongs to you",
-      "description": "Paperflow is built to protect your process, not to exploit it. We believe in privacy, ownership, and the confidentiality of legal work.",
+      "description": "Paperflow is built to protect your process, not to exploit it. We believe in privacy, ownership, and the human act of writing.",
       "items": [
         {
           "title": "No AI Training",
-          "description": "We never use your private legal text to train artificial intelligence models."
+          "description": "We never use your private text to train artificial intelligence models."
         },
         {
           "title": "No Lock-in",
-          "description": "Your data is yours. Export your contracts to standard formats like Docx at any time."
+          "description": "Your data is yours. Export your documents to standard formats at any time."
         },
         {
           "title": "No Distractions",
-          "description": "No badges, streaks, or gamification. Just a quiet place to focus on the law."
+          "description": "No badges, streaks, or gamification. Just a quiet place to focus."
         }
       ]
     },
     "faq": {
       "badge": "Clarifications",
       "title": "Common Questions",
-      "description": "Everything you need to know about the professional standard for the modern legal editor.",
+      "description": "Everything you need to know about the professional standard for the modern editor.",
       "items": [
         {
           "question": "Who is Paperflow for?",
-          "answer": "Paperflow is designed for legal professionals who manage complex, high-stakes documents. It is built for lawyers, counsel, and contract managers who need absolute control over their revision history."
+          "answer": "Paperflow is designed for professionals who manage complex, high-stakes documents. It is built for academics, lawyers, technical writers, and authors who need absolute control over their revision history."
         },
         {
-          "question": "Do you use my work to train AI?",
-          "answer": "No. We do not use your legal text to train artificial intelligence models. Your work remains private and encrypted."
+          "question": "Do you use my writing to train AI?",
+          "answer": "No. We do not use your text to train artificial intelligence models. Your work remains private and is never used to feed our algorithms."
         },
         {
-          "question": "Is Microsoft Word supported?",
-          "answer": "Yes. While you use Paperflow for internal versioning and branching, you can export to .docx at any time to share with outside parties or for final execution."
+          "question": "Why use Markdown?",
+          "answer": "We use Markdown to ensure formatting never becomes a distraction. You focus purely on the structure and content while writing, but you can export to any styled format (PDF, Word, LaTeX) when you are ready to publish."
         },
         {
           "question": "What platforms will be supported?",
-          "answer": "Paperflow will launch initially as a web application optimized for desktop browsers. This allows us to deliver updates quickly to the legal community."
+          "answer": "Paperflow will launch initially as a web application optimized for desktop browsers. This allows us to deliver updates quickly before we expand to native desktop or mobile apps."
         },
         {
           "question": "How do I get my data out?",
-          "answer": "Data ownership is a core principle. You will be able to export individual documents or your entire repository to standard formats like Markdown, Docx, or PDF."
+          "answer": "Data ownership is a core principle. You will be able to export your individual documents or your entire repository to standard formats like Markdown, Docx, or PDF at any time."
         },
         {
-          "question": "How is this different from 'Track Changes'?",
-          "answer": "Track changes is for surface-level edits. Paperflow is for architectural version control, allowing you to branch off new ideas without cluttering the main agreement."
+          "question": "How is this different from Google Docs?",
+          "answer": "Google Docs is designed for live collaboration, which often results in a messy history. Paperflow is designed for version control, providing a clean, permanent record of every major decision you make."
         },
         {
           "question": "Do I need technical skills to use this?",
-          "answer": "No. While the tech is powerful (based on Git), the interface is simple. We use concepts like 'Save Version' and 'Explore Wording' so you get the benefits without the complexity."
+          "answer": "No. While the technology is powerful, the interface is simple. We use concepts like 'Save Version' and 'Explore Idea' so you get the benefits of version control without needing to be a developer."
         },
         {
           "question": "Is there a limit to how many versions I can save?",
-          "answer": "We offer unlimited version history. We believe your history is a valuable legal asset that should never be deleted."
+          "answer": "We plan to offer unlimited version history. We believe your history is a valuable asset, not a storage problem that needs to be deleted."
         },
         {
-          "question": "Is this just Git for lawyers?",
-          "answer": "It shares the same philosophy as Git (branching, merging, history), but the interface and features are built specifically for the security and precision needs of the legal industry."
+          "question": "Is this just Git for writers?",
+          "answer": "It shares the same philosophy as Git (branching, merging, history), but the interface and features are built specifically for prose, legal text, and academic writing."
         },
         {
           "question": "When can I start using Paperflow?",
-          "answer": "Paperflow is currently in active development. Join the waitlist to secure your spot for the first legal beta release."
+          "answer": "Paperflow is currently in active development. We are opening access in waves to ensure stability. Join the waitlist to secure your spot for the first public release."
         }
       ]
     },
     "final": {
-      "badge": "Legal Beta",
-      "title": "Ready to review without the fear of losing work?",
-      "description": "Paperflow is currently in active development. Join the waitlist to be notified when the legal access opens.",
+      "badge": "Early Access",
+      "title": "Ready to write without the fear of losing work?",
+      "description": "Paperflow is currently in active development. Join the waitlist to be notified when early access opens.",
       "benefits": [
         "Early access",
-        "Shape the legal roadmap",
+        "Shape the roadmap",
         "Reserved spot"
       ]
     }
   },
   "header": {
     "how_it_works": "How it Works",
-    "collaboration": "Reviewing",
+    "collaboration": "Collaboration",
     "the_record": "The Record",
     "principles": "Principles",
     "faq": "FAQ",
     "join_waitlist": "Join Waitlist"
   },
   "footer": {
-    "description": "The professional standard for legal document review.",
+    "description": "Write without the fear of losing work.",
     "links": {
       "how_it_works": "How it Works",
-      "collaboration": "Reviewing",
+      "collaboration": "Collaboration",
       "the_record": "The Record",
       "principles": "Principles",
       "faq": "FAQ"
@@ -523,28 +523,28 @@
   },
   "waitlist": {
     "default": {
-      "placeholder": "lawyer@firm.com",
-      "label": "Join the waitlist for early legal access",
+      "placeholder": "your@email.com",
+      "label": "Join the waitlist for early access",
       "join": "Join",
       "joined": "Joined!"
     },
     "dark": {
-      "placeholder": "Enter your professional email",
-      "label": "Ready to take control of your legal work?",
-      "join": "Join the Beta Waitlist",
+      "placeholder": "Enter your email",
+      "label": "Ready to take control of your work?",
+      "join": "Join the Waitlist",
       "joining": "Joining...",
       "welcome": "Welcome Aboard!",
       "error": "Try Again",
-      "success_status": "You're on the list. We'll be in touch with your firm soon."
+      "success_status": "You're on the list. We'll be in touch soon."
     }
   },
   "metadata": {
-    "title": "Paperflow | Legal review with absolute precision.",
-    "description": "The infrastructure your legal ideas deserve. Manage complex contracts with absolute precision—branch, merge, and track every version."
+    "title": "Paperflow | Write without the fear of losing work.",
+    "description": "The infrastructure your ideas deserve. Manage complex documents with absolute precision—branch, merge, and track every version without the chaos."
   },
   "animations": {
     "evolution": {
-      "entries": "revisions",
+      "entries": "entries",
       "ui": {
         "by": "",
         "you": "You",
@@ -561,28 +561,28 @@
       },
       "no_additional_history": "No Additional History",
       "collapse_history": "Collapse History",
-      "view_more_updates": "View {count} More Revisions",
-      "branch_name": "Version: master-agreement",
-      "awaiting_change": "Awaiting adjustment...",
-      "patching_buffer": "Patching terms...",
-      "broadcasting_refresh": "Broadcasting update...",
-      "syncing_state": "Syncing compliance...",
+      "view_more_updates": "View {count} More Updates",
+      "branch_name": "Branch: main",
+      "awaiting_change": "Awaiting change...",
+      "patching_buffer": "Patching buffer...",
+      "broadcasting_refresh": "Broadcasting refresh...",
+      "syncing_state": "Syncing state...",
       "draft": "Draft",
       "revision": "Revision",
       "registering_change": "Registering change...",
-      "refreshing_manuscript": "Refreshing Document State...",
-      "record_evolution": "Record Revision",
+      "refreshing_manuscript": "Refreshing Manuscript State...",
+      "record_evolution": "Record Evolution",
       "documenting_file_state": "Documenting this file state.",
-      "updating_buffer": "Updating Index...",
+      "updating_buffer": "Updating Buffer...",
       "commit_change": "Commit Change",
       "latest_changes": "Latest Changes",
       "simulation": {
-        "initial_phrase": "Clauses define the safe path.",
-        "initial_message": "Initial contract draft",
-        "step1_name": "Expanded the termination terms",
-        "step1_text": "\nNotice the compliance.",
-        "step2_name": "Clarified the jurisdiction",
-        "step2_text": "\nEvery term is a legal decision.",
+        "initial_phrase": "Ideas leave a small path.",
+        "initial_message": "Initial manuscript",
+        "step1_name": "Expanded the opening statement",
+        "step1_text": "\nNotice the change.",
+        "step2_name": "Clarified the philosophy",
+        "step2_text": "\nEvery draft is a decision.",
         "step3_name": "Precision edit for impact"
       }
     },
@@ -603,30 +603,30 @@
       },
       "reviewing": "Reviewing...",
       "reply_to_thread": "Reply to thread...",
-      "thread_resolved": "Clause Accepted",
-      "resolved": "Accepted",
-      "thread_marked_resolved": "Clause marked as accepted",
+      "thread_resolved": "Thread Resolved",
+      "resolved": "Resolved",
+      "thread_marked_resolved": "Thread marked as resolved",
       "commit": {
-        "message": "Revised liability limitation clause",
+        "message": "Refactored chapter 3 transition and pacing",
         "author": "Elena Vasquez (You)",
         "time": "2 hours ago"
       },
       "comments": [
         {
           "author": "David Park",
-          "text": "This wording is much tighter. The 100% cap is standard for this industry.",
+          "text": "This flow is much better. The transition feels natural now.",
           "time": "1h ago"
         },
         {
           "author": "Elena Vasquez (You)",
-          "text": "Thanks! I removed the indirect damages section to avoid ambiguity in court.",
+          "text": "Thanks! I chopped about 400 words to make it tighter.",
           "time": "Just now"
         }
       ]
     },
     "methodology": {
       "draft": "Draft",
-      "diverge": "Branch",
+      "diverge": "Diverge",
       "compare": "Compare",
       "merge": "Merge"
     }
