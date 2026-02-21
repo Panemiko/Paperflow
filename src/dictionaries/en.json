@@ -15,7 +15,7 @@
     },
     "collaboration": {
       "badge": "Collaborate with clarity",
-      "title": "Get feedback without the friction",
+      "title": "Feedback without friction",
       "description": "Share your work and get notes exactly where they belong. Discuss changes in context and approve updates with one click.",
       "items": [
         "Add comments directly to any draft.",
@@ -26,19 +26,19 @@
     },
     "archive": {
       "badge": "The Record",
-      "title": "Your entire process, perfectly preserved",
+      "title": "Your process preserved",
       "description": "Save your progress whenever you reach a milestone. You can go back in time to see how your work evolved or recover something you changed weeks ago.",
       "items": [
         "Go back to any saved version instantly.",
-        "See exactly what was changed and when.",
-        "Bring back deleted text with one click.",
+        "See exactly what was changed, when, and by whom.",
+        "Bring back past changes.",
         "Share specific versions with others easily."
       ],
       "latest_changes": "Latest changes",
       "branch": "main",
       "ui": {
-        "impact": "Impact",
-        "domain": "Domain",
+        "impact": "Changes",
+        "domain": "Section",
         "editorial_note": "Editorial Note",
         "words": "words",
         "by": "",
@@ -68,15 +68,15 @@
           "details": {
             "diff": {
               "added": 87234,
-              "removed": 120
+              "removed": 49308
             },
-            "section": "Full Manuscript",
-            "description": "Initial assembly of all chapters into a single master document."
+            "section": "Global",
+            "description": "The entire initial structure of the text organized in a single place."
           }
         },
         {
           "hash": "1b2c3d4",
-          "message": "Auto-format: Standardized dialogue punctuation",
+          "message": "Standardizing dialogue punctuation",
           "author": "Paperflow Bot",
           "daysAgo": 13,
           "time": "03:12 UTC",
@@ -88,12 +88,12 @@
               "removed": 12
             },
             "section": "Global",
-            "description": "Applied standard em-dash formatting rules across dialogue."
+            "description": "Automatic bot review to ensure the correct use of em-dashes."
           }
         },
         {
           "hash": "2d4f6c1",
-          "message": "Fact-check complete: historical preamble",
+          "message": "Fact adjustment in the introduction",
           "author": "Yuki Sato",
           "daysAgo": 12,
           "time": "16:48 UTC",
@@ -104,12 +104,12 @@
               "removed": 15
             },
             "section": "Introduction",
-            "description": "Verified dates and locations against the 1924 architectural archives."
+            "description": "Checking of historical dates and locations to ensure the precision of the text."
           }
         },
         {
           "hash": "a9b1e8f",
-          "message": "Merged branch: alternate-ending",
+          "message": "Merging the \"Alternate Ending\" version",
           "author": "Isabella Conti",
           "daysAgo": 10,
           "time": "09:15 UTC",
@@ -121,12 +121,12 @@
               "removed": 1204
             },
             "section": "Chapter 24",
-            "description": "Consolidated the 'Harbor' and 'Departure' endings into a single resolution."
+            "description": "Uniting different paths of the story into a single conclusion."
           }
         },
         {
           "hash": "f7c3a2d",
-          "message": "Final pass: tightened dialogue in confrontation",
+          "message": "Giving more weight to the dialogue in Chap. 12",
           "author": "Liam O'Sullivan (You)",
           "daysAgo": 9,
           "time": "14:32 UTC",
@@ -137,12 +137,12 @@
               "removed": 109
             },
             "section": "Chapter 12",
-            "description": "Removed redundant phrasing to increase tension in the ballroom scene."
+            "description": "Cutting excesses to accelerate the pace and increase the tension of the scene."
           }
         },
         {
           "hash": "b3d1e4a",
-          "message": "Adjusted pacing in the third act bridge",
+          "message": "Pacing adjustment in the third act",
           "author": "Isabella Conti",
           "daysAgo": 8,
           "time": "08:12 UTC",
@@ -153,12 +153,12 @@
               "removed": 12
             },
             "section": "Chapter 18",
-            "description": "Added transitional prose to smooth the jump between settings."
+            "description": "Improvement in the transition between scenes to make the reading more fluid."
           }
         },
         {
           "hash": "3d4e5f6",
-          "message": "Consistency: Renamed 'Theatre' to 'Theater'",
+          "message": "Cleaning up the spelling (Bot)",
           "author": "Paperflow Bot",
           "daysAgo": 8,
           "time": "04:45 UTC",
@@ -170,12 +170,12 @@
               "removed": 8
             },
             "section": "Global",
-            "description": "Enforced US English spelling conventions per project settings."
+            "description": "The bot reviewed the text and applied standard spelling rules."
           }
         },
         {
           "hash": "c9f2b8d",
-          "message": "Character voice refinement: Chapter 4",
+          "message": "Refining the protagonist's tone",
           "author": "Liam O'Sullivan (You)",
           "daysAgo": 7,
           "time": "11:45 UTC",
@@ -185,13 +185,13 @@
               "added": 210,
               "removed": 45
             },
-            "section": "Chapter 4",
-            "description": "Enhanced the protagonist's internal monologue for deeper POV."
+            "section": "Global",
+            "description": "Deepening the character's thoughts to generate more connection."
           }
         },
         {
           "hash": "e4a5d6c",
-          "message": "Updated source citations: Lunar Colonies",
+          "message": "Source review: Lunar Colonies",
           "author": "Yuki Sato",
           "daysAgo": 6,
           "time": "16:20 UTC",
@@ -202,12 +202,12 @@
               "removed": 15
             },
             "section": "Technical Appendix",
-            "description": "Corrected DOI links and bibliography formatting."
+            "description": "Links and bibliographical references corrected for the final version."
           }
         },
         {
           "hash": "d1f2g3h",
-          "message": "Structural edit: removed redundant flashback",
+          "message": "Removing repetitive scenes",
           "author": "Isabella Conti",
           "daysAgo": 5,
           "time": "09:30 UTC",
@@ -218,12 +218,12 @@
               "removed": 4500
             },
             "section": "Chapter 7",
-            "description": "Leaner narrative achieved by moving backstory to Chapter 1."
+            "description": "Optimization of the narrative by moving details from the past to the beginning of the book."
           }
         },
         {
           "hash": "h2j3k4l",
-          "message": "Finalized epilogue: 'The Long Wait'",
+          "message": "Finalizing the chapter 'The Long Wait'",
           "author": "Liam O'Sullivan (You)",
           "daysAgo": 4,
           "time": "21:15 UTC",
@@ -234,12 +234,12 @@
               "removed": 45
             },
             "section": "Epilogue",
-            "description": "Completed the final sequence and thematic closure."
+            "description": "Writing of the final scene concluded, tying up all the loose ends of the story."
           }
         },
         {
           "hash": "5f6g7h8",
-          "message": "Typography: Curly quotes application",
+          "message": "Quotes standardization (Bot)",
           "author": "Paperflow Bot",
           "daysAgo": 4,
           "time": "21:16 UTC",
@@ -251,12 +251,12 @@
               "removed": 45
             },
             "section": "Epilogue",
-            "description": "Converted straight quotes to smart quotes."
+            "description": "Bot swapped straight quotes for curly quotes for a professional look."
           }
         },
         {
           "hash": "m4n5p6q",
-          "message": "Grammar sweep: complete manuscript",
+          "message": "General review of the manuscript",
           "author": "Yuki Sato",
           "daysAgo": 3,
           "time": "14:05 UTC",
@@ -267,12 +267,12 @@
               "removed": 24
             },
             "section": "Global",
-            "description": "Final proofreading for consistency, spelling, and grammar."
+            "description": "One last complete read-through to ensure everything is flawless."
           }
         },
         {
           "hash": "r7s8t9u",
-          "message": "Merged branch: publisher-requested-cuts",
+          "message": "Checkpoint: Publisher's Edit",
           "author": "Isabella Conti",
           "daysAgo": 2,
           "time": "10:50 UTC",
@@ -284,12 +284,12 @@
               "removed": 2300
             },
             "section": "Chapters 15-17",
-            "description": "Removed subplots as requested for the initial print run."
+            "description": "Strategic cuts in the parallel plots for the first printed edition."
           }
         },
         {
           "hash": "6g7h8i9",
-          "message": "Cleanup: Removed trailing whitespace",
+          "message": "Technical cleanup: Excess spaces",
           "author": "Paperflow Bot",
           "daysAgo": 2,
           "time": "10:55 UTC",
@@ -301,12 +301,12 @@
               "removed": 15
             },
             "section": "Global",
-            "description": "Removed unnecessary whitespace from end of lines."
+            "description": "Automatic removal of invisible spaces for a clean file."
           }
         },
         {
           "hash": "v1w2x3y",
-          "message": "Restored Chapter 12: 'The Pier' (Draft 4)",
+          "message": "Recovered: Chapter 12 complete",
           "author": "Liam O'Sullivan (You)",
           "daysAgo": 1,
           "time": "13:22 UTC",
@@ -317,12 +317,12 @@
               "removed": 0
             },
             "section": "Chapter 12",
-            "description": "Recovered original prose after deciding against the rewrite."
+            "description": "Returning to the original version of the chapter after testing new paths."
           }
         },
         {
           "hash": "z4a5b6c",
-          "message": "Tone adjustment: increased suspense in intro",
+          "message": "More suspense in the opening",
           "author": "Isabella Conti",
           "daysAgo": 0,
           "time": "08:45 UTC",
@@ -333,12 +333,12 @@
               "removed": 12
             },
             "section": "Introduction",
-            "description": "Reworked the opening hook to grab reader attention faster."
+            "description": "Rewrite of the beginning to grab the reader's attention from the first line."
           }
         },
         {
           "hash": "d7e8f9g",
-          "message": "Cross-referenced timelines for consistency",
+          "message": "Timeline adjustment",
           "author": "Yuki Sato",
           "daysAgo": 0,
           "time": "17:10 UTC",
@@ -349,12 +349,12 @@
               "removed": 5
             },
             "section": "Chronology",
-            "description": "Ensured age consistency across the 40-year timeline."
+            "description": "Checking of dates and ages to keep the story coherent from beginning to end."
           }
         },
         {
           "hash": "h1i2j3k",
-          "message": "Final pre-publication binary freeze",
+          "message": "Final Version: Protected File",
           "author": "Liam O'Sullivan (You)",
           "daysAgo": 0,
           "time": "23:55 UTC",
@@ -366,7 +366,7 @@
               "removed": 0
             },
             "section": "Global",
-            "description": "Version locked for final typesetting."
+            "description": "Document finalized and locked for the printing process."
           }
         }
       ]
@@ -405,7 +405,7 @@
         },
         {
           "title": "The Lawyer",
-          "description": "Track every clause and version history to ensure accuracy before reaching court."
+          "description": "Track every clause and version history to ensure accuracy before it's time to sign."
         },
         {
           "title": "The Executive",
@@ -493,7 +493,7 @@
     },
     "final": {
       "badge": "Early Access",
-      "title": "Ready to write without the fear of losing work?",
+      "title": "Be notified when it's ready",
       "description": "Paperflow is currently in active development. Join the waitlist to be notified when early access opens.",
       "benefits": [
         "Early access",
@@ -540,7 +540,7 @@
     },
     "dark": {
       "placeholder": "Enter your email",
-      "label": "Ready to take control of your work?",
+      "label": "Ready to write without fear?",
       "join": "Join the Waitlist",
       "joining": "Joining...",
       "welcome": "Welcome Aboard!",
