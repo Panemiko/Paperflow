@@ -522,11 +522,21 @@
     "copyright": "© {year} Paperflow. All rights reserved."
   },
   "waitlist": {
+    "consent_agreed": "By clicking join, you agree to our ",
+    "terms_link": "Terms of Service",
+    "consent_and": " and ",
+    "privacy_link": "Privacy Policy",
+    "consent_end": ".",
+    "error_duplicate": "This email is already registered.",
     "default": {
       "placeholder": "your@email.com",
       "label": "Join the waitlist for early access",
       "join": "Join",
-      "joined": "Joined!"
+      "joined": "Joined!",
+      "joining": "Joining...",
+      "welcome": "Welcome Aboard!",
+      "error": "Try Again",
+      "success_status": "You're on the list. We'll be in touch soon."
     },
     "dark": {
       "placeholder": "Enter your email",

@@ -3,6 +3,8 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { ArrowRight, Check, Loader2, Mail } from "lucide-react";
+import Link from "next/link";
+import { useParams } from "next/navigation";
 import React, { useState } from "react";
 
 export function WaitlistForm({
@@ -16,6 +18,10 @@ export function WaitlistForm({
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const params = useParams();
+  const locale = params?.locale || "en";
 
   const d = dict?.[variant] ||
     dict?.default || {
@@ -34,49 +40,80 @@ export function WaitlistForm({
 
     setStatus("loading");
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    try {
+      const response = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
 
-    setStatus("success");
-    setEmail("");
+      if (!response.ok) {
+        if (response.status === 409) {
+          setErrorMessage(
+            dict?.error_duplicate || "This email is already registered.",
+          );
+        } else {
+          setErrorMessage(d.error || "Try Again");
+        }
+        throw new Error("Failed to register");
+      }
 
-    setTimeout(() => setStatus("idle"), 3000);
+      setStatus("success");
+      setEmail("");
+      setErrorMessage("");
+    } catch (error) {
+      console.error("Waitlist error:", error);
+      setStatus("error");
+    } finally {
+      setTimeout(() => setStatus("idle"), 3000);
+    }
   };
 
   if (variant === "compact") {
     return (
-      <form onSubmit={handleSubmit} className="flex gap-3">
-        <div className="relative flex-1">
-          <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder={d.placeholder}
-            className="w-full pl-11 pr-4 py-3 border-2 border-border bg-card text-foreground font-mono text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
-            required
-          />
-        </div>
-        <Button
-          type="submit"
-          disabled={status === "loading"}
-          className="px-6 py-3 group"
-        >
-          {status === "loading" ? (
-            <Loader2 className="w-4 h-4 animate-spin" />
-          ) : status === "success" ? (
-            <>
-              {d.joined}
-              <Check className="w-4 h-4" />
-            </>
-          ) : (
-            <>
-              {d.join}
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </>
-          )}
-        </Button>
-      </form>
+      <div className="w-full">
+        <form onSubmit={handleSubmit} className="flex gap-3">
+          <div className="relative flex-1">
+            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder={d.placeholder}
+              className="w-full pl-11 pr-4 py-3 border-2 border-border bg-card text-foreground font-mono text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
+              required
+            />
+          </div>
+          <Button
+            type="submit"
+            disabled={status === "loading"}
+            className="px-6 py-3 group"
+          >
+            {status === "loading" ? (
+              <Loader2 className="w-4 h-4 animate-spin" />
+            ) : status === "success" ? (
+              <>
+                {d.joined}
+                <Check className="w-4 h-4" />
+              </>
+            ) : (
+              <>
+                {d.join}
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </>
+            )}
+          </Button>
+        </form>
+        {status === "error" && errorMessage && (
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mt-3 font-mono text-xs text-destructive text-center"
+          >
+            {errorMessage}
+          </motion.p>
+        )}
+      </div>
     );
   }
 
@@ -137,6 +174,35 @@ export function WaitlistForm({
             {d.success_status}
           </motion.p>
         )}
+        {status === "error" && errorMessage && (
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mt-3 font-mono text-xs text-destructive"
+          >
+            {errorMessage}
+          </motion.p>
+        )}
+
+        {dict?.consent_agreed && (
+          <p className="mt-4 text-center text-[10px] text-background/60 w-full">
+            {dict.consent_agreed}
+            <Link
+              href={`/${locale}/terms`}
+              className="underline hover:text-background/80"
+            >
+              {dict.terms_link}
+            </Link>
+            {dict.consent_and}
+            <Link
+              href={`/${locale}/privacy`}
+              className="underline hover:text-background/80"
+            >
+              {dict.privacy_link}
+            </Link>
+            {dict.consent_end}
+          </p>
+        )}
       </form>
     );
   }
@@ -144,7 +210,7 @@ export function WaitlistForm({
   return (
     <form onSubmit={handleSubmit} className="w-full max-w-xl">
       {d.label && (
-        <label className="block text-center mt-2 mb-6 text-[10px] font-mono tracking-[0.3em] uppercase text-primary/90">
+        <label className="block text-center mt-2 mb-6 text-[10px] font-mono tracking-wider uppercase text-primary/90">
           {d.label}
         </label>
       )}
@@ -195,6 +261,35 @@ export function WaitlistForm({
         >
           {d.success_status}
         </motion.p>
+      )}
+      {status === "error" && errorMessage && (
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mt-3 font-mono text-xs text-destructive"
+        >
+          {errorMessage}
+        </motion.p>
+      )}
+
+      {dict?.consent_agreed && (
+        <p className="mt-4 text-center text-[10px] text-muted-foreground w-full">
+          {dict.consent_agreed}
+          <Link
+            href={`/${locale}/terms`}
+            className="underline hover:text-foreground"
+          >
+            {dict.terms_link}
+          </Link>
+          {dict.consent_and}
+          <Link
+            href={`/${locale}/privacy`}
+            className="underline hover:text-foreground"
+          >
+            {dict.privacy_link}
+          </Link>
+          {dict.consent_end}
+        </p>
       )}
     </form>
   );

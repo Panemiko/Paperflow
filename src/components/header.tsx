@@ -1,7 +1,13 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { BrandLogo } from "./brand/logo";
 import { MaxWidth } from "./max-width";
@@ -24,7 +30,6 @@ export function Header({ dict, lang }: { dict: any; lang: string }) {
             { label: dict.collaboration, href: `/${lang}#collaboration` },
             { label: dict.the_record, href: `/${lang}#result` },
             { label: dict.principles, href: `/${lang}#refuse` },
-            { label: dict.faq, href: `/${lang}#faq` },
           ].map((link) => (
             <a
               key={link.label}
@@ -35,7 +40,35 @@ export function Header({ dict, lang }: { dict: any; lang: string }) {
             </a>
           ))}
         </nav>
-        <div className="flex-1 flex justify-end">
+        <div className="flex-1 flex justify-end items-center gap-4">
+          <div className="flex items-center gap-2">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1">
+                  {lang === "en" ? "EN" : "PT"}
+                  <ChevronDown className="w-3 h-3" />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="min-w-[120px]">
+                <DropdownMenuItem asChild>
+                  <Link
+                    href="/en"
+                    className="w-full cursor-pointer font-mono text-xs"
+                  >
+                    English
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link
+                    href="/pt"
+                    className="w-full cursor-pointer font-mono text-xs"
+                  >
+                    Português
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
           <Button asChild className="group">
             <a href="#waitlist">
               {dict.join_waitlist}

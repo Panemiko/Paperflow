@@ -514,18 +514,28 @@
     "links": {
       "how_it_works": "Como Funciona",
       "collaboration": "Colaboração",
-      "the_record": "O Registro",
+      "the_record": "Registro",
       "principles": "Princípios",
       "faq": "FAQ"
     },
     "copyright": "© {year} Paperflow. Todos os direitos reservados."
   },
   "waitlist": {
+    "consent_agreed": "Ao clicar em entrar, você concorda com nossos ",
+    "terms_link": "Termos de Serviço",
+    "consent_and": " e ",
+    "privacy_link": "Política de Privacidade",
+    "consent_end": ".",
+    "error_duplicate": "Este e-mail já está registrado.",
     "default": {
       "placeholder": "seu@email.com",
       "label": "Entre na lista para acesso antecipado",
       "join": "Entrar",
-      "joined": "Entrou!"
+      "joined": "Entrou!",
+      "joining": "Entrando...",
+      "welcome": "Bem-vindo a bordo!",
+      "error": "Tentar Novamente",
+      "success_status": "Você está na lista. Entraremos em contato em breve."
     },
     "dark": {
       "placeholder": "Digite seu email",
