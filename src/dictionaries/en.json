@@ -1,39 +1,73 @@
 {
   "home": {
     "hero": {
-      "waitlist_badge": "Waitlist open",
-      "title_start": "Write without the fear of",
-      "title_strong": "losing work",
+      "waitlist_badge": "Early access",
+      "title_start": "Writing infrastructure ",
+      "title_strong": "for professionals.",
       "title_end": "",
-      "description": "Paperflow is a professional writing tool for people who need to explore ideas without losing their original draft."
+      "description": "Edit, manage and collaborate. Paperflow is the writing infrastructure for those who create contracts, theses and reports where every decision matters."
     },
     "features": {
       "how_it_works_badge": "How it works",
-      "test_ideas": "Test new ideas,",
-      "keep_works": "keep what works.",
-      "description": "Explore different directions for your document in a safe space. If a change works, keep it. If it doesn’t, go back to your original draft with one click."
+      "test_ideas": "Changed your mind?",
+      "keep_works": "Go back to how it was.",
+      "description": "No change is permanent until you want it to be. Create an alternative path and, if it doesn't work out, undo it with one click.",
+      "cta": "I want early access"
+    },
+    "main_features": {
+      "badge": "Benefits",
+      "title": "The writing infrastructure that keeps up with your pace.",
+      "description": "Tools designed for the professional who values precision and control.",
+      "items": [
+        {
+          "title": "Write without thinking about formatting",
+          "description": "The document formats itself. Total focus on the text.",
+          "icon": "type"
+        },
+        {
+          "title": "Export to any model",
+          "description": "Word, PDF or LaTeX. With a few clicks and no rework.",
+          "icon": "download"
+        },
+        {
+          "title": "What changed, who changed it and when",
+          "description": "Every save records what happened. Every decision in the document is traceable.",
+          "icon": "history"
+        },
+        {
+          "title": "Staged collaborative editing",
+          "description": "Review only the changes. Nothing enters the final document without your approval.",
+          "icon": "user-check"
+        },
+        {
+          "title": "Changed your mind? Undo",
+          "description": "Ability to return your document to the version you want in an easy and clean way.",
+          "icon": "rotate-ccw"
+        }
+      ]
     },
     "collaboration": {
-      "badge": "Collaborate with clarity",
-      "title": "Feedback without friction",
-      "description": "Share your work and get notes exactly where they belong. Discuss changes in context and approve updates with one click.",
+      "badge": "Collaborative review",
+      "title": "Frictionless feedback.",
+      "description": "Forget the chaos of lost comments. Visualize suggestions exactly where they were made and maintain contextualized conversations in each draft.",
       "items": [
-        "Add comments directly to any draft.",
-        "Discuss changes in organized threads.",
-        "Fix problems with one click.",
-        "Keep every conversation attached to the right change."
+        "Combine suggestions without conflicts.",
+        "Discuss changes in threads.",
+        "Explore ideas in parallel.",
+        "Approve every comma individually."
       ]
     },
     "archive": {
-      "badge": "The Record",
-      "title": "Your process preserved",
-      "description": "Save your progress whenever you reach a milestone. You can go back in time to see how your work evolved or recover something you changed weeks ago.",
+      "badge": "Document history",
+      "title": "Every change recorded.",
+      "description": "Know what changed, who changed it and when. Every decision is documented for you to consult when you need it.",
       "items": [
-        "Go back to any saved version instantly.",
-        "See exactly what was changed, when, and by whom.",
-        "Bring back past changes.",
-        "Share specific versions with others easily."
+        "Consult the history whenever you need.",
+        "Know who changed every detail.",
+        "Go back to any version instantly.",
+        "No decision is lost."
       ],
+      "cta": "Secure my spot",
       "latest_changes": "Latest changes",
       "branch": "main",
       "ui": {
@@ -41,10 +75,9 @@
         "domain": "Section",
         "editorial_note": "Editorial Note",
         "words": "words",
-        "by": "",
         "you": "You",
-        "merge": "Merge",
-        "ai_authored": "AI Authored",
+        "merge": "Consolidate",
+        "ai_authored": "AI",
         "ai": "AI",
         "time_ago": {
           "just_now": "Just now",
@@ -60,7 +93,7 @@
       "commits": [
         {
           "hash": "8e2a9b7",
-          "message": "First draft complete: 87,234 words",
+          "message": "First draft: 87,234 words",
           "author": "Liam O'Sullivan (You)",
           "daysAgo": 14,
           "time": "11:03 UTC",
@@ -71,7 +104,7 @@
               "removed": 49308
             },
             "section": "Global",
-            "description": "The entire initial structure of the text organized in a single place."
+            "description": "The entire initial text structure organized in one place."
           }
         },
         {
@@ -88,12 +121,12 @@
               "removed": 12
             },
             "section": "Global",
-            "description": "Automatic bot review to ensure the correct use of em-dashes."
+            "description": "Automatic bot review to ensure correct use of em-dashes."
           }
         },
         {
           "hash": "2d4f6c1",
-          "message": "Fact adjustment in the introduction",
+          "message": "Fact adjustment in introduction",
           "author": "Yuki Sato",
           "daysAgo": 12,
           "time": "16:48 UTC",
@@ -104,12 +137,12 @@
               "removed": 15
             },
             "section": "Introduction",
-            "description": "Checking of historical dates and locations to ensure the precision of the text."
+            "description": "Checking historical dates and locations to ensure text accuracy."
           }
         },
         {
           "hash": "a9b1e8f",
-          "message": "Merging the \"Alternate Ending\" version",
+          "message": "Consolidating \"Alternate Ending\" version",
           "author": "Isabella Conti",
           "daysAgo": 10,
           "time": "09:15 UTC",
@@ -126,7 +159,7 @@
         },
         {
           "hash": "f7c3a2d",
-          "message": "Giving more weight to the dialogue in Chap. 12",
+          "message": "Giving more weight to dialogue in Chap. 12",
           "author": "Liam O'Sullivan (You)",
           "daysAgo": 9,
           "time": "14:32 UTC",
@@ -137,12 +170,12 @@
               "removed": 109
             },
             "section": "Chapter 12",
-            "description": "Cutting excesses to accelerate the pace and increase the tension of the scene."
+            "description": "Cutting excesses to speed up the pace and increase scene tension."
           }
         },
         {
           "hash": "b3d1e4a",
-          "message": "Pacing adjustment in the third act",
+          "message": "Paging adjustment in the third act",
           "author": "Isabella Conti",
           "daysAgo": 8,
           "time": "08:12 UTC",
@@ -153,12 +186,12 @@
               "removed": 12
             },
             "section": "Chapter 18",
-            "description": "Improvement in the transition between scenes to make the reading more fluid."
+            "description": "Improved transition between scenes to make reading more fluid."
           }
         },
         {
           "hash": "3d4e5f6",
-          "message": "Cleaning up the spelling (Bot)",
+          "message": "Cleaning up spelling (Bot)",
           "author": "Paperflow Bot",
           "daysAgo": 8,
           "time": "04:45 UTC",
@@ -186,7 +219,7 @@
               "removed": 45
             },
             "section": "Global",
-            "description": "Deepening the character's thoughts to generate more connection."
+            "description": "Deepening character thoughts to generate more connection."
           }
         },
         {
@@ -202,7 +235,7 @@
               "removed": 15
             },
             "section": "Technical Appendix",
-            "description": "Links and bibliographical references corrected for the final version."
+            "description": "Links and bibliographic references corrected for the final version."
           }
         },
         {
@@ -218,7 +251,7 @@
               "removed": 4500
             },
             "section": "Chapter 7",
-            "description": "Optimization of the narrative by moving details from the past to the beginning of the book."
+            "description": "Narrative optimization by moving past details to the beginning of the book."
           }
         },
         {
@@ -234,7 +267,7 @@
               "removed": 45
             },
             "section": "Epilogue",
-            "description": "Writing of the final scene concluded, tying up all the loose ends of the story."
+            "description": "Writing of the final scene completed, tying up all story loose ends."
           }
         },
         {
@@ -256,7 +289,7 @@
         },
         {
           "hash": "m4n5p6q",
-          "message": "General review of the manuscript",
+          "message": "General manuscript review",
           "author": "Yuki Sato",
           "daysAgo": 3,
           "time": "14:05 UTC",
@@ -267,12 +300,12 @@
               "removed": 24
             },
             "section": "Global",
-            "description": "One last complete read-through to ensure everything is flawless."
+            "description": "One last complete reading to ensure everything is flawless."
           }
         },
         {
           "hash": "r7s8t9u",
-          "message": "Checkpoint: Publisher's Edit",
+          "message": "Checkpoint: Publisher Edit",
           "author": "Isabella Conti",
           "daysAgo": 2,
           "time": "10:50 UTC",
@@ -284,7 +317,7 @@
               "removed": 2300
             },
             "section": "Chapters 15-17",
-            "description": "Strategic cuts in the parallel plots for the first printed edition."
+            "description": "Strategic cuts in parallel plots for the first printed edition."
           }
         },
         {
@@ -322,7 +355,7 @@
         },
         {
           "hash": "z4a5b6c",
-          "message": "More suspense in the opening",
+          "message": "More suspense in opening",
           "author": "Isabella Conti",
           "daysAgo": 0,
           "time": "08:45 UTC",
@@ -333,7 +366,7 @@
               "removed": 12
             },
             "section": "Introduction",
-            "description": "Rewrite of the beginning to grab the reader's attention from the first line."
+            "description": "Rewriting the beginning to catch the reader's attention from the first line."
           }
         },
         {
@@ -349,7 +382,7 @@
               "removed": 5
             },
             "section": "Chronology",
-            "description": "Checking of dates and ages to keep the story coherent from beginning to end."
+            "description": "Checking dates and ages to keep the story consistent from start to finish."
           }
         },
         {
@@ -373,39 +406,41 @@
     },
     "philosophy": {
       "badge": "The Method",
-      "title": "A better way to build your work",
-      "description": "Most tools want you to write faster. We want you to write better. Paperflow gives you the space to explore ideas, the clarity to make decisions, and the confidence to share your best work.",
+      "title": "Text editors were made for documents.",
+      "title_highlight": "Paperflow was made for quality.",
+      "description": "Write with focus, export to any format and keep track of every decision.",
       "items": [
         {
-          "title": "Draft",
-          "description": "Write your thoughts freely. Every version you save is kept in a permanent history."
+          "title": "Write",
+          "description": "Write. The document formats itself upon export."
         },
         {
           "title": "Explore",
-          "description": "Try a new direction. Create a separate path for a new idea without changing your main work."
+          "description": "Explore alternative paths without changing the main document."
         },
         {
           "title": "Compare",
-          "description": "Put two versions side-by-side. See exactly what changed line by line to choose the best one."
+          "description": "Put two options side by side clearly to decide which objective to keep."
         },
         {
-          "title": "Combine",
-          "description": "Bring the best parts together. Put your favorite ideas into one polished final work."
+          "title": "Consolidate",
+          "description": "Each contribution arrives separately. You decide what goes into the final document."
         }
       ]
     },
     "audience": {
-      "badge": "Built for Professionals",
-      "title": "Precision for every project",
-      "description": "Whether you are writing a novel or a legal contract, Paperflow gives you the tools to manage complex documents with confidence.",
+      "badge": "Made for professionals",
+      "title": "Infrastructure for serious documents",
+      "description": "Contracts, theses, reports and appraisals. For professionals who need every decision recorded.",
+      "cta": "Join the list",
       "personas": [
         {
           "title": "The Academic",
-          "description": "Manage research, evolving theories, and the precision needed for scholarly publishing."
+          "description": "Manage research, evolving theories and the precision needed for academic publications."
         },
         {
           "title": "The Lawyer",
-          "description": "Track every clause and version history to ensure accuracy before it's time to sign."
+          "description": "Track every clause and version history to ensure precision before it reaches the moment of signing."
         },
         {
           "title": "The Executive",
@@ -413,11 +448,11 @@
         },
         {
           "title": "The Copywriter",
-          "description": "Test headlines, refine campaigns, and manage multiple drafts without the clutter."
+          "description": "Test headlines, refine campaigns and manage multiple drafts without the mess."
         },
         {
           "title": "The Product Manager",
-          "description": "Keep requirements, user stories, and roadmaps aligned as the project evolves."
+          "description": "Keep requirements, user stories and roadmaps aligned as the project evolves."
         },
         {
           "title": "The Novelist",
@@ -426,32 +461,32 @@
       ]
     },
     "principles": {
-      "badge": "Our Principles",
+      "badge": "The Foundation",
       "title": "Your work belongs to you",
-      "description": "Paperflow is built to protect your process, not to exploit it. We believe in privacy, ownership, and the human act of writing.",
+      "description": "Paperflow was built to protect your process. We believe in the privacy of your writing.",
       "items": [
         {
-          "title": "No AI Training",
+          "title": "No AI training",
           "description": "We never use your private text to train artificial intelligence models."
         },
         {
-          "title": "No Lock-in",
-          "description": "Your data is yours. Export your documents to standard formats at any time."
+          "title": "No lock-in",
+          "description": "Your data is yours. Export to standard formats at any time."
         },
         {
-          "title": "No Distractions",
-          "description": "No badges, streaks, or gamification. Just a quiet place to focus."
+          "title": "No distractions",
+          "description": "No unnecessary notifications or gamification. Just space to focus."
         }
       ]
     },
     "faq": {
-      "badge": "Clarifications",
-      "title": "Common Questions",
-      "description": "Everything you need to know about the professional standard for the modern editor.",
+      "badge": "Questions",
+      "title": "Frequently Asked Questions",
+      "description": "Everything you need to know about Paperflow.",
       "items": [
         {
           "question": "Who is Paperflow for?",
-          "answer": "Paperflow is designed for professionals who manage complex, high-stakes documents. It is built for academics, lawyers, technical writers, and authors who need absolute control over their revision history."
+          "answer": "Paperflow is designed for professionals who manage complex documents. It is built for academics, lawyers, technical writers and authors who need absolute control over their revision history."
         },
         {
           "question": "Do you use my writing to train AI?",
@@ -459,22 +494,22 @@
         },
         {
           "question": "Why use Markdown?",
-          "answer": "We use Markdown to ensure formatting never becomes a distraction. You focus purely on the structure and content while writing, but you can export to any styled format (PDF, Word, LaTeX) when you are ready to publish."
+          "answer": "We use Markdown to ensure formatting never becomes a distraction. You focus purely on structure and content while writing, but can export to any styled format (PDF, Word, LaTeX) when you are ready to publish."
         },
         {
           "question": "What platforms will be supported?",
-          "answer": "Paperflow will launch initially as a web application optimized for desktop browsers. This allows us to deliver updates quickly before we expand to native desktop or mobile apps."
+          "answer": "Paperflow will initially launch as a web application optimized for desktop browsers. This allows us to deliver updates quickly before expanding to native desktop or mobile applications."
         },
         {
-          "question": "How do I get my data out?",
-          "answer": "Data ownership is a core principle. You will be able to export your individual documents or your entire repository to standard formats like Markdown, Docx, or PDF at any time."
+          "question": "How do I take my data out?",
+          "answer": "Data ownership is a fundamental principle. You will be able to export your individual documents or your entire repository to standard formats like Markdown, Docx or PDF at any time."
         },
         {
           "question": "How is this different from Google Docs?",
-          "answer": "Google Docs is designed for live collaboration, which often results in a messy history. Paperflow is designed for version control, providing a clean, permanent record of every major decision you make."
+          "answer": "Google Docs is designed for live collaboration, which often results in a messy history. Paperflow is designed for version control, providing a clean and permanent record of every major decision you make."
         },
         {
-          "question": "Do I need technical skills to use this?",
+          "question": "Do I need technical skills to use it?",
           "answer": "No. While the technology is powerful, the interface is simple. We use concepts like 'Save Version' and 'Explore Idea' so you get the benefits of version control without needing to be a developer."
         },
         {
@@ -483,80 +518,79 @@
         },
         {
           "question": "Is this just Git for writers?",
-          "answer": "It shares the same philosophy as Git (branching, merging, history), but the interface and features are built specifically for prose, legal text, and academic writing."
+          "answer": "It shares the same philosophy as Git (branching, merging, history), but the interface and features are built specifically for writing, legal texts and academic writing."
         },
         {
           "question": "When can I start using Paperflow?",
-          "answer": "Paperflow is currently in active development. We are opening access in waves to ensure stability. Join the waitlist to secure your spot for the first public release."
+          "answer": "Paperflow is currently in active development. We are opening access in waves to ensure stability. Join the waitlist to secure your place for the first public release."
         }
       ]
     },
     "final": {
-      "badge": "Early Access",
+      "badge": "Early access",
       "title": "Be notified when it's ready",
-      "description": "Paperflow is currently in active development. Join the waitlist to be notified when early access opens.",
+      "description": "Paperflow is in development. Join the waitlist to be notified.",
       "benefits": [
         "Early access",
-        "Shape the roadmap",
+        "Participate in the roadmap",
         "Reserved spot"
       ]
     }
   },
   "header": {
-    "how_it_works": "How it Works",
-    "collaboration": "Collaboration",
-    "the_record": "The Record",
+    "how_it_works": "How It Works",
+    "collaboration": "Review",
+    "the_record": "History",
     "principles": "Principles",
     "faq": "FAQ",
-    "join_waitlist": "Join Waitlist"
+    "join_waitlist": "Join the waitlist"
   },
   "footer": {
-    "description": "Write without the fear of losing work.",
+    "description": "Writing infrastructure for professionals.",
     "links": {
-      "how_it_works": "How it Works",
-      "collaboration": "Collaboration",
-      "the_record": "The Record",
+      "how_it_works": "How It Works",
+      "collaboration": "Review",
+      "the_record": "History",
       "principles": "Principles",
       "faq": "FAQ"
     },
     "copyright": "© {year} Paperflow. All rights reserved."
   },
   "waitlist": {
-    "consent_agreed": "By clicking join, you agree to our ",
+    "consent_agreed": "By joining, you agree to our ",
     "terms_link": "Terms of Service",
     "consent_and": " and ",
     "privacy_link": "Privacy Policy",
     "consent_end": ".",
     "error_duplicate": "This email is already registered.",
     "default": {
-      "placeholder": "your@email.com",
-      "label": "Join the waitlist for early access",
+      "placeholder": "you@email.com",
+      "label": "Join the waitlist.",
       "join": "Join",
-      "joined": "Joined!",
+      "joined": "On the list.",
       "joining": "Joining...",
-      "welcome": "Welcome Aboard!",
+      "welcome": "Email registered.",
       "error": "Try Again",
       "success_status": "You're on the list. We'll be in touch soon."
     },
     "dark": {
       "placeholder": "Enter your email",
-      "label": "Ready to write without fear?",
-      "join": "Join the Waitlist",
+      "label": "Join the waitlist.",
+      "join": "Join",
       "joining": "Joining...",
-      "welcome": "Welcome Aboard!",
+      "welcome": "Email registered.",
       "error": "Try Again",
       "success_status": "You're on the list. We'll be in touch soon."
     }
   },
   "metadata": {
-    "title": "Paperflow | Write without the fear of losing work.",
-    "description": "The infrastructure your ideas deserve. Manage complex documents with absolute precision—branch, merge, and track every version without the chaos."
+    "title": "Paperflow | Writing infrastructure for professionals.",
+    "description": "Write with focus, export to any format and keep track of every decision."
   },
   "animations": {
     "evolution": {
       "entries": "entries",
       "ui": {
-        "by": "",
         "you": "You",
         "time_ago": {
           "just_now": "Just now",
@@ -569,10 +603,10 @@
           "yesterday": "Yesterday"
         }
       },
-      "no_additional_history": "No Additional History",
-      "collapse_history": "Collapse History",
-      "view_more_updates": "View {count} More Updates",
-      "branch_name": "Branch: main",
+      "no_additional_history": "No additional history",
+      "collapse_history": "Collapse history",
+      "view_more_updates": "View {count} more updates",
+      "branch_name": "Path: main",
       "awaiting_change": "Awaiting change...",
       "patching_buffer": "Patching buffer...",
       "broadcasting_refresh": "Broadcasting refresh...",
@@ -584,21 +618,20 @@
       "record_evolution": "Record Evolution",
       "documenting_file_state": "Documenting this file state.",
       "updating_buffer": "Updating Buffer...",
-      "commit_change": "Commit Change",
+      "commit_change": "Save Change",
       "latest_changes": "Latest Changes",
       "simulation": {
         "initial_phrase": "Ideas leave a small path.",
         "initial_message": "Initial manuscript",
-        "step1_name": "Expanded the opening statement",
-        "step1_text": "\nNotice the change.",
-        "step2_name": "Clarified the philosophy",
+        "step1_name": "Expanding the opening statement",
+        "step1_text": "\nNote the change.",
+        "step2_name": "Clarifying the philosophy",
         "step2_text": "\nEvery draft is a decision.",
-        "step3_name": "Precision edit for impact"
+        "step3_name": "Precision editing for impact"
       }
     },
     "review": {
       "ui": {
-        "by": "",
         "you": "You",
         "time_ago": {
           "just_now": "Just now",
@@ -617,7 +650,7 @@
       "resolved": "Resolved",
       "thread_marked_resolved": "Thread marked as resolved",
       "commit": {
-        "message": "Refactored chapter 3 transition and pacing",
+        "message": "Refactoring chapter 3 transition and pacing",
         "author": "Elena Vasquez (You)",
         "time": "2 hours ago"
       },
@@ -629,7 +662,7 @@
         },
         {
           "author": "Elena Vasquez (You)",
-          "text": "Thanks! I chopped about 400 words to make it tighter.",
+          "text": "Thanks! I cut about 400 words to make it tighter.",
           "time": "Just now"
         }
       ]
@@ -638,7 +671,7 @@
       "draft": "Draft",
       "diverge": "Diverge",
       "compare": "Compare",
-      "merge": "Merge"
+      "merge": "Consolidate"
     }
   }
 }

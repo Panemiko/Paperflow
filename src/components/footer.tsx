@@ -6,7 +6,7 @@ import { MaxWidth } from "./max-width";
 
 export function Footer({ dict, lang }: { dict: any; lang: string }) {
   return (
-    <footer className="py-16 border-t border-border relative z-50 bg-background">
+    <footer className="py-16 lg:py-24 border-t border-border relative z-50 bg-background">
       <MaxWidth>
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <div>

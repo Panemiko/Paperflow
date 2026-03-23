@@ -336,10 +336,10 @@ export function Evolution({ dict }: { dict?: any }) {
   return (
     <div
       ref={containerRef}
-      className="grid grid-cols-1 lg:grid-cols-5 gap-0 border border-border bg-card overflow-hidden shadow-2xl h-auto lg:h-[440px]"
+      className="grid grid-cols-1 lg:grid-cols-5 gap-0 border border-border bg-white rounded-sm overflow-hidden h-auto lg:h-[440px] shadow-paperflow hover:shadow-xl hover:border-primary/50 transition-all duration-500"
     >
       {/* Simulation Pane (Software View) */}
-      <div className="lg:col-span-3 border-b lg:border-b-0 lg:border-r border-border bg-background flex flex-col relative h-[400px] lg:h-auto">
+      <div className="lg:col-span-3 border-b lg:border-b-0 lg:border-r border-border bg-white flex flex-col relative h-[400px] lg:h-auto">
         {/* Background Vertical Guidelines */}
         <div className="absolute inset-0 flex justify-between px-12 opacity-10 pointer-events-none select-none">
           {[...Array(5)].map((_, i) => (
@@ -349,7 +349,7 @@ export function Evolution({ dict }: { dict?: any }) {
           ))}
         </div>
 
-        <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-background relative z-10 shrink-0">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-white relative z-10 shrink-0">
           <span className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground/60 hidden sm:inline">
             {phase === "idling"
               ? d.awaiting_change
@@ -394,7 +394,7 @@ export function Evolution({ dict }: { dict?: any }) {
                     className={`
                       ${segment.type === "added" ? "bg-primary/20 text-primary border-primary/20" : ""}
                       ${segment.type === "removed" ? "bg-destructive/20 text-destructive line-through decoration-destructive/50" : ""}
-                      transition-all duration-300 rounded-[2px] px-0.5
+                      transition-all duration-300 rounded-sm px-0.5
                     `}
                   >
                     {segment.text}
@@ -421,7 +421,7 @@ export function Evolution({ dict }: { dict?: any }) {
                 exit={{ opacity: 0, scale: 1.1 }}
                 className="absolute inset-x-0 bottom-8 flex justify-center z-10"
               >
-                <div className="bg-foreground text-background px-6 py-3 shadow-xl flex items-center gap-3">
+                <div className="bg-foreground text-background px-6 py-3 flex items-center gap-3 rounded-sm">
                   <Clock className="w-4 h-4 text-primary animate-spin" />
                   <span className="font-mono text-xs uppercase tracking-wider">
                     {d.registering_change}
@@ -437,7 +437,7 @@ export function Evolution({ dict }: { dict?: any }) {
                 exit={{ opacity: 0, scale: 1.1 }}
                 className="absolute inset-x-0 bottom-8 flex justify-center z-10"
               >
-                <div className="bg-foreground text-background px-6 py-3 shadow-xl flex items-center gap-3">
+                <div className="bg-foreground text-background px-6 py-3 flex items-center gap-3 rounded-sm">
                   <RotateCcw className="w-4 h-4 text-primary animate-spin" />
                   <span className="font-mono text-xs uppercase tracking-wider">
                     {d.refreshing_manuscript}
@@ -455,7 +455,7 @@ export function Evolution({ dict }: { dict?: any }) {
               >
                 <div className="relative inline-block">
                   {/* Trigger */}
-                  <div className="bg-primary text-primary-foreground px-4 py-2 text-[10px] font-mono uppercase tracking-widest flex items-center gap-2 shadow-lg cursor-default relative noise">
+                  <div className="bg-primary text-primary-foreground px-4 py-2 text-[10px] font-mono uppercase tracking-widest flex items-center gap-2 cursor-default rounded-sm relative noise">
                     <Send className="w-3 h-3" />
                     {d.commit_change}
                   </div>
@@ -468,7 +468,7 @@ export function Evolution({ dict }: { dict?: any }) {
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95, y: 10 }}
                         transition={{ duration: 0.2, ease: "easeOut" }}
-                        className="absolute bottom-full right-0 mb-3 w-72 p-4 bg-background border border-border shadow-2xl z-30 pointer-events-none"
+                        className="absolute bottom-full right-0 mb-3 w-72 p-4 bg-white border border-border rounded-sm z-30 pointer-events-none"
                       >
                         <div className="space-y-4">
                           <div className="space-y-2">
@@ -492,7 +492,7 @@ export function Evolution({ dict }: { dict?: any }) {
                           </div>
                         </div>
                         {/* Arrow/Tail */}
-                        <div className="absolute top-full right-6 w-3 h-3 bg-background border-r border-b border-border rotate-45 -translate-y-1.5" />
+                        <div className="absolute top-full right-6 w-3 h-3 bg-white border-r border-b border-border rotate-45 -translate-y-1.5" />
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -505,10 +505,10 @@ export function Evolution({ dict }: { dict?: any }) {
 
       {/* Commit History Pane */}
       <div className="lg:col-span-2 flex flex-col h-full overflow-hidden relative">
-        <div className="px-6 py-4 border-b border-border bg-background flex items-center justify-between shrink-0">
+        <div className="px-6 py-4 border-b border-border bg-white flex items-center justify-between shrink-0">
           <div className="flex items-center gap-2">
             <Clock className="w-3.5 h-3.5 text-muted-foreground" />
-            <span className="font-mono text-[10px] tracking-widest uppercase text-muted-foreground font-bold">
+            <span className="font-mono text-[10px] tracking-widest uppercase text-primary font-bold">
               {d.latest_changes || "Latest Changes"}
             </span>
           </div>
@@ -525,7 +525,7 @@ export function Evolution({ dict }: { dict?: any }) {
         </div>
 
         <div
-          className={`overflow-y-auto custom-scrollbar bg-card border-l border-border/50 transition-[height] duration-300 ${
+          className={`overflow-y-auto custom-scrollbar bg-white border-l border-border/50 transition-[height] duration-300 ${
             !isHistoryExpanded ? "h-[125px] lg:h-auto" : "h-[500px] lg:h-auto"
           }`}
         >
@@ -568,7 +568,7 @@ export function Evolution({ dict }: { dict?: any }) {
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-3 mb-1 justify-between">
                             <div className="flex items-center gap-2">
-                              <code className="font-mono text-[10px] text-primary bg-primary/10 px-1.5 py-0.5 rounded-[2px] relative noise">
+                              <code className="font-mono text-[10px] text-primary bg-primary/10 px-1.5 py-0.5 rounded-sm relative noise">
                                 {commit.hash}
                               </code>
                               <span className="text-xs text-muted-foreground">
@@ -635,7 +635,7 @@ export function Evolution({ dict }: { dict?: any }) {
           )}
         </button>
 
-        <div className="p-4 bg-background mt-auto border-t border-border hidden lg:block">
+        <div className="p-4 bg-white mt-auto border-t border-border hidden lg:block">
           <div className="flex items-center justify-between text-muted-foreground">
             <span className="font-mono text-[8px] uppercase tracking-tighter">
               {phase === "refreshing"

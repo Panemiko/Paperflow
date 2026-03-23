@@ -2,12 +2,12 @@
 
 export function VerticalGuidelines() {
   return (
-    <div className="absolute inset-0 pointer-events-none z-30 overflow-hidden hidden xl:block h-full">
-      <div className="max-w-7xl mx-auto h-full relative px-6 lg:px-12">
+    <div className="absolute inset-0 pointer-events-none -z-5 overflow-hidden hidden lg:block min-h-full">
+      <div className="max-w-[1440px] mx-auto h-full relative px-6 lg:px-12">
         {/* Left line */}
-        <div className="absolute left-0 lg:left-0 top-0 bottom-0 w-px bg-[#777777]/15" />
+        <div className="absolute left-0 lg:left-0 top-0 bottom-0 w-px bg-[#777777]/5" />
         {/* Right line */}
-        <div className="absolute right-0 lg:right-0 top-0 bottom-0 w-px bg-[#777777]/15" />
+        <div className="absolute right-0 lg:right-0 top-0 bottom-0 w-px bg-[#777777]/5" />
 
         {/* LEFT COLUMN MARKERS
          */}

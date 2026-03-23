@@ -169,11 +169,11 @@ export function Archive({ dict }: { dict?: any }) {
   return (
     <div
       ref={containerRef}
-      className="border border-border bg-card shadow-xl relative"
+      className="border border-border bg-white rounded-sm relative shadow-paperflow hover:shadow-xl hover:border-primary/50 transition-all duration-500"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="px-6 py-4 border-b border-border bg-background flex items-center justify-between relative z-10">
+      <div className="px-6 py-4 border-b border-border bg-white flex items-center justify-between relative z-10">
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-2">
             {isHovered || expandedId ? (
@@ -184,7 +184,7 @@ export function Archive({ dict }: { dict?: any }) {
                 <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500"></span>
               </div>
             )}
-            <span className="font-mono text-[10px] tracking-widest uppercase text-muted-foreground font-bold">
+            <span className="font-mono text-[10px] tracking-widest uppercase text-primary font-bold">
               {d.latest_changes}
             </span>
           </div>
@@ -198,7 +198,7 @@ export function Archive({ dict }: { dict?: any }) {
 
       {/* Commits Container */}
 
-      <div className="divide-y divide-border bg-card relative z-0 h-[500px] md:h-[440px]">
+      <div className="divide-y divide-border bg-white relative z-0 h-[500px] md:h-[440px]">
         <AnimatePresence mode="popLayout" initial={false}>
           {items.map((commit: CommitItem, index: number) => (
             <motion.div
@@ -254,7 +254,7 @@ export function Archive({ dict }: { dict?: any }) {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between mb-1 min-h-[20px]">
                         <div className="flex items-center gap-2 overflow-hidden">
-                          <code className="font-mono text-[10px] text-primary bg-primary/10 px-1.5 py-0.5 rounded-[2px] relative noise">
+                          <code className="font-mono text-[10px] text-primary bg-primary/10 px-1.5 py-0.5 rounded-sm relative noise">
                             {commit.hash}
                           </code>
                           <span className="text-xs text-muted-foreground whitespace-nowrap">
@@ -344,7 +344,7 @@ export function Archive({ dict }: { dict?: any }) {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -5 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute top-[109px] left-0 w-full bg-card border-x border-b border-border shadow-2xl z-50 p-6 pt-0 space-y-4"
+                      className="absolute top-[109px] left-0 w-full bg-white border-x border-b border-border z-50 p-6 pt-0 space-y-4"
                     >
                       <div className="pt-6 border-t border-border/50 space-y-4">
                         <div className="grid grid-cols-2 gap-4">

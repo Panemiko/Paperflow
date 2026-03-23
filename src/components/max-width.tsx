@@ -8,7 +8,7 @@ interface MaxWidthProps {
 
 export function MaxWidth({ children, className }: MaxWidthProps) {
   return (
-    <div className={cn("max-w-7xl mx-auto px-6 lg:px-12", className)}>
+    <div className={cn("max-w-[1440px] mx-auto px-6 lg:px-12", className)}>
       {children}
     </div>
   );

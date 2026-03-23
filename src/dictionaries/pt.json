@@ -2,47 +2,81 @@
   "home": {
     "hero": {
       "waitlist_badge": "Acesso antecipado",
-      "title_start": "Escreva sem o medo de",
-      "title_strong": "perder seu progresso",
+      "title_start": "Infraestrutura de escrita ",
+      "title_strong": "para profissionais.",
       "title_end": "",
-      "description": "Paperflow é uma plataforma de escrita profissional para quem precisa explorar ideias sem perder o rascunho original."
+      "description": "Edite, gerencie e colabore. O Paperflow é a infraestrutura de escrita para quem faz contratos, teses e relatórios onde cada decisão é importante."
     },
     "features": {
       "how_it_works_badge": "Como funciona",
-      "test_ideas": "Teste novas ideias,",
-      "keep_works": "mantenha o que funciona.",
-      "description": "Explore diferentes direções para seu documento em um espaço seguro. Se uma mudança funcionar, mantenha-a. Se não, volte ao seu rascunho original com um clique."
+      "test_ideas": "Mudou de ideia?",
+      "keep_works": "Volte para como estava.",
+      "description": "Nenhuma alteração é permanente até você querer que seja. Crie um caminho alternativo e, se não funcionar, desfaça com um clique.",
+      "cta": "Quero acesso antecipado"
+    },
+    "main_features": {
+      "badge": "Benefícios",
+      "title": "A infraestrutura de escrita que acompanha seu ritmo.",
+      "description": "Ferramentas projetadas para profissionais que exigem precisão, rastreabilidade e controle total sobre cada palavra.",
+      "items": [
+        {
+          "title": "Foco total no texto, esqueça a formatação",
+          "description": "",
+          "icon": "type"
+        },
+        {
+          "title": "Exportação rápida para Word e PDF",
+          "description": "",
+          "icon": "download"
+        },
+        {
+          "title": "Rastreabilidade completa de cada decisão",
+          "description": "",
+          "icon": "history"
+        },
+        {
+          "title": "Aprovação granular de sugestões",
+          "description": "",
+          "icon": "user-check"
+        },
+        {
+          "title": "Liberdade para testar e desfazer ideias",
+          "description": "",
+          "icon": "rotate-ccw"
+        }
+      ]
     },
     "collaboration": {
-      "badge": "Colabore com clareza",
-      "title": "Feedback sem atrito",
-      "description": "Compartilhe seu trabalho e receba anotações exatamente onde elas pertencem. Discuta mudanças no contexto e aprove atualizações com um clique.",
+      "badge": "Revisão colaborativa",
+      "title": "Feedback sem fricção.",
+      "description": "Esqueça o caos de comentários perdidos. Visualize sugestões exatamente onde elas foram feitas e mantenha conversas contextualizadas em cada rascunho.",
       "items": [
-        "Adicione comentários diretamente em qualquer versão.",
-        "Discuta mudanças em tópicos organizados.",
-        "Corrija problemas com um clique.",
-        "Mantenha cada conversa anexada à mudança realizada."
+        "Combine sugestões sem conflitos.",
+        "Discuta alterações em tópicos.",
+        "Explore ideias em paralelo.",
+        "Aprove cada vírgula individualmente."
       ]
     },
     "archive": {
-      "badge": "O Registro",
-      "title": "O seu processo preservado",
-      "description": "Salve seu progresso sempre que atingir um marco. Você pode voltar no tempo para ver como seu trabalho evoluiu ou recuperar algo que mudou semanas atrás.",
+      "badge": "Histórico do documento",
+      "title": "Cada alteração registrada.",
+      "description": "Saiba o que mudou, quem mudou e quando. Cada decisão fica documentada para você consultar quando precisar.",
       "items": [
-        "Volte para qualquer versão salva instantaneamente.",
-        "Veja exatamente o que foi alterado, quando e por quem.",
-        "Traga de volta alterações passadas.",
-        "Compartilhe versões específicas com facilidade."
+        "Consulte o histórico quando precisar.",
+        "Saiba quem alterou cada detalhe.",
+        "Volte para qualquer versão instantaneamente.",
+        "Nenhuma decisão é perdida."
       ],
+      "cta": "Garantir meu lugar",
       "latest_changes": "Últimas alterações",
-      "branch": "main",
+      "branch": "principal",
       "ui": {
         "impact": "Alterações",
         "domain": "Seção",
         "editorial_note": "Nota Editorial",
         "words": "palavras",
         "you": "Você",
-        "merge": "Combinar",
+        "merge": "Consolidar",
         "ai_authored": "IA",
         "ai": "IA",
         "time_ago": {
@@ -108,7 +142,7 @@
         },
         {
           "hash": "a9b1e8f",
-          "message": "Mesclando a versão \"Final Alternativo\"",
+          "message": "Consolidando a versão \"Final Alternativo\"",
           "author": "Isabella Conti",
           "daysAgo": 10,
           "time": "09:15 UTC",
@@ -372,31 +406,33 @@
     },
     "philosophy": {
       "badge": "O Método",
-      "title": "Uma maneira melhor de construir seu trabalho",
-      "description": "A maioria das ferramentas quer que você escreva mais rápido. Nós queremos que você escreva melhor. O Paperflow oferece o espaço para explorar ideias, a clareza para tomar decisões e a confiança para compartilhar seu melhor trabalho.",
+      "title": "Editores de texto foram feitos para documentos.",
+      "title_highlight": "O Paperflow foi feito para a qualidade.",
+      "description": "Escreva com foco, exporte para qualquer formato e mantenha o rastro de cada decisão.",
       "items": [
         {
-          "title": "Rascunhe",
-          "description": "Escreva seus pensamentos livremente. Cada versão que você salva é mantida em um histórico permanente."
+          "title": "Escreva",
+          "description": "Escreva. O documento se formata sozinho na exportação."
         },
         {
           "title": "Explore",
-          "description": "Tente uma nova direção. Crie um caminho separado para uma nova ideia sem alterar seu trabalho principal."
+          "description": "Explore caminhos alternativos sem alterar o documento principal."
         },
         {
           "title": "Compare",
-          "description": "Coloque duas versões lado a lado. Veja exatamente o que mudou linha por linha para escolher a melhor."
+          "description": "Coloque duas opções lado a lado de forma clara para decidir qual manter."
         },
         {
-          "title": "Combine",
-          "description": "Junte as melhores partes. Coloque suas ideias favoritas em um trabalho final polido."
+          "title": "Consolide",
+          "description": "Cada contribuição chega separada. Você decide o que entra no documento final."
         }
       ]
     },
     "audience": {
-      "badge": "Feito para Profissionais",
-      "title": "Precisão para cada projeto",
-      "description": "Seja escrevendo um romance ou um contrato legal, o Paperflow oferece as ferramentas para gerenciar documentos complexos com confiança.",
+      "badge": "Feito para profissionais",
+      "title": "Infraestrutura para documentos sérios",
+      "description": "Contratos, teses, relatórios e laudos. Para profissionais que precisam que cada decisão esteja registrada.",
+      "cta": "Entrar na lista",
       "personas": [
         {
           "title": "O Acadêmico",
@@ -425,21 +461,21 @@
       ]
     },
     "principles": {
-      "badge": "Nossos Princípios",
+      "badge": "A Base",
       "title": "Seu trabalho pertence a você",
-      "description": "O Paperflow é construído para proteger seu processo, não para explorá-lo. Acreditamos na privacidade, propriedade e no ato humano de escrever.",
+      "description": "O Paperflow foi construído para proteger o seu processo. Acreditamos na privacidade da sua escrita.",
       "items": [
         {
-          "title": "Sem Treinamento de IA",
+          "title": "Sem treinamento de IA",
           "description": "Nunca usamos seu texto privado para treinar modelos de inteligência artificial."
         },
         {
-          "title": "Sem Aprisionamento",
-          "description": "Seus dados são seus. Exporte seus documentos para formatos padrão a qualquer momento."
+          "title": "Sem aprisionamento",
+          "description": "Seus dados são seus. Exporte para formatos padrão a qualquer momento."
         },
         {
-          "title": "Sem Distrações",
-          "description": "Sem emblemas, sequências ou gamificação. Apenas um lugar tranquilo para focar."
+          "title": "Sem distrações",
+          "description": "Sem notificações desnecessárias ou gamificação. Apenas espaço para focar."
         }
       ]
     },
@@ -491,37 +527,37 @@
       ]
     },
     "final": {
-      "badge": "Acesso Antecipado",
+      "badge": "Acesso antecipado",
       "title": "Seja notificado quando estiver pronto",
-      "description": "O Paperflow está atualmente em desenvolvimento ativo. Junte-se à lista de espera para ser notificado quando o acesso antecipado abrir.",
+      "description": "O Paperflow está em desenvolvimento. Entre na lista de espera para ser notificado.",
       "benefits": [
         "Acesso antecipado",
-        "Molde o roadmap",
+        "Participe do roadmap",
         "Lugar reservado"
       ]
     }
   },
   "header": {
     "how_it_works": "Como Funciona",
-    "collaboration": "Colaboração",
-    "the_record": "Registro",
+    "collaboration": "Revisão",
+    "the_record": "Histórico",
     "principles": "Princípios",
     "faq": "FAQ",
-    "join_waitlist": "Entrar na Lista de Espera"
+    "join_waitlist": "Entre na lista de espera"
   },
   "footer": {
-    "description": "Escreva sem o medo de perder seu progresso.",
+    "description": "Infraestrutura de escrita para profissionais.",
     "links": {
       "how_it_works": "Como Funciona",
-      "collaboration": "Colaboração",
-      "the_record": "Registro",
+      "collaboration": "Revisão",
+      "the_record": "Histórico",
       "principles": "Princípios",
       "faq": "FAQ"
     },
     "copyright": "© {year} Paperflow. Todos os direitos reservados."
   },
   "waitlist": {
-    "consent_agreed": "Ao clicar em entrar, você concorda com nossos ",
+    "consent_agreed": "Ao entrar, você concorda com nossos ",
     "terms_link": "Termos de Serviço",
     "consent_and": " e ",
     "privacy_link": "Política de Privacidade",
@@ -529,27 +565,27 @@
     "error_duplicate": "Este e-mail já está registrado.",
     "default": {
       "placeholder": "seu@email.com",
-      "label": "Entre na lista para acesso antecipado",
+      "label": "Entre na lista de espera.",
       "join": "Entrar",
-      "joined": "Entrou!",
+      "joined": "Na lista.",
       "joining": "Entrando...",
-      "welcome": "Bem-vindo a bordo!",
+      "welcome": "Email registrado.",
       "error": "Tentar Novamente",
-      "success_status": "Você está na lista. Entraremos em contato em breve."
+      "success_status": "Bem-vindo! Entraremos em contato quando tivermos alguma atualização!"
     },
     "dark": {
       "placeholder": "Digite seu email",
-      "label": "Pronto para escrever sem medo?",
-      "join": "Entrar na Lista",
+      "label": "Entre na lista de espera.",
+      "join": "Entrar",
       "joining": "Entrando...",
-      "welcome": "Bem-vindo a bordo!",
+      "welcome": "Email registrado.",
       "error": "Tentar Novamente",
-      "success_status": "Você está na lista. Entraremos em contato em breve."
+      "success_status": "Bem-vindo! Entraremos em contato quando tivermos alguma atualização!"
     }
   },
   "metadata": {
-    "title": "Paperflow | Escreva sem o medo de perder seu progresso.",
-    "description": "A infraestrutura que suas ideias merecem. Gerencie documentos complexos com precisão absoluta—ramifique, funda e acompanhe cada versão sem o caos."
+    "title": "Paperflow | Infraestrutura de escrita para profissionais.",
+    "description": "Escreva com foco, exporte para qualquer formato e mantenha o rastro de cada decisão."
   },
   "animations": {
     "evolution": {
@@ -570,7 +606,7 @@
       "no_additional_history": "Sem histórico adicional",
       "collapse_history": "Recolher histórico",
       "view_more_updates": "Ver mais {count} atualizações",
-      "branch_name": "Ramo: main",
+      "branch_name": "Caminho: principal",
       "awaiting_change": "Aguardando mudança...",
       "patching_buffer": "Aplicando buffer...",
       "broadcasting_refresh": "Transmitindo atualização...",
@@ -582,7 +618,7 @@
       "record_evolution": "Registrar Evolução",
       "documenting_file_state": "Documentando este estado de arquivo.",
       "updating_buffer": "Atualizando Buffer...",
-      "commit_change": "Commitar Mudança",
+      "commit_change": "Salvar Alteração",
       "latest_changes": "Últimas Alterações",
       "simulation": {
         "initial_phrase": "Ideias deixam um pequeno caminho.",
@@ -635,7 +671,7 @@
       "draft": "Rascunho",
       "diverge": "Divergir",
       "compare": "Comparar",
-      "merge": "Mesclar"
+      "merge": "Consolidar"
     }
   }
 }

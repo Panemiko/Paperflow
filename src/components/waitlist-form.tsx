@@ -20,6 +20,13 @@ export function WaitlistForm({
   >("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+    if (status !== "idle" && status !== "loading") {
+      setStatus("idle");
+    }
+  };
+
   const params = useParams();
   const locale = params?.locale || "en";
 
@@ -64,7 +71,6 @@ export function WaitlistForm({
     } catch (error) {
       console.error("Waitlist error:", error);
       setStatus("error");
-    } finally {
       setTimeout(() => setStatus("idle"), 3000);
     }
   };
@@ -78,9 +84,9 @@ export function WaitlistForm({
             <input
               type="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={handleEmailChange}
               placeholder={d.placeholder}
-              className="w-full pl-11 pr-4 py-3 border-2 border-border bg-card text-foreground font-mono text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
+              className="w-full pl-11 pr-4 py-3 border border-border bg-card rounded-sm text-foreground font-mono text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
               required
             />
           </div>
@@ -131,15 +137,14 @@ export function WaitlistForm({
             <input
               type="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={handleEmailChange}
               placeholder={d.placeholder}
-              className="w-full pl-11 pr-5 py-4 border-2 border-background/20 bg-background/5 text-background font-mono text-sm placeholder:text-background/40 focus:outline-none focus:border-primary transition-colors"
+              className="w-full pl-11 pr-5 py-4 border border-background/20 bg-background/5 rounded-sm text-background font-mono text-sm placeholder:text-background/40 focus:outline-none focus:border-primary transition-colors"
               required
             />
           </div>
           <Button
             type="submit"
-            variant="dark"
             size="xl"
             disabled={status === "loading"}
             className="whitespace-nowrap group"
@@ -220,9 +225,9 @@ export function WaitlistForm({
           <input
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleEmailChange}
             placeholder={d.placeholder}
-            className="w-full pl-11 pr-5 py-4 border-2 border-border bg-card text-foreground font-mono text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
+            className="w-full pl-11 pr-5 py-4 border border-border bg-card rounded-sm text-foreground font-mono text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
             required
           />
         </div>

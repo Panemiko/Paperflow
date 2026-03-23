@@ -121,12 +121,12 @@ export function Review({ dict }: { dict?: any }) {
   return (
     <div
       ref={containerRef}
-      className="w-full h-[500px] border border-border bg-card shadow-2xl overflow-hidden relative flex flex-col"
+      className="w-full h-[500px] border border-border bg-white rounded-sm overflow-hidden relative flex flex-col shadow-paperflow hover:shadow-xl hover:border-primary/50 transition-all duration-500"
     >
-      <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-background">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-white">
         <div className="flex items-center gap-2">
           <div className="w-1.5 h-1.5 rounded-full bg-primary/20" />
-          <span className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground/60">
+          <span className="font-mono text-[9px] uppercase tracking-widest text-primary font-bold">
             {d.reviewing}
           </span>
         </div>
@@ -134,7 +134,7 @@ export function Review({ dict }: { dict?: any }) {
       {/* Commit Content */}
       <div className="w-full relative z-10">
         {/* Commit Header */}
-        <div className="p-4 flex bg-background items-start gap-4 border-b border-border">
+        <div className="p-4 flex bg-white items-start gap-4 border-b border-border">
           <div className="mt-1">
             <div className="w-8 h-8 rounded-full bg-primary/10 overflow-hidden border border-primary/20 text-primary">
               <img
@@ -147,7 +147,7 @@ export function Review({ dict }: { dict?: any }) {
           <div className="flex-1 min-w-0">
             <div className="flex items-center justify-between mb-1">
               <div className="flex items-center gap-2">
-                <span className="font-mono text-[10px] text-primary bg-primary/10 px-1.5 py-0.5 rounded-[2px]">
+                <span className="font-mono text-[10px] text-primary bg-primary/10 px-1.5 py-0.5 rounded-sm">
                   {COMMIT_DATA.hash}
                 </span>
                 <span className="text-xs text-muted-foreground">
@@ -202,7 +202,7 @@ export function Review({ dict }: { dict?: any }) {
                         {COMMENTS[0].author}
                       </span>
                     </div>
-                    <div className="text-sm text-foreground bg-background p-2 rounded-lg border border-border shadow-sm w-fit max-w-[calc(100%-2.3rem)] md:max-w-[320px] h-auto min-h-[60px] wrap-break-word">
+                    <div className="text-sm text-foreground bg-background p-2 rounded-sm border border-border w-fit max-w-[calc(100%-2.3rem)] md:max-w-[320px] h-auto min-h-[60px] wrap-break-word">
                       {phase === "commenting" ? (
                         <Typewriter text={COMMENTS[0].text} />
                       ) : (
@@ -236,7 +236,7 @@ export function Review({ dict }: { dict?: any }) {
                         {COMMENTS[1].author}
                       </span>
                     </div>
-                    <div className="text-sm text-primary-foreground bg-primary p-2 rounded-lg border border-primary/20 shadow-sm text-left w-fit max-w-[calc(100%-2.3rem)] md:max-w-[320px] h-auto min-h-[60px] wrap-break-word">
+                    <div className="text-sm text-primary-foreground bg-primary p-2 rounded-sm border border-primary/20 text-left w-fit max-w-[calc(100%-2.3rem)] md:max-w-[320px] h-auto min-h-[60px] wrap-break-word">
                       {COMMENTS[1].text}
                     </div>
                   </div>
@@ -268,7 +268,7 @@ export function Review({ dict }: { dict?: any }) {
 
       {/* Action Bar */}
       {phase !== "idle" && (
-        <div className="mt-auto w-full p-3 border-t border-border bg-background flex items-center justify-between relative z-20">
+        <div className="mt-auto w-full p-3 border-t border-border bg-white flex items-center justify-between relative z-20">
           <span className="text-[10px] text-muted-foreground uppercase tracking-wider font-mono">
             {phase === "resolved" ? (
               d.thread_resolved
@@ -282,14 +282,14 @@ export function Review({ dict }: { dict?: any }) {
           </span>
 
           {phase === "resolved" ? (
-            <div className="flex items-center gap-1 text-green-600 bg-green-100 px-2 py-1 rounded-lg border border-green-200">
+            <div className="flex items-center gap-1 text-green-600 bg-green-100 px-2 py-1 rounded-sm border border-green-200">
               <Check className="w-3 h-3" />
               <span className="text-[9px] font-bold uppercase tracking-wider">
                 {d.resolved}
               </span>
             </div>
           ) : (
-            <div className="w-6 h-6 rounded flex items-center justify-center bg-primary/20 text-primary">
+            <div className="w-6 h-6 rounded-sm flex items-center justify-center bg-primary/20 text-primary">
               <ChevronDown className="w-3 h-3" />
             </div>
           )}
@@ -297,7 +297,7 @@ export function Review({ dict }: { dict?: any }) {
       )}
 
       {/* Background Decorative Elements */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[60%] bg-primary/5 blur-3xl rounded-full z-0 pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[60%] z-0 pointer-events-none" />
     </div>
   );
 }
