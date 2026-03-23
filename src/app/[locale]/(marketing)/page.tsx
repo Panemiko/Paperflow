@@ -28,8 +28,6 @@ import Image from "next/image";
 import Link from "next/link";
 import demoImage from "./demo.png";
 
-import { MicroPlatform } from "@/components/micro-platform";
-
 export default async function Page({
   params,
 }: {
@@ -376,7 +374,7 @@ export default async function Page({
                   </div>
 
                   <div>
-                    <h3 className="font-serif text-xl font-bold mb-3 text-foreground">
+                    <h3 className="font-serif text-xl font-bold mb-3 text-foreground leading-tight line-clamp-2 min-h-[2.5em]">
                       {persona.title}
                     </h3>
                     <p className="text-muted-foreground leading-relaxed text-sm">
@@ -429,14 +427,10 @@ export default async function Page({
                   whileHover={{ y: -5, transition: { duration: 0.3, delay: 0 } }}
                 >
                   <div
-                    className="p-8 prism-card flex flex-col items-center text-center gap-6 group border-t-2 border-t-primary h-full"
+                    className="p-8 prism-card flex flex-col items-center text-center gap-2 group border-t-2 border-t-primary h-full"
                   >
-                    <div className="w-12 h-12 border border-border flex items-center justify-center shrink-0 text-primary group-hover:text-primary-foreground group-hover:bg-primary group-hover:border-primary bg-white backdrop-blur-sm rounded-sm transition-all duration-500 shadow-sm">
-                      {feature.icon}
-                    </div>
-
-                    <div>
-                      <h3 className="font-serif text-xl font-bold text-foreground mb-2 leading-tight">
+                    <div className="mt-4">
+                      <h3 className="font-serif text-xl font-bold text-foreground mb-2 leading-tight line-clamp-2 min-h-[2.5em]">
                         {feature.title}
                       </h3>
                       <p className="text-muted-foreground leading-relaxed text-sm">

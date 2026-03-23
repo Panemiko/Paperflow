@@ -132,7 +132,7 @@ function PaperflowCard({
         </div>
       )}
 
-      <h3 className="font-serif text-xl font-semibold text-foreground mb-3 leading-tight text-balance">
+      <h3 className="font-serif text-xl font-semibold text-foreground mb-3 leading-tight text-balance line-clamp-2 min-h-[2.5em]">
         {title}
       </h3>
       <p className="text-sm text-balance text-muted-foreground leading-relaxed">

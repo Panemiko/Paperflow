@@ -17,31 +17,31 @@
     "main_features": {
       "badge": "Benefits",
       "title": "The writing infrastructure that keeps up with your pace.",
-      "description": "Tools designed for the professional who values precision and control.",
+      "description": "Tools designed for professionals who demand precision, traceability and full control over every word.",
       "items": [
         {
-          "title": "Write without thinking about formatting",
-          "description": "The document formats itself. Total focus on the text.",
+          "title": "Total focus on text, forget formatting",
+          "description": "",
           "icon": "type"
         },
         {
-          "title": "Export to any model",
-          "description": "Word, PDF or LaTeX. With a few clicks and no rework.",
+          "title": "Quick export to Word and PDF",
+          "description": "",
           "icon": "download"
         },
         {
-          "title": "What changed, who changed it and when",
-          "description": "Every save records what happened. Every decision in the document is traceable.",
+          "title": "Complete traceability of every decision",
+          "description": "",
           "icon": "history"
         },
         {
-          "title": "Staged collaborative editing",
-          "description": "Review only the changes. Nothing enters the final document without your approval.",
+          "title": "Granular approval of suggestions",
+          "description": "",
           "icon": "user-check"
         },
         {
-          "title": "Changed your mind? Undo",
-          "description": "Ability to return your document to the version you want in an easy and clean way.",
+          "title": "Freedom to test and undo ideas",
+          "description": "",
           "icon": "rotate-ccw"
         }
       ]
