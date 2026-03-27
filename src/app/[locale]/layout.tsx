@@ -2,6 +2,7 @@ import { getDictionary, Locale } from "@/dictionaries";
 import "@/styles/globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { Metadata } from "next";
+import Script from "next/script";
 import { Bitter, Inter, JetBrains_Mono } from "next/font/google"; // Fonts moved here
 
 const _inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -49,6 +50,11 @@ export default async function RootLayout({
       >
         <div className="relative min-h-screen">{children}</div>
         <Analytics />
+        <Script
+          defer
+          src={process.env.NEXT_PUBLIC_UMAMI_URL}
+          data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
+        />
       </body>
     </html>
   );

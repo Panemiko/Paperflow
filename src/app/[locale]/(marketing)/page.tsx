@@ -185,7 +185,7 @@ export default async function Page({
             className="mt-12 flex justify-center"
             transition={{ delay: 0.2 }}
           >
-            <Button asChild size="lg" variant="outline" className="group">
+            <Button asChild size="lg" variant="outline" className="group" data-umami-event="evolution_cta_click">
               <Link href="#waitlist">
                 {dictionary.home.features.cta}
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -270,7 +270,7 @@ export default async function Page({
                 </ul>
 
                 <div className="mt-10">
-                  <Button asChild size="lg" className="group">
+                  <Button asChild size="lg" className="group" data-umami-event="archive_cta_click">
                     <Link href="#waitlist">
                       {dictionary.home.archive.cta}
                       <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -390,7 +390,7 @@ export default async function Page({
             className="mt-16 flex justify-center"
             transition={{ delay: 0.4 }}
           >
-            <Button asChild size="lg" className="group">
+            <Button asChild size="lg" className="group" data-umami-event="audience_cta_click">
               <Link href="#waitlist">
                 {dictionary.home.audience.cta}
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />

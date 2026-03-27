@@ -66,7 +66,7 @@ export function Header({ dict, lang }: { dict: any; lang: string }) {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <Button asChild className="group">
+          <Button asChild className="group" data-umami-event="header_waitlist_click">
             <a href="#waitlist">
               {dict.join_waitlist}
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />

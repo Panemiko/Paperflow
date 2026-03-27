@@ -27,6 +27,16 @@ export function WaitlistForm({
     }
   };
 
+  const handleEmailBlur = () => {
+    if (email && email.includes("@")) {
+      // @ts-ignore
+      if (window.umami) {
+        // @ts-ignore
+        window.umami.track("email_input_blur", { email, variant });
+      }
+    }
+  };
+
   const params = useParams();
   const locale = params?.locale || "en";
 
@@ -44,6 +54,12 @@ export function WaitlistForm({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
+
+    // @ts-ignore
+    if (window.umami) {
+      // @ts-ignore
+      window.umami.track("waitlist_submission", { email, variant });
+    }
 
     setStatus("loading");
 
@@ -88,12 +104,14 @@ export function WaitlistForm({
               placeholder={d.placeholder}
               className="w-full pl-11 pr-4 py-3 border border-border bg-card rounded-sm text-foreground font-mono text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
               required
+              onBlur={handleEmailBlur}
             />
           </div>
           <Button
             type="submit"
             disabled={status === "loading"}
             className="px-6 py-3 group"
+            data-umami-event={`waitlist_submit_${variant}`}
           >
             {status === "loading" ? (
               <Loader2 className="w-4 h-4 animate-spin" />
@@ -141,6 +159,7 @@ export function WaitlistForm({
               placeholder={d.placeholder}
               className="w-full pl-11 pr-5 py-4 border border-background/20 bg-background/5 rounded-sm text-background font-mono text-sm placeholder:text-background/40 focus:outline-none focus:border-primary transition-colors"
               required
+              onBlur={handleEmailBlur}
             />
           </div>
           <Button
@@ -148,6 +167,7 @@ export function WaitlistForm({
             size="xl"
             disabled={status === "loading"}
             className="whitespace-nowrap group"
+            data-umami-event={`waitlist_submit_${variant}`}
           >
             {status === "loading" && (
               <>
@@ -229,6 +249,7 @@ export function WaitlistForm({
             placeholder={d.placeholder}
             className="w-full pl-11 pr-5 py-4 border border-border bg-card rounded-sm text-foreground font-mono text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
             required
+            onBlur={handleEmailBlur}
           />
         </div>
         <Button
@@ -236,6 +257,7 @@ export function WaitlistForm({
           size="xl"
           disabled={status === "loading"}
           className="whitespace-nowrap group"
+          data-umami-event={`waitlist_submit_${variant}`}
         >
           {status === "loading" && (
             <>

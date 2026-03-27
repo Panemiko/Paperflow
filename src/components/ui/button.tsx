@@ -48,13 +48,24 @@ function Button({
 }: React.ComponentProps<"button"> &
   VariantProps<typeof buttonVariants> & {
     asChild?: boolean;
+    "data-umami-event"?: string;
   }) {
   const Comp = asChild ? Slot : "button";
+
+  // Identify button for Umami if not already tagged
+  const umamiEvent =
+    props["data-umami-event"] ||
+    (typeof props.children === "string"
+      ? `btn_${props.children.trim().toLowerCase().replace(/\s+/g, "_")}`
+      : props.title
+        ? `btn_${props.title.trim().toLowerCase().replace(/\s+/g, "_")}`
+        : "button_click");
 
   return (
     <Comp
       data-slot="button"
       className={cn(buttonVariants({ variant, size, className }))}
+      data-umami-event={umamiEvent}
       {...props}
     />
   );
